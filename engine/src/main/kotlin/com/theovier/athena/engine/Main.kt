@@ -1,5 +1,9 @@
 package com.theovier.athena.engine
 
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger {}
+
 fun main() {
-    println("Hello world!")
+    logger.info { "Hello World" }
 }

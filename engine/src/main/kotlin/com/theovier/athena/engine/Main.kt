@@ -5,5 +5,5 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 fun main() {
-    logger.info { "Hello World" }
+    logger.info { "Hello from Engine" }
 }

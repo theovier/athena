@@ -33,4 +33,4 @@ build/
 .vscode/
 
 .DS_STORE
-logs/spring.log
+logs/

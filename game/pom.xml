@@ -6,10 +6,18 @@
     <packaging>pom</packaging>
 
     <parent>
-        <artifactId>athena</artifactId>
         <groupId>com.theovier</groupId>
+        <artifactId>athena</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.theovier</groupId>
+            <artifactId>engine</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <modules>
         <module>server</module>

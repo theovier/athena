@@ -4,8 +4,4 @@ fun main() {
     val engine = Engine()
     engine.init()
     engine.start()
-
-    while (true) {
-
-    }
 }

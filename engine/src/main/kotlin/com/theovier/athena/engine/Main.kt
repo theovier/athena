@@ -1,9 +1,11 @@
 package com.theovier.athena.engine
 
-import mu.KotlinLogging
-
-private val logger = KotlinLogging.logger {}
-
 fun main() {
-    logger.info { "Hello from Engine" }
+    val engine = Engine()
+    engine.init()
+    engine.start()
+
+    while (true) {
+
+    }
 }

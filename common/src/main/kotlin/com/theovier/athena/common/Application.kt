@@ -1,4 +1,4 @@
-package com.theovier.athena.client.athena.common
+package com.theovier.athena.common
 
 import mu.KotlinLogging
 

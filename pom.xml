@@ -8,10 +8,9 @@
     <artifactId>athena</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
-
     <modules>
-        <module>engine</module>
-        <module>game</module>
+        <module>common</module>
+        <module>client</module>
     </modules>
 
     <properties>

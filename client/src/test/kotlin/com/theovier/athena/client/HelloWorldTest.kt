@@ -1,4 +1,4 @@
-package com.theovier.athena.engine
+package com.theovier.athena.client
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName

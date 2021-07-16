@@ -1,8 +1,8 @@
 package com.theovier.athena.client
 
 enum class InputAction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    MOVE_UP,
+    MOVE_DOWN,
+    MOVE_LEFT,
+    MOVE_RIGHT,
 }

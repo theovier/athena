@@ -31,7 +31,7 @@ class ExampleScreen(private val context: Context) : KtxScreen, ActionListener {
 
     override fun onAction(action: InputAction): Boolean {
         return when(action) {
-            UP -> {
+            MOVE_UP -> {
                 message += "!"
                 true
             }

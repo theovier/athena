@@ -11,10 +11,10 @@ class InputActionManger : KtxInputAdapter {
 
     private val actionListeners = ArrayList<ActionListener>()
     private val keyboardMappings: HashMap<Int, InputAction> = hashMapOf(
-        Input.Keys.W to InputAction.UP,
-        Input.Keys.S to InputAction.DOWN,
-        Input.Keys.A to InputAction.LEFT,
-        Input.Keys.D to InputAction.RIGHT
+        Input.Keys.W to InputAction.MOVE_UP,
+        Input.Keys.S to InputAction.MOVE_DOWN,
+        Input.Keys.A to InputAction.MOVE_LEFT,
+        Input.Keys.D to InputAction.MOVE_RIGHT
     )
 
     fun subscribe(listener: ActionListener) {

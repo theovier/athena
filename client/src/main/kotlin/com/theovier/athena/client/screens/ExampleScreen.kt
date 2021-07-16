@@ -5,20 +5,20 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.theovier.athena.client.ActionListener
-import com.theovier.athena.client.InputAction
-import com.theovier.athena.client.InputAction.*
-import com.theovier.athena.client.InputActionManger
+import com.theovier.athena.client.inputs.ActionInputListener
+import com.theovier.athena.client.inputs.ActionInput
+import com.theovier.athena.client.inputs.ActionInput.*
+import com.theovier.athena.client.inputs.ActionInputAdapter
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 import ktx.graphics.use
-import ktx.inject.Context
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
 class ExampleScreen(private val game: KtxGame<Screen>,
-                    private val inputActionManager: InputActionManger) : KtxScreen, ActionListener {
+                    private val actionInputAdapter: ActionInputAdapter
+) : KtxScreen, ActionInputListener {
 
     private val font = BitmapFont()
     private val batch = SpriteBatch().apply {
@@ -27,11 +27,11 @@ class ExampleScreen(private val game: KtxGame<Screen>,
     private var message = "Hello Kotlin"
 
     override fun show() {
-        Gdx.input.inputProcessor = inputActionManager
-        inputActionManager.subscribe(this)
+        Gdx.input.inputProcessor = actionInputAdapter
+        actionInputAdapter.subscribe(this)
     }
 
-    override fun onAction(action: InputAction): Boolean {
+    override fun onAction(action: ActionInput): Boolean {
         return when(action) {
             MOVE_UP -> {
                 message += "!"
@@ -48,7 +48,7 @@ class ExampleScreen(private val game: KtxGame<Screen>,
     }
 
     override fun hide() {
-        inputActionManager.unsubscribe(this)
+        actionInputAdapter.unsubscribe(this)
     }
 
     override fun dispose() {

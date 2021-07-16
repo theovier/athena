@@ -1,27 +1,25 @@
-package com.theovier.athena.client
+package com.theovier.athena.client.inputs
 
 import com.badlogic.gdx.Input
-import ktx.app.KtxInputAdapter
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-//https://xanadugame.ca/Making-Remappable-Controls/
-class InputActionManger : KtxInputAdapter {
+class ActionInputManager : ActionInputAdapter {
 
-    private val actionListeners = ArrayList<ActionListener>()
-    private val keyboardMappings: HashMap<Int, InputAction> = hashMapOf(
-        Input.Keys.W to InputAction.MOVE_UP,
-        Input.Keys.S to InputAction.MOVE_DOWN,
-        Input.Keys.A to InputAction.MOVE_LEFT,
-        Input.Keys.D to InputAction.MOVE_RIGHT
+    private val actionListeners = ArrayList<ActionInputListener>()
+    private val keyboardMappings: HashMap<Int, ActionInput> = hashMapOf(
+        Input.Keys.W to ActionInput.MOVE_UP,
+        Input.Keys.S to ActionInput.MOVE_DOWN,
+        Input.Keys.A to ActionInput.MOVE_LEFT,
+        Input.Keys.D to ActionInput.MOVE_RIGHT
     )
 
-    fun subscribe(listener: ActionListener) {
+    override fun subscribe(listener: ActionInputListener) {
         actionListeners.add(0, listener) // Latest subscribers get priority
     }
 
-    fun unsubscribe(listener: ActionListener) {
+    override fun unsubscribe(listener: ActionInputListener) {
         actionListeners.remove(listener)
     }
 

@@ -3,6 +3,7 @@ package com.theovier.athena.client
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
+import com.theovier.athena.client.inputs.ActionInputManager
 import com.theovier.athena.client.screens.ExampleScreen
 import com.theovier.athena.client.screens.LoadingScreen
 import ktx.app.KtxGame
@@ -22,12 +23,12 @@ fun main() {
 class MyGame : KtxGame<Screen>() {
 
     private val context = Context().register {
-        bindSingleton(InputActionManger())
+        bindSingleton(ActionInputManager())
     }
 
     override fun create() {
-        addScreen(ExampleScreen(this, context.inject()))
-        addScreen(LoadingScreen(this, context.inject()))
+        addScreen(ExampleScreen(this, context.inject<ActionInputManager>()))
+        addScreen(LoadingScreen(this, context.inject<ActionInputManager>()))
         setScreen<LoadingScreen>()
     }
 

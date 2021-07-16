@@ -1,5 +1,6 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -24,7 +25,7 @@ class ExampleScreen(private val context: Context) : KtxScreen, ActionListener {
     private var message = "Hello Kotlin"
 
     override fun show() {
-        inputActionManager.init() //this seems to be wrong here?!
+        Gdx.input.inputProcessor = inputActionManager
         inputActionManager.subscribe(this)
     }
 

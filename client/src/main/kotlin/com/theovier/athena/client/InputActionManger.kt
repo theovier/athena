@@ -1,6 +1,5 @@
 package com.theovier.athena.client
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import ktx.app.KtxInputAdapter
 import mu.KotlinLogging
@@ -24,10 +23,6 @@ class InputActionManger : KtxInputAdapter {
 
     fun unsubscribe(listener: ActionListener) {
         actionListeners.remove(listener)
-    }
-
-    fun init() {
-        Gdx.input.inputProcessor = this
     }
 
     override fun keyDown(keycode: Int): Boolean {

@@ -5,6 +5,8 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.theovier.athena.client.screens.ExampleScreen
 import ktx.app.KtxGame
+import ktx.inject.Context
+import ktx.inject.register
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
@@ -17,8 +19,13 @@ fun main() {
 }
 
 class ExampleGame : KtxGame<Screen>() {
+
+    private val context = Context().register {
+        bindSingleton(InputActionManger())
+    }
+
     override fun create() {
-        addScreen(ExampleScreen())
+        addScreen(ExampleScreen(context))
         setScreen<ExampleScreen>()
     }
 }

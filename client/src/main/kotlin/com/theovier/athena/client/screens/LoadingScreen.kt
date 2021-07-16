@@ -7,24 +7,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.theovier.athena.client.ActionListener
 import com.theovier.athena.client.InputAction
-import com.theovier.athena.client.InputAction.*
 import com.theovier.athena.client.InputActionManger
+import com.theovier.athena.client.MyGame
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 import ktx.graphics.use
 import ktx.inject.Context
-import mu.KotlinLogging
 
-private val log = KotlinLogging.logger {}
-
-class ExampleScreen(private val game: KtxGame<Screen>,
+class LoadingScreen(private val game: KtxGame<Screen>,
                     private val inputActionManager: InputActionManger) : KtxScreen, ActionListener {
 
     private val font = BitmapFont()
     private val batch = SpriteBatch().apply {
         color = Color.WHITE
     }
-    private var message = "Hello Kotlin"
+    private var message = "Press W to switch to another screen."
 
     override fun show() {
         Gdx.input.inputProcessor = inputActionManager
@@ -33,8 +30,8 @@ class ExampleScreen(private val game: KtxGame<Screen>,
 
     override fun onAction(action: InputAction): Boolean {
         return when(action) {
-            MOVE_UP -> {
-                message += "!"
+            InputAction.MOVE_UP -> {
+                game.setScreen<ExampleScreen>()
                 true
             }
             else -> false
@@ -43,7 +40,7 @@ class ExampleScreen(private val game: KtxGame<Screen>,
 
     override fun render(delta: Float) {
         batch.use {
-            font.draw(it, message, 500f, 100f)
+            font.draw(it, message, 100f, 100f)
         }
     }
 

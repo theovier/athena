@@ -39,6 +39,11 @@
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
+            <artifactId>ktx-assets-async</artifactId>
+            <version>1.10.0-b1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.libktx</groupId>
             <artifactId>ktx-math</artifactId>
             <version>1.10.0-b1</version>
         </dependency>

@@ -1,20 +1,27 @@
 package com.theovier.athena.client
 
 import com.badlogic.gdx.Screen
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.inputs.ActionInputManager
 import com.theovier.athena.client.screens.GameScreen
 import com.theovier.athena.client.screens.StartupScreen
+import kotlinx.coroutines.launch
 import ktx.app.KtxGame
+import ktx.assets.async.AssetStorage
+import ktx.async.KtxAsync
 import ktx.inject.Context
 import ktx.inject.register
+import org.w3c.dom.Text
 
 class MyGame : KtxGame<Screen>() {
-    private val batch: Batch by lazy {
+    val batch: Batch by lazy {
         SpriteBatch()
     }
+
+    val assetStorage = AssetStorage()
 
     private val context = Context().register {
         bindSingleton(ActionInputManager())
@@ -22,18 +29,17 @@ class MyGame : KtxGame<Screen>() {
 
     override fun create() {
         super.create()
+        KtxAsync.initiate()
+        //assetStorage.loadSync<Texture>("images/test.png")
         addScreen(GameScreen(this))
-        addScreen(StartupScreen(this, context.inject<ActionInputManager>()))
-        setScreen<StartupScreen>()
+        setScreen<GameScreen>()
     }
 
-    override fun render() {
-        super.render()
-    }
 
     override fun dispose() {
         super.dispose()
         batch.dispose()
         context.dispose()
+        assetStorage.dispose()
     }
 }

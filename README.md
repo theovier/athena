@@ -5,6 +5,14 @@ After having worked with some state-of-the-art engines like Unity and Unreal, I 
 The main purpose of this project is simply to play around with some ideas and homemade graphics. 
 Don't expect anything too fancy or polished here.
 
+## Contribution
+
+Feel free to open pull-requests or discuss ideas about the project.
+
+## Acknowledgement
+
+I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference of how to get started with KTX.
+
 ## License
 
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#)

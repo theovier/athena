@@ -20,9 +20,9 @@ class SpriteRenderer : Component, Poolable {
     }
 
     companion object {
-        val mapper = mapperFor<SpriteRenderer>()
+        val MAPPER = mapperFor<SpriteRenderer>()
     }
 }
 
 val Entity.renderer: SpriteRenderer
-    get() = this[SpriteRenderer.mapper] ?: throw GdxRuntimeException("RenderComponent for entity '$this' is null")
+    get() = this[SpriteRenderer.MAPPER] ?: throw GdxRuntimeException("Renderer for entity '$this' is null")

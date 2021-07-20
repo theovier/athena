@@ -2,7 +2,7 @@ package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.Texture
-import com.theovier.athena.client.MyGame
+import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.Player
 import com.theovier.athena.client.ecs.components.SpriteRenderer
 import com.theovier.athena.client.ecs.components.Transform
@@ -15,8 +15,7 @@ import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-class GameScreen(private val game: MyGame) : KtxScreen {
-
+class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val viewport = FitViewport(64f, 40f) //width and height in units, 16:10
     private val engine = PooledEngine().apply {
         addSystem(RenderingSystem(game.batch, viewport))
@@ -32,7 +31,7 @@ class GameScreen(private val game: MyGame) : KtxScreen {
             with<SpriteRenderer>() {
                 val texture: Texture = game.assetStorage["sprites/test.png"]
                 sprite.setRegion(texture)
-                sprite.setSize(texture.width * MyGame.UNIT_SCALE, texture.height * MyGame.UNIT_SCALE)
+                sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
                 sprite.setOrigin(sprite.width * 0.5f, sprite.height * 0.5f)
             }
         }

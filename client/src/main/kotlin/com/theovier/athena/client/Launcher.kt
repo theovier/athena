@@ -7,5 +7,5 @@ fun main() {
     val config = Lwjgl3ApplicationConfiguration().apply {
         setWindowSizeLimits(1920, 1200, 1920, 1200)
     }
-    Lwjgl3Application(MyGame(), config)
+    Lwjgl3Application(AthenaGame(), config)
 }

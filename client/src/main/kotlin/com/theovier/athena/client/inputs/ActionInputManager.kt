@@ -6,7 +6,6 @@ import mu.KotlinLogging
 private val log = KotlinLogging.logger {}
 
 class ActionInputManager : ActionInputAdapter {
-
     private val actionListeners = ArrayList<ActionInputListener>()
     private val keyboardMappings: HashMap<Int, ActionInput> = hashMapOf(
         Input.Keys.W to ActionInput.MOVE_UP,

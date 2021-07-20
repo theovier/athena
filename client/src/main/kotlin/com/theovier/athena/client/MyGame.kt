@@ -30,7 +30,7 @@ class MyGame : KtxGame<Screen>() {
     override fun create() {
         super.create()
         KtxAsync.initiate()
-        //assetStorage.loadSync<Texture>("images/test.png")
+        assetStorage.loadSync<Texture>("sprites/test.png")
         addScreen(GameScreen(this))
         setScreen<GameScreen>()
     }
@@ -41,5 +41,9 @@ class MyGame : KtxGame<Screen>() {
         batch.dispose()
         context.dispose()
         assetStorage.dispose()
+    }
+
+    companion object {
+        val UNIT_SCALE = 1 / 64f // 1 unit = 64 pixels
     }
 }

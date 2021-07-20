@@ -14,6 +14,7 @@ import ktx.graphics.use
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
+
 class RenderingSystem (
     private val batch: Batch,
     private val viewport: Viewport,

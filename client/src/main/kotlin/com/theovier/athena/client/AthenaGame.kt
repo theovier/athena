@@ -19,22 +19,22 @@ class AthenaGame : KtxGame<Screen>() {
 
     val assetStorage = AssetStorage()
 
-    private val context = Context().register {
-        bindSingleton(ActionInputManager())
-    }
-
     override fun create() {
         super.create()
         KtxAsync.initiate()
-        assetStorage.loadSync<Texture>("sprites/test.png")
+        loadAssets()
         addScreen(GameScreen(this))
         setScreen<GameScreen>()
+    }
+
+    private fun loadAssets() {
+        //better to load assets in a loading screen
+        assetStorage.loadSync<Texture>("sprites/test.png")
     }
 
     override fun dispose() {
         super.dispose()
         batch.dispose()
-        context.dispose()
         assetStorage.dispose()
     }
 

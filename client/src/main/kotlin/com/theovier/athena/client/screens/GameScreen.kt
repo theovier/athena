@@ -16,7 +16,7 @@ import mu.KotlinLogging
 private val log = KotlinLogging.logger {}
 
 class GameScreen(private val game: AthenaGame) : KtxScreen {
-    private val viewport = FitViewport(64f, 40f) //width and height in units, 16:10
+    private val viewport = FitViewport(38f, 23f) //width and height in units, 16:10
     private val engine = PooledEngine().apply {
         addSystem(RenderingSystem(game.batch, viewport))
     }
@@ -25,8 +25,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         engine.entity {
             with<Player>()
             with<Transform>() {
-                position.set(26f, 14f, 0f)
-                size.set(6f, 6f)
+                position.set(18f, 11f, 0f)
+                size.set(2f, 2f)
             }
             with<SpriteRenderer>() {
                 val texture: Texture = game.assetStorage["sprites/test.png"]

@@ -5,12 +5,12 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.GdxRuntimeException
-import com.badlogic.gdx.utils.Pool
+import com.badlogic.gdx.utils.Pool.Poolable
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 import ktx.math.compareTo
 
-class Transform : Component, Pool.Poolable, Comparable<Transform> {
+class Transform : Component, Poolable, Comparable<Transform> {
     val position = Vector3()
     val size = Vector2(1f, 1f)
 

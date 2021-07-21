@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import ktx.app.KtxInputAdapter
@@ -18,12 +19,12 @@ class PlayerMovementSystem : KtxInputAdapter,
 
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)
-        Gdx.input.inputProcessor = this //todo multiplexer so we can use several systems that listen to player actions
+        (Gdx.input.inputProcessor as InputMultiplexer).addProcessor(this)
     }
 
     override fun removedFromEngine(engine: Engine?) {
         super.removedFromEngine(engine)
-        Gdx.input.inputProcessor = null //todo remove from multiplexer
+        (Gdx.input.inputProcessor as InputMultiplexer).removeProcessor(this)
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {

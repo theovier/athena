@@ -4,10 +4,10 @@ After having worked with some state-of-the-art engines like Unity and Unreal, I 
 The main purpose of this project is simply to play around with some ideas and homemade graphics. 
 Don't expect anything too fancy or polished here.
 
-# Status
+## Status
 Work in progress.
 
-# Features
+## Features
 - Uses [Ashley](https://github.com/libktx/ktx/tree/master/ashley) as its [ECS](https://en.wikipedia.org/wiki/Entity_component_system)
 - Basic movement system
 

@@ -34,3 +34,5 @@ build/
 
 .DS_STORE
 logs/
+
+notes.txt

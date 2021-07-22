@@ -15,7 +15,7 @@ Work in progress.
 Feel free to open pull-requests or discuss ideas about the project.
 
 ## Acknowledgement
-I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference of how to get started with KTX.
+I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference on how to get started with KTX.
 
 ## License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#)

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.math.clampMagnitude
 import ktx.app.KtxInputAdapter
 import ktx.ashley.allOf
 import ktx.math.plus
@@ -16,6 +17,8 @@ import ktx.math.times
 class PlayerMovementSystem : KtxInputAdapter,
     IteratingSystem(allOf(Player::class, Movement::class, Transform::class).get()) {
     private var direction = Vector2()
+    private val hasNoMovementInput: Boolean
+        get() = direction.isZero
 
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)
@@ -30,8 +33,15 @@ class PlayerMovementSystem : KtxInputAdapter,
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity.transform
         val movement = entity.movement
-        val velocity = direction.nor() * movement.speed
-        transform.position.set(transform.position + velocity * deltaTime)
+
+        movement.resetAcceleration()
+        movement.applyForce(direction * movement.accelerationFactor)
+        movement.applyFriction()
+        movement.move(deltaTime)
+        if (hasNoMovementInput && movement.isNearlyStandingStill) {
+            movement.stop()
+        }
+        transform.position.set(transform.position + movement.velocity * deltaTime)
     }
 
     override fun keyDown(keycode: Int): Boolean {

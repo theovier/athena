@@ -9,7 +9,18 @@ Work in progress.
 
 ## Features
 - Uses [Ashley](https://github.com/libktx/ktx/tree/master/ashley) as its [ECS](https://en.wikipedia.org/wiki/Entity_component_system)
-- Basic movement system
+- Basic movement system with acceleration and friction
+
+## Building from Source
+This project uses **Maven 3** as its build management tool.
+If you installed Maven just clone the repository or download the .zip and navigate to the root-level pom.xml.
+Then simply run
+
+```
+mvn package
+```
+
+and check your /target folder for the newly generated jar files. 
 
 ## Contribution
 Feel free to open pull-requests or discuss ideas about the project.

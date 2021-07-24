@@ -22,6 +22,10 @@ mvn package
 
 and check your /target folder for the newly generated jar files. 
 
+### macOS
+Please note that (even when run from within your IDE) you need to add the VM option flag `-XstartOnFirstThread`
+to make the application window appear on macOS.
+
 ## Contribution
 Feel free to open pull-requests or discuss ideas about the project.
 

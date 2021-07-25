@@ -27,12 +27,17 @@ class Movement : Component, Poolable {
     var acceleration = Vector2()
     var accelerationFactor = 0f
     var decelerationFactor = 0f
-    private var standingStillThreshold = 0.1 //when should the movement be considered standing still
+    var standingStillThreshold = 0.1f //when should the movement be considered standing still
     var mass = 1f
-    val friction: Vector2
+    private val friction: Vector2
         get() = -velocity * decelerationFactor
     val isNearlyStandingStill: Boolean
         get() = velocity.len2() <= standingStillThreshold
+    var direction = Vector2()
+    val hasNoMovementInput: Boolean
+        get() = direction.isZero
+    val hasMovementInput: Boolean
+        get() = !hasNoMovementInput
 
     override fun reset() {
         velocity = Vector2()
@@ -41,25 +46,36 @@ class Movement : Component, Poolable {
         accelerationFactor = 0f
         decelerationFactor = 0f
         mass = 1f
+        direction = Vector2()
     }
 
-    fun applyForce(force: Vector2) {
+    fun updateVelocity(deltaTime: Float) {
+        resetAcceleration()
+        accelerate()
+        applyFriction()
+        velocity += acceleration * deltaTime
+        if (hasNoMovementInput && isNearlyStandingStill) {
+            stop()
+        }
+    }
+
+    private fun applyForce(force: Vector2) {
         acceleration += force * (1 / mass)
     }
 
-    fun applyFriction() {
+    private fun applyFriction() {
         applyForce(friction)
     }
 
-    fun resetAcceleration() {
+    private fun accelerate() {
+        applyForce(direction * accelerationFactor)
+    }
+
+    private fun resetAcceleration() {
         acceleration = Vector2.Zero
     }
 
-    fun move(deltaTime: Float) {
-        velocity += acceleration * deltaTime
-    }
-
-    fun stop() {
+    private fun stop() {
         velocity = Vector2.Zero
     }
 

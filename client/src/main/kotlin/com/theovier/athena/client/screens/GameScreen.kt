@@ -7,6 +7,7 @@ import com.theovier.athena.client.ecs.systems.RenderingSystem
 import ktx.app.KtxScreen
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.systems.MovementSystem
 import com.theovier.athena.client.ecs.systems.PlayerMovementSystem
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -18,6 +19,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val viewport = FitViewport(38f, 23f) //width and height in units, 16:10
     private val engine = PooledEngine().apply {
         addSystem(RenderingSystem(game.batch, viewport))
+        addSystem(MovementSystem())
         addSystem(PlayerMovementSystem())
     }
 

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CameraMovementSystemTest {
-
     private var camera = OrthographicCamera()
 
     companion object {
@@ -40,14 +39,14 @@ class CameraMovementSystemTest {
     fun cameraFollowsTarget() {
         val engine = Engine().apply {
             addSystem(CameraMovementSystem(camera))
-        }
-        val entity = engine.entity {
-            with<CameraTarget>()
-            with<Transform>()
-            with<Movement>() {
-                maxSpeed = 10f
-                accelerationFactor = 10f
-                direction = Vector2.X
+            entity{
+                with<CameraTarget>()
+                with<Transform>()
+                with<Movement>() {
+                    maxSpeed = 10f
+                    accelerationFactor = 10f
+                    direction = Vector2.X
+                }
             }
         }
         engine.update(DELTA_TIME)
@@ -59,11 +58,11 @@ class CameraMovementSystemTest {
     fun cameraDoesNotMoveWhenTargetIsStandingStill() {
         val engine = Engine().apply {
             addSystem(CameraMovementSystem(camera))
-        }
-        val entity = engine.entity {
-            with<CameraTarget>()
-            with<Transform>() {
-                position.set(STARTING_POSITION)
+            entity {
+                with<CameraTarget>()
+                with<Transform>() {
+                    position.set(STARTING_POSITION)
+                }
             }
         }
         engine.update(DELTA_TIME)

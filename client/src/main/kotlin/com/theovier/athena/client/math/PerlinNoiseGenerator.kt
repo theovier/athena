@@ -20,9 +20,9 @@ class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 10) {
     /**
      * return perlin noises mapped to the range of -1 to 1
      * */
-    fun perlinWithNegative(x: Double, persistence: Double = 0.5, numberOfOctaves: Int = 8): Double {
+    fun perlinWithNegative(x: Double, persistence: Double = 0.5, numberOfOctaves: Int = 8): Float {
         val perlinInRange0to1 = perlin(x, persistence, numberOfOctaves)
-        return mapToRange(0, 1,-1, 1, perlinInRange0to1)
+        return mapToRange(0, 1,-1, 1, perlinInRange0to1).toFloat()
     }
 
     /**

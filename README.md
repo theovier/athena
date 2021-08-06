@@ -11,6 +11,7 @@ Work in progress.
 - Uses [Ashley](https://github.com/libktx/ktx/tree/master/ashley) as its [ECS](https://en.wikipedia.org/wiki/Entity_component_system)
 - Basic movement system with acceleration and friction
 - Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t) 
+- Smooth translational + rotational [camera shake based on trauma](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 
 ## Building from Source
 This project uses **Maven 3** as its build management tool.

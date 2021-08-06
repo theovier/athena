@@ -38,11 +38,14 @@ class CameraMovementSystemTest {
     @DisplayName("Camera follows entity with <CameraTarget> component")
     fun cameraFollowsTarget() {
         val engine = Engine().apply {
-            addSystem(CameraMovementSystem(camera))
+            addSystem(MovementSystem())
+            addSystem(CameraMovementSystem(camera, STARTING_POSITION))
             entity{
                 with<CameraTarget>()
-                with<Transform>()
-                with<Movement>() {
+                with<Transform> {
+                    position.set(STARTING_POSITION)
+                }
+                with<Movement> {
                     maxSpeed = 10f
                     accelerationFactor = 10f
                     direction = Vector2.X
@@ -57,10 +60,10 @@ class CameraMovementSystemTest {
     @DisplayName("Camera does not move when entity with <CameraTarget> component is standing still")
     fun cameraDoesNotMoveWhenTargetIsStandingStill() {
         val engine = Engine().apply {
-            addSystem(CameraMovementSystem(camera))
+            addSystem(CameraMovementSystem(camera, STARTING_POSITION))
             entity {
                 with<CameraTarget>()
-                with<Transform>() {
+                with<Transform> {
                     position.set(STARTING_POSITION)
                 }
             }

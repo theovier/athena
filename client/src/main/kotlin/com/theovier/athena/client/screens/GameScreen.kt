@@ -3,14 +3,12 @@ package com.theovier.athena.client.screens
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.math.Vector3
 import com.theovier.athena.client.AthenaGame
-import com.theovier.athena.client.ecs.systems.RenderingSystem
 import ktx.app.KtxScreen
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.systems.CameraMovementSystem
-import com.theovier.athena.client.ecs.systems.MovementSystem
-import com.theovier.athena.client.ecs.systems.PlayerMovementSystem
+import com.theovier.athena.client.ecs.systems.*
 import ktx.ashley.entity
 import ktx.ashley.with
 import mu.KotlinLogging
@@ -18,29 +16,30 @@ import mu.KotlinLogging
 private val log = KotlinLogging.logger {}
 
 class GameScreen(private val game: AthenaGame) : KtxScreen {
+    private val playerStartingPosition = Vector3(10f, 12f, 0f)
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine().apply {
         addSystem(RenderingSystem(game.batch, viewport))
         addSystem(MovementSystem())
         addSystem(PlayerMovementSystem())
-        addSystem(CameraMovementSystem(camera))
+        addSystem(CameraMovementSystem(camera, playerStartingPosition))
     }
 
     init {
         engine.entity {
             with<Player>()
             with<CameraTarget>()
-            with<Movement>() {
+            with<Movement> {
                 maxSpeed = 8f
                 accelerationFactor = 250f
                 decelerationFactor = 10f
             }
-            with<Transform>() {
-                position.set(18f, 11f, 0f)
+            with<Transform> {
+                position.set(playerStartingPosition)
                 size.set(2f, 2f)
             }
-            with<SpriteRenderer>() {
+            with<SpriteRenderer> {
                 val texture: Texture = game.assetStorage["sprites/test.png"]
                 sprite.setRegion(texture)
                 sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
@@ -69,7 +68,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     override fun resize(width: Int, height: Int) {
         super.resize(width, height)
-        viewport.update(width, height, true)
+        viewport.update(width, height)
     }
 
     override fun dispose() {

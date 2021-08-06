@@ -20,12 +20,9 @@ class CameraMovementSystem(private val camera: Camera, private val startPosition
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)
         camera.position.set(startPosition)
-        log.debug { camera.position }
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        log.debug { camera.position }
-
         if (entities.size() > 1) {
             log.error { "More than 1 entity with <CameraLock> component detected." }
         }

@@ -1,7 +1,6 @@
 package com.theovier.athena.client.math
 
 import com.badlogic.gdx.math.MathUtils
-import mu.KotlinLogging
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.random.Random
@@ -16,6 +15,14 @@ class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 10) {
 
     private val noise = DoubleArray(boundary) {
         random.nextDouble()
+    }
+
+    /**
+     * return perlin noises mapped to the range of -1 to 1
+     * */
+    fun perlinWithNegative(x: Double, persistence: Double = 0.5, numberOfOctaves: Int = 8): Double {
+        val perlinInRange0to1 = perlin(x, persistence, numberOfOctaves)
+        return mapToRange(0, 1,-1, 1, perlinInRange0to1)
     }
 
     /**
@@ -60,14 +67,8 @@ class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 10) {
         val x = MathUtils.clamp((alpha - x0) / (x1 - x0), 0.0, 1.0)
         return x * x * x * (x * (x * 6 - 15) + 10);
     }
-}
 
-private val log = KotlinLogging.logger {}
-fun main() {
-    val generator = PerlinNoiseGenerator(1)
-
-    for (i in 0 until 101) {
-        log.debug { generator.perlin(0.1 * i) }
+    private fun mapToRange(currentLow: Int, currentHigh: Int, targetLow: Int, targetHigh: Int, value: Double): Double {
+        return (value - currentLow) * (targetHigh - targetLow) / (currentHigh - currentLow) + targetLow
     }
-
 }

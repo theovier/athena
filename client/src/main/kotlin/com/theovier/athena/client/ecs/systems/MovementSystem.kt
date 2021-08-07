@@ -8,7 +8,6 @@ import ktx.math.plus
 import ktx.math.times
 import mu.KotlinLogging
 
-private val log = KotlinLogging.logger {}
 class MovementSystem : IteratingSystem(allOf(Movement::class, Transform::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {

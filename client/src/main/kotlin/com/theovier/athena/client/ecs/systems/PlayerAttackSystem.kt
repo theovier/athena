@@ -60,6 +60,9 @@ class PlayerAttackSystem(private val game: AthenaGame, private val viewport: Vie
                     decelerationFactor = 10f
                     direction = bulletDirection
                 }
+                with<Lifetime> {
+                    duration = 3f
+                }
             }
             wantsToFire = false
         }

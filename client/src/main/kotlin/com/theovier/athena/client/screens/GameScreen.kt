@@ -26,6 +26,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         addSystem(PlayerAttackSystem(game, viewport))
         addSystem(CameraMovementSystem(camera, playerStartingPosition))
         addSystem(CameraShakeSystem(viewport))
+        addSystem(LifetimeSystem())
     }
 
     init {

@@ -1,4 +1,5 @@
-<entity name="test">
-    <bar name="alice" />
-    <bar name="bob" />
-</entity>
+<Prefab>
+    <Foo name="alice" />
+    <Foo name="bob" />
+    <Bar id="1" />
+</Prefab>

@@ -1,0 +1,4 @@
+<EntityPrefab name="test">
+    <Bar name="alice" />
+    <Bar name="bob" />
+</EntityPrefab>

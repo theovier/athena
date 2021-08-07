@@ -27,10 +27,10 @@ class MovementSystemTest {
 
         val startingPosition = Vector3(0f, 0f, 0f)
         val entity = engine.entity {
-            with<Transform>() {
+            with<Transform> {
                 position.set(startingPosition)
             }
-            with<Movement>() {
+            with<Movement> {
                 maxSpeed = 10f
                 accelerationFactor = 0f
                 direction = Vector2.X
@@ -50,10 +50,10 @@ class MovementSystemTest {
 
         val startingPosition = Vector3(0f, 0f, 0f)
         val entity = engine.entity {
-            with<Transform>() {
+            with<Transform> {
                 position.set(startingPosition)
             }
-            with<Movement>() {
+            with<Movement> {
                 maxSpeed = 0f
                 accelerationFactor = 10f
                 direction = Vector2.X
@@ -73,10 +73,10 @@ class MovementSystemTest {
 
         val startingPosition = Vector3(0f, 0f, 0f)
         val entity = engine.entity {
-            with<Transform>() {
+            with<Transform> {
                 position.set(startingPosition)
             }
-            with<Movement>() {
+            with<Movement> {
                 maxSpeed = 10f
                 accelerationFactor = 10f
                 direction = Vector2.Zero
@@ -96,10 +96,10 @@ class MovementSystemTest {
 
         val startingPosition = Vector3(0f, 0f, 0f)
         val entity = engine.entity {
-            with<Transform>() {
+            with<Transform> {
                 position.set(startingPosition)
             }
-            with<Movement>() {
+            with<Movement> {
                 maxSpeed = 10f
                 accelerationFactor = 10f
                 direction = Vector2.X

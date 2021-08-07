@@ -40,6 +40,7 @@ class RenderingSystem (
             // normalize sprite to to size (1,1) and scale sprite by the entity's size
             setScale(1 / width * transform.size.x, 1 / height * transform.size.y)
             setPosition(transform.position.x, transform.position.y)
+            rotation = transform.rotation
 
             // -> [origin * (1 - scale)]: puts the sprite correctly to the bottom left corner if scaling is applied
             // -> [(transformSizeX - width * scaleX) * 0.5]: centers the sprite horizontally within its bounding rectangle

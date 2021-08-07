@@ -6,6 +6,7 @@ import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 import ktx.math.plus
 import ktx.math.times
+import mu.KotlinLogging
 
 class MovementSystem : IteratingSystem(allOf(Movement::class, Transform::class).get()) {
 

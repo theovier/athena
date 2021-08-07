@@ -13,10 +13,12 @@ import ktx.math.compareTo
 class Transform : Component, Poolable, Comparable<Transform> {
     val position = Vector3()
     val size = Vector2(1f, 1f)
+    var rotation = 0f
 
     override fun reset() {
         position.set(0f, 0f, 0f)
         size.set(1f, 1f)
+        rotation = 0f
     }
 
     override fun compareTo(other: Transform): Int {

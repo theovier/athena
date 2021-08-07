@@ -34,6 +34,7 @@ class AthenaGame : KtxGame<Screen>() {
         //better to load assets in a loading screen
         assetStorage.loadSync<Texture>("sprites/test.png")
         assetStorage.loadSync<Texture>("sprites/cyan_square.png")
+        assetStorage.loadSync<Texture>("sprites/bullet.png")
     }
 
     override fun dispose() {
@@ -43,6 +44,6 @@ class AthenaGame : KtxGame<Screen>() {
     }
 
     companion object {
-        val UNIT_SCALE = 1 / 64f // 1 unit = 64 pixels
+        const val UNIT_SCALE = 1 / 64f // 1 unit = 64 pixels
     }
 }

@@ -16,10 +16,7 @@ import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.math.minus
-import mu.KotlinLogging
 
-
-private val log = KotlinLogging.logger {}
 class PlayerAttackSystem(private val game: AthenaGame, private val viewport: Viewport) : KtxInputAdapter, IteratingSystem(allOf(Player::class).get()) {
 
     private var wantsToFire = false

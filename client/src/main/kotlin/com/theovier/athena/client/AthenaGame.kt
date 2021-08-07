@@ -34,6 +34,7 @@ class AthenaGame : KtxGame<Screen>() {
         //better to load assets in a loading screen
         assetStorage.loadSync<Texture>("sprites/test.png")
         assetStorage.loadSync<Texture>("sprites/cyan_square.png")
+        assetStorage.loadSync<Texture>("sprites/bullet.png")
     }
 
     override fun dispose() {

@@ -23,6 +23,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         addSystem(RenderingSystem(game.batch, viewport))
         addSystem(MovementSystem())
         addSystem(PlayerMovementSystem())
+        addSystem(PlayerAttackSystem(game, viewport))
         addSystem(CameraMovementSystem(camera, playerStartingPosition))
         addSystem(CameraShakeSystem(viewport))
     }
@@ -50,10 +51,10 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
         //reference object
         engine.entity {
-            with<Transform>() {
+            with<Transform> {
                 position.set(14f, 10f, 0f)
             }
-            with<SpriteRenderer>() {
+            with<SpriteRenderer> {
                 val texture: Texture = game.assetStorage["sprites/cyan_square.png"]
                 sprite.setRegion(texture)
                 sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)

@@ -1,30 +1,23 @@
 package com.theovier.athena.client.ecs.prefabs
 
 import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import mu.KotlinLogging
 
+@Serializable
+@SerialName("entity")
+data class EntityPrefab(val name: String, val components: List<Bar> = listOf())
+//note: List<@Polymorphic Foo> does not work
+
+interface Foo
 
 @Serializable
-data class EntityPrefab(val name: String, val components: List<@Polymorphic Foo>)
-
-interface Foo {
-    fun doStuff()
-}
+@SerialName("bar")
+data class Bar(val name: String) : Foo
 
 @Serializable
-data class Bar(val name: String) : Foo {
-    override fun doStuff(){
-
-    }
-}
-
-@Serializable
-class Buzz : Foo {
-    override fun doStuff() {
-
-    }
-}
+class Buzz : Foo
 
 private val log = KotlinLogging.logger {}
 fun main() {

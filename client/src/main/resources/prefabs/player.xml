@@ -1,4 +1,4 @@
-<EntityPrefab name="test">
-    <Bar name="alice" />
-    <Bar name="bob" />
-</EntityPrefab>
+<entity name="test">
+    <bar name="alice" />
+    <bar name="bob" />
+</entity>

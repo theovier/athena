@@ -6,19 +6,49 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.math.Vector3
 import com.theovier.athena.client.ecs.prefabs.serializers.Vector3Serializer
 import kotlinx.serialization.*
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 import ktx.ashley.get
+import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import nl.adaptivity.xmlutil.XmlStreaming
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlPolyChildren
+import java.lang.RuntimeException
 
 @Serializable
-class Prefab(
-    //todo this needs to be stated here as annotation argument must be a compile time constant
-    @XmlPolyChildren([".Foo", ".Bar", ".CustomComponent"])
-    val components: List<@Polymorphic Component>
-)
+class Prefab(@XmlPolyChildren([".Foo", ".Bar", ".CustomComponent"]) val components: List<@Polymorphic Component>) {
+
+    companion object {
+        private val serializerModule = SerializersModule {
+            polymorphic(Component::class) {
+                subclass(Foo::class)
+                subclass(Bar::class)
+                subclass(CustomComponent::class)
+            }
+        }
+
+        private fun load(name: String): Prefab {
+            val prefabStream = Prefab::class.java.getResourceAsStream("/prefabs/$name.xml")
+            if (prefabStream != null) {
+                val reader = XmlStreaming.newReader(prefabStream, "utf-8")
+                return XML(serializersModule = serializerModule).decodeFromReader(reader)
+            } else {
+                log.error { "Prefab '$name' could not be found." }
+                throw RuntimeException("Could not load prefab '$name'.xml")
+            }
+        }
+
+        fun instantiate(name: String): Entity {
+            val entity = Entity()
+            val prefab = load(name)
+            prefab.components.forEach { entity += it }
+            return entity
+        }
+    }
+}
 
 @Serializable
 class Foo(var name: String) : Component
@@ -36,6 +66,6 @@ data class CustomComponent(
 
 private val log = KotlinLogging.logger {}
 fun main() {
-    val entityFromPrefab = GameObject.instantiate("player")
+    val entityFromPrefab = Prefab.instantiate("player")
     log.debug { entityFromPrefab.get<CustomComponent>()?.vector }
 }

@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.math.Vector3
+import com.theovier.athena.client.ecs.components.Player
 import com.theovier.athena.client.ecs.prefabs.serializers.Vector3Serializer
 import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
@@ -19,12 +20,12 @@ import nl.adaptivity.xmlutil.serialization.XmlPolyChildren
 import java.lang.RuntimeException
 
 @Serializable
-class Prefab(@XmlPolyChildren([".Foo", ".Bar", ".CustomComponent"]) val components: List<@Polymorphic Component>) {
+class Prefab(val components: List<@Polymorphic Component>) {
 
     companion object {
         private val serializerModule = SerializersModule {
             polymorphic(Component::class) {
-                subclass(Foo::class)
+                subclass(Player::class)
                 subclass(Bar::class)
                 subclass(CustomComponent::class)
             }
@@ -34,7 +35,9 @@ class Prefab(@XmlPolyChildren([".Foo", ".Bar", ".CustomComponent"]) val componen
             val prefabStream = Prefab::class.java.getResourceAsStream("/prefabs/$name.xml")
             if (prefabStream != null) {
                 val reader = XmlStreaming.newReader(prefabStream, "utf-8")
-                return XML(serializersModule = serializerModule).decodeFromReader(reader)
+                return XML(serializersModule = serializerModule) {
+                    autoPolymorphic = true
+                }.decodeFromReader(reader)
             } else {
                 log.error { "Prefab '$name' could not be found." }
                 throw RuntimeException("Could not load prefab '$name'.xml")
@@ -49,9 +52,6 @@ class Prefab(@XmlPolyChildren([".Foo", ".Bar", ".CustomComponent"]) val componen
         }
     }
 }
-
-@Serializable
-class Foo(var name: String) : Component
 
 @Serializable
 class Bar(var id: Int) : Component

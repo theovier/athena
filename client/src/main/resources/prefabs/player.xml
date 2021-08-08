@@ -2,4 +2,7 @@
     <Foo name="alice" />
     <Foo name="bob" />
     <Bar id="1" />
+    <Buzz>
+        <Vector3 x="1" y="2" z="3" />
+    </Buzz>
 </Prefab>

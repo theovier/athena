@@ -18,6 +18,7 @@ class GameObject {
             polymorphic(Component::class) {
                 subclass(Foo::class)
                 subclass(Bar::class)
+                //subclass(Buzz::class)
             }
         }
 

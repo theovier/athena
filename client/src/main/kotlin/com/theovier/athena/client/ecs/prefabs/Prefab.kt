@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.math.Vector3
-import com.theovier.athena.client.ecs.components.CameraTarget
-import com.theovier.athena.client.ecs.components.Player
-import com.theovier.athena.client.ecs.components.Transform
-import com.theovier.athena.client.ecs.components.transform
+import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.serializers.Vector3Serializer
 import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
@@ -28,13 +25,13 @@ import java.lang.RuntimeException
 class Prefab(val components: List<@Polymorphic Component>) {
 
     companion object {
-
         private const val ENCODING = "utf-8"
 
         private val serializerModule = SerializersModule {
             polymorphic(Component::class) {
-                subclass(Player::class)
                 subclass(CameraTarget::class)
+                subclass(Movement::class)
+                subclass(Player::class)
                 subclass(Transform::class)
             }
         }
@@ -69,4 +66,5 @@ private val log = KotlinLogging.logger {}
 fun main() {
     val entityFromPrefab = Prefab.instantiate("player")
     log.debug { entityFromPrefab.transform.position }
+    log.debug { entityFromPrefab.get<Movement>()?.maxSpeed }
 }

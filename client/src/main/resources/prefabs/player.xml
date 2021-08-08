@@ -5,4 +5,5 @@
         <Position x="4" y="5" z="0" />
         <Size x="2" y="2" />
     </Transform>
+    <Movement maxSpeed="8" accelerationFactor="250" decelerationFactor="10" />
 </Prefab>

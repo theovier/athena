@@ -30,6 +30,7 @@ class Prefab(val components: List<@Polymorphic Component>) {
         private val serializerModule = SerializersModule {
             polymorphic(Component::class) {
                 subclass(CameraTarget::class)
+                subclass(Lifetime::class)
                 subclass(Movement::class)
                 subclass(Player::class)
                 subclass(Transform::class)

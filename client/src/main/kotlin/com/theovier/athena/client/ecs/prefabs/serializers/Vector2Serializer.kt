@@ -1,5 +1,6 @@
 package com.theovier.athena.client.ecs.prefabs.serializers
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
@@ -9,11 +10,11 @@ import nl.adaptivity.xmlutil.XmlException
 import nl.adaptivity.xmlutil.attributes
 import nl.adaptivity.xmlutil.serialization.XML
 
-@Serializer(forClass = Vector3::class)
-class Vector3Serializer : KSerializer<Vector3> {
+@Serializer(forClass = Vector2::class)
+class Vector2Serializer : KSerializer<Vector2> {
 
-    override fun deserialize(decoder: Decoder): Vector3 {
-        val vector = Vector3()
+    override fun deserialize(decoder: Decoder): Vector2 {
+        val vector = Vector2()
 
         if (decoder is XML.XmlInput) {
             val reader = decoder.input
@@ -21,11 +22,10 @@ class Vector3Serializer : KSerializer<Vector3> {
                 when(attribute.localName) {
                     "x" -> vector.x = attribute.value.toFloat()
                     "y" -> vector.y = attribute.value.toFloat()
-                    "z" -> vector.z = attribute.value.toFloat()
                 }
             }
             while (reader.next() != EventType.END_ELEMENT) {
-                throw XmlException("Vector3 may only have attributes x,y,z which are all floating point numbers.")
+                throw XmlException("Vector2 may only have attributes x,y which are all floating point numbers.")
             }
         }
         return vector

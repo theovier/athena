@@ -1,7 +1,8 @@
 <Prefab>
     <Player />
-    <Bar id="1" />
-    <CustomComponent>
-        <Vector3 x="1" y="2" z="3" />
-    </CustomComponent>
+    <CameraTarget />
+    <Transform rotation="45">
+        <Position x="4" y="5" z="0" />
+        <Size x="2" y="2" />
+    </Transform>
 </Prefab>

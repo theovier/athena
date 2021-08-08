@@ -4,7 +4,10 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.math.Vector3
+import com.theovier.athena.client.ecs.components.CameraTarget
 import com.theovier.athena.client.ecs.components.Player
+import com.theovier.athena.client.ecs.components.Transform
+import com.theovier.athena.client.ecs.components.transform
 import com.theovier.athena.client.ecs.prefabs.serializers.Vector3Serializer
 import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
@@ -17,31 +20,40 @@ import nl.adaptivity.xmlutil.XmlStreaming
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlPolyChildren
+import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import java.io.InputStream
 import java.lang.RuntimeException
 
 @Serializable
 class Prefab(val components: List<@Polymorphic Component>) {
 
     companion object {
+
+        private const val ENCODING = "utf-8"
+
         private val serializerModule = SerializersModule {
             polymorphic(Component::class) {
                 subclass(Player::class)
-                subclass(Bar::class)
-                subclass(CustomComponent::class)
+                subclass(CameraTarget::class)
+                subclass(Transform::class)
             }
         }
 
         private fun load(name: String): Prefab {
             val prefabStream = Prefab::class.java.getResourceAsStream("/prefabs/$name.xml")
             if (prefabStream != null) {
-                val reader = XmlStreaming.newReader(prefabStream, "utf-8")
-                return XML(serializersModule = serializerModule) {
-                    autoPolymorphic = true
-                }.decodeFromReader(reader)
+                return loadFromStream(prefabStream)
             } else {
                 log.error { "Prefab '$name' could not be found." }
                 throw RuntimeException("Could not load prefab '$name'.xml")
             }
+        }
+
+        private fun loadFromStream(stream: InputStream): Prefab {
+            val reader = XmlStreaming.newReader(stream, ENCODING)
+            return XML(serializersModule = serializerModule) {
+                autoPolymorphic = true
+            }.decodeFromReader(reader)
         }
 
         fun instantiate(name: String): Entity {
@@ -53,19 +65,8 @@ class Prefab(val components: List<@Polymorphic Component>) {
     }
 }
 
-@Serializable
-class Bar(var id: Int) : Component
-
-@Serializable
-data class CustomComponent(
-    @XmlElement(true)
-    @Serializable(with = Vector3Serializer::class)
-    val vector: Vector3
-) : Component
-
-
 private val log = KotlinLogging.logger {}
 fun main() {
     val entityFromPrefab = Prefab.instantiate("player")
-    log.debug { entityFromPrefab.get<CustomComponent>()?.vector }
+    log.debug { entityFromPrefab.transform.position }
 }

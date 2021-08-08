@@ -1,9 +1,11 @@
 package com.theovier.athena.client.ecs.prefabs
 
 import com.badlogic.ashley.core.Component
+import com.badlogic.ashley.core.Entity
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import nl.adaptivity.xmlutil.XmlStreaming
 import nl.adaptivity.xmlutil.serialization.XML
@@ -14,20 +16,26 @@ private val log = KotlinLogging.logger {}
 class GameObject {
     companion object {
 
-        val baseModule = SerializersModule {
+        val components = arrayOf(
+            ".Foo",
+            ".Bar",
+            ".CustomComponent"
+        )
+
+        //todo get them from an array or through reflection
+        private val serializerModule = SerializersModule {
             polymorphic(Component::class) {
                 subclass(Foo::class)
                 subclass(Bar::class)
-                //subclass(Buzz::class)
+                subclass(CustomComponent::class)
             }
         }
 
-
-        fun instantiate(name: String): Prefab {
+        private fun loadPrefab(name: String): Prefab {
             val prefabStream = GameObject::class.java.getResourceAsStream("/prefabs/$name.xml")
             if (prefabStream != null) {
                 val reader = XmlStreaming.newReader(prefabStream, "utf-8")
-                val prefab = XML(serializersModule = baseModule){
+                val prefab = XML(serializersModule = serializerModule){
                     autoPolymorphic = false
                 }.decodeFromReader<Prefab>(reader)
                 return prefab
@@ -36,8 +44,12 @@ class GameObject {
                 throw RuntimeException("Could not load prefab '$name'.xml")
             }
         }
+
+        fun instantiate(name: String): Entity {
+            val entity = Entity()
+            val prefab = loadPrefab(name)
+            prefab.components.forEach { entity += it }
+            return entity
+        }
     }
-
-
-
 }

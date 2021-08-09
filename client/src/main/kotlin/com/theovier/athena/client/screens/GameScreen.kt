@@ -24,15 +24,15 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         addSystem(RenderingSystem(game.batch, viewport))
         addSystem(MovementSystem())
         addSystem(PlayerMovementSystem())
-        addSystem(PlayerAttackSystem(game, viewport))
+        addSystem(PlayerAttackSystem(viewport))
         addSystem(CameraMovementSystem(camera, playerStartingPosition))
         addSystem(CameraShakeSystem(viewport))
         addSystem(LifetimeSystem())
     }
 
     init {
-        val entityFromPrefab = Prefab.instantiate("player")
-        engine.addEntity(entityFromPrefab)
+        val player = Prefab.instantiate("player")
+        engine.addEntity(player)
 
         //reference object
         engine.entity {

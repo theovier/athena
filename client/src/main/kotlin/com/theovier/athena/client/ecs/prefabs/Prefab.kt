@@ -50,10 +50,11 @@ class Prefab(val components: List<@Polymorphic Component>) {
             }.decodeFromReader(reader)
         }
 
-        fun instantiate(name: String): Entity {
+        fun instantiate(name: String, configure: Entity.() -> Unit = {}): Entity {
             val entity = Entity()
             val prefab = load(name)
             prefab.components.forEach { entity += it }
+            configure(entity)
             return entity
         }
     }

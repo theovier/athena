@@ -23,7 +23,6 @@ class SpriteSerializer : KSerializer<Sprite> {
                 when(attribute.localName) {
                     "texture" -> {
                         val textureName = attribute.value
-                        log.debug { textureName }
                         val texture: Texture = AthenaGame.assetStorage[textureName]
                         sprite.setRegion(texture)
                         sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)

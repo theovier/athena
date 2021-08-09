@@ -8,6 +8,7 @@ import com.theovier.athena.client.AthenaGame
 import ktx.app.KtxScreen
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -30,25 +31,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     init {
-        engine.entity {
-            with<Player>()
-            with<CameraTarget>()
-            with<Movement> {
-                maxSpeed = 8f
-                accelerationFactor = 250f
-                decelerationFactor = 10f
-            }
-            with<Transform> {
-                position.set(playerStartingPosition)
-                size.set(2f, 2f)
-            }
-            with<SpriteRenderer> {
-                val texture: Texture = game.assetStorage["sprites/test.png"]
-                sprite.setRegion(texture)
-                sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
-                sprite.setOrigin(sprite.width * 0.5f, sprite.height * 0.5f)
-            }
-        }
+        val entityFromPrefab = Prefab.instantiate("player")
+        engine.addEntity(entityFromPrefab)
 
         //reference object
         engine.entity {
@@ -56,7 +40,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 position.set(14f, 10f, 0f)
             }
             with<SpriteRenderer> {
-                val texture: Texture = game.assetStorage["sprites/cyan_square.png"]
+                val texture: Texture = AthenaGame.assetStorage["sprites/cyan_square.png"]
                 sprite.setRegion(texture)
                 sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
                 sprite.setOrigin(sprite.width * 0.5f, sprite.height * 0.5f)

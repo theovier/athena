@@ -1,9 +1,13 @@
 <Prefab>
     <Player />
     <CameraTarget />
-    <Transform rotation="45">
-        <Position x="4" y="5" z="0" />
+    <Transform>
+        <Position x="10" y="12" z="0" />
         <Size x="2" y="2" />
     </Transform>
     <Movement maxSpeed="8" accelerationFactor="250" decelerationFactor="10" />
+    <SpriteRenderer>
+        <Sprite texture="sprites/test.png" />
+        <Offset x="0" y="0" />
+    </SpriteRenderer>
 </Prefab>

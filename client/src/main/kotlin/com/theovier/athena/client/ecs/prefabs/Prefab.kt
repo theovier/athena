@@ -2,24 +2,19 @@ package com.theovier.athena.client.ecs.prefabs
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.core.PooledEngine
-import com.badlogic.gdx.math.Vector3
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.prefabs.serializers.Vector3Serializer
 import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
-import ktx.ashley.get
 import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import nl.adaptivity.xmlutil.XmlStreaming
 import nl.adaptivity.xmlutil.serialization.XML
-import nl.adaptivity.xmlutil.serialization.XmlElement
-import nl.adaptivity.xmlutil.serialization.XmlPolyChildren
-import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.io.InputStream
 import java.lang.RuntimeException
+
+private val log = KotlinLogging.logger {}
 
 @Serializable
 class Prefab(val components: List<@Polymorphic Component>) {
@@ -33,6 +28,7 @@ class Prefab(val components: List<@Polymorphic Component>) {
                 subclass(Lifetime::class)
                 subclass(Movement::class)
                 subclass(Player::class)
+                subclass(SpriteRenderer::class)
                 subclass(Transform::class)
             }
         }
@@ -61,11 +57,4 @@ class Prefab(val components: List<@Polymorphic Component>) {
             return entity
         }
     }
-}
-
-private val log = KotlinLogging.logger {}
-fun main() {
-    val entityFromPrefab = Prefab.instantiate("player")
-    log.debug { entityFromPrefab.transform.position }
-    log.debug { entityFromPrefab.get<Movement>()?.maxSpeed }
 }

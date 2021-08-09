@@ -47,7 +47,7 @@ class PlayerAttackSystem(private val game: AthenaGame, private val viewport: Vie
                     rotation = bulletDirection.angleDeg()
                 }
                 with<SpriteRenderer> {
-                    val texture: Texture = game.assetStorage["sprites/bullet.png"]
+                    val texture: Texture = AthenaGame.assetStorage["sprites/bullet.png"]
                     sprite.setRegion(texture)
                     sprite.setSize(texture.width.toFloat(), texture.height.toFloat())
                 }

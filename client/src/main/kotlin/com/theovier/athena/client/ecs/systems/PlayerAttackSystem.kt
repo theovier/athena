@@ -15,7 +15,6 @@ import ktx.ashley.allOf
 import ktx.math.minus
 
 class PlayerAttackSystem(private val viewport: Viewport) : KtxInputAdapter, IteratingSystem(allOf(Player::class).get()) {
-
     private var wantsToFire = false
     private var latestClickedPosition = Vector2()
 

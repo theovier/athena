@@ -21,8 +21,8 @@ class Prefab(val components: List<@Polymorphic Component>) {
 
     companion object {
         private const val ENCODING = "utf-8"
-
-        private val serializerModule = SerializersModule {
+        private val CACHE = HashMap<String, Entity>()
+        private val MODULE = SerializersModule {
             polymorphic(Component::class) {
                 subclass(CameraTarget::class)
                 subclass(Lifetime::class)
@@ -45,16 +45,21 @@ class Prefab(val components: List<@Polymorphic Component>) {
 
         private fun loadFromStream(stream: InputStream): Prefab {
             val reader = XmlStreaming.newReader(stream, ENCODING)
-            return XML(serializersModule = serializerModule) {
+            return XML(serializersModule = MODULE) {
                 autoPolymorphic = true
             }.decodeFromReader(reader)
         }
 
         fun instantiate(name: String, configure: Entity.() -> Unit = {}): Entity {
+            return CACHE.getOrDefault(name, instantiateFresh(name, configure))
+        }
+
+        private fun instantiateFresh(name: String, configure: Entity.() -> Unit = {}): Entity {
             val entity = Entity()
             val prefab = load(name)
             prefab.components.forEach { entity += it }
             configure(entity)
+            CACHE[name] = entity
             return entity
         }
     }

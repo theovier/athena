@@ -128,6 +128,16 @@
             <artifactId>ashley</artifactId>
             <version>1.7.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.pdvrieze.xmlutil</groupId>
+            <artifactId>core-jvm</artifactId>
+            <version>0.82.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pdvrieze.xmlutil</groupId>
+            <artifactId>serialization-jvm</artifactId>
+            <version>0.82.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -143,7 +153,17 @@
                     <sourceDirs>
                         <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
                     </sourceDirs>
+                    <compilerPlugins>
+                        <plugin>kotlinx-serialization</plugin>
+                    </compilerPlugins>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-serialization</artifactId>
+                        <version>1.5.21</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>compile</id>

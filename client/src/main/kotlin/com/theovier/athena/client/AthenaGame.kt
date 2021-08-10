@@ -6,20 +6,15 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.theovier.athena.client.inputs.ActionInputManager
 import com.theovier.athena.client.screens.GameScreen
 import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
-import ktx.inject.Context
-import ktx.inject.register
 
 class AthenaGame : KtxGame<Screen>() {
     val batch: Batch by lazy {
         SpriteBatch()
     }
-
-    val assetStorage = AssetStorage()
 
     override fun create() {
         super.create()
@@ -44,6 +39,7 @@ class AthenaGame : KtxGame<Screen>() {
     }
 
     companion object {
+        val assetStorage = AssetStorage() //todo: think of a better way to access this in the SpriteSerializer
         const val UNIT_SCALE = 1 / 64f // 1 unit = 64 pixels
     }
 }

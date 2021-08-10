@@ -1,3 +1,8 @@
+[![Main Build](https://img.shields.io/github/workflow/status/theovier/athena/Kotlin%20CI%20with%20Maven?label=Main)](https://github.com/theovier/athena/actions)
+[![GitHub license](https://img.shields.io/github/license/theovier/athena)](https://github.com/theovier/athena/blob/main/COPYING)
+[![LibGDX](https://img.shields.io/badge/LibGDX-1.10.0-red.svg)](https://github.com/libgdx/libgdx)
+[![LibKTX](https://img.shields.io/badge/LibKTX-1.10.0--b1-red.svg)](https://github.com/libktx/ktx)
+
 # Athena
 This is a 2D shoot'em up game done in [KTX](https://github.com/libktx/ktx). 
 After having worked with some state-of-the-art engines like Unity and Unreal, I decided to toy around with a more old-school approach to making games. 

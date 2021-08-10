@@ -12,6 +12,7 @@ Work in progress.
 - Basic movement system with acceleration and friction
 - Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t) 
 - Smooth translational + rotational [camera shake based on trauma](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
+- Custom prefab system (using XML internally)
 
 ## Building from Source
 This project uses **Maven 3** as its build management tool.

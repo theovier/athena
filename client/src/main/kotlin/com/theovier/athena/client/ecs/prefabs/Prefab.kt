@@ -11,8 +11,8 @@ import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import nl.adaptivity.xmlutil.XmlStreaming
 import nl.adaptivity.xmlutil.serialization.XML
+import java.io.FileNotFoundException
 import java.io.InputStream
-import java.lang.RuntimeException
 
 private val log = KotlinLogging.logger {}
 
@@ -39,7 +39,7 @@ class Prefab(val components: List<@Polymorphic Component>) {
                 return loadFromStream(prefabStream)
             } else {
                 log.error { "Prefab '$name' could not be found." }
-                throw RuntimeException("Could not load prefab '$name'.xml")
+                throw FileNotFoundException("Could not load prefab '$name'.xml")
             }
         }
 

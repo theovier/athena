@@ -1,0 +1,5 @@
+<Prefab>
+    <Player />
+    <CameraTarget />
+    <Lifetime />
+</Prefab>

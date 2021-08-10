@@ -6,22 +6,31 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputMultiplexer
+import com.badlogic.gdx.controllers.Controller
+import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.app.KtxInputAdapter
 import ktx.ashley.allOf
+import mu.KotlinLogging
 
-class PlayerMovementSystem : KtxInputAdapter, IteratingSystem(allOf(Player::class, Movement::class).get()) {
+private val log = KotlinLogging.logger {}
+class PlayerMovementSystem : KtxInputAdapter, XboxInputAdapter, IteratingSystem(allOf(Player::class, Movement::class).get()) {
     private var direction = Vector2()
+    private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)
         (Gdx.input.inputProcessor as InputMultiplexer).addProcessor(this)
+        currentController = Controllers.getCurrent()
+        currentController.addListener(this)
     }
 
     override fun removedFromEngine(engine: Engine?) {
         super.removedFromEngine(engine)
         (Gdx.input.inputProcessor as InputMultiplexer).removeProcessor(this)
+        currentController.removeListener(this)
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
@@ -94,6 +103,22 @@ class PlayerMovementSystem : KtxInputAdapter, IteratingSystem(allOf(Player::clas
                     direction.x = 0f
                 }
             }
+            else -> return false
+        }
+        return true
+    }
+
+    override fun axisMoved(controller: Controller?, axis: Int, value: Float): Boolean {
+        if (XboxInputAdapter.isAxisValueInDeadzone(value)) {
+            when (axis) {
+                currentController.mapping.axisLeftX -> direction.x = 0f
+                currentController.mapping.axisLeftY -> direction.y = 0f
+            }
+            return false
+        }
+        when (axis) {
+            currentController.mapping.axisLeftX -> direction.x = value
+            currentController.mapping.axisLeftY -> direction.y = -value //y-coordinates of controller are inverted
             else -> return false
         }
         return true

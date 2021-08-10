@@ -124,6 +124,16 @@
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
+            <groupId>com.badlogicgames.gdx-controllers</groupId>
+            <artifactId>gdx-controllers-desktop</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx-controllers</groupId>
+            <artifactId>gdx-controllers-core</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.badlogicgames.ashley</groupId>
             <artifactId>ashley</artifactId>
             <version>1.7.4</version>

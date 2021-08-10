@@ -83,11 +83,12 @@ class PrefabTest {
     fun isTransformComponentCorrectlyLoadedFromPrefab() {
         val expectedPosition = Vector3(1f, 2f, 3f)
         val entity = Prefab.instantiate("transform")
-        Assertions.assertNotNull(entity.transform)
+        val component = entity.get<Transform>()
+        Assertions.assertNotNull(component)
         Assertions.assertTrue(entity.components.size() == 1)
-        val actualPosition = entity.transform.position
-        Assertions.assertEquals(expectedPosition.x, actualPosition.x)
-        Assertions.assertEquals(expectedPosition.y, actualPosition.y)
-        Assertions.assertEquals(expectedPosition.z, actualPosition.z)
+        val actualPosition = component?.position
+        Assertions.assertEquals(expectedPosition.x, actualPosition?.x)
+        Assertions.assertEquals(expectedPosition.y, actualPosition?.y)
+        Assertions.assertEquals(expectedPosition.z, actualPosition?.z)
     }
 }

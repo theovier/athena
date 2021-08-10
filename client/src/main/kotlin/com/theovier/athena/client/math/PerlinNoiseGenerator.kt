@@ -10,7 +10,7 @@ non-optimized implementation of 1D perlin noise based upon
 https://www.cs.umd.edu/class/fall2018/cmsc425/Lects/lect14-perlin.pdf
 http://web.archive.org/web/20160530124230/http://freespace.virgin.net/hugo.elias/models/m_perlin.htm
 */
-class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 10) {
+class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 256) {
     private var random = Random(seed)
 
     private val noise = DoubleArray(boundary) {

@@ -18,6 +18,7 @@ class AthenaGame : KtxGame<Screen>() {
 
     override fun create() {
         super.create()
+        Gdx.input.isCursorCatched = true
         Gdx.input.inputProcessor = InputMultiplexer()
         KtxAsync.initiate()
         loadAssets()

@@ -91,4 +91,13 @@ class PrefabTest {
         Assertions.assertEquals(expectedPosition.y, actualPosition?.y)
         Assertions.assertEquals(expectedPosition.z, actualPosition?.z)
     }
+
+    @Test
+    @DisplayName("<Aim> component is loaded from prefab correctly")
+    fun isAimComponentCorrectlyLoadedFromPrefab() {
+        val entity = Prefab.instantiate("aim")
+        val component = entity.get<Aim>()
+        Assertions.assertNotNull(component)
+        Assertions.assertTrue(entity.components.size() == 1)
+    }
 }

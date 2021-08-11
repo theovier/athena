@@ -30,6 +30,7 @@ class Prefab(val components: List<@Polymorphic Component>) {
                 subclass(Player::class)
                 subclass(SpriteRenderer::class)
                 subclass(Transform::class)
+                subclass(Aim::class)
             }
         }
 

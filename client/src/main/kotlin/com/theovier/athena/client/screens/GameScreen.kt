@@ -20,7 +20,6 @@ import mu.KotlinLogging
 private val log = KotlinLogging.logger {}
 
 class GameScreen(private val game: AthenaGame) : KtxScreen {
-    private val playerStartingPosition = Vector3(10f, 12f, 0f)
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
@@ -51,7 +50,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
             addSystem(PlayerAttackSystem())
-            addSystem(CameraMovementSystem(camera, playerStartingPosition))
+            addSystem(CameraMovementSystem(camera, crosshair.transform.position))
             addSystem(CameraShakeSystem(viewport))
             addSystem(LifetimeSystem())
             addSystem(CrosshairSystem(player))

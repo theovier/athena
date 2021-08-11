@@ -18,11 +18,17 @@ class Aim : Component, Poolable {
     @Serializable(with = Vector2Serializer::class)
     var direction = Vector2()
 
-    var distanceToAimTarget = 0f
+    @XmlElement(true)
+    @Serializable(with = Vector2Serializer::class)
+    var targetPosition = Vector2()
+
+    //"target" position
+    //"view" position
+
+
 
     override fun reset() {
         direction = Vector2()
-        distanceToAimTarget = 0f
     }
 
     companion object {

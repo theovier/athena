@@ -1,7 +1,10 @@
 <Prefab>
+    <Transform>
+        <Position x="14" y="12" z="0" />
+    </Transform>
     <Crosshair />
     <CameraTarget />
-    <Transform />
+    <Movement maxSpeed="22" accelerationFactor="250" decelerationFactor="10" />
     <SpriteRenderer>
         <Sprite texture="sprites/crosshair.png" />
     </SpriteRenderer>

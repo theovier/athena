@@ -22,7 +22,7 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
         val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_LEFT_X)
         val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_LEFT_Y)
         var stickInput = Vector2(xAxisValueRaw, yAxisValueRaw)
-        if (stickInput.len() < XboxInputAdapter.DEAD_ZONE) {
+        if (stickInput.len() < XboxInputAdapter.MOVE_DEAD_ZONE) {
             stickInput = Vector2.Zero
         }
         val playerMovement = entity.movement

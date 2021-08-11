@@ -18,6 +18,7 @@ interface XboxInputAdapter : ControllerListener {
         const val AXIS_RIGHT_Y = 3
         const val AXIS_TRIGGER_LEFT = 4
         const val AXIS_TRIGGER_RIGHT = 5
-        const val DEAD_ZONE = 0.15f
+        const val MOVE_DEAD_ZONE = 0.15f
+        const val LOOK_DEAD_ZONE = 0.55f
     }
 }

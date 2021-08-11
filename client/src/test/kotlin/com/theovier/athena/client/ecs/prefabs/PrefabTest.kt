@@ -100,4 +100,13 @@ class PrefabTest {
         Assertions.assertNotNull(component)
         Assertions.assertTrue(entity.components.size() == 1)
     }
+
+    @Test
+    @DisplayName("<Crosshair> component is loaded from prefab correctly")
+    fun isCrosshairComponentCorrectlyLoadedFromPrefab() {
+        val entity = Prefab.instantiate("crosshair")
+        val component = entity.get<Crosshair>()
+        Assertions.assertNotNull(component)
+        Assertions.assertTrue(entity.components.size() == 1)
+    }
 }

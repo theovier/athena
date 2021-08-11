@@ -1,0 +1,7 @@
+<Prefab>
+    <Crosshair />
+    <Transform />
+    <SpriteRenderer>
+        <Sprite texture="sprites/crosshair.png" />
+    </SpriteRenderer>
+</Prefab>

@@ -13,7 +13,7 @@ import com.theovier.athena.client.math.xy
 import ktx.app.KtxInputAdapter
 import ktx.ashley.allOf
 
-class PlayerAttackSystem() : KtxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class).get()) {
+class PlayerAttackSystem : KtxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class).get()) {
     private var wantsToFire = false
 
     override fun addedToEngine(engine: Engine?) {

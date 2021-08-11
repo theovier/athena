@@ -49,7 +49,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(RenderingSystem(game.batch, viewport))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())
-            addSystem(PlayerAimSystem(viewport::unproject))
+            addSystem(PlayerAimSystem())
             addSystem(PlayerAttackSystem())
             addSystem(CameraMovementSystem(camera, playerStartingPosition))
             addSystem(CameraShakeSystem(viewport))

@@ -1,5 +1,6 @@
 <Prefab>
     <Crosshair />
+    <CameraTarget />
     <Transform />
     <SpriteRenderer>
         <Sprite texture="sprites/crosshair.png" />

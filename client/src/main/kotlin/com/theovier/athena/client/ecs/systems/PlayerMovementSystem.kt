@@ -18,10 +18,6 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
         currentController = Controllers.getCurrent()
     }
 
-    override fun removedFromEngine(engine: Engine?) {
-        super.removedFromEngine(engine)
-    }
-
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_LEFT_X)
         val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_LEFT_Y)

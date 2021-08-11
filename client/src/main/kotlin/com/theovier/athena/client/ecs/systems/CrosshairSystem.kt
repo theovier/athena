@@ -22,12 +22,10 @@ class CrosshairSystem(private val player: Entity) : IteratingSystem(allOf(Crossh
         }
         val crosshairMinRadius = entity[Crosshair.MAPPER]!!.minRadius
         val crosshairMaxRadius = entity[Crosshair.MAPPER]!!.maxRadius
-
         val direction = player.aim.direction
-        val origin = player.transform.position
-        val distance = MathUtils.clamp(player.aim.distanceToAimTarget, crosshairMinRadius, crosshairMaxRadius)
-        val destination = origin + direction * distance
-
-        entity.transform.position.set(destination)
+        val radius = MathUtils.map(0f, 1f, crosshairMinRadius, crosshairMaxRadius, direction.len())
+        val playerPosition = player.transform.position
+        val position = playerPosition + direction * radius
+        entity.transform.position.set(position)
     }
 }

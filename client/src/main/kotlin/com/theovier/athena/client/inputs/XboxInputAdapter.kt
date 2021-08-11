@@ -14,6 +14,8 @@ interface XboxInputAdapter : ControllerListener {
     companion object {
         const val AXIS_LEFT_X = 0
         const val AXIS_LEFT_Y = 1
+        const val AXIS_RIGHT_X = 2
+        const val AXIS_RIGHT_Y = 3
         const val AXIS_TRIGGER_LEFT = 4
         const val AXIS_TRIGGER_RIGHT = 5
         const val DEAD_ZONE = 0.15f

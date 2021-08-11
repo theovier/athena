@@ -49,7 +49,7 @@ class Movement : Component, Poolable {
         get() = velocity.len2() <= standingStillThreshold
 
     @XmlElement(true)
-    @XmlSerialName("Velocity", "", "")
+    @XmlSerialName("Direction", "", "")
     @Serializable(with = Vector2Serializer::class)
     var direction = Vector2()
 

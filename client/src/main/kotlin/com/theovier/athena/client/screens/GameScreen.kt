@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
+import ktx.ashley.addComponent
 import ktx.ashley.entity
 import ktx.ashley.with
 import mu.KotlinLogging
@@ -24,7 +25,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         addSystem(RenderingSystem(game.batch, viewport))
         addSystem(MovementSystem())
         addSystem(PlayerMovementSystem())
-        addSystem(PlayerAttackSystem(viewport))
+        addSystem(PlayerAimSystem(viewport::unproject))
+        addSystem(PlayerAttackSystem())
         addSystem(CameraMovementSystem(camera, playerStartingPosition))
         addSystem(CameraShakeSystem(viewport))
         addSystem(LifetimeSystem())
@@ -32,6 +34,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     init {
         val player = Prefab.instantiate("player")
+        player.addComponent<Aim>(engine)
         engine.addEntity(player)
 
         //reference object

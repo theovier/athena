@@ -19,6 +19,7 @@ class RenderingSystem (
     private val batch: Batch,
     private val viewport: Viewport,
 ) : SortedIteratingSystem(allOf(Transform::class, SpriteRenderer::class).get(), compareBy { it[Transform.MAPPER] }) {
+
     override fun update(deltaTime: Float) {
         forceSort()
         viewport.apply()

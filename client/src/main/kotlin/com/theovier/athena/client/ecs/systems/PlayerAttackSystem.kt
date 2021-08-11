@@ -7,16 +7,14 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.utils.viewport.Viewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
+import com.theovier.athena.client.math.xy
 import ktx.app.KtxInputAdapter
 import ktx.ashley.allOf
-import ktx.math.minus
 
-class PlayerAttackSystem(private val viewport: Viewport) : KtxInputAdapter, IteratingSystem(allOf(Player::class).get()) {
+class PlayerAttackSystem : KtxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class).get()) {
     private var wantsToFire = false
-    private var latestClickedPosition = Vector2()
 
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)
@@ -30,16 +28,13 @@ class PlayerAttackSystem(private val viewport: Viewport) : KtxInputAdapter, Iter
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         if (wantsToFire) {
-            val playerPosition = entity.transform.position
-            val origin = Vector2(playerPosition.x, playerPosition.y)
-            val destination = viewport.unproject(latestClickedPosition)
-            spawnBullet(origin, destination)
+            val playerPosition = entity.transform.position.xy
+            spawnBullet(playerPosition, entity.aim.direction)
             wantsToFire = false
         }
     }
 
-    private fun spawnBullet(origin: Vector2, destination: Vector2) {
-        val direction = (destination - origin).nor()
+    private fun spawnBullet(origin: Vector2, direction: Vector2) {
         Prefab.instantiate("bullet") {
             with(transform) {
                 rotation = direction.angleDeg()
@@ -54,10 +49,7 @@ class PlayerAttackSystem(private val viewport: Viewport) : KtxInputAdapter, Iter
 
     override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
         when (button) {
-            Input.Buttons.LEFT -> {
-                latestClickedPosition = Vector2(screenX.toFloat(), screenY.toFloat())
-                wantsToFire = true
-            }
+            Input.Buttons.LEFT -> wantsToFire = true
             else -> return false
         }
         return true

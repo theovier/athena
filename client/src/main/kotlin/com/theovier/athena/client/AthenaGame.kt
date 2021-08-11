@@ -11,6 +11,7 @@ import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 
+
 class AthenaGame : KtxGame<Screen>() {
     val batch: Batch by lazy {
         SpriteBatch()
@@ -28,6 +29,7 @@ class AthenaGame : KtxGame<Screen>() {
     private fun loadAssets() {
         //better to load assets in a loading screen
         assetStorage.loadSync<Texture>("sprites/test.png")
+        assetStorage.loadSync<Texture>("sprites/crosshair.png")
         assetStorage.loadSync<Texture>("sprites/cyan_square.png")
         assetStorage.loadSync<Texture>("sprites/bullet.png")
     }

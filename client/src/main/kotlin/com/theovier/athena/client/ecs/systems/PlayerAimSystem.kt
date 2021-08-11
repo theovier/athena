@@ -19,11 +19,10 @@ class PlayerAimSystem(private val screenCoordinatesToWorldCoordinates: (Vector2)
         val playerPosition = entity.transform.position.xy
         val mousePosition = Vector2(Gdx.input.x.toFloat(), Gdx.input.y.toFloat())
         val mousePositionInWorld = screenCoordinatesToWorldCoordinates(mousePosition)
-        val direction = (mousePositionInWorld - playerPosition).nor()
+        val aimTargetPosition = (mousePositionInWorld - playerPosition)
+        val distanceToMousePosition = aimTargetPosition.len()
+        val direction = aimTargetPosition.nor()
         entity.aim.direction = direction
-
-        val distanceToMousePosition = (mousePositionInWorld - playerPosition).len()
-
         entity.aim.distanceToAimTarget = distanceToMousePosition
     }
 }

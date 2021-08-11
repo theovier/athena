@@ -1,5 +1,6 @@
 <Prefab>
     <Player />
+    <Aim />
     <CameraTarget />
     <Transform>
         <Position x="10" y="12" z="0" />

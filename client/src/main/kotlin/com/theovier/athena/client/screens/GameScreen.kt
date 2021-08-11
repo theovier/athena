@@ -1,6 +1,8 @@
 package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.Vector3
@@ -10,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
+import ktx.ashley.addComponent
 import ktx.ashley.entity
 import ktx.ashley.with
 import mu.KotlinLogging
@@ -20,19 +23,14 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val playerStartingPosition = Vector3(10f, 12f, 0f)
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
-    private val engine = PooledEngine().apply {
-        addSystem(RenderingSystem(game.batch, viewport))
-        addSystem(MovementSystem())
-        addSystem(PlayerMovementSystem())
-        addSystem(PlayerAttackSystem(viewport))
-        addSystem(CameraMovementSystem(camera, playerStartingPosition))
-        addSystem(CameraShakeSystem(viewport))
-        addSystem(LifetimeSystem())
-    }
+    private val engine = PooledEngine()
 
     init {
         val player = Prefab.instantiate("player")
+        val crosshair = Prefab.instantiate("crosshair")
+
         engine.addEntity(player)
+        engine.addEntity(crosshair)
 
         //reference object
         engine.entity {
@@ -45,6 +43,18 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
                 sprite.setOrigin(sprite.width * 0.5f, sprite.height * 0.5f)
             }
+        }
+
+        engine.apply {
+            addSystem(RenderingSystem(game.batch, viewport))
+            addSystem(MovementSystem())
+            addSystem(PlayerMovementSystem())
+            addSystem(PlayerAimSystem(viewport::unproject))
+            addSystem(PlayerAttackSystem())
+            addSystem(CameraMovementSystem(camera, playerStartingPosition))
+            addSystem(CameraShakeSystem(viewport))
+            addSystem(LifetimeSystem())
+            addSystem(CrosshairSystem(player))
         }
     }
 

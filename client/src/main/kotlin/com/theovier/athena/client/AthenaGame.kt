@@ -11,6 +11,7 @@ import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 
+
 class AthenaGame : KtxGame<Screen>() {
     val batch: Batch by lazy {
         SpriteBatch()
@@ -18,7 +19,6 @@ class AthenaGame : KtxGame<Screen>() {
 
     override fun create() {
         super.create()
-        Gdx.input.isCursorCatched = true
         Gdx.input.inputProcessor = InputMultiplexer()
         KtxAsync.initiate()
         loadAssets()

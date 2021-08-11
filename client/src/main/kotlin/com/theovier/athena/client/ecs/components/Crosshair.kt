@@ -7,11 +7,11 @@ import ktx.ashley.mapperFor
 
 @Serializable
 class Crosshair : Component, Poolable {
-    var minRadius = 4f
-    var maxRadius = 15f
+    var minRadius = 2f
+    var maxRadius = 10f
 
     override fun reset() {
-        minRadius = 4f
+        minRadius = 2f
         maxRadius = 10f
     }
 

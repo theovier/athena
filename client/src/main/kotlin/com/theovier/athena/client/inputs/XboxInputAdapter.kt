@@ -12,10 +12,10 @@ interface XboxInputAdapter : ControllerListener {
     override fun axisMoved(controller: Controller?, axis: Int, value: Float): Boolean = false
 
     companion object {
-        const val DEADZONE = 0.15
-
-        fun isAxisValueInDeadzone(value: Float): Boolean {
-            return abs(value) <= DEADZONE
-        }
+        const val AXIS_LEFT_X = 0
+        const val AXIS_LEFT_Y = 1
+        const val AXIS_TRIGGER_LEFT = 4
+        const val AXIS_TRIGGER_RIGHT = 5
+        const val DEAD_ZONE = 0.15f
     }
 }

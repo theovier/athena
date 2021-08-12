@@ -18,6 +18,7 @@ Work in progress.
 - Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t) 
 - Smooth translational + rotational [camera shake based on trauma](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 - Custom prefab system (using XML internally)
+- Controller support with [relatively smooth aiming](https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
 
 ## Building from Source
 This project uses **Maven 3** as its build management tool.

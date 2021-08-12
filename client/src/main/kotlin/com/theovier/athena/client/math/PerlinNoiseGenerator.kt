@@ -21,8 +21,8 @@ class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 256) {
      * return perlin noises mapped to the range of -1 to 1
      * */
     fun perlinWithNegative(x: Double, persistence: Double = 0.5, numberOfOctaves: Int = 8): Float {
-        val perlinInRange0to1 = perlin(x, persistence, numberOfOctaves)
-        return mapToRange(0, 1,-1, 1, perlinInRange0to1).toFloat()
+        val perlinInRange0to1 = perlin(x, persistence, numberOfOctaves).toFloat()
+        return MathUtils.map(0f, 1f,-1f, 1f, perlinInRange0to1)
     }
 
     /**
@@ -66,9 +66,5 @@ class PerlinNoiseGenerator(seed: Int, private val boundary: Int = 256) {
     private fun smootherstep(x0: Double, x1: Double, alpha: Double): Double {
         val x = MathUtils.clamp((alpha - x0) / (x1 - x0), 0.0, 1.0)
         return x * x * x * (x * (x * 6 - 15) + 10);
-    }
-
-    private fun mapToRange(currentLow: Int, currentHigh: Int, targetLow: Int, targetHigh: Int, value: Double): Double {
-        return (value - currentLow) * (targetHigh - targetLow) / (currentHigh - currentLow) + targetLow
     }
 }

@@ -1,7 +1,6 @@
 <Prefab>
     <Player />
-    <Aim />
-    <CameraTarget />
+    <Aim maxDistanceToPlayer="4"/>
     <Transform>
         <Position x="10" y="12" z="0" />
         <Size x="2" y="2" />

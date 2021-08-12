@@ -15,7 +15,7 @@ private val log = KotlinLogging.logger {}
 
 class CameraMovementSystem(private val camera: Camera, private val startPosition: Vector3 = Vector3.Zero) : IteratingSystem(allOf(CameraTarget::class, Transform::class).get()) {
     private var timeScale = 1 // 0 = Paused; 0.1f = slow motion
-    private val proximityPace = 0.01f // each frame get this % closer to our target
+    private val proximityPace = 0.075f // each frame get this % closer to our target
 
     override fun addedToEngine(engine: Engine?) {
         super.addedToEngine(engine)

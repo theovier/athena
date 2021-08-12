@@ -13,16 +13,21 @@ import nl.adaptivity.xmlutil.serialization.XmlElement
 
 @Serializable
 class Aim : Component, Poolable {
+    val maxDistanceToPlayer: Float = 4f
 
     @XmlElement(true)
     @Serializable(with = Vector2Serializer::class)
-    var direction = Vector2()
+    //the direction the player aims at (default is facing right)
+    var direction = Vector2(1f, 0f)
 
-    var distanceToAimTarget = 0f
+    @XmlElement(true)
+    @Serializable(with = Vector2Serializer::class)
+    //where the (invisible) crosshair will move to
+    var targetPosition = Vector2()
 
     override fun reset() {
-        direction = Vector2()
-        distanceToAimTarget = 0f
+        targetPosition = Vector2()
+        direction = Vector2(1f, 0f)
     }
 
     companion object {

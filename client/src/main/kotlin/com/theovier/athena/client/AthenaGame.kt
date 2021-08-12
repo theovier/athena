@@ -29,7 +29,6 @@ class AthenaGame : KtxGame<Screen>() {
     private fun loadAssets() {
         //better to load assets in a loading screen
         assetStorage.loadSync<Texture>("sprites/test.png")
-        assetStorage.loadSync<Texture>("sprites/crosshair.png")
         assetStorage.loadSync<Texture>("sprites/cyan_square.png")
         assetStorage.loadSync<Texture>("sprites/bullet.png")
     }

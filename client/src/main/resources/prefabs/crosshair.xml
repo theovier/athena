@@ -5,7 +5,4 @@
     <Crosshair />
     <CameraTarget />
     <Movement maxSpeed="22" accelerationFactor="250" decelerationFactor="10" />
-    <SpriteRenderer>
-        <Sprite texture="sprites/crosshair.png" />
-    </SpriteRenderer>
 </Prefab>

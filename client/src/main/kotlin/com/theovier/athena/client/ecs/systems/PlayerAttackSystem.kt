@@ -27,10 +27,10 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         currentController.removeListener(this)
     }
 
-    override fun processEntity(entity: Entity, deltaTime: Float) {
+    override fun processEntity(player: Entity, deltaTime: Float) {
         if (wantsToFire) {
-            val playerPosition = entity.transform.position.xy
-            spawnBullet(playerPosition, entity.aim.direction)
+            val playerPosition = player.transform.position.xy
+            spawnBullet(playerPosition, player.aim.direction)
             wantsToFire = false
         }
     }

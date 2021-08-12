@@ -1,18 +1,14 @@
 package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.math.Vector3
 import com.theovier.athena.client.AthenaGame
 import ktx.app.KtxScreen
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
-import ktx.ashley.addComponent
 import ktx.ashley.entity
 import ktx.ashley.with
 import mu.KotlinLogging

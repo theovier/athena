@@ -12,23 +12,7 @@ import ktx.ashley.mapperFor
 import nl.adaptivity.xmlutil.serialization.XmlElement
 
 @Serializable
+//used to identify the crosshair entity
 class Crosshair : Component, Poolable {
-    var minRadius = 4f
-    var maxRadius = 8f
-
-    @XmlElement(true)
-    @Serializable(with = Vector2Serializer::class)
-    var targetPosition = Vector2()
-
-    override fun reset() {
-        minRadius = 4f
-        maxRadius = 8f
-    }
-
-    companion object {
-        val MAPPER = mapperFor<Crosshair>()
-    }
+    override fun reset() = Unit
 }
-
-val Entity.crosshair: Crosshair
-    get() = this[Crosshair.MAPPER] ?: throw GdxRuntimeException("Crosshair for entity '$this' is null")

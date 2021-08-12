@@ -2,7 +2,7 @@ package com.theovier.athena.client.inputs
 
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.ControllerListener
-import kotlin.math.abs
+import com.badlogic.gdx.math.Vector2
 
 interface XboxInputAdapter : ControllerListener {
     override fun connected(controller: Controller?) = Unit
@@ -12,13 +12,17 @@ interface XboxInputAdapter : ControllerListener {
     override fun axisMoved(controller: Controller?, axis: Int, value: Float): Boolean = false
 
     companion object {
+        fun isAxisInputInDeadZone(input: Vector2, deadZone: Float = MOVE_DEAD_ZONE): Boolean {
+            return input.len() < deadZone
+        }
+
         const val AXIS_LEFT_X = 0
         const val AXIS_LEFT_Y = 1
         const val AXIS_RIGHT_X = 2
         const val AXIS_RIGHT_Y = 3
         const val AXIS_TRIGGER_LEFT = 4
         const val AXIS_TRIGGER_RIGHT = 5
-        const val MOVE_DEAD_ZONE = 0.15f
+        const val MOVE_DEAD_ZONE = 0.55f
         const val LOOK_DEAD_ZONE = 0.55f
     }
 }

@@ -9,13 +9,15 @@ import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
+import com.theovier.athena.client.inputs.XboxInputAdapter.Companion.isAxisInputInDeadZone
 import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
 import ktx.math.minus
+import ktx.math.plus
+import ktx.math.times
+import mu.KotlinLogging
 
-//todo still feels horrible
-//https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php
-class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Movement::class).get())  {
+class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transform::class).get())  {
     private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {
@@ -23,13 +25,25 @@ class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Movement::class).get()
         currentController = Controllers.getCurrent()
     }
 
-    override fun processEntity(entity: Entity, deltaTime: Float) {
-//        val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_X)
-//        val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_Y)
-//        var stickInput = Vector2(xAxisValueRaw, yAxisValueRaw)
-//        if (stickInput.len() < XboxInputAdapter.DEAD_ZONE) {
-//            stickInput = Vector2.Zero
-//        }
-//        entity.aim.direction = stickInput.nor()
+    override fun processEntity(player: Entity, deltaTime: Float) {
+        var stickInput = pollInput()
+        if (isAxisInputInDeadZone(stickInput)) {
+            stickInput = Vector2.Zero
+        }
+        val playerPosition = player.transform.position.xy
+        val targetPositionRelativeToPlayer = stickInput * player.aim.maxDistanceToPlayer
+        player.aim.targetPosition = playerPosition + targetPositionRelativeToPlayer
+
+        val direction = stickInput.nor()
+        if (!direction.isZero) {
+            //todo if the direction is zero, use the left stick input so the players shoots in the direction they face
+            player.aim.direction = stickInput.nor()
+        }
+    }
+
+    private fun pollInput(): Vector2 {
+        val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_X)
+        val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_Y)
+        return Vector2(xAxisValueRaw, yAxisValueRaw)
     }
 }

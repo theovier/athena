@@ -13,7 +13,7 @@ import nl.adaptivity.xmlutil.serialization.XmlElement
 
 @Serializable
 class Aim : Component, Poolable {
-    val maxDistanceToPlayer: Float = 3.0f
+    val maxDistanceToPlayer: Float = 4f
 
     @XmlElement(true)
     @Serializable(with = Vector2Serializer::class)

@@ -66,7 +66,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     override fun render(delta: Float) {
         super.render(delta)
 
-        //todo WHY DOES THIS FUCKING SHIT NOT WORK?
         viewport.camera.update()
         tileMapRenderer.setView(viewport.camera as OrthographicCamera)
         tileMapRenderer.render()

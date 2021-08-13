@@ -21,6 +21,9 @@ Work in progress.
 - Controller support with [relatively smooth aiming](https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
 - Basic support for [tiled maps](https://github.com/libktx/ktx/tree/master/tiled)
 
+## Screenshots
+![screenshot_001](screenshots/screenshot_001.png)
+
 ## Building from Source
 This project uses **Maven 3** as its build management tool.
 If you installed Maven just clone the repository or download the .zip and navigate to the root-level pom.xml.

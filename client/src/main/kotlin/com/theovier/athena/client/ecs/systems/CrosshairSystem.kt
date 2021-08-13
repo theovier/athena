@@ -10,13 +10,13 @@ import ktx.math.minus
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
-class CrosshairSystem(private val player: Entity) : IteratingSystem(allOf(Crosshair::class, Movement::class).get()) {
+class CrosshairSystem(private val aim: Aim) : IteratingSystem(allOf(Crosshair::class, Movement::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         if (entities.size() > 1) {
             log.error { "More than 1 entity with <Crosshair> component detected." }
         }
-        val offsetBetweenCurrentPositionAndTargetPosition = player.aim.targetPosition - entity.transform.position.xy
+        val offsetBetweenCurrentPositionAndTargetPosition = aim.targetPosition - entity.transform.position.xy
         if (offsetBetweenCurrentPositionAndTargetPosition.len2() <= STANDING_STILL_THRESHOLD) {
             entity.movement.direction = Vector2.Zero
         } else {

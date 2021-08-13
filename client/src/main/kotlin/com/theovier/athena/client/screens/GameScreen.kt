@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.SpriteRenderer
 import com.theovier.athena.client.ecs.components.Transform
+import com.theovier.athena.client.ecs.components.aim
 import com.theovier.athena.client.ecs.components.transform
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
@@ -56,7 +57,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(CameraMovementSystem(camera, crosshair.transform.position))
             addSystem(CameraShakeSystem(viewport))
             addSystem(LifetimeSystem())
-            addSystem(CrosshairSystem(player))
+            addSystem(CrosshairSystem(player.aim))
         }
     }
 

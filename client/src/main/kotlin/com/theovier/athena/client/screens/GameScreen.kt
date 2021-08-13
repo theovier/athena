@@ -3,15 +3,20 @@ package com.theovier.athena.client.screens
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
-import com.theovier.athena.client.AthenaGame
-import ktx.app.KtxScreen
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.AthenaGame
+import com.theovier.athena.client.ecs.components.SpriteRenderer
+import com.theovier.athena.client.ecs.components.Transform
+import com.theovier.athena.client.ecs.components.transform
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
+import ktx.app.KtxScreen
 import ktx.ashley.entity
 import ktx.ashley.with
 import mu.KotlinLogging
+
 
 private val log = KotlinLogging.logger {}
 
@@ -19,6 +24,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
+    private val map = TmxMapLoader().load("maps/debug.tmx")
+    private val mapRenderer = OrthogonalTiledMapRenderer(map, AthenaGame.UNIT_SCALE)
 
     init {
         val player = Prefab.instantiate("player")
@@ -41,7 +48,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         }
 
         engine.apply {
-            addSystem(RenderingSystem(game.batch, viewport))
+            addSystem(RenderingSystem(game.batch, viewport, mapRenderer))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())

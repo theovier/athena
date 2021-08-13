@@ -2,7 +2,9 @@ package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
+import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
+import com.badlogic.gdx.maps.MapRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.theovier.athena.client.ecs.components.SpriteRenderer
 import com.theovier.athena.client.ecs.components.Transform
@@ -18,12 +20,15 @@ private val log = KotlinLogging.logger {}
 class RenderingSystem (
     private val batch: Batch,
     private val viewport: Viewport,
+    private val mapRenderer: MapRenderer
 ) : SortedIteratingSystem(allOf(Transform::class, SpriteRenderer::class).get(), compareBy { it[Transform.MAPPER] }) {
 
     override fun update(deltaTime: Float) {
         forceSort()
         viewport.apply()
+        mapRenderer.setView(viewport.camera as OrthographicCamera)
         batch.use(viewport.camera) {
+            mapRenderer.render()
             super.update(deltaTime)
         }
     }

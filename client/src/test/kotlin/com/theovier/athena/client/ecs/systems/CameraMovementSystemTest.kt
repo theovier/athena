@@ -52,7 +52,7 @@ class CameraMovementSystemTest {
                 }
             }
         }
-        engine.update(DELTA_TIME)
+        engine.update(DELTA_TIME * 20) //simulate multiple frames at once
         Assertions.assertTrue(camera.position != STARTING_POSITION)
     }
 

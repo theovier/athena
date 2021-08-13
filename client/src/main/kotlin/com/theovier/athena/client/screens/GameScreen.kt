@@ -26,9 +26,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
 
-    private val map = TmxMapLoader().load("maps/playground.tmx")
+    private val map = TmxMapLoader().load("maps/debug.tmx")
     private val tileMapRenderer = OrthogonalTiledMapRenderer(map, AthenaGame.UNIT_SCALE)
-
 
     init {
         val player = Prefab.instantiate("player")

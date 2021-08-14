@@ -65,7 +65,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     override fun render(delta: Float) {
         game.batch.use(viewport.camera) {
             //todo externalize the map rendering process
-            //todo get rid of cast by using the camera obj. (req. rework of CameraMovement)
+            //todo get rid of cast by using the camera obj. (req. rework of CameraShakeSystem)
             mapRenderer.setView(viewport.camera as OrthographicCamera)
             mapRenderer.render()
             engine.update(delta)

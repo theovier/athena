@@ -18,7 +18,7 @@ import ktx.math.plus
 class CameraShakeSystem(viewport: Viewport) : KtxInputAdapter, EntitySystem() {
     var trauma = 0.0f// from 0 to 1
 
-    private val baseCamera = viewport.camera as OrthographicCamera
+    private val baseCamera = viewport.camera
     private val shakyCamera = OrthographicCamera()
 
     private val startTime = TimeUtils.millis()
@@ -51,7 +51,6 @@ class CameraShakeSystem(viewport: Viewport) : KtxInputAdapter, EntitySystem() {
         (Gdx.input.inputProcessor as InputMultiplexer).removeProcessor(this)
     }
 
-    //https://www.youtube.com/watch?v=tu-Qe66AvtY
     override fun update(deltaTime: Float) {
         val shake = trauma * trauma
         val timePassed = TimeUtils.timeSinceMillis(startTime).toDouble()

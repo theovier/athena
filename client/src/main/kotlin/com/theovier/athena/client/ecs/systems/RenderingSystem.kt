@@ -17,21 +17,11 @@ import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-class RenderingSystem (
-    private val batch: Batch,
-    private val viewport: Viewport,
-    private val mapRenderer: MapRenderer
-) : SortedIteratingSystem(allOf(Transform::class, SpriteRenderer::class).get(), compareBy { it[Transform.MAPPER] }) {
-
-    override fun update(deltaTime: Float) {
-        forceSort()
-        viewport.apply()
-        mapRenderer.setView(viewport.camera as OrthographicCamera)
-        batch.use(viewport.camera) {
-            mapRenderer.render()
-            super.update(deltaTime)
-        }
-    }
+class RenderingSystem (private val batch: Batch) :
+    SortedIteratingSystem(
+        allOf(Transform::class, SpriteRenderer::class).get(),
+        compareBy { it[Transform.MAPPER] }
+    ) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity.transform

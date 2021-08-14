@@ -16,6 +16,7 @@ import com.theovier.athena.client.ecs.systems.*
 import ktx.app.KtxScreen
 import ktx.ashley.entity
 import ktx.ashley.with
+import ktx.graphics.use
 import mu.KotlinLogging
 
 
@@ -49,21 +50,27 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         }
 
         engine.apply {
-            addSystem(RenderingSystem(game.batch, viewport, mapRenderer))
+            addSystem(RenderingSystem(game.batch))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
+            addSystem(CrosshairSystem(player.aim))
             addSystem(PlayerAttackSystem())
             addSystem(CameraMovementSystem(camera, crosshair.transform.position))
             addSystem(CameraShakeSystem(viewport))
             addSystem(LifetimeSystem())
-            addSystem(CrosshairSystem(player.aim))
         }
     }
 
     override fun render(delta: Float) {
-        super.render(delta)
-        engine.update(delta)
+        game.batch.use(viewport.camera) {
+            //todo externalize the map rendering process
+            //todo get rid of cast by using the camera obj. (req. rework of CameraMovement)
+            mapRenderer.setView(viewport.camera as OrthographicCamera)
+            mapRenderer.render()
+            engine.update(delta)
+        }
+        viewport.apply()
     }
 
     override fun resize(width: Int, height: Int) {

@@ -17,17 +17,17 @@ import mu.KotlinLogging
 private val log = KotlinLogging.logger {}
 
 class GameScreen(private val game: AthenaGame) : KtxScreen {
+    private val steadyReferenceCamera = OrthographicCamera()
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
-    private lateinit var map: MapManager
+    private val map = MapManager(camera)
     private val player = Prefab.instantiate("player")
     private val playersCrosshair = Prefab.instantiate("crosshair")
 
     init {
         initEntities()
         initSystems()
-        initManagers()
         positionCamera()
     }
 
@@ -39,28 +39,23 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private fun initSystems() {
         engine.apply {
             addSystem(RenderingSystem(game.batch))
-            addSystem(CameraMovementSystem(camera))
+            addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
             addSystem(CrosshairSystem(player.aim))
             addSystem(PlayerAttackSystem())
-            addSystem(CameraShakeSystem(viewport))
+            addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
         }
     }
 
-    private fun initManagers() {
-        //todo has to be init after the CameraShake system until the camera shake system gets reworked.
-        map = MapManager(viewport.camera as OrthographicCamera)
-    }
-
     private fun positionCamera() {
-        camera.position.set(playersCrosshair.transform.position)
+        steadyReferenceCamera.position.set(playersCrosshair.transform.position)
     }
 
     override fun render(delta: Float) {
-        game.batch.use(viewport.camera) {
+        game.batch.use(camera) {
             map.render(delta)
             engine.update(delta)
         }

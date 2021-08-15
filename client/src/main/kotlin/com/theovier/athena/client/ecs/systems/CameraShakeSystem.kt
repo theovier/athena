@@ -10,16 +10,14 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.TimeUtils
-import com.badlogic.gdx.utils.viewport.Viewport
 import com.theovier.athena.client.math.PerlinNoiseGenerator
 import ktx.app.KtxInputAdapter
 import ktx.math.plus
 
-class CameraShakeSystem(viewport: Viewport) : KtxInputAdapter, EntitySystem() {
+/* mutates the shakyCamera argument */
+class CameraShakeSystem(private val steadyCamera: OrthographicCamera,
+                        private val shakyCamera: OrthographicCamera) : KtxInputAdapter, EntitySystem() {
     var trauma = 0.0f// from 0 to 1
-
-    private val baseCamera = viewport.camera
-    private val shakyCamera = OrthographicCamera()
 
     private val startTime = TimeUtils.millis()
 
@@ -35,10 +33,6 @@ class CameraShakeSystem(viewport: Viewport) : KtxInputAdapter, EntitySystem() {
         private const val TRAUMA_REDUCE_FACTOR = 0.6f
         private const val MAX_TRANSLATIONAL_OFFSET = 0.5f
         private const val MAX_ROTATIONAL_OFFSET = 5
-    }
-
-    init {
-        viewport.camera = shakyCamera
     }
 
     override fun addedToEngine(engine: Engine?) {
@@ -61,13 +55,13 @@ class CameraShakeSystem(viewport: Viewport) : KtxInputAdapter, EntitySystem() {
     }
 
     private fun resetShakyCamera() {
-        shakyCamera.up.set(baseCamera.up)
+        shakyCamera.up.set(steadyCamera.up)
     }
 
     private fun shakeCameraPosition(timePassed: Double, shake: Float) {
         val noise = Vector2(noiseGeneratorX.perlinWithNegative(timePassed), noiseGeneratorY.perlinWithNegative(timePassed))
         val offset = Vector3(MAX_TRANSLATIONAL_OFFSET * shake * noise.x, MAX_TRANSLATIONAL_OFFSET * shake * noise.y, 0f)
-        val targetPos = baseCamera.position + offset
+        val targetPos = steadyCamera.position + offset
         shakyCamera.position.set(targetPos)
     }
 

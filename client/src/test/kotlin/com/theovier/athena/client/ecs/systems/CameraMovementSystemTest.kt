@@ -8,9 +8,7 @@ import com.badlogic.gdx.utils.GdxNativesLoader
 import com.theovier.athena.client.ecs.components.CameraTarget
 import com.theovier.athena.client.ecs.components.Movement
 import com.theovier.athena.client.ecs.components.Transform
-import io.mockk.impl.annotations.MockK
 import ktx.ashley.entity
-import ktx.ashley.get
 import ktx.ashley.with
 import org.junit.jupiter.api.*
 
@@ -25,7 +23,7 @@ class CameraMovementSystemTest {
 
     @BeforeAll
     fun setup() {
-        GdxNativesLoader.load();
+        GdxNativesLoader.load()
     }
 
     @BeforeEach
@@ -39,7 +37,7 @@ class CameraMovementSystemTest {
     fun cameraFollowsTarget() {
         val engine = Engine().apply {
             addSystem(MovementSystem())
-            addSystem(CameraMovementSystem(camera, STARTING_POSITION))
+            addSystem(CameraMovementSystem(camera))
             entity{
                 with<CameraTarget>()
                 with<Transform> {
@@ -60,7 +58,7 @@ class CameraMovementSystemTest {
     @DisplayName("Camera does not move when entity with <CameraTarget> component is standing still")
     fun cameraDoesNotMoveWhenTargetIsStandingStill() {
         val engine = Engine().apply {
-            addSystem(CameraMovementSystem(camera, STARTING_POSITION))
+            addSystem(CameraMovementSystem(camera))
             entity {
                 with<CameraTarget>()
                 with<Transform> {

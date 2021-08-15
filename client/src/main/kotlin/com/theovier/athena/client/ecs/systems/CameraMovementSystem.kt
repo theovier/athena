@@ -1,6 +1,5 @@
 package com.theovier.athena.client.ecs.systems
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.Camera
@@ -14,15 +13,10 @@ import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-class CameraMovementSystem(private val camera: Camera, private val startPosition: Vector3 = Vector3.Zero) : IteratingSystem(allOf(CameraTarget::class, Transform::class).get()) {
+class CameraMovementSystem(private val camera: Camera) : IteratingSystem(allOf(CameraTarget::class, Transform::class).get()) {
     private var timeScale = 1 // 0 = Paused; 0.1f = slow motion
     private val proximityPace = 0.075f // each frame get this % closer to our target
     private val standingStillThreshold = 0.5f
-
-    override fun addedToEngine(engine: Engine?) {
-        super.addedToEngine(engine)
-        camera.position.set(startPosition)
-    }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         if (entities.size() > 1) {

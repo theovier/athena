@@ -1,10 +1,7 @@
 package com.theovier.athena.client.screens
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.FitViewport
@@ -13,14 +10,10 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.managers.MapManager
-import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen
-import ktx.ashley.entity
-import ktx.ashley.with
 import ktx.graphics.use
 import ktx.math.unaryMinus
 import mu.KotlinLogging
-import kotlin.math.max
 
 
 private val log = KotlinLogging.logger {}
@@ -41,7 +34,12 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     private fun initEntities() {
+        engine.addEntity(player)
+        engine.addEntity(playersCrosshair)
+        initDemoBullets()
+    }
 
+    private fun initDemoBullets() {
         val bulletRight = Prefab.instantiate("bullet") {
             with(lifetime) {
                 duration = 1000f
@@ -54,7 +52,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 position.set(Vector3(13f, 12f, 0f))
             }
         }
-
         val bulletUp = Prefab.instantiate("bullet") {
             with(lifetime) {
                 duration = 1000f
@@ -68,7 +65,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 rotation = 90f
             }
         }
-
         val bulletDown = Prefab.instantiate("bullet") {
             with(lifetime) {
                 duration = 1000f
@@ -82,7 +78,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 rotation = 270f
             }
         }
-
         val bulletLeft = Prefab.instantiate("bullet") {
             with(lifetime) {
                 duration = 1000f
@@ -96,10 +91,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 rotation = 180f
             }
         }
-
-
-        engine.addEntity(player)
-        engine.addEntity(playersCrosshair)
         engine.addEntity(bulletRight)
         engine.addEntity(bulletUp)
         engine.addEntity(bulletDown)

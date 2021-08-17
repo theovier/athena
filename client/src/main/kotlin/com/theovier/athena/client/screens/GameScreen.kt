@@ -105,7 +105,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
-            addSystem(CrosshairSystem(player.aim))
+            addSystem(CrosshairPlacementSystem(player.aim))
             addSystem(PlayerAttackSystem())
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())

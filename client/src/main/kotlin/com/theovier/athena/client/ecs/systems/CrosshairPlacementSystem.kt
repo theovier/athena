@@ -10,7 +10,7 @@ import ktx.math.minus
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
-class CrosshairSystem(private val aim: Aim) : IteratingSystem(allOf(Crosshair::class, Movement::class).get()) {
+class CrosshairPlacementSystem(private val aim: Aim) : IteratingSystem(allOf(Crosshair::class, Movement::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         if (entities.size() > 1) {

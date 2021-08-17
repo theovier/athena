@@ -9,8 +9,9 @@ import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
-import com.theovier.athena.client.managers.MapManager
 import ktx.app.KtxScreen
+import ktx.ashley.entity
+import ktx.ashley.with
 import ktx.graphics.use
 import ktx.math.unaryMinus
 import mu.KotlinLogging
@@ -23,7 +24,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
-    private val map = MapManager(camera)
+    private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player")
     private val playersCrosshair = Prefab.instantiate("crosshair")
 
@@ -34,6 +35,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     private fun initEntities() {
+        engine.addEntity(map)
         engine.addEntity(player)
         engine.addEntity(playersCrosshair)
         initDemoBullets()
@@ -99,6 +101,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     private fun initSystems() {
         engine.apply {
+            addSystem(BackgroundRenderSystem(camera))
             addSystem(RenderingSystem(game.batch))
             addSystem(ParticleSystem(game.batch))
             addSystem(CameraMovementSystem(steadyReferenceCamera))
@@ -118,7 +121,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     override fun render(delta: Float) {
         game.batch.use(camera) {
-            map.render(delta)
             engine.update(delta)
         }
         viewport.apply()

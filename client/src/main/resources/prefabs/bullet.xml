@@ -5,7 +5,7 @@
     </Transform>
     <Movement maxSpeed="20" accelerationFactor="250" decelerationFactor="10" />
     <SpriteRenderer>
-        <Sprite texture="sprites/bullet.png" />
+        <Sprite texture="sprites/bullet.png" originX="1" originY="0.5" />
         <Offset x="-1" y="-0.5" />
     </SpriteRenderer>
     <Particle>

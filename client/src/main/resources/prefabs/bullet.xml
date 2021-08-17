@@ -6,5 +6,10 @@
     <Movement maxSpeed="20" accelerationFactor="250" decelerationFactor="10" />
     <SpriteRenderer>
         <Sprite texture="sprites/bullet.png" />
+        <Offset x="-1" y="-0.5" />
     </SpriteRenderer>
+    <Particle>
+        <Effect propertyFile="particles/smoke_trail.p" particleSpriteFolder="sprites/particles" />
+        <Offset x="-1" y="0"/>
+    </Particle>
 </Prefab>

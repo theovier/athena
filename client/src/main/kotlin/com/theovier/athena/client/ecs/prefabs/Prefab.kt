@@ -32,6 +32,7 @@ class Prefab(val components: List<@Polymorphic Component>) {
                 subclass(Transform::class)
                 subclass(Aim::class)
                 subclass(Crosshair::class)
+                subclass(Particle::class)
             }
         }
 

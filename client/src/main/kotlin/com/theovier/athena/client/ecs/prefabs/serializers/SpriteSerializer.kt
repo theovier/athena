@@ -26,7 +26,8 @@ class SpriteSerializer : KSerializer<Sprite> {
                         val texture: Texture = AthenaGame.assetStorage[textureName]
                         sprite.setRegion(texture)
                         sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
-                        sprite.setOrigin(sprite.width * 0.5f, sprite.height * 0.5f)
+                        //sprite.setOriginCenter()
+                        sprite.setOrigin(sprite.width, sprite.height * 0.5f) //todo set this via attribute
                     }
                     else -> log.debug { "<Sprite> element does only expect argument 'texture'." }
                 }

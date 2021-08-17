@@ -42,9 +42,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
 
     private fun processInput() {
         val axisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_TRIGGER_RIGHT)
-        if (axisValueRaw >= XboxInputAdapter.FIRE_DEAD_ZONE) {
-            wantsToFire = true
-        }
+        wantsToFire = axisValueRaw >= XboxInputAdapter.FIRE_DEAD_ZONE
     }
 
     private fun canFire(): Boolean {

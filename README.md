@@ -20,6 +20,7 @@ Work in progress.
 - Custom prefab system (using XML internally)
 - Controller support with [relatively smooth aiming](https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
 - Basic support for [tiled maps](https://github.com/libktx/ktx/tree/master/tiled)
+- Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_001.png)

@@ -1,6 +1,7 @@
 package com.theovier.athena.client.ecs.prefabs
 
 import com.badlogic.gdx.math.Vector3
+import com.badlogic.gdx.utils.GdxNativesLoader
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.get
 import org.junit.jupiter.api.Assertions
@@ -106,6 +107,16 @@ class PrefabTest {
     fun isCrosshairComponentCorrectlyLoadedFromPrefab() {
         val entity = Prefab.instantiate("crosshair")
         val component = entity.get<Crosshair>()
+        Assertions.assertNotNull(component)
+        Assertions.assertTrue(entity.components.size() == 1)
+    }
+
+    @Test
+    @DisplayName("<Particle> component is loaded from prefab correctly")
+    fun isParticleComponentCorrectlyLoadedFromPrefab() {
+        GdxNativesLoader.load()
+        val entity = Prefab.instantiate("particle")
+        val component = entity.get<Particle>()
         Assertions.assertNotNull(component)
         Assertions.assertTrue(entity.components.size() == 1)
     }

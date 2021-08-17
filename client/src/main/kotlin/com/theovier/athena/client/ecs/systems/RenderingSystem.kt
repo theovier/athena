@@ -43,6 +43,9 @@ class RenderingSystem (private val batch: Batch) :
             x -= originX * (1f - scaleX)
             y -= originY * (1f - scaleY)
 
+            //center sprite horizontally
+            x += (transform.size.x - width * scaleX) * 0.5f
+
             //apply offset
             x += renderer.offset.x * transform.size.x
             y += renderer.offset.y * transform.size.y

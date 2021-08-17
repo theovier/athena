@@ -28,7 +28,6 @@ class SpriteSerializer : KSerializer<Sprite> {
                         val texture: Texture = AthenaGame.assetStorage[textureName]
                         sprite.setRegion(texture)
                         sprite.setSize(texture.width * AthenaGame.UNIT_SCALE, texture.height * AthenaGame.UNIT_SCALE)
-                        //sprite.setOrigin(sprite.width, sprite.height * 0.5f) //todo set this via attribute
                     }
                     "originX" -> originX = attribute.value.toFloat()
                     "originY" -> originY = attribute.value.toFloat()

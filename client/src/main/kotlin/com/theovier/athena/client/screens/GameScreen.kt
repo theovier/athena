@@ -41,32 +41,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private fun initEntities() {
         engine.addEntity(player)
         engine.addEntity(playersCrosshair)
-
-        //particle demo
-        engine.apply {
-            entity {
-                with<Lifetime> {
-                    duration = 100f
-                }
-                with<Transform> {
-                    position.set(playersCrosshair.transform.position)
-                }
-                with<Particle> {
-                    effect.load(
-                        Gdx.files.local("particles/smoke_trail.p"),
-                        Gdx.files.local("sprites/particles")
-                    )
-                    effect.scaleEffect(AthenaGame.UNIT_SCALE)
-                    effect.start()
-                }
-                with<Movement> {
-                    direction = Vector2.Y
-                    maxSpeed = 20f
-                    accelerationFactor = 100f
-                    decelerationFactor = 5f
-                }
-            }
-        }
     }
 
     private fun initSystems() {

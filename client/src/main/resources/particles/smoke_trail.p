@@ -8,10 +8,10 @@ lowMax: 10000.0
 min: 0
 max: 20
 - Emission - 
-lowMin: 5.0
-lowMax: 5.0
-highMin: 5.0
-highMax: 5.0
+lowMin: 12.0
+lowMax: 12.0
+highMin: 15.0
+highMax: 15.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -20,7 +20,7 @@ timeline0: 0.0
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 500.0
+highMin: 750.0
 highMax: 750.0
 relative: false
 scalingCount: 3
@@ -64,14 +64,16 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 24.0
-highMax: 42.0
+highMin: 18.0
+highMax: 18.0
 relative: false
-scalingCount: 1
+scalingCount: 2
 scaling0: 1.0
-timelineCount: 1
+scaling1: 0.5
+timelineCount: 2
 timeline0: 0.0
-- Y Scale - 
+timeline1: 0.5
+- Y Scale -
 active: false
 - Velocity - 
 active: false
@@ -97,9 +99,9 @@ highMin: 1.0
 highMax: 1.0
 relative: false
 scalingCount: 4
-scaling0: 0.0
+scaling0: 1.0
 scaling1: 1.0
-scaling2: 1.0
+scaling2: 0.5
 scaling3: 0.0
 timelineCount: 4
 timeline0: 0.0

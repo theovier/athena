@@ -26,10 +26,16 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val playersCrosshair = Prefab.instantiate("crosshair")
 
     init {
-        initSkeletonDemo()
         initEntities()
         initSystems()
         positionCamera()
+    }
+
+    private fun initEntities() {
+        initSkeletonDemo()
+        engine.addEntity(map)
+        engine.addEntity(player)
+        engine.addEntity(playersCrosshair)
     }
 
     private fun initSkeletonDemo() {
@@ -38,20 +44,12 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 with<Transform> {
                     position.set(Vector3(15f, 12f, 0f))
                 }
-                with<Skeleton> {
-                    skeleton?.setScale(1/150f, 1/150f)
-                }
-                with<Animation> {
-
+                with<SkeletonAnimation> {
+                    skeleton.setScale(1/150f, 1/150f)
+                    state.setAnimation(0, "idle", true)
                 }
             }
         }
-    }
-
-    private fun initEntities() {
-        engine.addEntity(map)
-        engine.addEntity(player)
-        engine.addEntity(playersCrosshair)
     }
 
     private fun initSystems() {
@@ -59,6 +57,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(BackgroundRenderingSystem(camera))
             addSystem(RenderingSystem(game.batch))
             addSystem(ParticleSystem(game.batch))
+            addSystem(SkeletonAnimationRenderingSystem(game.batch))
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())
@@ -67,8 +66,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(PlayerAttackSystem())
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
-            addSystem(AnimationSystem())
-            addSystem(SkeletonRenderingSystem(game.batch))
         }
     }
 

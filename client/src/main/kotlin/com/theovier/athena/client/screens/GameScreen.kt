@@ -38,65 +38,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         engine.addEntity(map)
         engine.addEntity(player)
         engine.addEntity(playersCrosshair)
-        initDemoBullets()
-    }
-
-    private fun initDemoBullets() {
-        val bulletRight = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = Vector2.X
-            }
-            with(transform) {
-                position.set(Vector3(13f, 12f, 0f))
-            }
-        }
-        val bulletUp = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = Vector2.Y
-            }
-            with(transform) {
-                position.set(Vector3(15f, 12f, 0f))
-                rotation = 90f
-            }
-        }
-        val bulletDown = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = -Vector2.Y
-            }
-            with(transform) {
-                position.set(Vector3(17f, 12f, 0f))
-                rotation = 270f
-            }
-        }
-        val bulletLeft = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = -Vector2.X
-            }
-            with(transform) {
-                position.set(Vector3(19f, 12f, 0f))
-                rotation = 180f
-            }
-        }
-        engine.addEntity(bulletRight)
-        engine.addEntity(bulletUp)
-        engine.addEntity(bulletDown)
-        engine.addEntity(bulletLeft)
     }
 
     private fun initSystems() {

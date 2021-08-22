@@ -44,10 +44,13 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 with<Transform> {
                     position.set(Vector3(15f, 12f, 0f))
                 }
-                with<SkeletonAnimation> {
-                    skeleton.setScale(1/150f, 1/150f)
-                    state.setAnimation(0, "idle", true)
+                val animation = with<SkeletalAnimation> {
+                    pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
+                    pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
                 }
+                animation.build()
+                val state = animation.state
+                state.setAnimation(0, "idle", true)
             }
         }
     }
@@ -57,7 +60,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(BackgroundRenderingSystem(camera))
             addSystem(RenderingSystem(game.batch))
             addSystem(ParticleSystem(game.batch))
-            addSystem(SkeletonAnimationRenderingSystem(game.batch))
+            addSystem(SkeletalAnimationSystem())
+            addSystem(SkeletonRenderingSystem(game.batch))
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())

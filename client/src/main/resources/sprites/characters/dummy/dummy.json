@@ -1,0 +1,89 @@
+{
+  "skeleton": {
+    "hash": "UsZyLgHJtc8",
+    "spine": "4.0.19",
+    "x": -125.42,
+    "y": -70,
+    "width": 263.81,
+    "height": 334.77,
+    "images": "./athena/dummy/",
+    "audio": ""
+  },
+  "bones": [
+    {
+      "name": "root"
+    },
+    {
+      "name": "bone",
+      "parent": "root",
+      "length": 206.45,
+      "rotation": 87.54,
+      "x": 0.81,
+      "y": 35.17
+    }
+  ],
+  "slots": [
+    {
+      "name": "rack",
+      "bone": "root",
+      "attachment": "rack"
+    },
+    {
+      "name": "body",
+      "bone": "bone",
+      "attachment": "body"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "body": {
+          "body": {
+            "x": 107.26,
+            "y": -5.68,
+            "rotation": -87.54,
+            "width": 254,
+            "height": 234
+          }
+        },
+        "rack": {
+          "rack": {
+            "y": 0.5,
+            "width": 156,
+            "height": 141
+          }
+        }
+      }
+    }
+  ],
+  "animations": {
+    "idle": {
+      "bones": {
+        "bone": {
+          "rotate": [
+            {
+              "value": 2.46
+            },
+            {
+              "time": 1,
+              "value": -20.08
+            },
+            {
+              "time": 2,
+              "value": 2.46
+            },
+            {
+              "time": 3,
+              "value": 17.28
+            },
+            {
+              "time": 4,
+              "value": 2.46
+            }
+          ]
+        }
+      }
+    }
+  }
+}

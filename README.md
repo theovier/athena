@@ -47,4 +47,7 @@ Feel free to open pull-requests or discuss ideas about the project.
 I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference on how to get started with KTX.
 
 ## License
-[GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#)
+[GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#) except for the Spine Runtime.
+
+### Spine Runtime
+Please note that since the Spine Runtime dependency is used, this part of the project is licenced under the [Spine Runtime Licence](https://github.com/EsotericSoftware/spine-runtimes/blob/4.0/LICENSE) instead.

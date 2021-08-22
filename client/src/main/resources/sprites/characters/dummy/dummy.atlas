@@ -1,0 +1,9 @@
+dummy.png
+size:401,238
+filter:Linear,Linear
+pma:true
+body
+bounds:2,2,254,234
+rack
+bounds:258,80,156,141
+rotate:90

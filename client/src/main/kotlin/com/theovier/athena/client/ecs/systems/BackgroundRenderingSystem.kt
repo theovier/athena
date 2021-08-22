@@ -11,7 +11,7 @@ import ktx.ashley.allOf
 import ktx.ashley.get
 import mu.KotlinLogging
 
-class BackgroundRenderSystem(private val camera: OrthographicCamera) : IteratingSystem(allOf(TiledMap::class).get()) {
+class BackgroundRenderingSystem(private val camera: OrthographicCamera) : IteratingSystem(allOf(TiledMap::class).get()) {
     private val log = KotlinLogging.logger {}
     private var renderer: OrthogonalTiledMapRenderer? = null
 

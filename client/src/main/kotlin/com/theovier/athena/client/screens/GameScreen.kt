@@ -57,7 +57,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     private fun initSystems() {
         engine.apply {
-            addSystem(BackgroundRenderSystem(camera))
+            addSystem(BackgroundRenderingSystem(camera))
             addSystem(RenderingSystem(game.batch))
             addSystem(ParticleSystem(game.batch))
             addSystem(CameraMovementSystem(steadyReferenceCamera))

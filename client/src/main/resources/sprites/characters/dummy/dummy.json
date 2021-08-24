@@ -1,11 +1,11 @@
 {
   "skeleton": {
     "hash": "UsZyLgHJtc8",
-    "spine": "4.0.19",
-    "x": -125.42,
-    "y": -70,
-    "width": 263.81,
-    "height": 334.77,
+    "spine": "4.0.22",
+    "x": -113.82,
+    "y": 0.01,
+    "width": 254,
+    "height": 329.08,
     "images": "./athena/dummy/",
     "audio": ""
   },
@@ -18,8 +18,8 @@
       "parent": "root",
       "length": 206.45,
       "rotation": 87.54,
-      "x": 0.81,
-      "y": 35.17
+      "x": 2.9,
+      "y": 105.18
     }
   ],
   "slots": [
@@ -49,7 +49,8 @@
         },
         "rack": {
           "rack": {
-            "y": 0.5,
+            "x": 2.09,
+            "y": 70.51,
             "width": 156,
             "height": 141
           }

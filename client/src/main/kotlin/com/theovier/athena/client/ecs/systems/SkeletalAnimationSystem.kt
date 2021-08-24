@@ -7,11 +7,11 @@ import com.esotericsoftware.spine.SkeletonRenderer
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
-class SkeletalAnimationSystem() : IteratingSystem(allOf(SkeletalAnimation::class).get()) {
+class SkeletalAnimationSystem : IteratingSystem(allOf(SkeletalAnimation::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val skeleton = entity.skeletonAnimation.skeleton
-        val state = entity.skeletonAnimation.state
+        val skeleton = entity.skeletalAnimation.skeleton
+        val state = entity.skeletalAnimation.state
         state.update(deltaTime)
         state.apply(skeleton)
     }

@@ -13,6 +13,8 @@ import com.esotericsoftware.spine.Skeleton
 class SkeletalAnimation : Component {
     var pathToAtlasFile = ""
     var pathToSkeletonFile = ""
+    var initialAnimationName = "idle"
+    var loopInitialAnimation = true
     var scale = 1/150f
 
     lateinit var skeleton: Skeleton
@@ -28,11 +30,8 @@ class SkeletalAnimation : Component {
         val animationStateData = AnimationStateData(skeletonData)
         skeleton = Skeleton(skeletonData)
         state = AnimationState(animationStateData)
+        state.setAnimation(0, initialAnimationName, loopInitialAnimation)
         return this
-    }
-
-    fun setAnimation(trackIndex: Int, animationName: String, loop: Boolean) {
-        state.setAnimation(trackIndex, animationName, loop)
     }
 
     companion object {
@@ -40,5 +39,5 @@ class SkeletalAnimation : Component {
     }
 }
 
-val Entity.skeletonAnimation: SkeletalAnimation
-    get() = this[SkeletalAnimation.MAPPER] ?: throw GdxRuntimeException("SkeletonAnimation for entity '$this' is null")
+val Entity.skeletalAnimation: SkeletalAnimation
+    get() = this[SkeletalAnimation.MAPPER] ?: throw GdxRuntimeException("SkeletalAnimation for entity '$this' is null")

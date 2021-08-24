@@ -12,7 +12,7 @@ class SkeletonRenderingSystem(private val batch: Batch) : IteratingSystem(allOf(
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val position = entity.transform.position
-        val skeleton = entity.skeletonAnimation.skeleton
+        val skeleton = entity.skeletalAnimation.skeleton
         skeleton.setPosition(position.x, position.y)
         skeleton.updateWorldTransform()
         renderer.draw(batch, skeleton)

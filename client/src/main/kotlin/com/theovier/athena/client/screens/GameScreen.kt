@@ -44,13 +44,10 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 with<Transform> {
                     position.set(Vector3(15f, 12f, 0f))
                 }
-                val animation = with<SkeletalAnimation> {
+                with<SkeletalAnimation> {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
                     pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
-                }
-                animation.build()
-                val state = animation.state
-                state.setAnimation(0, "idle", true)
+                }.build()
             }
         }
     }

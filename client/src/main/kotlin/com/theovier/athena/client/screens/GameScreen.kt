@@ -51,7 +51,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         engine.apply {
             entity {
                 with<Transform> {
-                    position.set(Vector3(16f, 14f, 0f))
+                    position.set(Vector3(16f, 13f, 0f))
                 }
                 with<SkeletalAnimation> {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"

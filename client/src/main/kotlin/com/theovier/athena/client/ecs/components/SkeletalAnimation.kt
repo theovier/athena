@@ -9,7 +9,11 @@ import com.esotericsoftware.spine.*
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 import com.esotericsoftware.spine.Skeleton
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
+@Serializable
 class SkeletalAnimation : Component {
     var pathToAtlasFile = ""
     var pathToSkeletonFile = ""
@@ -17,7 +21,10 @@ class SkeletalAnimation : Component {
     var loopInitialAnimation = true
     var scale = 1/150f
 
+    @Transient
     lateinit var skeleton: Skeleton
+
+    @Transient
     lateinit var state: AnimationState
 
     fun build(): SkeletalAnimation {

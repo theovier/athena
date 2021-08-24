@@ -34,6 +34,7 @@ class Prefab(val components: List<@Polymorphic Component>) {
                 subclass(Crosshair::class)
                 subclass(Particle::class)
                 subclass(TiledMap::class)
+                subclass(SkeletalAnimation::class)
             }
         }
 

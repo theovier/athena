@@ -22,7 +22,9 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
     private val map = Prefab.instantiate("map")
-    private val player = Prefab.instantiate("player")
+    private val player = Prefab.instantiate("player").apply {
+        skeletalAnimation.build()
+    }
     private val playersCrosshair = Prefab.instantiate("crosshair")
 
     init {
@@ -56,6 +58,18 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 with<SkeletalAnimation> {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
                     pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
+                }.build()
+            }
+        }
+
+        engine.apply {
+            entity {
+                with<Transform> {
+                    position.set(Vector3(18f, 13f, 0f))
+                }
+                with<SkeletalAnimation> {
+                    pathToAtlasFile = "sprites/characters/player/player.atlas"
+                    pathToSkeletonFile = "sprites/characters/player/player.json"
                 }.build()
             }
         }

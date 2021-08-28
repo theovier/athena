@@ -36,13 +36,6 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
         if (direction.isZero) {
             skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "idle")
         } else {
-
-            if (direction.x < 0) {
-                skeletalAnimation.forceSkeletonToFaceLeft()
-            } else {
-                skeletalAnimation.forceSkeletonToFaceRight()
-            }
-
             skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "run")
         }
     }

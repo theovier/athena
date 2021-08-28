@@ -48,14 +48,14 @@ class SkeletalAnimation : Component {
         }
     }
 
-    fun forceSkeletonToFaceLeft() {
+    fun forceToFaceLeft() {
         if(skeleton.scaleX >= 0) {
             flipX()
         }
     }
 
     //if already flipped, revert the flip, otherwise don't do anything
-    fun forceSkeletonToFaceRight() {
+    fun forceToFaceRight() {
         if(skeleton.scaleX < 0) {
             flipX()
         }

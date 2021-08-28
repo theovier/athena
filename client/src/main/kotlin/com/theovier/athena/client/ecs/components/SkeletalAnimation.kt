@@ -9,7 +9,6 @@ import com.esotericsoftware.spine.*
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 import com.esotericsoftware.spine.Skeleton
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
@@ -39,6 +38,31 @@ class SkeletalAnimation : Component {
         state = AnimationState(animationStateData)
         state.setAnimation(0, initialAnimationName, loopInitialAnimation)
         return this
+    }
+
+    fun playAnimationIfNotAlreadyPlaying(trackIndex: Int = 0, name: String, isLooping: Boolean = true) {
+        val currentTrackEntry = state.getCurrent(trackIndex)
+        val currentAnimation = currentTrackEntry.animation
+        if (currentAnimation.name != name) {
+            state.setAnimation(trackIndex, name, isLooping)
+        }
+    }
+
+    fun forceSkeletonToFaceLeft() {
+        if(skeleton.scaleX >= 0) {
+            flipX()
+        }
+    }
+
+    //if already flipped, revert the flip, otherwise don't do anything
+    fun forceSkeletonToFaceRight() {
+        if(skeleton.scaleX < 0) {
+            flipX()
+        }
+    }
+
+    fun flipX() {
+        skeleton.scaleX *= -1
     }
 
     companion object {

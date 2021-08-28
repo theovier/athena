@@ -61,18 +61,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                 }.build()
             }
         }
-
-        engine.apply {
-            entity {
-                with<Transform> {
-                    position.set(Vector3(18f, 13f, 0f))
-                }
-                with<SkeletalAnimation> {
-                    pathToAtlasFile = "sprites/characters/player/player.atlas"
-                    pathToSkeletonFile = "sprites/characters/player/player.json"
-                }.build()
-            }
-        }
     }
 
     private fun initSystems() {

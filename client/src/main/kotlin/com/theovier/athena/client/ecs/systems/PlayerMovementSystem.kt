@@ -10,7 +10,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class, SkeletalAnimation::class).get()) {
     private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {
@@ -26,6 +26,24 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
             stickInput = Vector2.Zero
         }
         val playerMovement = entity.movement
-        playerMovement.direction = stickInput
+        val skeletalAnimation = entity.skeletalAnimation
+        val direction = stickInput
+        playerMovement.direction = direction
+        playAnimation(skeletalAnimation, direction)
+    }
+
+    private fun playAnimation(skeletalAnimation: SkeletalAnimation, direction: Vector2) {
+        if (direction.isZero) {
+            skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "idle")
+        } else {
+
+            if (direction.x < 0) {
+                skeletalAnimation.forceSkeletonToFaceLeft()
+            } else {
+                skeletalAnimation.forceSkeletonToFaceRight()
+            }
+
+            skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "run")
+        }
     }
 }

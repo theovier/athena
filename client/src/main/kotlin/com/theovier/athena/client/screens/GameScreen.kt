@@ -2,7 +2,6 @@ package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.AthenaGame
@@ -13,9 +12,7 @@ import ktx.app.KtxScreen
 import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.graphics.use
-import ktx.math.unaryMinus
 import mu.KotlinLogging
-
 
 private val log = KotlinLogging.logger {}
 
@@ -25,7 +22,9 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
     private val map = Prefab.instantiate("map")
-    private val player = Prefab.instantiate("player")
+    private val player = Prefab.instantiate("player").apply {
+        skeletalAnimation.build()
+    }
     private val playersCrosshair = Prefab.instantiate("crosshair")
 
     init {
@@ -35,75 +34,42 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     private fun initEntities() {
+        initSkeletonDemo()
         engine.addEntity(map)
         engine.addEntity(player)
         engine.addEntity(playersCrosshair)
-        initDemoBullets()
     }
 
-    private fun initDemoBullets() {
-        val bulletRight = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = Vector2.X
-            }
-            with(transform) {
-                position.set(Vector3(13f, 12f, 0f))
+    private fun initSkeletonDemo() {
+        //from prefab
+        val dummy = Prefab.instantiate("dummy") {
+            with(skeletalAnimation) {
+                build()
             }
         }
-        val bulletUp = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = Vector2.Y
-            }
-            with(transform) {
-                position.set(Vector3(15f, 12f, 0f))
-                rotation = 90f
-            }
-        }
-        val bulletDown = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = -Vector2.Y
-            }
-            with(transform) {
-                position.set(Vector3(17f, 12f, 0f))
-                rotation = 270f
+        engine.addEntity(dummy)
+
+        //without prefab
+        engine.apply {
+            entity {
+                with<Transform> {
+                    position.set(Vector3(16f, 13f, 0f))
+                }
+                with<SkeletalAnimation> {
+                    pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
+                    pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
+                }.build()
             }
         }
-        val bulletLeft = Prefab.instantiate("bullet") {
-            with(lifetime) {
-                duration = 1000f
-            }
-            with(movement) {
-                maxSpeed = 0f
-                direction = -Vector2.X
-            }
-            with(transform) {
-                position.set(Vector3(19f, 12f, 0f))
-                rotation = 180f
-            }
-        }
-        engine.addEntity(bulletRight)
-        engine.addEntity(bulletUp)
-        engine.addEntity(bulletDown)
-        engine.addEntity(bulletLeft)
     }
 
     private fun initSystems() {
         engine.apply {
-            addSystem(BackgroundRenderSystem(camera))
+            addSystem(BackgroundRenderingSystem(camera))
             addSystem(RenderingSystem(game.batch))
             addSystem(ParticleSystem(game.batch))
+            addSystem(SkeletalAnimationSystem())
+            addSystem(SkeletonRenderingSystem(game.batch))
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PlayerMovementSystem())

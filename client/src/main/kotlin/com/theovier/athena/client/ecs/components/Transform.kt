@@ -36,8 +36,14 @@ class Transform : Component, Poolable, Comparable<Transform> {
         rotation = 0f
     }
 
+
+    /* compares foremost on the y-axis to determine which transform is overlapping the other */
     override fun compareTo(other: Transform): Int {
-        return position.compareTo(other.position)
+        val yDifference = other.position.y.compareTo(position.y)
+        if (yDifference == 0) {
+            return position.compareTo(other.position)
+        }
+        return yDifference
     }
 
     companion object {

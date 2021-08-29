@@ -1,0 +1,14 @@
+player.png
+size:405,183
+filter:Linear,Linear
+pma:true
+body
+bounds:274,86,129,95
+offsets:0,0,129,96
+head
+bounds:2,2,270,179
+leg_left
+bounds:274,15,32,69
+offsets:1,1,34,70
+leg_right
+bounds:308,17,34,67

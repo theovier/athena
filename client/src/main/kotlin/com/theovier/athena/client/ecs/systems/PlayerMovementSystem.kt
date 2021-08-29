@@ -10,7 +10,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class, SkeletalAnimation::class).get()) {
     private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {
@@ -18,14 +18,29 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
         currentController = Controllers.getCurrent()
     }
 
-    override fun processEntity(entity: Entity, deltaTime: Float) {
+    override fun processEntity(player: Entity, deltaTime: Float) {
         val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_LEFT_X)
         val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_LEFT_Y)
         var stickInput = Vector2(xAxisValueRaw, yAxisValueRaw)
         if (stickInput.len() < XboxInputAdapter.MOVE_DEAD_ZONE) {
             stickInput = Vector2.Zero
         }
-        val playerMovement = entity.movement
-        playerMovement.direction = stickInput
+        val playerMovement = player.movement
+        val animation = player.skeletalAnimation
+        val direction = stickInput
+        playerMovement.direction = direction
+        playAnimation(animation, direction)
+
+        if (!direction.isZero) {
+            animation.faceDirection(direction)
+        }
+    }
+
+    private fun playAnimation(skeletalAnimation: SkeletalAnimation, direction: Vector2) {
+        if (direction.isZero) {
+            skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "idle")
+        } else {
+            skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "run")
+        }
     }
 }

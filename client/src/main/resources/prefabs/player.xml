@@ -6,8 +6,5 @@
         <Size x="2" y="2" />
     </Transform>
     <Movement maxSpeed="8" accelerationFactor="250" decelerationFactor="10" />
-    <SpriteRenderer>
-        <Sprite texture="sprites/test.png" />
-        <Offset x="0" y="0" />
-    </SpriteRenderer>
+    <SkeletalAnimation pathToAtlasFile="sprites/characters/player/player.atlas" pathToSkeletonFile="sprites/characters/player/player.json" />
 </Prefab>

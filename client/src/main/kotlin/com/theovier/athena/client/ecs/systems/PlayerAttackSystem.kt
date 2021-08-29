@@ -12,7 +12,7 @@ import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
 
-class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class).get()) {
+class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SkeletalAnimation::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
 
@@ -51,7 +51,8 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     }
 
     private fun fire(shooter: Entity) {
-        val origin = shooter.transform.position.xy
+        val headBone = shooter.skeletalAnimation.skeleton.findBone("head")
+        val origin = Vector2(headBone.worldX, headBone.worldY)
         spawnBullet(origin, shooter.aim.direction)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false

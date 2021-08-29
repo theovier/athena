@@ -4,9 +4,9 @@
 [![LibKTX](https://img.shields.io/badge/LibKTX-1.10.0--b1-red.svg)](https://github.com/libktx/ktx)
 
 # Athena
-This is a 2D shoot'em up game done in [KTX](https://github.com/libktx/ktx). 
-After having worked with some state-of-the-art engines like Unity and Unreal, I decided to toy around with a more old-school approach to making games. 
-The main purpose of this project is simply to play around with some ideas and homemade graphics. 
+This is a 2D shoot'em up game done in [KTX](https://github.com/libktx/ktx).
+After having worked with some state-of-the-art engines like Unity and Unreal, I decided to toy around with a more old-school approach to making games.
+The main purpose of this project is simply to play around with some ideas and homemade graphics.
 Don't expect anything too fancy or polished here.
 
 ## Status
@@ -15,12 +15,13 @@ Work in progress.
 ## Features
 - Uses [Ashley](https://github.com/libktx/ktx/tree/master/ashley) as its [ECS](https://en.wikipedia.org/wiki/Entity_component_system)
 - Basic movement system with acceleration and friction
-- Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t) 
+- Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 - Smooth translational + rotational [camera shake based on trauma](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 - Custom prefab system (using XML internally)
 - Controller support with [relatively smooth aiming](https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
 - Basic support for [tiled maps](https://github.com/libktx/ktx/tree/master/tiled)
 - Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)
+- Supports [Spine](http://de.esotericsoftware.com/) animations and skeletons
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_002.gif)
@@ -34,7 +35,7 @@ Then simply run
 mvn package
 ```
 
-and check your /target folder for the newly generated jar files. 
+and check your /target folder for the newly generated jar files.
 
 ### macOS
 Please note that (even when run from within your IDE) you need to add the VM option flag `-XstartOnFirstThread`

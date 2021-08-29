@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.esotericsoftware.spine.*
 import ktx.ashley.get
@@ -48,20 +49,28 @@ class SkeletalAnimation : Component {
         }
     }
 
-    fun forceToFaceLeft() {
+    fun faceDirection(direction: Vector2) {
+        if (direction.x < 0) {
+            forceToFaceLeft()
+        } else {
+            forceToFaceRight()
+        }
+    }
+
+    private fun forceToFaceLeft() {
         if(skeleton.scaleX >= 0) {
             flipX()
         }
     }
 
     //if already flipped, revert the flip, otherwise don't do anything
-    fun forceToFaceRight() {
+    private fun forceToFaceRight() {
         if(skeleton.scaleX < 0) {
             flipX()
         }
     }
 
-    fun flipX() {
+    private fun flipX() {
         skeleton.scaleX *= -1
     }
 

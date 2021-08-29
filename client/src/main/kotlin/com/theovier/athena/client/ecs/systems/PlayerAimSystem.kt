@@ -32,9 +32,11 @@ class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transfo
         player.aim.targetPosition = playerPosition + targetPositionRelativeToPlayer
 
         val direction = stickInput.nor()
-        if (!direction.isZero) {
+        val isAiming = !direction.isZero
+        player.aim.isCurrentlyAiming = isAiming
+
+        if (isAiming) {
             player.aim.direction = direction
-            faceTowardsAimDirection(player.skeletalAnimation, direction)
         }
     }
 
@@ -42,13 +44,5 @@ class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transfo
         val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_X)
         val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_Y)
         return Vector2(xAxisValueRaw, yAxisValueRaw)
-    }
-
-    private fun faceTowardsAimDirection(animation: SkeletalAnimation, direction: Vector2) {
-        if (direction.x < 0) {
-            animation.forceToFaceLeft()
-        } else {
-            animation.forceToFaceRight()
-        }
     }
 }

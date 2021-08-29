@@ -23,7 +23,7 @@ Work in progress.
 - Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)
 
 ## Screenshots
-![screenshot_001](screenshots/screenshot_001.png)
+![screenshot_001](screenshots/screenshot_002.gif)
 
 ## Building from Source
 This project uses **Maven 3** as its build management tool.

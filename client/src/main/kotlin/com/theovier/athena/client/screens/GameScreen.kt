@@ -2,7 +2,10 @@ package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
+import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.*
@@ -26,6 +29,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         skeletalAnimation.build()
     }
     private val playersCrosshair = Prefab.instantiate("crosshair")
+    private val world = World(Vector2.Zero, true)
 
     init {
         initEntities()
@@ -35,9 +39,22 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     private fun initEntities() {
         initSkeletonDemo()
+        initPlayer()
         engine.addEntity(map)
-        engine.addEntity(player)
         engine.addEntity(playersCrosshair)
+    }
+
+    private fun initPlayer() {
+        val bodyComponent = PhysicsBody()
+        val bodyDefinition = BodyDef().apply {
+            type = BodyDef.BodyType.KinematicBody
+            fixedRotation = true
+            position.x = player.transform.position.x
+            position.y = player.transform.position.y
+        }
+        bodyComponent.body = world.createBody(bodyDefinition)
+        player.add(bodyComponent)
+        engine.addEntity(player)
     }
 
     private fun initSkeletonDemo() {
@@ -78,6 +95,8 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(PlayerAttackSystem())
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
+            addSystem(PhysicsSystem(world))
+            addSystem(DebugPhysicsSystem(world, camera))
         }
     }
 

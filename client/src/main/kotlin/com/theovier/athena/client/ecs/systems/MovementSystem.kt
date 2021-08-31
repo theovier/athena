@@ -4,18 +4,13 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
-import ktx.math.plus
-import ktx.math.times
-import mu.KotlinLogging
 
-class MovementSystem : IteratingSystem(allOf(Movement::class, Transform::class).get()) {
+class MovementSystem : IteratingSystem(allOf(Movement::class, PhysicsBody::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val transform = entity.transform
+        val body = entity.physics.body
         val movement = entity.movement
-        if (movement.hasMovementInput) {
-            movement.updateVelocity(deltaTime)
-            transform.position.set(transform.position + movement.velocity * deltaTime)
-        }
+        movement.updateVelocity(deltaTime)
+        body.setLinearVelocity(movement.velocity.x, movement.velocity.y)
     }
 }

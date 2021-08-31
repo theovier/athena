@@ -11,9 +11,12 @@ import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
+import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen
 import ktx.ashley.entity
 import ktx.ashley.with
+import ktx.box2d.body
+import ktx.box2d.box
 import ktx.graphics.use
 import mu.KotlinLogging
 
@@ -24,6 +27,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
+    private val debugEngine = PooledEngine()
     private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player").apply {
         skeletalAnimation.build()
@@ -34,6 +38,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     init {
         initEntities()
         initSystems()
+        initDebugSystems()
         positionCamera()
     }
 
@@ -45,14 +50,12 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     private fun initPlayer() {
-        val bodyComponent = PhysicsBody()
-        val bodyDefinition = BodyDef().apply {
-            type = BodyDef.BodyType.KinematicBody
-            fixedRotation = true
-            position.x = player.transform.position.x
-            position.y = player.transform.position.y
+        val bodyComponent = PhysicsBody().apply {
+            body = world.body(BodyDef.BodyType.KinematicBody) {
+                box(width = 1f, height = 2f)
+                position.set(player.transform.position.xy)
+            }
         }
-        bodyComponent.body = world.createBody(bodyDefinition)
         player.add(bodyComponent)
         engine.addEntity(player)
     }
@@ -96,7 +99,13 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(PhysicsSystem(world))
-            addSystem(DebugPhysicsSystem(world, camera))
+        }
+    }
+
+    /* systems that need to be called after the batch's end command, see https://stackoverflow.com/a/32791208/6516194 */
+    private fun initDebugSystems() {
+        debugEngine.apply {
+            addSystem(PhysicsDebugSystem(world, camera))
         }
     }
 
@@ -108,6 +117,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         game.batch.use(camera) {
             engine.update(delta)
         }
+        debugEngine.update(delta)
         viewport.apply()
     }
 
@@ -117,6 +127,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     override fun dispose() {
+        world.dispose()
         log.debug { "'${engine.entities.size()}' entities in engine" }
     }
 }

@@ -113,6 +113,11 @@
             <version>1.10.0-b1</version>
         </dependency>
         <dependency>
+            <groupId>io.github.libktx</groupId>
+            <artifactId>ktx-box2d</artifactId>
+            <version>1.10.0-b1</version>
+        </dependency>
+        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>1.10.0</version>
@@ -137,6 +142,17 @@
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-core</artifactId>
             <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d-platform</artifactId>
+            <version>1.10.0</version>
+            <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.ashley</groupId>

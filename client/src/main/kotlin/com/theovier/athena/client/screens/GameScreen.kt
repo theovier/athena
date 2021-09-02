@@ -51,7 +51,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     private fun initPlayer() {
         val bodyComponent = PhysicsBody().apply {
-            body = world.body(BodyDef.BodyType.KinematicBody) {
+            body = world.body(BodyDef.BodyType.DynamicBody) {
                 box(width = 1f, height = 2f)
                 position.set(player.transform.position.xy)
             }
@@ -62,23 +62,27 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     private fun initSkeletonDemo() {
         //from prefab
-        val dummy = Prefab.instantiate("dummy") {
-            with(skeletalAnimation) {
-                build()
-            }
-        }
-        engine.addEntity(dummy)
+//        val dummy = Prefab.instantiate("dummy") {
+//            with(skeletalAnimation) {
+//                build()
+//            }
+//        }
+//        engine.addEntity(dummy)
 
         //without prefab
         engine.apply {
             entity {
-                with<Transform> {
-                    position.set(Vector3(16f, 13f, 0f))
-                }
+                with<Transform>()
                 with<SkeletalAnimation> {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
                     pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
                 }.build()
+                with<PhysicsBody> {
+                    body = world.body(BodyDef.BodyType.StaticBody) {
+                        box(width = 1f, height = 2f)
+                        position.set(16f, 13f)
+                    }
+                }
             }
         }
     }

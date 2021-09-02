@@ -6,7 +6,11 @@ import com.theovier.athena.client.ecs.components.physics
 
 class PhysicsListener : EntityListener {
 
-    override fun entityAdded(entity: Entity) = Unit
+    override fun entityAdded(entity: Entity) {
+        val physics = entity.physics
+        val body = physics.body
+        body.userData = entity
+    }
 
     override fun entityRemoved(entity: Entity) {
         val physics = entity.physics

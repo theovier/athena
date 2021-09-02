@@ -15,6 +15,7 @@ import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
 import ktx.box2d.body
 import ktx.box2d.box
+import ktx.box2d.circle
 
 class PlayerAttackSystem(private val world: World) : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SkeletalAnimation::class).get()) {
     private lateinit var currentController: Controller
@@ -66,7 +67,7 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
         val bullet = Prefab.instantiate(BULLET_ENTITY) {
             with(transform) {
                 rotation = direction.angleDeg()
-                position.set(origin.x, origin.y, 0f)
+                position.set(origin.x, origin.y + 2f, 0f)
             }
             with(movement) {
                 this.direction = direction
@@ -76,9 +77,11 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
         //testwise add the physic components manually until they can be persisted in prefabs
         val bodyComponent = Physics().apply {
             body = world.body(BodyDef.BodyType.DynamicBody) {
-                box(width = 1f, height = 0.5f) //todo
+                circle(radius = 0.25f)
+                fixedRotation = true
                 position.set(bullet.transform.position.xy)
             }
+            body.isBullet = true
         }
         bullet.add(bodyComponent)
 

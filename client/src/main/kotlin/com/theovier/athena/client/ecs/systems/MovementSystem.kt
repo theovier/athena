@@ -5,7 +5,7 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
-class MovementSystem : IteratingSystem(allOf(Movement::class, PhysicsBody::class).get()) {
+class MovementSystem : IteratingSystem(allOf(Movement::class, Physics::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val body = entity.physics.body

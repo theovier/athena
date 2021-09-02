@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
-class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform::class, PhysicsBody::class).get()) {
+class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform::class, Physics::class).get()) {
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)

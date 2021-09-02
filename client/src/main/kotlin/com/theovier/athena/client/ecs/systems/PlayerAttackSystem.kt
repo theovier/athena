@@ -6,13 +6,17 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
+import ktx.box2d.body
+import ktx.box2d.box
 
-class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SkeletalAnimation::class).get()) {
+class PlayerAttackSystem(private val world: World) : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SkeletalAnimation::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
 
@@ -59,7 +63,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     }
 
     private fun spawnBullet(origin: Vector2, direction: Vector2) {
-        Prefab.instantiate(BULLET_ENTITY) {
+        val bullet = Prefab.instantiate(BULLET_ENTITY) {
             with(transform) {
                 rotation = direction.angleDeg()
                 position.set(origin.x, origin.y, 0f)
@@ -67,8 +71,18 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
             with(movement) {
                 this.direction = direction
             }
-            engine.addEntity(this)
         }
+
+        //testwise add the physic components manually until they can be persisted in prefabs
+        val bodyComponent = Physics().apply {
+            body = world.body(BodyDef.BodyType.DynamicBody) {
+                box(width = 1f, height = 0.5f) //todo
+                position.set(bullet.transform.position.xy)
+            }
+        }
+        bullet.add(bodyComponent)
+
+        engine.addEntity(bullet)
     }
 
     companion object {

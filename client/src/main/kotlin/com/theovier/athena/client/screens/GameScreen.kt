@@ -1,18 +1,20 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen
+import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.box2d.body
@@ -39,6 +41,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         initEntities()
         initSystems()
         initDebugSystems()
+        addEntityListeners()
         positionCamera()
     }
 
@@ -50,7 +53,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     private fun initPlayer() {
-        val bodyComponent = PhysicsBody().apply {
+        val bodyComponent = Physics().apply {
             body = world.body(BodyDef.BodyType.DynamicBody) {
                 box(width = 1f, height = 2f)
                 position.set(player.transform.position.xy)
@@ -77,7 +80,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
                     pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
                 }.build()
-                with<PhysicsBody> {
+                with<Physics> {
                     body = world.body(BodyDef.BodyType.StaticBody) {
                         box(width = 1f, height = 2f)
                         position.set(16f, 13f)
@@ -99,7 +102,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
-            addSystem(PlayerAttackSystem())
+            addSystem(PlayerAttackSystem(world)) //todo think of a different way (= not passing in the world) to let the attack system spawn physic entities
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(PhysicsSystem(world))
@@ -111,6 +114,10 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         debugEngine.apply {
             addSystem(PhysicsDebugSystem(world, camera))
         }
+    }
+
+    private fun addEntityListeners() {
+        engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
     }
 
     private fun positionCamera() {

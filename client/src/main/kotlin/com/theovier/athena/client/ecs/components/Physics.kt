@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Pool.Poolable
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
-class PhysicsBody : Component, Poolable {
+class Physics : Component, Poolable {
     lateinit var body: Body
 
     override fun reset() {
@@ -17,9 +17,9 @@ class PhysicsBody : Component, Poolable {
     }
 
     companion object {
-        val MAPPER = mapperFor<PhysicsBody>()
+        val MAPPER = mapperFor<Physics>()
     }
 }
 
-val Entity.physics: PhysicsBody
-    get() = this[PhysicsBody.MAPPER] ?: throw GdxRuntimeException("Body for entity '$this' is null")
+val Entity.physics: Physics
+    get() = this[Physics.MAPPER] ?: throw GdxRuntimeException("Body for entity '$this' is null")

@@ -14,7 +14,7 @@ class SpineDebugSystem(private val camera: Camera) : IteratingSystem(allOf(Spine
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val skeleton = entity.skeletalAnimation.skeleton
+        val skeleton = entity.spineAnimation.skeleton
         renderer.shapeRenderer.projectionMatrix = camera.combined
         renderer.draw(skeleton)
     }

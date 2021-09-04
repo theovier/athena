@@ -30,7 +30,7 @@ class GameScreen : KtxScreen {
     private val engine = PooledEngine()
     private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player").apply {
-        skeletalAnimation.build()
+        spineAnimation.build()
     }
     private val playersCrosshair = Prefab.instantiate("crosshair")
     private val world = World(Vector2.Zero, true)

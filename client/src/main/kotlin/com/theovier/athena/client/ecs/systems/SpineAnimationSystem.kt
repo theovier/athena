@@ -8,8 +8,8 @@ import ktx.ashley.allOf
 class SpineAnimationSystem : IteratingSystem(allOf(SpineAnimation::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val skeleton = entity.skeletalAnimation.skeleton
-        val state = entity.skeletalAnimation.state
+        val skeleton = entity.spineAnimation.skeleton
+        val state = entity.spineAnimation.state
         state.update(deltaTime)
         state.apply(skeleton)
     }

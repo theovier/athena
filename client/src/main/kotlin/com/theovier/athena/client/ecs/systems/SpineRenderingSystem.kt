@@ -16,7 +16,7 @@ class SpineRenderingSystem(private val batch: Batch) :
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val position = entity.transform.position
-        val skeleton = entity.skeletalAnimation.skeleton
+        val skeleton = entity.spineAnimation.skeleton
         skeleton.setPosition(position.x, position.y)
         skeleton.updateWorldTransform()
         renderer.draw(batch, skeleton)

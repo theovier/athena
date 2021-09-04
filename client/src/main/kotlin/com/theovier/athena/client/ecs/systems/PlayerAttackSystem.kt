@@ -54,7 +54,7 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
     }
 
     private fun fire(shooter: Entity) {
-        val headBone = shooter.skeletalAnimation.skeleton.findBone("head")
+        val headBone = shooter.spineAnimation.skeleton.findBone("head")
         val origin = Vector2(headBone.worldX, headBone.worldY)
         spawnBullet(origin, shooter.aim.direction)
         canNextFireInSeconds = timeBetweenShots

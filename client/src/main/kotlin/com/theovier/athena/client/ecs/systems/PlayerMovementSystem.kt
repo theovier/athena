@@ -26,7 +26,7 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
             stickInput = Vector2.Zero
         }
         val playerMovement = player.movement
-        val animation = player.skeletalAnimation
+        val animation = player.spineAnimation
         val direction = stickInput
         playerMovement.direction = direction
         playAnimation(animation, direction)

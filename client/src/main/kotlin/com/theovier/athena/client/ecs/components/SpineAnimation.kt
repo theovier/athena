@@ -79,5 +79,5 @@ class SpineAnimation : Component {
     }
 }
 
-val Entity.skeletalAnimation: SpineAnimation
+val Entity.spineAnimation: SpineAnimation
     get() = this[SpineAnimation.MAPPER] ?: throw GdxRuntimeException("SkeletalAnimation for entity '$this' is null")

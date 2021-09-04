@@ -2,6 +2,7 @@ package com.theovier.athena.client.ecs.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.GdxRuntimeException
@@ -28,7 +29,11 @@ class Transform : Component, Poolable, Comparable<Transform> {
     @Serializable(with = Vector2Serializer::class)
     val size = Vector2(1f, 1f)
 
+    /* radians */
     var rotation = 0f
+
+    val rotationDegrees: Float
+        get() = rotation * MathUtils.radiansToDegrees
 
     override fun reset() {
         position.set(0f, 0f, 0f)

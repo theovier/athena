@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
@@ -65,10 +66,6 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
 
     private fun spawnBullet(origin: Vector2, direction: Vector2) {
         val bullet = Prefab.instantiate(BULLET_ENTITY) {
-            with(transform) {
-                rotation = direction.angleDeg()
-                position.set(origin.x, origin.y + 2f, 0f)
-            }
             with(movement) {
                 this.direction = direction
             }
@@ -77,9 +74,9 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
         //testwise add the physic components manually until they can be persisted in prefabs
         val bodyComponent = Physics().apply {
             body = world.body(BodyDef.BodyType.DynamicBody) {
-                circle(radius = 0.25f)
-                fixedRotation = true
-                position.set(bullet.transform.position.xy)
+                box(width = bullet.transform.size.x, height = bullet.transform.size.y)
+                position.set(origin.x, origin.y + 2f)
+                angle = direction.angleRad()
             }
             body.isBullet = true
         }
@@ -89,7 +86,6 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
     }
 
     companion object {
-        const val MILLIS_PER_SECOND = 1000
         const val BULLET_ENTITY = "bullet"
     }
 }

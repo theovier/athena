@@ -29,6 +29,7 @@ class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform:
         //box2d's (0,0) is center - in Spine (0,0) is bottom center
         val offsetY = 0.5f * transform.size.y
         transform.position.set(body.position.x, body.position.y - offsetY, 0f)
+        transform.rotation = body.transform.rotation
     }
 
     private fun updateInterpolatedPosition(alpha: Float) {
@@ -36,12 +37,15 @@ class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform:
             val transform = entity.transform
             val body = entity.physics.body
             val previousPosition = transform.position
+            val previousRotation = transform.rotation
             val currentPosition = body.position
+            val currentRotation = body.transform.rotation
 
             //box2d's (0,0) is center - in Spine (0,0) is bottom center
             val offsetY = 0.5f * transform.size.y
             transform.position.x = MathUtils.lerp(previousPosition.x, currentPosition.x, alpha)
             transform.position.y = MathUtils.lerp(previousPosition.y, currentPosition.y - offsetY, alpha)
+            transform.rotation = MathUtils.lerp(previousRotation, currentRotation, alpha)
         }
     }
 

@@ -5,20 +5,17 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
-import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
-import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
 import ktx.box2d.body
 import ktx.box2d.box
-import ktx.box2d.circle
 
-class PlayerAttackSystem(private val world: World) : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SkeletalAnimation::class).get()) {
+class PlayerAttackSystem(private val world: World) : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SpineAnimation::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
 

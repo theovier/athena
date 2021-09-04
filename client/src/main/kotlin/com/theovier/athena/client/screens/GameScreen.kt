@@ -65,7 +65,7 @@ class GameScreen : KtxScreen {
     private fun initSkeletonDemo() {
         //from prefab
 //        val dummy = Prefab.instantiate("dummy") {
-//            with(skeletalAnimation) {
+//            with(spineAnimation) {
 //                build()
 //            }
 //        }
@@ -77,7 +77,7 @@ class GameScreen : KtxScreen {
                 with<Transform>() {
                     size.set(1f, 2f)
                 }
-                with<SkeletalAnimation> {
+                with<SpineAnimation> {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
                     pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
                 }.build()
@@ -94,13 +94,13 @@ class GameScreen : KtxScreen {
     private fun initSystems() {
         engine.apply {
             addSystem(PhysicsSystem(world))
-            addSystem(SkeletalAnimationSystem())
+            addSystem(SpineAnimationSystem())
             addSystem(RenderingMetaSystem(camera, batch)
                 .apply {
                     addSubsystem(BackgroundRenderingSystem(camera))
                     addSubsystem(SpriteRenderingSystem(batch))
                     addSubsystem(ParticleSystem(batch))
-                    addSubsystem(SkeletonRenderingSystem(batch))
+                    addSubsystem(SpineRenderingSystem(batch))
                 })
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())

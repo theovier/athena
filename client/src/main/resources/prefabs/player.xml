@@ -6,5 +6,5 @@
         <Size x="2" y="2" />
     </Transform>
     <Movement maxSpeed="8" accelerationFactor="250" decelerationFactor="10" />
-    <SkeletalAnimation pathToAtlasFile="sprites/characters/player/player.atlas" pathToSkeletonFile="sprites/characters/player/player.json" />
+    <SpineAnimation pathToAtlasFile="sprites/characters/player/player.atlas" pathToSkeletonFile="sprites/characters/player/player.json" />
 </Prefab>

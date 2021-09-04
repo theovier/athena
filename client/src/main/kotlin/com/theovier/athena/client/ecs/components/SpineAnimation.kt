@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-class SkeletalAnimation : Component {
+class SpineAnimation : Component {
     var pathToAtlasFile = ""
     var pathToSkeletonFile = ""
     var initialAnimationName = "idle"
@@ -27,7 +27,7 @@ class SkeletalAnimation : Component {
     @Transient
     lateinit var state: AnimationState
 
-    fun build(): SkeletalAnimation {
+    fun build(): SpineAnimation {
         val atlasFile = Gdx.files.internal(pathToAtlasFile)
         val skeletonFile = Gdx.files.internal(pathToSkeletonFile)
         val atlas = TextureAtlas(atlasFile)
@@ -75,9 +75,9 @@ class SkeletalAnimation : Component {
     }
 
     companion object {
-        val MAPPER = mapperFor<SkeletalAnimation>()
+        val MAPPER = mapperFor<SpineAnimation>()
     }
 }
 
-val Entity.skeletalAnimation: SkeletalAnimation
-    get() = this[SkeletalAnimation.MAPPER] ?: throw GdxRuntimeException("SkeletalAnimation for entity '$this' is null")
+val Entity.skeletalAnimation: SpineAnimation
+    get() = this[SpineAnimation.MAPPER] ?: throw GdxRuntimeException("SkeletalAnimation for entity '$this' is null")

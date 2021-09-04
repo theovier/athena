@@ -112,6 +112,7 @@ class GameScreen : KtxScreen {
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(PhysicsDebugSystem(world, camera))
+            //addSystem(SpineDebugSystem(camera))
         }
     }
 

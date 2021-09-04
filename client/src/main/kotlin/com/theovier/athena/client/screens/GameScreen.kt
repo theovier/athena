@@ -1,7 +1,6 @@
 package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
@@ -103,6 +102,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(SkeletonRenderingSystem(game.batch))
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
+            addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
             addSystem(CrosshairPlacementSystem(player.aim))

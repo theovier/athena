@@ -18,7 +18,6 @@ class CrosshairPlacementSystem(private val aim: Aim) : IteratingSystem(allOf(Cro
         if (entities.size() > 1) {
             log.error { "More than 1 entity with <Crosshair> component detected." }
         }
-
         val transform = entity.transform
         val movement = entity.movement
 
@@ -27,12 +26,6 @@ class CrosshairPlacementSystem(private val aim: Aim) : IteratingSystem(allOf(Cro
             movement.direction = Vector2.Zero
         } else {
             movement.direction = offsetBetweenCurrentPositionAndTargetPosition.nor()
-        }
-
-        //non-physic movement
-        if (movement.hasMovementInput) {
-            movement.updateVelocity(deltaTime)
-            transform.position.set(transform.position + movement.velocity * deltaTime)
         }
     }
 

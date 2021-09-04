@@ -1,6 +1,7 @@
 package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
@@ -92,6 +93,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     private fun initSystems() {
         engine.apply {
+            addSystem(PhysicsSystem(world))
             addSystem(BackgroundRenderingSystem(camera))
             addSystem(RenderingSystem(game.batch))
             addSystem(ParticleSystem(game.batch))
@@ -105,7 +107,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(PlayerAttackSystem(world)) //todo think of a different way (= not passing in the world) to let the attack system spawn physic entities
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
-            addSystem(PhysicsSystem(world))
         }
     }
 

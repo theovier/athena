@@ -15,17 +15,13 @@ import java.lang.RuntimeException
 
 
 class AthenaGame : KtxGame<Screen>() {
-    val batch: Batch by lazy {
-        SpriteBatch()
-    }
-
     override fun create() {
         super.create()
         enforceConnectedController()
         Gdx.input.inputProcessor = InputMultiplexer()
         KtxAsync.initiate()
         loadAssets()
-        addScreen(GameScreen(this))
+        addScreen(GameScreen())
         setScreen<GameScreen>()
     }
 
@@ -42,7 +38,6 @@ class AthenaGame : KtxGame<Screen>() {
 
     override fun dispose() {
         super.dispose()
-        batch.dispose()
         assetStorage.dispose()
     }
 

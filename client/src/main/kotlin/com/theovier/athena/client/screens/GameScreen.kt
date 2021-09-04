@@ -2,11 +2,11 @@ package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
@@ -19,28 +19,27 @@ import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.box2d.body
 import ktx.box2d.box
-import ktx.graphics.use
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-class GameScreen(private val game: AthenaGame) : KtxScreen {
+class GameScreen : KtxScreen {
     private val steadyReferenceCamera = OrthographicCamera()
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
-    private val debugEngine = PooledEngine()
     private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player").apply {
         skeletalAnimation.build()
     }
     private val playersCrosshair = Prefab.instantiate("crosshair")
     private val world = World(Vector2.Zero, true)
+    private val batch = SpriteBatch()
+
 
     init {
         initEntities()
         initSystems()
-        initDebugSystems()
         initListeners()
         positionCamera()
     }
@@ -95,11 +94,14 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     private fun initSystems() {
         engine.apply {
             addSystem(PhysicsSystem(world))
-            addSystem(BackgroundRenderingSystem(camera))
-            addSystem(RenderingSystem(game.batch))
-            addSystem(ParticleSystem(game.batch))
             addSystem(SkeletalAnimationSystem())
-            addSystem(SkeletonRenderingSystem(game.batch))
+            addSystem(RenderingMetaSystem(camera, batch)
+                .apply {
+                    addSubsystem(BackgroundRenderingSystem(camera))
+                    addSubsystem(SpriteRenderingSystem(batch))
+                    addSubsystem(ParticleSystem(batch))
+                    addSubsystem(SkeletonRenderingSystem(batch))
+                })
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PhysicMovementSystem())
@@ -109,12 +111,6 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
             addSystem(PlayerAttackSystem(world)) //todo think of a different way (= not passing in the world) to let the attack system spawn physic entities
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
-        }
-    }
-
-    /* systems that need to be called after the batch's end command, see https://stackoverflow.com/a/32791208/6516194 */
-    private fun initDebugSystems() {
-        debugEngine.apply {
             addSystem(PhysicsDebugSystem(world, camera))
         }
     }
@@ -129,10 +125,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
     }
 
     override fun render(delta: Float) {
-        game.batch.use(camera) {
-            engine.update(delta)
-        }
-        debugEngine.update(delta)
+        engine.update(delta)
         viewport.apply()
     }
 
@@ -143,6 +136,7 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
 
     override fun dispose() {
         world.dispose()
+        batch.dispose()
         log.debug { "'${engine.entities.size()}' entities in engine" }
     }
 }

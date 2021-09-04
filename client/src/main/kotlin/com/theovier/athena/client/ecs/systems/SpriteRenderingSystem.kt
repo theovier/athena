@@ -2,25 +2,19 @@ package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.maps.MapRenderer
-import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.utils.viewport.Viewport
 import com.theovier.athena.client.ecs.components.SpriteRenderer
 import com.theovier.athena.client.ecs.components.Transform
 import com.theovier.athena.client.ecs.components.renderer
 import com.theovier.athena.client.ecs.components.transform
 import ktx.ashley.allOf
 import ktx.ashley.get
-import ktx.graphics.use
 import ktx.math.times
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
 
-class RenderingSystem (private val batch: Batch) :
+class SpriteRenderingSystem (private val batch: Batch) :
     SortedIteratingSystem(
         allOf(Transform::class, SpriteRenderer::class).get(),
         compareBy { it[Transform.MAPPER] }

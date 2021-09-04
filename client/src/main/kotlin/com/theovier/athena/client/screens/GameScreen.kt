@@ -76,15 +76,17 @@ class GameScreen(private val game: AthenaGame) : KtxScreen {
         //without prefab
         engine.apply {
             entity {
-                with<Transform>()
+                with<Transform>() {
+                    size.set(1f, 2f)
+                }
                 with<SkeletalAnimation> {
                     pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
                     pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
                 }.build()
                 with<Physics> {
                     body = world.body(BodyDef.BodyType.StaticBody) {
-                        box(width = 1f, height = 2f)
                         position.set(16f, 13f)
+                        box(width = 1f, height = 2f)
                     }
                 }
             }

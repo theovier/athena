@@ -7,20 +7,25 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
 import ktx.math.minus
+import ktx.math.plus
+import ktx.math.times
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
-class CrosshairPlacementSystem(private val aim: Aim) : IteratingSystem(allOf(Crosshair::class, Movement::class).get()) {
+class CrosshairPlacementSystem(private val aim: Aim) : IteratingSystem(allOf(Crosshair::class, Movement::class, Transform::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         if (entities.size() > 1) {
             log.error { "More than 1 entity with <Crosshair> component detected." }
         }
-        val offsetBetweenCurrentPositionAndTargetPosition = aim.targetPosition - entity.transform.position.xy
+        val transform = entity.transform
+        val movement = entity.movement
+
+        val offsetBetweenCurrentPositionAndTargetPosition = aim.targetPosition - transform.position.xy
         if (offsetBetweenCurrentPositionAndTargetPosition.len2() <= STANDING_STILL_THRESHOLD) {
-            entity.movement.direction = Vector2.Zero
+            movement.direction = Vector2.Zero
         } else {
-            entity.movement.direction = offsetBetweenCurrentPositionAndTargetPosition.nor()
+            movement.direction = offsetBetweenCurrentPositionAndTargetPosition.nor()
         }
     }
 

@@ -5,8 +5,8 @@
     </Transform>
     <Movement maxSpeed="20" accelerationFactor="250" decelerationFactor="10" />
     <SpriteRenderer>
-        <Sprite texture="sprites/bullet.png" originX="1" originY="0.5" />
-        <Offset x="-1" y="-0.5" />
+        <Sprite texture="sprites/bullet.png" originX="0.5" originY="0.5" />
+        <Offset x="-0.5" y="0" />
     </SpriteRenderer>
     <Particle>
         <Effect propertyFile="particles/smoke_trail.p" particleSpriteFolder="sprites/particles" />

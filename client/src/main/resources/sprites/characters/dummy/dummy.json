@@ -1,7 +1,7 @@
 {
   "skeleton": {
     "hash": "UsZyLgHJtc8",
-    "spine": "4.0.22",
+    "spine": "4.0.25",
     "x": -113.82,
     "y": 0.01,
     "width": 254,
@@ -32,6 +32,11 @@
       "name": "body",
       "bone": "bone",
       "attachment": "body"
+    },
+    {
+      "name": "collider",
+      "bone": "bone",
+      "attachment": "collider"
     }
   ],
   "skins": [
@@ -45,6 +50,22 @@
             "rotation": -87.54,
             "width": 254,
             "height": 234
+          }
+        },
+        "collider": {
+          "collider": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              223.99,
+              92.08,
+              230.8,
+              -88.11,
+              -97.93,
+              -98.49,
+              -105.63,
+              80.73
+            ]
           }
         },
         "rack": {

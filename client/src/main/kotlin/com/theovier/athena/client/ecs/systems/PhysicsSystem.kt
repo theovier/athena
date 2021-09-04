@@ -10,7 +10,6 @@ import java.lang.Math.min
 
 class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform::class, Physics::class).get()) {
     private var timeSinceLastUpdate = 0f
-    private var alpha = 1.0f
 
     override fun update(deltaTime: Float) {
         timeSinceLastUpdate += min(MINIMAL_TIME_STEP, deltaTime)
@@ -19,7 +18,7 @@ class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform:
             world.step(FIXED_TIME_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS)
             timeSinceLastUpdate -= FIXED_TIME_STEP
         }
-        alpha = timeSinceLastUpdate / FIXED_TIME_STEP
+        val alpha = timeSinceLastUpdate / FIXED_TIME_STEP
         updateInterpolatedPosition(alpha)
     }
 
@@ -35,7 +34,6 @@ class PhysicsSystem(private val world: World) : IteratingSystem(allOf(Transform:
             val body = entity.physics.body
             val previousPosition = transform.position
             val currentPosition = body.position
-
             transform.position.x = MathUtils.lerp(previousPosition.x, currentPosition.x, alpha)
             transform.position.y = MathUtils.lerp(previousPosition.y, currentPosition.y, alpha)
         }

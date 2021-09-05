@@ -7,10 +7,12 @@ import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.theovier.athena.client.screens.GameScreen
 import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
+import ktx.scene2d.Scene2DSkin
 import java.lang.RuntimeException
 
 
@@ -21,6 +23,7 @@ class AthenaGame : KtxGame<Screen>() {
         Gdx.input.inputProcessor = InputMultiplexer()
         KtxAsync.initiate()
         loadAssets()
+        setDefaultScene2DSkin()
         addScreen(GameScreen())
         setScreen<GameScreen>()
     }
@@ -34,7 +37,13 @@ class AthenaGame : KtxGame<Screen>() {
     private fun loadAssets() {
         //better to load assets in a loading screen
         assetStorage.loadSync<Texture>("sprites/bullet.png")
+        assetStorage.loadSync<Skin>("ui/skins/default/uiskin.json")
     }
+
+    private fun setDefaultScene2DSkin() {
+        Scene2DSkin.defaultSkin = assetStorage["ui/skins/default/uiskin.json"]
+    }
+
 
     override fun dispose() {
         super.dispose()

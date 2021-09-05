@@ -47,7 +47,7 @@ class GameScreen : KtxScreen {
     private val world = World(Vector2.Zero, true)
     private val batch = SpriteBatch()
 
-    //UI demo
+    //Debug UI
     private val uiCamera = OrthographicCamera()
     private val uiViewport = ScreenViewport(uiCamera)
     private val stage = Stage(uiViewport, batch)
@@ -140,7 +140,6 @@ class GameScreen : KtxScreen {
     }
 
     private fun initDebugUI() {
-        setDefaultScene2DSkin()
         stage.actors {
             table {
                 setFillParent(true)
@@ -154,23 +153,23 @@ class GameScreen : KtxScreen {
         }
     }
 
-    private fun setDefaultScene2DSkin() {
-        Scene2DSkin.defaultSkin = Skin(Gdx.files.internal("ui/skins/default/uiskin.json"))
-    }
-
     private fun positionCamera() {
         steadyReferenceCamera.position.set(playersCrosshair.transform.position)
     }
 
     override fun render(delta: Float) {
         engine.update(delta)
+        updateDebugUI()
+        stage.act()
+        stage.draw()
+        viewport.apply()
+    }
+
+    private fun updateDebugUI() {
         val fpsText = "${Gdx.graphics.framesPerSecond} FPS"
         val playerPositionText = "Position: (%.2f, %.2f)".format(player.transform.position.x, player.transform.position.y)
         debugLabelFPS.setText(fpsText)
         debugLabelPlayerPosition.setText(playerPositionText)
-        stage.act()
-        stage.draw()
-        viewport.apply()
     }
 
     override fun resize(width: Int, height: Int) {

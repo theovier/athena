@@ -1,12 +1,21 @@
 package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
+import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
@@ -19,6 +28,8 @@ import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.box2d.body
 import ktx.box2d.box
+import ktx.graphics.use
+import ktx.scene2d.*
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}
@@ -36,11 +47,18 @@ class GameScreen : KtxScreen {
     private val world = World(Vector2.Zero, true)
     private val batch = SpriteBatch()
 
+    //UI demo
+    private val uiCamera = OrthographicCamera()
+    private val uiViewport = ScreenViewport(uiCamera)
+    private val stage = Stage(uiViewport, batch)
+    private lateinit var debugLabelFPS: Label
+    private lateinit var debugLabelPlayerPosition: Label
 
     init {
         initEntities()
         initSystems()
         initListeners()
+        initDebugUI()
         positionCamera()
     }
 
@@ -121,22 +139,49 @@ class GameScreen : KtxScreen {
         world.setContactListener(ProjectileCollisionListener(engine))
     }
 
+    private fun initDebugUI() {
+        setDefaultScene2DSkin()
+        stage.actors {
+            table {
+                setFillParent(true)
+                left().top()
+                padLeft(100f)
+                verticalGroup {
+                    debugLabelFPS = label("FPS Counter")
+                    debugLabelPlayerPosition = label("Player Position")
+                }
+            }
+        }
+    }
+
+    private fun setDefaultScene2DSkin() {
+        Scene2DSkin.defaultSkin = Skin(Gdx.files.internal("ui/skins/default/uiskin.json"))
+    }
+
     private fun positionCamera() {
         steadyReferenceCamera.position.set(playersCrosshair.transform.position)
     }
 
     override fun render(delta: Float) {
         engine.update(delta)
+        val fpsText = "${Gdx.graphics.framesPerSecond} FPS"
+        val playerPositionText = "Position: (%.2f, %.2f)".format(player.transform.position.x, player.transform.position.y)
+        debugLabelFPS.setText(fpsText)
+        debugLabelPlayerPosition.setText(playerPositionText)
+        stage.act()
+        stage.draw()
         viewport.apply()
     }
 
     override fun resize(width: Int, height: Int) {
         super.resize(width, height)
         viewport.update(width, height)
+        stage.viewport.update(width, height, true)
     }
 
     override fun dispose() {
         world.dispose()
+        stage.dispose()
         batch.dispose()
         log.debug { "'${engine.entities.size()}' entities in engine" }
     }

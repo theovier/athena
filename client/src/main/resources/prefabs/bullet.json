@@ -1,0 +1,12 @@
+{
+  "lifetime": {
+    "duration": 3.0
+  },
+
+  "transform": {
+    "size": {
+      "x": 0.6,
+      "y": 0.6
+    }
+  }
+}

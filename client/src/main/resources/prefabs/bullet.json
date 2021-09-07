@@ -8,5 +8,15 @@
       "x": 0.6,
       "y": 0.6
     }
+  },
+
+  "particle": {
+    "effect": {
+      "settings": "particles/smoke_trail.p",
+      "images": "sprites/particles"
+    },
+    "offset": {
+      "x": -1
+    }
   }
 }

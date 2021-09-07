@@ -15,7 +15,8 @@ class PrefabDemo {
         private val cache = HashMap<String, Entity>() //todo check if this always return the exact SAME instance -> problematic
         private val componentReaders = mapOf(
             "lifetime" to LifetimeComponentReader(),
-            "transform" to TransformComponentReader()
+            "transform" to TransformComponentReader(),
+            "particle" to ParticleComponentReader()
         )
 
         fun instantiate(name: String, configure: Entity.() -> Unit = {}): Entity {

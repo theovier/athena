@@ -12,29 +12,16 @@ class TransformComponentReader : ComponentReader {
         val component = Transform()
         if (componentJSON.has(POSITION)) {
             val positionJSON = componentJSON.get(POSITION)
-            val position = readPosition(positionJSON)
+            val position = readVector3(positionJSON)
             component.position.set(position)
         }
         if (componentJSON.has(SIZE)) {
             val sizeJSON = componentJSON.get(SIZE)
-            val size = readSize(sizeJSON)
+            val size = readVector2(sizeJSON)
             component.size.set(size)
         }
         component.rotation = componentJSON.getFloat("rotation", 0f)
         return component
-    }
-
-    private fun readPosition(node: JsonValue): Vector3 {
-        val x = node.getFloat("x", 0f)
-        val y = node.getFloat("y", 0f)
-        val z = node.getFloat("z", 0f)
-        return Vector3(x, y, z)
-    }
-
-    private fun readSize(node: JsonValue): Vector2 {
-        val x = node.getFloat("x", 0f)
-        val y = node.getFloat("y", 0f)
-        return Vector2(x, y)
     }
 
     companion object {

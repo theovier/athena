@@ -12,7 +12,8 @@ class PrefabReader : EntityReader {
     private val componentReaders = mapOf(
         "lifetime" to LifetimeComponentReader(),
         "transform" to TransformComponentReader(),
-        "particle" to ParticleComponentReader()
+        "particle" to ParticleComponentReader(),
+        "aim" to AimComponentReader()
     )
 
     override fun read(fileName: String, configure: Entity.() -> Unit): Entity {

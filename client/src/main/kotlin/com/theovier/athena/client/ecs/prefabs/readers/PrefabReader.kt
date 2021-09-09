@@ -13,7 +13,8 @@ class PrefabReader : EntityReader {
         "lifetime" to LifetimeComponentReader(),
         "transform" to TransformComponentReader(),
         "particle" to ParticleComponentReader(),
-        "aim" to AimComponentReader()
+        "aim" to AimComponentReader(),
+        "movement" to MovementComponentReader()
     )
 
     override fun read(fileName: String, configure: Entity.() -> Unit): Entity {

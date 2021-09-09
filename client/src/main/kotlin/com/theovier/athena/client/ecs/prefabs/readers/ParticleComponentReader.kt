@@ -14,7 +14,7 @@ class ParticleComponentReader : ComponentReader {
         }
         if (componentJSON.has(OFFSET)) {
             val offsetJSON = componentJSON.get(OFFSET)
-            val offset = readVector2(offsetJSON)
+            val offset = ComponentReader.readVector2(offsetJSON)
             component.offset.set(offset)
         }
         return component

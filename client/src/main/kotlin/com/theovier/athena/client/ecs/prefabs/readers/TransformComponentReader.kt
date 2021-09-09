@@ -8,12 +8,12 @@ class TransformComponentReader : ComponentReader {
         val component = Transform()
         if (componentJSON.has(POSITION)) {
             val positionJSON = componentJSON.get(POSITION)
-            val position = readVector3(positionJSON)
+            val position = ComponentReader.readVector3(positionJSON)
             component.position.set(position)
         }
         if (componentJSON.has(SIZE)) {
             val sizeJSON = componentJSON.get(SIZE)
-            val size = readVector2(sizeJSON)
+            val size = ComponentReader.readVector2(sizeJSON)
             component.size.set(size)
         }
         component.rotation = componentJSON.getFloat("rotation", 0f)

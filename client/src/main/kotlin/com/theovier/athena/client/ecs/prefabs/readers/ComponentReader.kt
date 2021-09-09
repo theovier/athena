@@ -8,16 +8,19 @@ import com.badlogic.gdx.utils.JsonValue
 interface ComponentReader {
     fun read(componentJSON: JsonValue): Component
 
-    fun readVector2(node: JsonValue): Vector2 {
-        val x = node.getFloat("x", 0f)
-        val y = node.getFloat("y", 0f)
-        return Vector2(x, y)
+    companion object {
+        fun readVector2(node: JsonValue): Vector2 {
+            val x = node.getFloat("x", 0f)
+            val y = node.getFloat("y", 0f)
+            return Vector2(x, y)
+        }
+
+        fun readVector3(node: JsonValue): Vector3 {
+            val x = node.getFloat("x", 0f)
+            val y = node.getFloat("y", 0f)
+            val z = node.getFloat("z", 0f)
+            return Vector3(x, y, z)
+        }
     }
 
-    fun readVector3(node: JsonValue): Vector3 {
-        val x = node.getFloat("x", 0f)
-        val y = node.getFloat("y", 0f)
-        val z = node.getFloat("z", 0f)
-        return Vector3(x, y, z)
-    }
 }

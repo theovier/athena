@@ -22,5 +22,4 @@ interface ComponentReader {
             return Vector3(x, y, z)
         }
     }
-
 }

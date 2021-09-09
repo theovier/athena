@@ -1,5 +1,6 @@
 package com.theovier.athena.client.ecs.prefabs.readers
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Particle
@@ -25,8 +26,7 @@ class ParticleComponentReader : ComponentReader {
         val imageFolderPath = node.getString("images")
 
         return ParticleEffect().apply {
-            //todo load from asset manager (maybe inject an asset manager into componentReader?)
-            //load(Gdx.files.local(settingsFilePath), Gdx.files.local(imageFolderPath))
+            load(Gdx.files.local(settingsFilePath), Gdx.files.local(imageFolderPath))
         }
     }
 

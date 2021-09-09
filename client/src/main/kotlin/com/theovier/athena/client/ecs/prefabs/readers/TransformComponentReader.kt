@@ -1,13 +1,9 @@
 package com.theovier.athena.client.ecs.prefabs.readers
 
-import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Transform
 
 class TransformComponentReader : ComponentReader {
-    override val componentName = "transform"
-
     override fun read(componentJSON: JsonValue): Transform {
         val component = Transform()
         if (componentJSON.has(POSITION)) {

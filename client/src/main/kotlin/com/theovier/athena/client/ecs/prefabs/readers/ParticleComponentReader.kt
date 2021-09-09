@@ -5,8 +5,6 @@ import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Particle
 
 class ParticleComponentReader : ComponentReader {
-    override val componentName = "particle"
-
     override fun read(componentJSON: JsonValue): Particle {
         val component = Particle()
         if (componentJSON.has(EFFECT)) {

@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.JsonValue
 
 interface ComponentReader {
-    val componentName: String
     fun read(componentJSON: JsonValue): Component
 
     fun readVector2(node: JsonValue): Vector2 {

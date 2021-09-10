@@ -3,6 +3,7 @@ package com.theovier.athena.client.ecs.prefabs.readers
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.utils.JsonValue
+import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.Particle
 
 class ParticleComponentReader : ComponentReader {
@@ -18,6 +19,7 @@ class ParticleComponentReader : ComponentReader {
             val offset = ComponentReader.readVector2(offsetJSON)
             component.offset.set(offset)
         }
+        component.effect.scaleEffect(AthenaGame.UNIT_SCALE)
         return component
     }
 

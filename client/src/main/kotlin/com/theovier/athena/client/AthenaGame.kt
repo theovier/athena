@@ -5,23 +5,25 @@ import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.theovier.athena.client.screens.GameScreen
 import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
 import ktx.scene2d.Scene2DSkin
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.lang.RuntimeException
 
 
-class AthenaGame : KtxGame<Screen>() {
+class AthenaGame : KtxGame<Screen>(), KoinComponent {
+    private val assets: AssetStorage by inject()
+
     override fun create() {
         super.create()
         enforceConnectedController()
-        Gdx.input.inputProcessor = InputMultiplexer()
         KtxAsync.initiate()
+        Gdx.input.inputProcessor = InputMultiplexer()
         loadAssets()
         setDefaultScene2DSkin()
         addScreen(GameScreen())
@@ -38,16 +40,19 @@ class AthenaGame : KtxGame<Screen>() {
         //better to load assets in a loading screen
         assetStorage.loadSync<Texture>("sprites/bullet.png")
         assetStorage.loadSync<Skin>("ui/skins/default/uiskin.json")
+
+        assets.loadSync<Texture>("sprites/bullet.png")
+        assets.loadSync<Skin>("ui/skins/default/uiskin.json")
     }
 
     private fun setDefaultScene2DSkin() {
         Scene2DSkin.defaultSkin = assetStorage["ui/skins/default/uiskin.json"]
     }
 
-
     override fun dispose() {
         super.dispose()
         assetStorage.dispose()
+        assets.dispose()
     }
 
     companion object {

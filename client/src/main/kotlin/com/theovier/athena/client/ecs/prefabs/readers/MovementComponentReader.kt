@@ -10,8 +10,8 @@ class MovementComponentReader : ComponentReader {
             maxSpeed = componentJSON.getFloat("maxSpeed", 0f)
             accelerationFactor = componentJSON.getFloat("acceleration", 0f)
             decelerationFactor = componentJSON.getFloat("deceleration", 0f)
-            mass = componentJSON.getFloat("mass", 0f)
-            standingStillThreshold = componentJSON.getFloat("standingStillThreshold", 0f)
+            mass = componentJSON.getFloat("mass", 1f)
+            standingStillThreshold = componentJSON.getFloat("standingStillThreshold", 0.1f)
         }
         if (componentJSON.has(DIRECTION)) {
             val directionJSON = componentJSON.get(DIRECTION)

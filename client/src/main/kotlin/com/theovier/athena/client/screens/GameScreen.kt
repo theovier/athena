@@ -2,24 +2,20 @@ package com.theovier.athena.client.screens
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
+import com.theovier.athena.client.ecs.prefabs.readers.PrefabDemo
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen
@@ -28,7 +24,6 @@ import ktx.ashley.entity
 import ktx.ashley.with
 import ktx.box2d.body
 import ktx.box2d.box
-import ktx.graphics.use
 import ktx.scene2d.*
 import mu.KotlinLogging
 
@@ -39,11 +34,9 @@ class GameScreen : KtxScreen {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
-    private val map = Prefab.instantiate("map")
-    private val player = Prefab.instantiate("player").apply {
-        spineAnimation.build()
-    }
-    private val playersCrosshair = Prefab.instantiate("crosshair")
+    private val map = PrefabDemo.instantiate("map")
+    private val player = PrefabDemo.instantiate("player")
+    private val crosshair = PrefabDemo.instantiate("crosshair")
     private val world = World(Vector2.Zero, true)
     private val batch = SpriteBatch()
 
@@ -66,7 +59,7 @@ class GameScreen : KtxScreen {
         initSkeletonDemo()
         initPlayer()
         engine.addEntity(map)
-        engine.addEntity(playersCrosshair)
+        engine.addEntity(crosshair)
     }
 
     private fun initPlayer() {
@@ -82,11 +75,7 @@ class GameScreen : KtxScreen {
 
     private fun initSkeletonDemo() {
         //from prefab
-//        val dummy = Prefab.instantiate("dummy") {
-//            with(spineAnimation) {
-//                build()
-//            }
-//        }
+//        val dummy = PrefabDemo.instantiate("dummy")
 //        engine.addEntity(dummy)
 
         //without prefab
@@ -154,7 +143,7 @@ class GameScreen : KtxScreen {
     }
 
     private fun positionCamera() {
-        steadyReferenceCamera.position.set(playersCrosshair.transform.position)
+        steadyReferenceCamera.position.set(crosshair.transform.position)
     }
 
     override fun render(delta: Float) {

@@ -2,14 +2,23 @@
   "lifetime": {
     "duration": 3.0
   },
-
   "transform": {
     "size": {
       "x": 0.6,
       "y": 0.6
     }
   },
-
+  "movement": {
+    "maxSpeed": 20,
+    "acceleration": 250,
+    "deceleration": 10
+  },
+  "sprite": {
+    "texture": "sprites/bullet.png",
+    "offset": {
+      "x": -0.5
+    }
+  },
   "particle": {
     "effect": {
       "settings": "particles/smoke_trail.p",

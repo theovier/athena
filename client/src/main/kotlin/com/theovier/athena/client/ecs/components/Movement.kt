@@ -17,7 +17,7 @@ import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 
 /**
- * Components are usually considered to carry only the raw data.
+ * Components are usually considered carrying only the raw data.
  * This component uses some public convenience functions which, however, do only
  * carry out basic modifications of its internal members and no complex business logic.
  */

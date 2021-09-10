@@ -6,15 +6,25 @@ import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
 import ktx.ashley.plusAssign
 import mu.KotlinLogging
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class PrefabReader : EntityReader {
+class PrefabReader : EntityReader, KoinComponent {
     private val log = KotlinLogging.logger {}
+    private val spriteComponentReader by inject<SpriteComponentReader>()
+
     private val componentReaders = mapOf(
-        "lifetime" to LifetimeComponentReader(),
-        "transform" to TransformComponentReader(),
-        "particle" to ParticleComponentReader(),
         "aim" to AimComponentReader(),
-        "movement" to MovementComponentReader()
+        "cameraTarget" to CameraTargetComponentReader(),
+        "crosshair" to CrosshairComponentReader(),
+        "lifetime" to LifetimeComponentReader(),
+        "movement" to MovementComponentReader(),
+        "particle" to ParticleComponentReader(),
+        "player" to PlayerComponentReader(),
+        "spine" to SpineAnimationComponentReader(),
+        "sprite" to spriteComponentReader,
+        "map" to TiledMapComponentReader(),
+        "transform" to TransformComponentReader(),
     )
 
     override fun read(fileName: String, configure: Entity.() -> Unit): Entity {

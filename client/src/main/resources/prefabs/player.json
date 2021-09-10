@@ -1,0 +1,25 @@
+{
+  "player": {},
+  "aim": {
+    "maxDistanceToPlayer": 4
+  },
+  "transform": {
+    "position": {
+      "x": 10,
+      "y": 12
+    },
+    "size": {
+      "x": 2,
+      "y": 2
+    }
+  },
+  "movement": {
+    "maxSpeed": 8,
+    "acceleration": 250,
+    "deceleration": 10
+  },
+  "spine": {
+    "atlas": "sprites/characters/player/player.atlas",
+    "skeleton": "sprites/characters/player/player.json"
+  }
+}

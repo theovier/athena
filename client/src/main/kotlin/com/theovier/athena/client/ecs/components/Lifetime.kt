@@ -4,11 +4,9 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Pool.Poolable
-import kotlinx.serialization.Serializable
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
-@Serializable
 class Lifetime : Component, Poolable {
     var duration = DEFAULT_DURATION
 

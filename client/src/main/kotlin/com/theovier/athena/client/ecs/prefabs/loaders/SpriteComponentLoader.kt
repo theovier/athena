@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.prefabs.readers
+package com.theovier.athena.client.ecs.prefabs.loaders
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.Texture
@@ -7,9 +7,9 @@ import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.SpriteRenderer
 import ktx.assets.async.AssetStorage
 
-class SpriteComponentReader(private val assets: AssetStorage) : ComponentReader {
+class SpriteComponentLoader(private val assets: AssetStorage) : ComponentLoader {
 
-    override fun read(componentJSON: JsonValue): Component {
+    override fun load(componentJSON: JsonValue): Component {
         val component = SpriteRenderer()
         val texturePath = componentJSON.getString("texture")
         val texture: Texture = assets[texturePath]
@@ -20,12 +20,12 @@ class SpriteComponentReader(private val assets: AssetStorage) : ComponentReader 
         )
         if (componentJSON.has(OFFSET)) {
             val offsetJSON = componentJSON.get(OFFSET)
-            val offset = ComponentReader.readVector2(offsetJSON)
+            val offset = ComponentLoader.readVector2(offsetJSON)
             component.offset.set(offset)
         }
         if (componentJSON.has(ORIGIN)) {
             val originJson = componentJSON.get(ORIGIN)
-            val origin = ComponentReader.readVector2(originJson)
+            val origin = ComponentLoader.readVector2(originJson)
             component.sprite.setOrigin(origin.x, origin.y)
         } else {
             component.sprite.setOriginCenter()

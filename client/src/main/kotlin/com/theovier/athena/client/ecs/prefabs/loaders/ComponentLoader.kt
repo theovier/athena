@@ -1,12 +1,12 @@
-package com.theovier.athena.client.ecs.prefabs.readers
+package com.theovier.athena.client.ecs.prefabs.loaders
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.JsonValue
 
-interface ComponentReader {
-    fun read(componentJSON: JsonValue): Component
+interface ComponentLoader {
+    fun load(componentJSON: JsonValue): Component
 
     companion object {
         fun readVector2(node: JsonValue): Vector2 {

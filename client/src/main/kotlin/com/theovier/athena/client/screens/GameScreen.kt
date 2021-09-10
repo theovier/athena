@@ -14,8 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
-import com.theovier.athena.client.ecs.prefabs.Prefab
-import com.theovier.athena.client.ecs.prefabs.readers.PrefabDemo
+import com.theovier.athena.client.ecs.prefabs.loaders.PrefabDemo
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen

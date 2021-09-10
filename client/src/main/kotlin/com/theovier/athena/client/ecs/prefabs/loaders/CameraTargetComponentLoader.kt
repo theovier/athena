@@ -1,11 +1,11 @@
-package com.theovier.athena.client.ecs.prefabs.readers
+package com.theovier.athena.client.ecs.prefabs.loaders
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.CameraTarget
 
-class CameraTargetComponentReader : ComponentReader {
-    override fun read(componentJSON: JsonValue): Component {
+class CameraTargetComponentLoader : ComponentLoader {
+    override fun load(componentJSON: JsonValue): Component {
         return CameraTarget()
     }
 }

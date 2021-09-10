@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.prefabs.readers
+package com.theovier.athena.client.ecs.prefabs.loaders
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
@@ -6,8 +6,8 @@ import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.Particle
 
-class ParticleComponentReader : ComponentReader {
-    override fun read(componentJSON: JsonValue): Particle {
+class ParticleComponentLoader : ComponentLoader {
+    override fun load(componentJSON: JsonValue): Particle {
         val component = Particle()
         if (componentJSON.has(EFFECT)) {
             val effectJSON = componentJSON.get(EFFECT)
@@ -16,7 +16,7 @@ class ParticleComponentReader : ComponentReader {
         }
         if (componentJSON.has(OFFSET)) {
             val offsetJSON = componentJSON.get(OFFSET)
-            val offset = ComponentReader.readVector2(offsetJSON)
+            val offset = ComponentLoader.readVector2(offsetJSON)
             component.offset.set(offset)
         }
         component.effect.scaleEffect(AthenaGame.UNIT_SCALE)

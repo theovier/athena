@@ -2,7 +2,7 @@ package com.theovier.athena.client
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
-import com.theovier.athena.client.ecs.prefabs.readers.SpriteComponentReader
+import com.theovier.athena.client.ecs.prefabs.loaders.SpriteComponentLoader
 import ktx.assets.async.AssetStorage
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
@@ -10,7 +10,7 @@ import org.koin.dsl.module
 fun main() {
     val module = module {
         single { AssetStorage() }
-        single { SpriteComponentReader(get()) }
+        single { SpriteComponentLoader(get()) }
     }
     startKoin {
         modules(module)

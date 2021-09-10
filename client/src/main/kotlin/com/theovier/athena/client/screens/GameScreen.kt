@@ -25,10 +25,12 @@ import ktx.box2d.body
 import ktx.box2d.box
 import ktx.scene2d.*
 import mu.KotlinLogging
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 private val log = KotlinLogging.logger {}
 
-class GameScreen : KtxScreen {
+class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val steadyReferenceCamera = OrthographicCamera()
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
@@ -36,8 +38,10 @@ class GameScreen : KtxScreen {
     private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
-    private val world = World(Vector2.Zero, true)
     private val batch = SpriteBatch()
+
+    //injected systems
+    private val playerAttackSystem : PlayerAttackSystem by inject()
 
     //Debug UI
     private val uiCamera = OrthographicCamera()
@@ -114,7 +118,7 @@ class GameScreen : KtxScreen {
             addSystem(PlayerMovementSystem())
             addSystem(PlayerAimSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
-            addSystem(PlayerAttackSystem(world)) //todo think of a different way (= not passing in the world) to let the attack system spawn physic entities
+            addSystem(playerAttackSystem)
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(PhysicsDebugSystem(world, camera))

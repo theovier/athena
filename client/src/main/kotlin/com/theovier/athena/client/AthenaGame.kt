@@ -18,6 +18,7 @@ import java.lang.RuntimeException
 
 class AthenaGame : KtxGame<Screen>(), KoinComponent {
     private val assets: AssetStorage by inject()
+    private val gameScreen: GameScreen by inject()
 
     override fun create() {
         super.create()
@@ -26,7 +27,7 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
         Gdx.input.inputProcessor = InputMultiplexer()
         loadAssets()
         setDefaultScene2DSkin()
-        addScreen(GameScreen())
+        addScreen(gameScreen)
         setScreen<GameScreen>()
     }
 

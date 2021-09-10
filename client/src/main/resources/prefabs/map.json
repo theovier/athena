@@ -1,5 +1,3 @@
 {
-  "map": {
-    "file": "maps/debug.tmx"
-  }
+  "map": "maps/debug.tmx"
 }

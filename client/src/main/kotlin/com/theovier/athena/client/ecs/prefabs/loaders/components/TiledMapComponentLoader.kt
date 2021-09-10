@@ -8,7 +8,7 @@ import com.theovier.athena.client.ecs.components.TiledMap
 class TiledMapComponentLoader : ComponentLoader {
     override fun load(componentJSON: JsonValue): Component {
         val component = TiledMap()
-        val file = componentJSON.getString("file", TiledMap.DEBUG_MAP)
+        val file = componentJSON.asString()
         component.map = TmxMapLoader().load(file)
         return component
     }

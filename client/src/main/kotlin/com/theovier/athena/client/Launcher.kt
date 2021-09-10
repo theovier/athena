@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.prefabs.loaders.components.SpriteComponentLoader
+import com.theovier.athena.client.ecs.systems.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.PlayerAttackSystem
 import com.theovier.athena.client.screens.GameScreen
 import ktx.assets.async.AssetStorage
@@ -17,6 +18,7 @@ fun main() {
         single { World(Vector2.Zero, true) }
         single { GameScreen(get()) }
         single { PlayerAttackSystem(get()) }
+        single { PhysicsSystem(get()) }
         single { SpriteComponentLoader(get()) }
     }
     startKoin {

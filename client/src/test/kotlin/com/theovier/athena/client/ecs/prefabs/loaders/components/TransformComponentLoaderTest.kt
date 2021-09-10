@@ -2,7 +2,7 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 

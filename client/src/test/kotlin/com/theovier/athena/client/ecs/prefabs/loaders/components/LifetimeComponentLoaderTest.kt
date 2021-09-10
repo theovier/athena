@@ -1,7 +1,7 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.theovier.athena.client.ecs.components.Lifetime
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 

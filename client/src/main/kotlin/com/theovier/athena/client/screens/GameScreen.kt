@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
-import com.theovier.athena.client.ecs.prefabs.loaders.PrefabDemo
+import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen
@@ -33,9 +33,9 @@ class GameScreen : KtxScreen {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine = PooledEngine()
-    private val map = PrefabDemo.instantiate("map")
-    private val player = PrefabDemo.instantiate("player")
-    private val crosshair = PrefabDemo.instantiate("crosshair")
+    private val map = Prefab.instantiate("map")
+    private val player = Prefab.instantiate("player")
+    private val crosshair = Prefab.instantiate("crosshair")
     private val world = World(Vector2.Zero, true)
     private val batch = SpriteBatch()
 

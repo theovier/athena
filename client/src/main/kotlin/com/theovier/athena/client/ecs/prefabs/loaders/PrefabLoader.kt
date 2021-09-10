@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
+import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent

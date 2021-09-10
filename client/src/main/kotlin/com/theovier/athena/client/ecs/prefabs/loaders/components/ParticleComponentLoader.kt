@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.prefabs.loaders
+package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.ParticleEffect

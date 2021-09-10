@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.prefabs.loaders
+package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.JsonValue

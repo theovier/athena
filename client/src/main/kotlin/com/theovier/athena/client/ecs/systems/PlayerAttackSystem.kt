@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.prefabs.loaders.PrefabDemo
+import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.ashley.allOf
 import ktx.box2d.body
@@ -62,7 +62,7 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
     }
 
     private fun spawnBullet(origin: Vector2, direction: Vector2) {
-        val bullet = PrefabDemo.instantiate(BULLET_ENTITY) {
+        val bullet = Prefab.instantiate(BULLET_ENTITY) {
             with(movement) {
                 this.direction = direction
             }

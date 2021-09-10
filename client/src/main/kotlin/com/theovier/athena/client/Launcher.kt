@@ -25,7 +25,6 @@ fun main() {
         single { assets }
         single { World(Vector2.Zero, true) }
         single { GameScreen(get()) }
-        single { PlayerAttackSystem(get()) }
         single { PhysicsSystem(get()) }
         single { MapComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }

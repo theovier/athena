@@ -16,8 +16,7 @@ import ktx.box2d.body
 import ktx.box2d.box
 import mu.KotlinLogging
 
-private val log = KotlinLogging.logger {}
-class PlayerAttackSystem(private val world: World) : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SpineAnimation::class).get()) {
+class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SpineAnimation::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
 

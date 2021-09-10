@@ -61,25 +61,14 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         initSkeletonDemo()
-        initPlayer()
+        engine.addEntity(player)
         engine.addEntity(map)
         engine.addEntity(crosshair)
     }
 
-    private fun initPlayer() {
-        val bodyComponent = Physics().apply {
-            body = world.body(BodyDef.BodyType.DynamicBody) {
-                box(width = 1f, height = 2f)
-                position.set(player.transform.position.xy)
-            }
-        }
-        player.add(bodyComponent)
-        engine.addEntity(player)
-    }
-
     private fun initSkeletonDemo() {
         //from prefab
-//        val dummy = PrefabDemo.instantiate("dummy")
+//        val dummy = Prefab.instantiate("dummy")
 //        engine.addEntity(dummy)
 
         //without prefab

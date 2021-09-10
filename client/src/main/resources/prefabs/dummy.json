@@ -1,12 +1,24 @@
 {
   "transform": {
-    "position": {
-      "x": 15,
-      "y": 12
+    "size": {
+      "y": 2
     }
   },
   "spine": {
     "atlas": "sprites/characters/dummy/dummy.atlas",
     "skeleton": "sprites/characters/dummy/dummy.json"
+  },
+  "physics": {
+    "body": {
+      "type": "static",
+      "box": {
+        "width": 1,
+        "height": 2
+      },
+      "position": {
+        "x": 15,
+        "y": 12
+      }
+    }
   }
 }

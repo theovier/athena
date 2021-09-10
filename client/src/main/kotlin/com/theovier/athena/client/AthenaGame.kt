@@ -37,26 +37,20 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
     }
 
     private fun loadAssets() {
-        //better to load assets in a loading screen
-        assetStorage.loadSync<Texture>("sprites/bullet.png")
-        assetStorage.loadSync<Skin>("ui/skins/default/uiskin.json")
-
         assets.loadSync<Texture>("sprites/bullet.png")
         assets.loadSync<Skin>("ui/skins/default/uiskin.json")
     }
 
     private fun setDefaultScene2DSkin() {
-        Scene2DSkin.defaultSkin = assetStorage["ui/skins/default/uiskin.json"]
+        Scene2DSkin.defaultSkin = assets["ui/skins/default/uiskin.json"]
     }
 
     override fun dispose() {
         super.dispose()
-        assetStorage.dispose()
         assets.dispose()
     }
 
     companion object {
-        val assetStorage = AssetStorage() //todo: think of a better way to access this in the SpriteSerializer
         const val UNIT_SCALE = 1 / 64f // 1 unit = 64 pixels
     }
 }

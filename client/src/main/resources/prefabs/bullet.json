@@ -27,5 +27,14 @@
     "offset": {
       "x": -1
     }
+  },
+  "physics": {
+    "body": {
+      "type": "dynamic",
+      "box": {
+        "width": 0.6,
+        "height": 0.6
+      }
+    }
   }
 }

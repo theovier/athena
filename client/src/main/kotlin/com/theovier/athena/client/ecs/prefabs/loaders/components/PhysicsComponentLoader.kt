@@ -1,5 +1,6 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.JsonValue
@@ -16,7 +17,12 @@ class PhysicsComponentLoader(private val world: World) : ComponentLoader {
             "dynamic" -> BodyDef.BodyType.DynamicBody
             else -> BodyDef.BodyType.StaticBody
         }
-        val position = ComponentLoader.readVector2(bodyJSON.get("position"))
+
+        var position: Vector2 = Vector2.Zero
+        if (bodyJSON.has("position")) {
+            position = ComponentLoader.readVector2(bodyJSON.get("position"))
+        }
+
 
         //todo improve this further for more shapes, fixtures, etc.
 

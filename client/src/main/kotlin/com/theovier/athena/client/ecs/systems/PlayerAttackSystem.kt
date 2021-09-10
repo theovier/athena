@@ -14,7 +14,9 @@ import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.ashley.allOf
 import ktx.box2d.body
 import ktx.box2d.box
+import mu.KotlinLogging
 
+private val log = KotlinLogging.logger {}
 class PlayerAttackSystem(private val world: World) : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SpineAnimation::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
@@ -66,19 +68,11 @@ class PlayerAttackSystem(private val world: World) : XboxInputAdapter, Iterating
             with(movement) {
                 this.direction = direction
             }
-        }
-
-        //testwise add the physic components manually until they can be persisted in prefabs
-        val bodyComponent = Physics().apply {
-            body = world.body(BodyDef.BodyType.DynamicBody) {
-                box(width = bullet.transform.size.x, height = bullet.transform.size.y)
-                position.set(origin.x, origin.y + 2f)
-                angle = direction.angleRad()
+            with(physics) {
+                body.isBullet = true
+                body.setTransform(Vector2(origin.x, origin.y + 2f), direction.angleRad())
             }
-            body.isBullet = true
         }
-        bullet.add(bodyComponent)
-
         engine.addEntity(bullet)
     }
 

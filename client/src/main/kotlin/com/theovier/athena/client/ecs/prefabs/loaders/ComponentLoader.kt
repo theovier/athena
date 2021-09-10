@@ -9,16 +9,16 @@ interface ComponentLoader {
     fun load(componentJSON: JsonValue): Component
 
     companion object {
-        fun readVector2(node: JsonValue): Vector2 {
-            val x = node.getFloat("x", 0f)
-            val y = node.getFloat("y", 0f)
+        fun readVector2(node: JsonValue, default: Vector2 = Vector2.Zero): Vector2 {
+            val x = node.getFloat("x", default.x)
+            val y = node.getFloat("y", default.y)
             return Vector2(x, y)
         }
 
-        fun readVector3(node: JsonValue): Vector3 {
-            val x = node.getFloat("x", 0f)
-            val y = node.getFloat("y", 0f)
-            val z = node.getFloat("z", 0f)
+        fun readVector3(node: JsonValue, default: Vector3 = Vector3.Zero): Vector3 {
+            val x = node.getFloat("x", default.x)
+            val y = node.getFloat("y", default.y)
+            val z = node.getFloat("z", default.z)
             return Vector3(x, y, z)
         }
     }

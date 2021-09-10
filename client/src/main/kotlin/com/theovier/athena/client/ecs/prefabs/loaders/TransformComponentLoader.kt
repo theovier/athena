@@ -1,5 +1,6 @@
 package com.theovier.athena.client.ecs.prefabs.loaders
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Transform
 
@@ -13,7 +14,7 @@ class TransformComponentLoader : ComponentLoader {
         }
         if (componentJSON.has(SIZE)) {
             val sizeJSON = componentJSON.get(SIZE)
-            val size = ComponentLoader.readVector2(sizeJSON)
+            val size = ComponentLoader.readVector2(sizeJSON, Vector2(1f, 1f))
             component.size.set(size)
         }
         component.rotation = componentJSON.getFloat("rotation", 0f)

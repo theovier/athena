@@ -3,15 +3,20 @@ package com.theovier.athena.client.ecs.prefabs.loaders
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Movement
+import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_ACCELERATION_FACTOR
+import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_DECELERATION_FACTOR
+import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_MASS
+import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_MAX_SPEED
+import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_STANDING_STILL_THRESHOLD
 
 class MovementComponentLoader : ComponentLoader {
     override fun load(componentJSON: JsonValue): Component {
         val component = Movement().apply {
-            maxSpeed = componentJSON.getFloat("maxSpeed", 0f)
-            accelerationFactor = componentJSON.getFloat("acceleration", 0f)
-            decelerationFactor = componentJSON.getFloat("deceleration", 0f)
-            mass = componentJSON.getFloat("mass", 1f)
-            standingStillThreshold = componentJSON.getFloat("standingStillThreshold", 0.1f)
+            maxSpeed = componentJSON.getFloat("maxSpeed", DEFAULT_MAX_SPEED)
+            accelerationFactor = componentJSON.getFloat("acceleration", DEFAULT_ACCELERATION_FACTOR)
+            decelerationFactor = componentJSON.getFloat("deceleration", DEFAULT_DECELERATION_FACTOR)
+            mass = componentJSON.getFloat("mass", DEFAULT_MASS)
+            standingStillThreshold = componentJSON.getFloat("standingStillThreshold", DEFAULT_STANDING_STILL_THRESHOLD)
         }
         if (componentJSON.has(DIRECTION)) {
             val directionJSON = componentJSON.get(DIRECTION)

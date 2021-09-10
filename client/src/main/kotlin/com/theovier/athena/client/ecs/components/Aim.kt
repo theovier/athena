@@ -13,7 +13,7 @@ import nl.adaptivity.xmlutil.serialization.XmlElement
 
 @Serializable
 class Aim : Component, Poolable {
-    var maxDistanceToPlayer: Float = 4f
+    var maxDistanceToPlayer: Float = DEFAULT_MAX_DISTANCE_TO_PLAYER
     var isCurrentlyAiming = false
     val isNotCurrentlyAiming: Boolean
         get() = !isCurrentlyAiming
@@ -35,6 +35,7 @@ class Aim : Component, Poolable {
 
     companion object {
         val MAPPER = mapperFor<Aim>()
+        const val DEFAULT_MAX_DISTANCE_TO_PLAYER = 4f
     }
 }
 

@@ -32,17 +32,17 @@ class Movement : Component, Poolable {
             //always when setting the velocity cap it to the max speed
             field = clampMagnitude(vector, maxSpeed)
         }
-    var maxSpeed = 0f //units per second
+    var maxSpeed = DEFAULT_MAX_SPEED //units per second
 
     @XmlElement(true)
     @XmlSerialName("Acceleration", "", "")
     @Serializable(with = Vector2Serializer::class)
     var acceleration = Vector2()
 
-    var accelerationFactor = 0f
-    var decelerationFactor = 0f
-    var standingStillThreshold = 0.1f //when should the movement be considered standing still
-    var mass = 1f
+    var accelerationFactor = DEFAULT_ACCELERATION_FACTOR
+    var decelerationFactor = DEFAULT_DECELERATION_FACTOR
+    var standingStillThreshold = DEFAULT_STANDING_STILL_THRESHOLD //when should the movement be considered standing still
+    var mass = DEFAULT_MASS
     private val friction: Vector2
         get() = -velocity * decelerationFactor
     val isNearlyStandingStill: Boolean
@@ -60,11 +60,12 @@ class Movement : Component, Poolable {
 
     override fun reset() {
         velocity = Vector2()
-        maxSpeed = 0f
+        maxSpeed = DEFAULT_MAX_SPEED
         acceleration = Vector2()
-        accelerationFactor = 0f
-        decelerationFactor = 0f
-        mass = 1f
+        accelerationFactor = DEFAULT_ACCELERATION_FACTOR
+        decelerationFactor = DEFAULT_DECELERATION_FACTOR
+        standingStillThreshold = DEFAULT_STANDING_STILL_THRESHOLD
+        mass = DEFAULT_MASS
         direction = Vector2()
     }
 
@@ -100,6 +101,11 @@ class Movement : Component, Poolable {
 
     companion object {
         val MAPPER = mapperFor<Movement>()
+        const val DEFAULT_MAX_SPEED = 0f
+        const val DEFAULT_ACCELERATION_FACTOR = 0f
+        const val DEFAULT_DECELERATION_FACTOR = 0f
+        const val DEFAULT_STANDING_STILL_THRESHOLD = 0.1f
+        const val DEFAULT_MASS = 1f
     }
 }
 

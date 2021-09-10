@@ -10,14 +10,15 @@ import ktx.ashley.mapperFor
 
 @Serializable
 class Lifetime : Component, Poolable {
-    var duration = 0f
+    var duration = DEFAULT_DURATION
 
     override fun reset() {
-        duration = 0f
+        duration = DEFAULT_DURATION
     }
 
     companion object {
         val MAPPER = mapperFor<Lifetime>()
+        const val DEFAULT_DURATION = 0f
     }
 }
 

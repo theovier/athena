@@ -1,0 +1,9 @@
+{
+  "movement": {
+    "mass": 0,
+    "acceleration": 1,
+    "deceleration": 2,
+    "maxSpeed": 3,
+    "standingStillThreshold": 4
+  }
+}

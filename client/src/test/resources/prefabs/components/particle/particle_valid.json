@@ -1,0 +1,11 @@
+{
+  "particle": {
+    "effect": {
+      "settings": "particles/smoke_trail.p",
+      "images": "sprites/particles"
+    },
+    "offset": {
+      "x": -1
+    }
+  }
+}

@@ -10,7 +10,7 @@ import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_MAX_
 import com.theovier.athena.client.ecs.components.Movement.Companion.DEFAULT_STANDING_STILL_THRESHOLD
 
 class MovementComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Component {
+    override fun load(componentJSON: JsonValue): Movement {
         val component = Movement().apply {
             maxSpeed = componentJSON.getFloat("maxSpeed", DEFAULT_MAX_SPEED)
             accelerationFactor = componentJSON.getFloat("acceleration", DEFAULT_ACCELERATION_FACTOR)

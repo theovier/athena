@@ -1,0 +1,6 @@
+{
+  "spine": {
+    "atlas": "path/to/atlas",
+    "skeleton": "path/to/skeleton"
+  }
+}

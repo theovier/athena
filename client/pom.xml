@@ -21,6 +21,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <koin.version>3.1.2</koin.version>
     </properties>
 
     <dependencies>
@@ -182,7 +183,17 @@
         <dependency>
             <groupId>io.insert-koin</groupId>
             <artifactId>koin-core-jvm</artifactId>
-            <version>3.1.2</version>
+            <version>${koin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-test-jvm</artifactId>
+            <version>${koin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-test-junit5</artifactId>
+            <version>${koin.version}</version>
         </dependency>
     </dependencies>
 

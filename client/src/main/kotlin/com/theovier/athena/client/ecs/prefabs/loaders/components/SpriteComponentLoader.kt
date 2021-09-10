@@ -12,7 +12,7 @@ class SpriteComponentLoader(private val assets: AssetStorage) : ComponentLoader 
     override fun load(componentJSON: JsonValue): Component {
         val component = SpriteRenderer()
         val texturePath = componentJSON.getString("texture")
-        val texture: Texture = assets[texturePath]
+        val texture: Texture = assets.loadSync(texturePath)
         component.sprite.setRegion(texture)
         component.sprite.setSize(
             texture.width * AthenaGame.UNIT_SCALE,

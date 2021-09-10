@@ -3,7 +3,7 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.DisplayName
 
-class TiledMapComponentLoaderTest {
+class MapComponentLoaderTest {
 
     @Test
     @DisplayName("<TiledMapComponent> component is loaded correctly")

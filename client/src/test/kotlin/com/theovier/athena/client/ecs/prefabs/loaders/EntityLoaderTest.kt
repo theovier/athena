@@ -1,7 +1,11 @@
 package com.theovier.athena.client.ecs.prefabs.loaders
 
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.SerializationException
 import com.theovier.athena.client.ecs.components.lifetime
+import com.theovier.athena.client.ecs.prefabs.loaders.components.MapComponentLoader
+import com.theovier.athena.client.ecs.prefabs.loaders.components.PhysicsComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.SpriteComponentLoader
 import ktx.assets.async.AssetStorage
 import org.junit.jupiter.api.*
@@ -13,7 +17,10 @@ import org.koin.test.junit5.AutoCloseKoinTest
 class EntityLoaderTest: AutoCloseKoinTest() {
     private val componentLoaders = module {
         single { AssetStorage() }
+        single { World(Vector2.Zero, true) }
+        single { MapComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }
+        single { PhysicsComponentLoader(get()) }
     }
 
     @BeforeEach

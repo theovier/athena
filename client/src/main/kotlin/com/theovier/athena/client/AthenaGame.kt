@@ -3,8 +3,11 @@ package com.theovier.athena.client
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.maps.tiled.TiledMap
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.theovier.athena.client.screens.GameScreen
 import ktx.app.KtxGame

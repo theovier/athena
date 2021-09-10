@@ -12,19 +12,22 @@ import org.koin.core.component.inject
 
 class PrefabLoader : EntityLoader, KoinComponent {
     private val log = KotlinLogging.logger {}
+    private val mapComponentLoader by inject<MapComponentLoader>()
     private val spriteComponentLoader by inject<SpriteComponentLoader>()
+    private val physicsComponentLoader by inject<PhysicsComponentLoader>()
 
     private val componentLoaders = mapOf(
         "aim" to AimComponentLoader(),
         "cameraTarget" to CameraTargetComponentLoader(),
         "crosshair" to CrosshairComponentLoader(),
         "lifetime" to LifetimeComponentLoader(),
+        "map" to mapComponentLoader,
         "movement" to MovementComponentLoader(),
         "particle" to ParticleComponentLoader(),
+        "physics" to physicsComponentLoader,
         "player" to PlayerComponentLoader(),
         "spine" to SpineAnimationComponentLoader(),
         "sprite" to spriteComponentLoader,
-        "map" to TiledMapComponentLoader(),
         "transform" to TransformComponentLoader(),
     )
 

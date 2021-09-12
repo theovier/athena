@@ -12,7 +12,8 @@ class PhysicsComponentLoader(private val world: World) : ComponentLoader {
 
     override fun load(componentJSON: JsonValue): Physics {
         val bodyJSON = componentJSON.get("body")
-        val type: BodyDef.BodyType = when(bodyJSON.getString("type")) {
+
+        val type: BodyDef.BodyType = when(bodyJSON.getString("type", "static")) {
             "kinematic" -> BodyDef.BodyType.KinematicBody
             "dynamic" -> BodyDef.BodyType.DynamicBody
             else -> BodyDef.BodyType.StaticBody
@@ -22,9 +23,6 @@ class PhysicsComponentLoader(private val world: World) : ComponentLoader {
         if (bodyJSON.has("position")) {
             position = ComponentLoader.readVector2(bodyJSON.get("position"))
         }
-
-
-        //todo improve this further for more shapes, fixtures, etc.
 
         val boxJSON = bodyJSON.get("box")
         val width = boxJSON.getFloat("width", 1.0f)

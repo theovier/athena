@@ -88,6 +88,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 }
             }
         }
+
+        val entity = Prefab.instantiate("demo")
+
     }
 
     private fun initSystems() {

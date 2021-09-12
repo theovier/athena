@@ -1,0 +1,6 @@
+{
+  "spineDemo": {
+    "atlas": "sprites/characters/dummy/dummy.atlas",
+    "skeleton": "sprites/characters/dummy/dummy.json"
+  }
+}

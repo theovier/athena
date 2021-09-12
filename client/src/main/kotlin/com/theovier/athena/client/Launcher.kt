@@ -8,8 +8,10 @@ import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.prefabs.loaders.components.PhysicsComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.SpriteComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.MapComponentLoader
+import com.theovier.athena.client.ecs.prefabs.loaders.components.SpineComponentLoader
 import com.theovier.athena.client.ecs.systems.PhysicsSystem
-import com.theovier.athena.client.ecs.systems.PlayerAttackSystem
+import com.theovier.athena.client.loaders.spine.AnimationStateDataLoader
+import com.theovier.athena.client.loaders.spine.SkeletonDataLoader
 import com.theovier.athena.client.screens.GameScreen
 import ktx.assets.async.AssetStorage
 import org.koin.core.context.GlobalContext.startKoin
@@ -20,6 +22,12 @@ fun main() {
         setLoader(suffix = ".tmx") {
             TmxMapLoader()
         }
+        setLoader {
+            SkeletonDataLoader()
+        }
+        setLoader {
+            AnimationStateDataLoader()
+        }
     }
     val module = module {
         single { assets }
@@ -27,6 +35,7 @@ fun main() {
         single { GameScreen(get()) }
         single { PhysicsSystem(get()) }
         single { MapComponentLoader(get()) }
+        single { SpineComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }
         single { PhysicsComponentLoader(get()) }
     }

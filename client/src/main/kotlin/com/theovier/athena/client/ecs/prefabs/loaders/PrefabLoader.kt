@@ -15,6 +15,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
     private val mapComponentLoader by inject<MapComponentLoader>()
     private val spriteComponentLoader by inject<SpriteComponentLoader>()
     private val physicsComponentLoader by inject<PhysicsComponentLoader>()
+    private val spineDemoComponentLoader by inject<SpineComponentLoader>()
 
     private val componentLoaders = mapOf(
         "aim" to AimComponentLoader(),
@@ -29,6 +30,9 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "spine" to SpineAnimationComponentLoader(),
         "sprite" to spriteComponentLoader,
         "transform" to TransformComponentLoader(),
+
+
+        "spineDemo" to spineDemoComponentLoader
     )
 
     override fun load(fileName: String, configure: Entity.() -> Unit): Entity {

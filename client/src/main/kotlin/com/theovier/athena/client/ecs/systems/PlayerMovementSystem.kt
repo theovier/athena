@@ -8,7 +8,8 @@ import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
-import com.theovier.athena.client.misc.faceDirection
+import com.theovier.athena.client.misc.spine.faceDirection
+import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import ktx.ashley.allOf
 
 class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class, Spine::class).get()) {
@@ -39,9 +40,9 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
 
     private fun playAnimation(spine: Spine, direction: Vector2) {
         if (direction.isZero) {
-            spine.playAnimationIfNotAlreadyPlaying(name = "idle")
+            spine.state.playAnimationIfNotAlreadyPlaying(name = "idle")
         } else {
-            spine.playAnimationIfNotAlreadyPlaying(name = "run")
+            spine.state.playAnimationIfNotAlreadyPlaying(name = "run")
         }
     }
 }

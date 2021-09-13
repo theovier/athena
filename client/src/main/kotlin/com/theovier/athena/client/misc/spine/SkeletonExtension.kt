@@ -1,4 +1,4 @@
-package com.theovier.athena.client.misc
+package com.theovier.athena.client.misc.spine
 
 import com.badlogic.gdx.math.Vector2
 import com.esotericsoftware.spine.Skeleton

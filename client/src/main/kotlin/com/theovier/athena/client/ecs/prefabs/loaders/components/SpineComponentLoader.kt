@@ -21,6 +21,25 @@ class SpineComponentLoader(private val assets: AssetStorage) : ComponentLoader {
         val data = assets.loadSync(descriptor.toIdentifier(), parameters)
         component.state = AnimationState(data)
         component.skeleton = Skeleton(data.skeletonData)
+
+        if (componentJSON.has(INITIAL_ANIMATION)) {
+            loadInitialAnimation(componentJSON.get(INITIAL_ANIMATION), component.state)
+        }
+
         return component
+    }
+
+    private fun loadInitialAnimation(animationJSON: JsonValue, state: AnimationState) {
+        val name = animationJSON.getString(ANIMATION_NAME, DEFAULT_INITIAL_ANIMATION_NAME)
+        val loop = animationJSON.getBoolean(IS_LOOP_ANIMATION, DEFAULT_LOOP_INITIAL_ANIMATION)
+        state.setAnimation(0, name, loop)
+    }
+
+    companion object {
+        private const val INITIAL_ANIMATION = "initialAnimation"
+        private const val ANIMATION_NAME = "name"
+        private const val DEFAULT_INITIAL_ANIMATION_NAME = "idle"
+        private const val IS_LOOP_ANIMATION = "loop"
+        private const val DEFAULT_LOOP_INITIAL_ANIMATION = true
     }
 }

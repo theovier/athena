@@ -14,7 +14,7 @@ import ktx.ashley.allOf
 import ktx.math.plus
 import ktx.math.times
 
-class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transform::class, SpineAnimation::class).get())  {
+class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transform::class).get())  {
     private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {

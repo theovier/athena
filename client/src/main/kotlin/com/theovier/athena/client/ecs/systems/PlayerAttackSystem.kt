@@ -16,7 +16,7 @@ import ktx.box2d.body
 import ktx.box2d.box
 import mu.KotlinLogging
 
-class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, SpineAnimation::class).get()) {
+class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
 
@@ -55,7 +55,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     }
 
     private fun fire(shooter: Entity) {
-        val headBone = shooter.spineAnimation.skeleton.findBone("head")
+        val headBone = shooter.spine.skeleton.findBone("head")
         val origin = Vector2(headBone.worldX, headBone.worldY)
         spawnBullet(origin, shooter.aim.direction)
         canNextFireInSeconds = timeBetweenShots

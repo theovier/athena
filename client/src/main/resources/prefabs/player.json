@@ -15,7 +15,11 @@
   },
   "spine": {
     "atlas": "sprites/characters/player/player.atlas",
-    "skeleton": "sprites/characters/player/player.json"
+    "skeleton": "sprites/characters/player/player.json",
+    "initialAnimation": {
+      "name": "idle",
+      "loop": true
+    }
   },
   "physics": {
     "body": {

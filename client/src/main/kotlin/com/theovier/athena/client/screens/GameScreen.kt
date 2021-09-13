@@ -38,6 +38,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
+    private val dummy = Prefab.instantiate("dummy")
     private val batch = SpriteBatch()
 
     //injected systems
@@ -59,38 +60,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun initEntities() {
-        initSkeletonDemo()
         engine.addEntity(player)
         engine.addEntity(map)
         engine.addEntity(crosshair)
-    }
-
-    private fun initSkeletonDemo() {
-        //from prefab
-//        val dummy = Prefab.instantiate("dummy")
-//        engine.addEntity(dummy)
-
-        //without prefab
-        engine.apply {
-            entity {
-                with<Transform>() {
-                    size.set(1f, 2f)
-                }
-                with<SpineAnimation> {
-                    pathToAtlasFile = "sprites/characters/dummy/dummy.atlas"
-                    pathToSkeletonFile = "sprites/characters/dummy/dummy.json"
-                }.build()
-                with<Physics> {
-                    body = world.body(BodyDef.BodyType.StaticBody) {
-                        position.set(16f, 13f)
-                        box(width = 1f, height = 2f)
-                    }
-                }
-            }
-        }
-
-        val entity = Prefab.instantiate("demo")
-
+        engine.addEntity(dummy)
     }
 
     private fun initSystems() {

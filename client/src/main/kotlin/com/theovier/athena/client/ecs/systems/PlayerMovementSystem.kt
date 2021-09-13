@@ -8,9 +8,10 @@ import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
+import com.theovier.athena.client.misc.faceDirection
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class, SpineAnimation::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class, Spine::class).get()) {
     private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {
@@ -26,21 +27,21 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
             stickInput = Vector2.Zero
         }
         val playerMovement = player.movement
-        val animation = player.spineAnimation
+        val spine = player.spine
         val direction = stickInput
         playerMovement.direction = direction
-        playAnimation(animation, direction)
+        playAnimation(spine, direction)
 
         if (!direction.isZero) {
-            animation.faceDirection(direction)
+            spine.skeleton.faceDirection(direction)
         }
     }
 
-    private fun playAnimation(skeletalAnimation: SpineAnimation, direction: Vector2) {
+    private fun playAnimation(spine: Spine, direction: Vector2) {
         if (direction.isZero) {
-            skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "idle")
+            spine.playAnimationIfNotAlreadyPlaying(name = "idle")
         } else {
-            skeletalAnimation.playAnimationIfNotAlreadyPlaying(name = "run")
+            spine.playAnimationIfNotAlreadyPlaying(name = "run")
         }
     }
 }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
+import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
 import ktx.box2d.body
 import ktx.box2d.box
@@ -57,12 +58,12 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     private fun fire(shooter: Entity) {
         val headBone = shooter.spine.skeleton.findBone("head")
         val origin = Vector2(headBone.worldX, headBone.worldY)
-        spawnBullet(origin, shooter.aim.direction)
+        spawnBullet(origin, shooter.aim.direction, shooter)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
     }
 
-    private fun spawnBullet(origin: Vector2, direction: Vector2) {
+    private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {
         val bullet = Prefab.instantiate(BULLET_ENTITY) {
             with(movement) {
                 this.direction = direction
@@ -70,6 +71,9 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
             with(physics) {
                 body.isBullet = true
                 body.setTransform(Vector2(origin.x, origin.y + 2f), direction.angleRad())
+            }
+            with(damageComponent) {
+                damage.source = DamageSource(this@instantiate, shooter)
             }
         }
         engine.addEntity(bullet)

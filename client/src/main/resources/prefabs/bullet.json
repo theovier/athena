@@ -8,6 +8,9 @@
       "y": 0.6
     }
   },
+  "damage": {
+    "amount": 1
+  },
   "movement": {
     "maxSpeed": 20,
     "acceleration": 250,

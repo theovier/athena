@@ -1,0 +1,6 @@
+{
+  "health": {
+    "maximum": 5,
+    "current": 3
+  }
+}

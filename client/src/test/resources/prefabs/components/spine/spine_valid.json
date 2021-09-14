@@ -1,6 +1,6 @@
 {
   "spine": {
-    "atlas": "path/to/atlas",
-    "skeleton": "path/to/skeleton"
+    "atlas": "spine/dummy/dummy.atlas",
+    "skeleton": "spine/dummy/dummy.json"
   }
 }

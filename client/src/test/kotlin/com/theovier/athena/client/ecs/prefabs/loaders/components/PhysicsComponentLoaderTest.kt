@@ -11,7 +11,6 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import org.koin.test.get
 import org.koin.test.junit5.AutoCloseKoinTest
-import kotlin.test.expect
 
 class PhysicsComponentLoaderTest : AutoCloseKoinTest() {
     private val module = module {

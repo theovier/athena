@@ -4,8 +4,10 @@ import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.Contact
-import com.theovier.athena.client.ecs.components.Health
+import com.theovier.athena.client.ecs.components.damageComponent
+import com.theovier.athena.client.ecs.components.hasHealthComponent
 import com.theovier.athena.client.ecs.components.health
+import com.theovier.athena.client.ecs.components.Damage as DamageComponent
 import ktx.ashley.has
 
 class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter() {
@@ -40,9 +42,11 @@ class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter()
     }
 
     private fun onHit(projectile: Entity, victim: Entity) {
-        val damage = 1 //todo get from projectile's component
-        if (victim.has(Health.MAPPER)) {
-            victim.health.current -= damage
+        if (projectile.has(DamageComponent.MAPPER)) {
+            val damage = projectile.damageComponent.damage
+            if (victim.hasHealthComponent) {
+                victim.health.onHit(damage)
+            }
         }
     }
 }

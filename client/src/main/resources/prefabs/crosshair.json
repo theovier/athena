@@ -1,0 +1,15 @@
+{
+  "transform": {
+    "position": {
+      "x": 14,
+      "y": 12
+    }
+  },
+  "crosshair": {},
+  "cameraTarget": {},
+  "movement": {
+    "maxSpeed": 22,
+    "acceleration": 250,
+    "deceleration": 10
+  }
+}

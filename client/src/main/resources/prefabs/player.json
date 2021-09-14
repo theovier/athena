@@ -1,0 +1,37 @@
+{
+  "player": {},
+  "aim": {
+    "maxDistanceToPlayer": 4
+  },
+  "transform": {
+    "size": {
+      "y": 2
+    }
+  },
+  "movement": {
+    "maxSpeed": 8,
+    "acceleration": 250,
+    "deceleration": 10
+  },
+  "spine": {
+    "atlas": "sprites/characters/player/player.atlas",
+    "skeleton": "sprites/characters/player/player.json",
+    "initialAnimation": {
+      "name": "idle",
+      "loop": true
+    }
+  },
+  "physics": {
+    "body": {
+      "type": "dynamic",
+      "box": {
+        "width": 1,
+        "height": 2
+      },
+      "position": {
+        "x": 10,
+        "y": 12
+      }
+    }
+  }
+}

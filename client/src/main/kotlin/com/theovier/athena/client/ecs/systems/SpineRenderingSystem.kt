@@ -9,14 +9,14 @@ import ktx.ashley.allOf
 
 class SpineRenderingSystem(private val batch: Batch) :
     SortedIteratingSystem(
-        allOf(SpineAnimation::class, Transform::class).get(),
+        allOf(Spine::class, Transform::class).get(),
         compareBy { it.transform }
     ) {
     private val renderer = SkeletonRenderer()
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val position = entity.transform.position
-        val skeleton = entity.spineAnimation.skeleton
+        val skeleton = entity.spine.skeleton
         skeleton.setPosition(position.x, position.y)
         skeleton.updateWorldTransform()
         renderer.draw(batch, skeleton)

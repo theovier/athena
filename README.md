@@ -17,7 +17,7 @@ Work in progress.
 - Basic movement system with acceleration and friction
 - Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 - Smooth translational + rotational [camera shake based on trauma](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
-- Custom prefab system (using XML internally)
+- Custom prefab system (using JSON)
 - Controller support with [relatively smooth aiming](https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
 - Basic support for [tiled maps](https://github.com/libktx/ktx/tree/master/tiled)
 - Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)
@@ -47,6 +47,7 @@ Feel free to open pull-requests or discuss ideas about the project.
 
 ## Acknowledgement
 I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference on how to get started with KTX.
+Also, I found [Sioncore](https://github.com/dsaltares/sioncore) to be a good read on how to develop modular LibGdx/KTX games.
 
 ## License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#) except for the Spine Runtime.

@@ -1,0 +1,8 @@
+{
+  "sprite": {
+    "texture": "sprites/bullet.png",
+    "offset": {
+      "x": -0.5
+    }
+  }
+}

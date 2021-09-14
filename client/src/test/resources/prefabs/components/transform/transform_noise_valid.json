@@ -1,0 +1,8 @@
+{
+  "transform": {
+    "noise": {
+      "something": "that should not be here.",
+      "please": "ignore me."
+    }
+  }
+}

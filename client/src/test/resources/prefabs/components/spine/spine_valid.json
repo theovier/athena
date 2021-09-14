@@ -1,0 +1,6 @@
+{
+  "spine": {
+    "atlas": "spine/dummy/dummy.atlas",
+    "skeleton": "spine/dummy/dummy.json"
+  }
+}

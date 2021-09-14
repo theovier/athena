@@ -21,6 +21,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "aim" to AimComponentLoader(),
         "cameraTarget" to CameraTargetComponentLoader(),
         "crosshair" to CrosshairComponentLoader(),
+        "health" to HealthComponentLoader(),
         "lifetime" to LifetimeComponentLoader(),
         "map" to mapComponentLoader,
         "movement" to MovementComponentLoader(),

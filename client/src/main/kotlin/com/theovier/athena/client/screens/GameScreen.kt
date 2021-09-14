@@ -52,9 +52,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private lateinit var debugLabelPlayerPosition: Label
 
     init {
-        initEntities()
         initSystems()
         initListeners()
+        initEntities()
         initDebugUI()
         positionCamera()
     }
@@ -86,6 +86,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PlayerAttackSystem())
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
+            addSystem(HealthSystem())
             addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }

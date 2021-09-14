@@ -2,7 +2,11 @@ package com.theovier.athena.client.ecs.listeners
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.Contact
+import com.theovier.athena.client.ecs.components.Health
+import com.theovier.athena.client.ecs.components.health
+import ktx.ashley.has
 
 class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter() {
 
@@ -31,12 +35,14 @@ class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter()
         engine.removeEntity(projectile)
     }
 
-    private fun hitAnotherEntity(other: Any?): Boolean {
-        return other != null && other is Entity
+    private fun hitAnotherEntity(other: Body): Boolean {
+        return other.userData != null && other.userData is Entity
     }
 
     private fun onHit(projectile: Entity, victim: Entity) {
-        //todo check for projectile component on entity
-        //todo deal damage
+        val damage = 1 //todo get from projectile's component
+        if (victim.has(Health.MAPPER)) {
+            victim.health.current -= damage
+        }
     }
 }

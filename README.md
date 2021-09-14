@@ -23,6 +23,7 @@ Work in progress.
 - Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)
 - Supports [Spine](http://de.esotericsoftware.com/) animations and skeletons
 - Uses [LibGdx's Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) as physic engine
+- Simple damage system
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_002.gif)

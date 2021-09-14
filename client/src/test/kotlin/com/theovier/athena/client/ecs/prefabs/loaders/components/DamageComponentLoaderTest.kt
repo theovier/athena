@@ -7,8 +7,8 @@ import org.junit.jupiter.api.DisplayName
 class DamageComponentLoaderTest {
 
     @Test
-    @DisplayName("Empty <Damage> component is loaded correctly")
-    fun isEmptyComponentLoaded() {
+    @DisplayName("<Damage> component is loaded correctly")
+    fun isComponentLoaded() {
         val expectedDamageAmount = 5
         val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/damage/damage_valid")
         val damage = DamageComponentLoader().load(json)

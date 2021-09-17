@@ -140,6 +140,17 @@
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype-platform</artifactId>
+            <version>1.10.0</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
+        <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-desktop</artifactId>
             <version>2.2.1</version>

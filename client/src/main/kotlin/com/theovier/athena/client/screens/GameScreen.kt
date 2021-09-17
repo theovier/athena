@@ -1,5 +1,6 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -27,6 +28,7 @@ import ktx.scene2d.*
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.awt.TextComponent
 
 private val log = KotlinLogging.logger {}
 
@@ -76,6 +78,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(SpriteRenderingSystem(batch))
                     addSubsystem(ParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
+                    addSubsystem(WorldTextRenderingSystem(batch))
                 })
             addSystem(CameraMovementSystem(steadyReferenceCamera))
             addSystem(MovementSystem())
@@ -87,7 +90,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(HealthSystem())
-            addSystem(PhysicsDebugSystem(world, camera))
+            //addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
     }

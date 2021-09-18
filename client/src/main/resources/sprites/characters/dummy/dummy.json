@@ -1,7 +1,7 @@
 {
   "skeleton": {
-    "hash": "UsZyLgHJtc8",
-    "spine": "4.0.25",
+    "hash": "7PUWthv2aQk",
+    "spine": "4.0.33",
     "x": -113.82,
     "y": 0.01,
     "width": 254,
@@ -37,6 +37,41 @@
       "name": "collider",
       "bone": "bone",
       "attachment": "collider"
+    },
+    {
+      "name": "damage_indicator_1",
+      "bone": "root",
+      "attachment": "indicator"
+    },
+    {
+      "name": "damage_indicator_2",
+      "bone": "root",
+      "attachment": "indicator"
+    },
+    {
+      "name": "damage_indicator_3",
+      "bone": "root",
+      "attachment": "indicator"
+    },
+    {
+      "name": "damage_indicator_4",
+      "bone": "root",
+      "attachment": "indicator"
+    },
+    {
+      "name": "damage_indicator_5",
+      "bone": "root",
+      "attachment": "indicator"
+    },
+    {
+      "name": "damage_indicator_6",
+      "bone": "root",
+      "attachment": "indicator"
+    },
+    {
+      "name": "damage_indicator_7",
+      "bone": "root",
+      "attachment": "indicator"
     }
   ],
   "skins": [
@@ -66,6 +101,55 @@
               -105.63,
               80.73
             ]
+          }
+        },
+        "damage_indicator_1": {
+          "indicator": {
+            "type": "point",
+            "x": 12.21,
+            "y": 450.12
+          }
+        },
+        "damage_indicator_2": {
+          "indicator": {
+            "type": "point",
+            "x": -131.2,
+            "y": 368.06
+          }
+        },
+        "damage_indicator_3": {
+          "indicator": {
+            "type": "point",
+            "x": 141.91,
+            "y": 370.21
+          }
+        },
+        "damage_indicator_4": {
+          "indicator": {
+            "type": "point",
+            "x": -162.71,
+            "y": 235.28
+          }
+        },
+        "damage_indicator_5": {
+          "indicator": {
+            "type": "point",
+            "x": 176.25,
+            "y": 208.53
+          }
+        },
+        "damage_indicator_6": {
+          "indicator": {
+            "type": "point",
+            "x": 157.87,
+            "y": 87.27
+          }
+        },
+        "damage_indicator_7": {
+          "indicator": {
+            "type": "point",
+            "x": -138.89,
+            "y": 82.01
           }
         },
         "rack": {

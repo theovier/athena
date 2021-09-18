@@ -21,11 +21,13 @@ class SpineComponentLoader(private val assets: AssetStorage) : ComponentLoader {
         val data = assets.loadSync(descriptor.toIdentifier(), parameters)
         component.state = AnimationState(data)
         component.skeleton = Skeleton(data.skeletonData)
-
         if (componentJSON.has(INITIAL_ANIMATION)) {
             loadInitialAnimation(componentJSON.get(INITIAL_ANIMATION), component.state)
         }
-
+        if (componentJSON.has(DAMAGE_INDICATOR_SLOT_NAMES)) {
+            val slotNames = loadDamageIndicatorSlotNames(componentJSON.get(DAMAGE_INDICATOR_SLOT_NAMES))
+            component.damageIndicatorSlotNames = slotNames.toTypedArray()
+        }
         return component
     }
 
@@ -35,11 +37,22 @@ class SpineComponentLoader(private val assets: AssetStorage) : ComponentLoader {
         state.setAnimation(0, name, loop)
     }
 
+    private fun loadDamageIndicatorSlotNames(slotNamesJSON: JsonValue): List<String> {
+        val slotNames = ArrayList<String>()
+        val iterator = slotNamesJSON.iterator()
+        while (iterator.hasNext()) {
+            val entry = iterator.next()
+            slotNames.add(entry.asString())
+        }
+        return slotNames
+    }
+
     companion object {
         private const val INITIAL_ANIMATION = "initialAnimation"
         private const val ANIMATION_NAME = "name"
         private const val DEFAULT_INITIAL_ANIMATION_NAME = "idle"
         private const val IS_LOOP_ANIMATION = "loop"
         private const val DEFAULT_LOOP_INITIAL_ANIMATION = true
+        private const val DAMAGE_INDICATOR_SLOT_NAMES = "damageIndicatorSlotNames"
     }
 }

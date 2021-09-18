@@ -5,7 +5,7 @@
     }
   },
   "health": {
-    "maximum": 3
+    "maximum": 100
   },
   "spine": {
     "atlas": "sprites/characters/dummy/dummy.atlas",
@@ -13,7 +13,16 @@
     "initialAnimation": {
       "name": "idle",
       "loop": true
-    }
+    },
+    "damageIndicatorSlotNames": [
+      "damage_indicator_1",
+      "damage_indicator_2",
+      "damage_indicator_3",
+      "damage_indicator_4",
+      "damage_indicator_5",
+      "damage_indicator_6",
+      "damage_indicator_7"
+    ]
   },
   "physics": {
     "body": {

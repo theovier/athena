@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.listeners
+package com.theovier.athena.client.ecs.listeners.physics
 
 import com.badlogic.gdx.physics.box2d.Contact
 import com.badlogic.gdx.physics.box2d.ContactImpulse

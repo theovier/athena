@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.listeners
+package com.theovier.athena.client.ecs.listeners.damage
 
 interface DamageEventSource {
     fun addDamageListener(listener: DamageListener)

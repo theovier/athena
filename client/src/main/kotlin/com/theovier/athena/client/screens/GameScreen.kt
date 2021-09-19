@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.listeners.DamageIndicatorSpawner
-import com.theovier.athena.client.ecs.listeners.PhysicsListener
-import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
+import com.theovier.athena.client.ecs.listeners.damage.DamageIndicatorSpawner
+import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
+import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import ktx.app.KtxScreen

@@ -3,9 +3,8 @@ package com.theovier.athena.client.ecs.systems
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.listeners.DamageEventSource
-import com.theovier.athena.client.ecs.listeners.DamageListener
-import com.theovier.athena.client.ecs.prefabs.Prefab
+import com.theovier.athena.client.ecs.listeners.damage.DamageEventSource
+import com.theovier.athena.client.ecs.listeners.damage.DamageListener
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf

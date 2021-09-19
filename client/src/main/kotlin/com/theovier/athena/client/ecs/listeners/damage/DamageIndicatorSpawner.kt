@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.listeners
+package com.theovier.athena.client.ecs.listeners.damage
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity

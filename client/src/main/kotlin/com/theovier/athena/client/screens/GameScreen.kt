@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.damage.DamageIndicatorSpawner
+import com.theovier.athena.client.ecs.listeners.damage.HapticDamageFeedback
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
@@ -92,6 +93,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
         world.setContactListener(ProjectileCollisionListener(engine))
         healthSystem.addDamageListener(DamageIndicatorSpawner(engine))
+        healthSystem.addDamageListener(HapticDamageFeedback())
     }
 
     private fun initDebugUI() {

@@ -6,13 +6,16 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.theovier.athena.client.screens.GameScreen
+import kotlinx.coroutines.launch
 import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
+import ktx.freetype.async.loadFreeTypeFont
 import ktx.scene2d.Scene2DSkin
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -43,6 +46,7 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
     private fun loadAssets() {
         assets.loadSync<Texture>("sprites/bullet.png")
         assets.loadSync<Skin>("ui/skins/default/uiskin.json")
+        assets.loadSync<FreeTypeFontGenerator>("fonts/open-sans.regular.ttf")
     }
 
     private fun setDefaultScene2DSkin() {

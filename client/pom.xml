@@ -124,6 +124,16 @@
             <version>1.10.0-b1</version>
         </dependency>
         <dependency>
+            <groupId>io.github.libktx</groupId>
+            <artifactId>ktx-freetype</artifactId>
+            <version>1.10.0-b1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.libktx</groupId>
+            <artifactId>ktx-freetype-async</artifactId>
+            <version>1.10.0-b1</version>
+        </dependency>
+        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>1.10.0</version>

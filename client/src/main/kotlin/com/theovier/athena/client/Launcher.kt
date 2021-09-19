@@ -14,6 +14,7 @@ import com.theovier.athena.client.loaders.spine.AnimationStateDataLoader
 import com.theovier.athena.client.loaders.spine.SkeletonDataLoader
 import com.theovier.athena.client.screens.GameScreen
 import ktx.assets.async.AssetStorage
+import ktx.freetype.async.registerFreeTypeFontLoaders
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 
@@ -28,6 +29,7 @@ fun main() {
         setLoader {
             AnimationStateDataLoader()
         }
+        registerFreeTypeFontLoaders()
     }
     val module = module {
         single { assets }

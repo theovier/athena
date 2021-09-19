@@ -55,3 +55,6 @@ Also, I found [Sioncore](https://github.com/dsaltares/sioncore) to be a good rea
 
 ### Spine Runtime
 Please note that since the Spine Runtime dependency is used, this part of the project is licenced under the [Spine Runtime Licence](https://github.com/EsotericSoftware/spine-runtimes/blob/4.0/LICENSE) instead.
+
+### Audio Files (Teeworlds)
+Some audio files (namely `gun_fire-01.ogg`, `gun_fire-02.ogg` and `gun_fire-03.ogg`) are converted versions of the [Teeworlds' Sound Effects](https://github.com/teeworlds/teeworlds/tree/master/datasrc/audio) which are licenced under the [CC-BY-SA 3.0](https://github.com/teeworlds/teeworlds/blob/master/license.txt) 

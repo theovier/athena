@@ -1,34 +1,26 @@
 package com.theovier.athena.client.screens
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.listeners.DamageIndicatorSpawner
 import com.theovier.athena.client.ecs.listeners.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
-import com.theovier.athena.client.math.xy
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
-import ktx.ashley.entity
-import ktx.ashley.with
-import ktx.box2d.body
-import ktx.box2d.box
 import ktx.scene2d.*
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.awt.TextComponent
 
 private val log = KotlinLogging.logger {}
 
@@ -45,6 +37,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     //injected systems
     private val physicsSystem: PhysicsSystem by inject()
+    private val healthSystem = HealthSystem()
 
     //Debug UI
     private val uiCamera = OrthographicCamera()
@@ -89,7 +82,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PlayerAttackSystem())
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
-            addSystem(HealthSystem())
+            addSystem(healthSystem)
             //addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
@@ -98,6 +91,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initListeners() {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
         world.setContactListener(ProjectileCollisionListener(engine))
+        healthSystem.addDamageListener(DamageIndicatorSpawner(engine))
     }
 
     private fun initDebugUI() {

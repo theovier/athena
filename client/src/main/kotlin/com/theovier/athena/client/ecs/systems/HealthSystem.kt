@@ -2,23 +2,27 @@ package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.math.Vector2
-import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.listeners.DamageEventSource
+import com.theovier.athena.client.ecs.listeners.DamageListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
 import ktx.ashley.exclude
 
-class HealthSystem : IteratingSystem(allOf(Health::class).exclude(Invincible::class).get()) {
+class HealthSystem : IteratingSystem(allOf(Health::class).exclude(Invincible::class).get()), DamageEventSource {
+    private val listeners = mutableListOf<DamageListener>()
 
-    override fun processEntity(entity: Entity, deltaTime: Float) {
-        takeDamage(entity)
+    override fun addDamageListener(listener: DamageListener) {
+        listeners += listener
     }
 
-    private fun takeDamage(entity: Entity) {
+    override fun removeDamageListener(listener: DamageListener) {
+        listeners -= listener
+    }
+
+    override fun processEntity(entity: Entity, deltaTime: Float) {
         val health = entity.health
         while (health.pendingDamage.isNotEmpty()) {
             val damage = health.pendingDamage.poll()
@@ -29,32 +33,19 @@ class HealthSystem : IteratingSystem(allOf(Health::class).exclude(Invincible::cl
         }
     }
 
-    private fun takeDamage(entity: Entity, damage: Damage) {
+    private fun takeDamage(victim: Entity, damage: Damage) {
         //this is the place to add resistance/shields/absorbs
-        val health = entity.health
+        val health = victim.health
         health.current -= damage.amount
-        spawnDamageIndicator(entity, damage)
-    }
-
-    private fun spawnDamageIndicator(entity: Entity, damage: Damage) {
-        if (!entity.hasSpineComponent || entity.spine.hasNoDamageIndicator) {
-            return
+        listeners.forEach {
+            it.onDamageTaken(victim, damage)
         }
-        val spine = entity.spine
-        val spawnPosition = spine.getRandomDamageIndicatorPosition()
-        val indicator = Prefab.instantiate("damageIndicator") {
-            with(transform) {
-                position.set(spawnPosition, 0f)
-            }
-            with(text) {
-                text = "${damage.amount}"
-            }
-        }
-        engine.addEntity(indicator)
     }
 
     private fun die(victim: Entity, source: DamageSource?) {
-        //todo add DeadComponent to play death animation etc. before removing the entity entirely
+        listeners.forEach {
+            it.onDeath(victim, source)
+        }
         engine.removeEntity(victim)
     }
 }

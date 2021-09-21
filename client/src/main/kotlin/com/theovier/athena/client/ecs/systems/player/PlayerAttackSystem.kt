@@ -79,9 +79,14 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
                 damage.source = DamageSource(this@instantiate, shooter)
             }
         }
-        engine.addEntity(bullet)
 
-        assets.loadSync<Sound>("audio/gun_fire-0${MathUtils.random(1, 3)}.ogg").play(0.1f)
+        val soundComponent = Sound().apply {
+            sound = assets.loadSync("audio/gun_fire-0${MathUtils.random(1, 3)}.ogg")
+            volume = 0.1f
+        }
+        bullet.add(soundComponent)
+
+        engine.addEntity(bullet)
     }
 
     companion object {

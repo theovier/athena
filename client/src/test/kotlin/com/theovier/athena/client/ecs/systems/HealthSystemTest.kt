@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.Health
 import com.theovier.athena.client.ecs.components.HitMarker
 import com.theovier.athena.client.ecs.components.hitmarker
+import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageType
 import org.junit.jupiter.api.Assertions

@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.systems
+package com.theovier.athena.client.ecs.systems.player
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
@@ -8,17 +8,12 @@ import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.physics.box2d.BodyDef
-import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
 import ktx.assets.async.AssetStorage
-import ktx.box2d.body
-import ktx.box2d.box
-import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

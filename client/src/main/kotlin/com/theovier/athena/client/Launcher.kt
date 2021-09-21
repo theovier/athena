@@ -9,7 +9,7 @@ import com.theovier.athena.client.ecs.prefabs.loaders.components.PhysicsComponen
 import com.theovier.athena.client.ecs.prefabs.loaders.components.SpriteComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.MapComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.SpineComponentLoader
-import com.theovier.athena.client.ecs.systems.PhysicsSystem
+import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.loaders.spine.AnimationStateDataLoader
 import com.theovier.athena.client.loaders.spine.SkeletonDataLoader
 import com.theovier.athena.client.screens.GameScreen

@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.systems
+package com.theovier.athena.client.ecs.systems.player
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity

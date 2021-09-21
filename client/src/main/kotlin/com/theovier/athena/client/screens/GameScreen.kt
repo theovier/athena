@@ -14,6 +14,16 @@ import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
+import com.theovier.athena.client.ecs.systems.cleanup.CleanupHitMarkerSystem
+import com.theovier.athena.client.ecs.systems.damage.DamageIndicatorSystem
+import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
+import com.theovier.athena.client.ecs.systems.damage.HealthSystem
+import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
+import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
+import com.theovier.athena.client.ecs.systems.player.PlayerAimSystem
+import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
+import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
+import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.scene2d.*
@@ -63,7 +73,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.apply {
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
-            addSystem(RenderingMetaSystem(camera, batch)
+            addSystem(
+                RenderingMetaSystem(camera, batch)
                 .apply {
                     addSubsystem(BackgroundRenderingSystem(camera))
                     addSubsystem(SpriteRenderingSystem(batch))

@@ -14,7 +14,6 @@ class HealthSystem : IteratingSystem(allOf(Health::class, HitMarker::class).excl
         victim.hitmarker.hits.forEach { hit ->
             takeDamage(victim, hit)
         }
-        victim.remove(HitMarker::class.java)
     }
 
     private fun takeDamage(victim: Entity, damage: Damage) {

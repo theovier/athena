@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.systems
+package com.theovier.athena.client.ecs.systems.cleanup
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem

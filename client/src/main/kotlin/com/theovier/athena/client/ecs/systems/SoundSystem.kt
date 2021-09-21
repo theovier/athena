@@ -9,9 +9,9 @@ import ktx.ashley.allOf
 class SoundSystem : IteratingSystem(allOf(SoundComponent::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val soundComponent = entity.sound
-        val sound = soundComponent.sound
-        val volume = soundComponent.volume
+        val soundEffect = entity.sound.effect
+        val sound = soundEffect.sound
+        val volume = soundEffect.volume
         sound.play(volume)
     }
 }

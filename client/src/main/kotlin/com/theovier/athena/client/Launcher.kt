@@ -5,10 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
-import com.theovier.athena.client.ecs.prefabs.loaders.components.PhysicsComponentLoader
-import com.theovier.athena.client.ecs.prefabs.loaders.components.SpriteComponentLoader
-import com.theovier.athena.client.ecs.prefabs.loaders.components.MapComponentLoader
-import com.theovier.athena.client.ecs.prefabs.loaders.components.SpineComponentLoader
+import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.loaders.spine.AnimationStateDataLoader
 import com.theovier.athena.client.loaders.spine.SkeletonDataLoader
@@ -39,6 +36,7 @@ fun main() {
         single { MapComponentLoader(get()) }
         single { SpineComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }
+        single { SoundComponentLoader(get()) }
         single { PhysicsComponentLoader(get()) }
     }
     startKoin {

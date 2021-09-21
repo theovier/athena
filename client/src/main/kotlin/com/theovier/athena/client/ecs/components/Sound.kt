@@ -4,18 +4,13 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.utils.GdxRuntimeException
-import com.badlogic.gdx.utils.Pool.Poolable
+import com.theovier.athena.client.misc.audio.SoundEffect
 import ktx.ashley.get
 import com.theovier.athena.client.ecs.components.Sound as SoundComponent
 import ktx.ashley.mapperFor
 
-class Sound : Component, Poolable {
-    lateinit var sound: Sound
-    var volume = DEFAULT_VOLUME
-
-    override fun reset() {
-        volume = DEFAULT_VOLUME
-    }
+class Sound : Component {
+    lateinit var effect: SoundEffect
 
     companion object {
         val MAPPER = mapperFor<SoundComponent>()

@@ -3,6 +3,8 @@ package com.theovier.athena.client.ecs.systems
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.Health
+import com.theovier.athena.client.ecs.components.HitMarker
+import com.theovier.athena.client.ecs.components.hitmarker
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageType
 import org.junit.jupiter.api.Assertions
@@ -27,7 +29,8 @@ class HealthSystemTest {
             addEntity(entity)
         }
         Assertions.assertEquals(health.current, health.maximum)
-        health.onHit(Damage(1, DamageType.PHYSICAL, null))
+        entity.add(HitMarker())
+        entity.hitmarker.onHit(Damage(1, DamageType.PHYSICAL, null))
         engine.update(DELTA_TIME)
         Assertions.assertEquals(health.current, 4)
     }
@@ -45,7 +48,8 @@ class HealthSystemTest {
             addEntity(entity)
         }
         Assertions.assertEquals(1, engine.entities.count())
-        health.onHit(Damage(health.maximum, DamageType.PHYSICAL, null))
+        entity.add(HitMarker())
+        entity.hitmarker.onHit(Damage(health.maximum, DamageType.PHYSICAL, null))
         engine.update(DELTA_TIME)
         Assertions.assertEquals(0, engine.entities.count())
     }

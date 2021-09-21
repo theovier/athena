@@ -4,10 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.SerializationException
 import com.theovier.athena.client.ecs.components.lifetime
-import com.theovier.athena.client.ecs.prefabs.loaders.components.MapComponentLoader
-import com.theovier.athena.client.ecs.prefabs.loaders.components.PhysicsComponentLoader
-import com.theovier.athena.client.ecs.prefabs.loaders.components.SpineComponentLoader
-import com.theovier.athena.client.ecs.prefabs.loaders.components.SpriteComponentLoader
+import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import ktx.assets.async.AssetStorage
 import org.junit.jupiter.api.*
 import org.koin.core.context.startKoin
@@ -22,6 +19,7 @@ class EntityLoaderTest: AutoCloseKoinTest() {
         single { MapComponentLoader(get()) }
         single { SpineComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }
+        single { SoundComponentLoader(get()) }
         single { PhysicsComponentLoader(get()) }
     }
 

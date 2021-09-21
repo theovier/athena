@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver
+import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
@@ -47,6 +48,9 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
         assets.loadSync<Texture>("sprites/bullet.png")
         assets.loadSync<Skin>("ui/skins/default/uiskin.json")
         assets.loadSync<FreeTypeFontGenerator>("fonts/open-sans.regular.ttf")
+        assets.loadSync<Sound>("audio/gun_fire-01.ogg")
+        assets.loadSync<Sound>("audio/gun_fire-02.ogg")
+        assets.loadSync<Sound>("audio/gun_fire-03.ogg")
     }
 
     private fun setDefaultScene2DSkin() {

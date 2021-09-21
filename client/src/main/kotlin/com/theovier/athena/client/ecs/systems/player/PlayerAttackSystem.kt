@@ -3,18 +3,26 @@ package com.theovier.athena.client.ecs.systems.player
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
+import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
+import ktx.assets.async.AssetStorage
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()) {
+class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()), KoinComponent {
     private lateinit var currentController: Controller
     private var wantsToFire = false
+
+    //testwise
+    private val assets: AssetStorage by inject()
 
     //todo use weapons and dedicated components instead
     private var timeBetweenShots = 0.2f

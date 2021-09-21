@@ -15,6 +15,7 @@ import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListe
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.ecs.systems.cleanup.CleanupHitMarkerSystem
+import com.theovier.athena.client.ecs.systems.cleanup.CleanupSoundSystem
 import com.theovier.athena.client.ecs.systems.damage.DamageIndicatorSystem
 import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
@@ -94,7 +95,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(DamageIndicatorSystem())
             addSystem(HapticDamageFeedbackSystem())
             addSystem(HealthSystem())
+            addSystem(SoundSystem())
             addSystem(CleanupHitMarkerSystem())
+            addSystem(CleanupSoundSystem())
             //addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }

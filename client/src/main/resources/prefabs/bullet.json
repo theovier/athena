@@ -16,6 +16,22 @@
     "acceleration": 250,
     "deceleration": 10
   },
+  "sound": {
+    "choice": [
+      {
+        "file": "audio/gun_fire-01.ogg",
+        "volume": 0.1
+      },
+      {
+        "file": "audio/gun_fire-02.ogg",
+        "volume": 0.1
+      },
+      {
+        "file": "audio/gun_fire-03.ogg",
+        "volume": 0.1
+      }
+    ]
+  },
   "sprite": {
     "texture": "sprites/bullet.png",
     "offset": {

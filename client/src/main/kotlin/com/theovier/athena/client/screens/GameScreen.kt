@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.listeners.damage.DamageIndicatorSpawner
-import com.theovier.athena.client.ecs.listeners.damage.HapticDamageFeedback
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
@@ -38,7 +36,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     //injected systems
     private val physicsSystem: PhysicsSystem by inject()
-    private val healthSystem = HealthSystem()
 
     //Debug UI
     private val uiCamera = OrthographicCamera()
@@ -83,7 +80,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PlayerAttackSystem())
             addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
-            addSystem(healthSystem)
+            addSystem(DamageIndicatorSystem())
+            addSystem(HapticDamageFeedbackSystem())
+            addSystem(HealthSystem())
             //addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
@@ -92,8 +91,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initListeners() {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
         world.setContactListener(ProjectileCollisionListener(engine))
-        healthSystem.addDamageListener(DamageIndicatorSpawner(engine))
-        healthSystem.addDamageListener(HapticDamageFeedback())
     }
 
     private fun initDebugUI() {

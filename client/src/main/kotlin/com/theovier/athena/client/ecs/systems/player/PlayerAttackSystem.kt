@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
+import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
@@ -51,8 +52,13 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     }
 
     private fun fire(shooter: Entity) {
-        val headBone = shooter.spine.skeleton.findBone("head")
-        val origin = Vector2(headBone.worldX, headBone.worldY)
+        val skeleton = shooter.spine.skeleton
+        val weaponBone = skeleton.findBone("weapon")
+        val slot = skeleton.findSlot("muzzle_flash")
+        val muzzleFlash = slot.attachment as PointAttachment
+        val origin = muzzleFlash.computeWorldPosition(weaponBone, Vector2(muzzleFlash.x, muzzleFlash.y))
+
+        //todo shoot in the direction that the muzzleFlash points to
         spawnBullet(origin, shooter.aim.direction, shooter)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
@@ -65,7 +71,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
             }
             with(physics) {
                 body.isBullet = true
-                body.setTransform(Vector2(origin.x, origin.y + 2f), direction.angleRad())
+                body.setTransform(Vector2(origin.x, origin.y), direction.angleRad())
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)

@@ -26,3 +26,13 @@ fun Skeleton.forceToFaceRight() {
 fun Skeleton.flipX() {
     scaleX *= -1
 }
+
+fun Skeleton.isMirrored(): Boolean = isFacingLeft()
+
+fun Skeleton.isFacingRight(): Boolean {
+    return this.scaleX >= 0
+}
+
+fun Skeleton.isFacingLeft(): Boolean {
+    return this.scaleX < 0
+}

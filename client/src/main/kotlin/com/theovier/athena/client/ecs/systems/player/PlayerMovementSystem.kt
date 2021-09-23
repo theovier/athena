@@ -8,7 +8,6 @@ import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
-import com.theovier.athena.client.misc.spine.faceDirection
 import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import ktx.ashley.allOf
 
@@ -32,10 +31,6 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
         val direction = stickInput
         playerMovement.direction = direction
         playAnimation(spine, direction)
-
-        if (!direction.isZero) {
-            spine.skeleton.faceDirection(direction)
-        }
     }
 
     private fun playAnimation(spine: Spine, direction: Vector2) {

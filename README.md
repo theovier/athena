@@ -44,7 +44,9 @@ Please note that (even when run from within your IDE) you need to add the VM opt
 to make the application window appear on macOS.
 
 ## Contribution
-Feel free to open pull-requests or discuss ideas about the project.
+This project uses [YouTrack](https://www.jetbrains.com/de-de/youtrack/) to track task instead of GitHub Issues.
+You can have a look at pending tasks (also possible as unauthorized user) at [Athena's Issue Tracker](https://theovier.myjetbrains.com/youtrack/issues/ATHENA#)
+Feel free to open up pull-requests or discuss issues with us either on GitHub or within our [Issue Tracker](https://theovier.myjetbrains.com/youtrack/issues/ATHENA#).
 
 ## Acknowledgement
 I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference on how to get started with KTX.

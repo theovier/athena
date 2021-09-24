@@ -13,7 +13,7 @@ import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
 
-class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()) {
+class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Spine::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
     private var timeBetweenShots = 0.2f

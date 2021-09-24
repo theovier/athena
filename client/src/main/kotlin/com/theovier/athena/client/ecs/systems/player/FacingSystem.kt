@@ -6,17 +6,17 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.misc.spine.faceDirection
 import ktx.ashley.allOf
 
-class FacingSystem : IteratingSystem(allOf(Movement::class, Aim::class, Spine::class).get())  {
+class FacingSystem : IteratingSystem(allOf(Transform::class, Aim::class, Spine::class).get())  {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val movement = entity.movement
+        val transform = entity.transform
         val aim = entity.aim
         val skeleton = entity.spine.skeleton
 
         if (aim.isCurrentlyAiming) {
             skeleton.faceDirection(aim.direction)
-        } else if (movement.hasMovementInput) {
-            skeleton.faceDirection(movement.direction)
+        } else {
+            skeleton.faceDirection(transform.forward)
         }
     }
 }

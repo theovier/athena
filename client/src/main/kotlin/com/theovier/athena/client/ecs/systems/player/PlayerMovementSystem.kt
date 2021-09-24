@@ -9,10 +9,11 @@ import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.inputs.XboxInputAdapter.Companion.isAxisInputInDeadZone
+import com.theovier.athena.client.math.isNotZero
 import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::class, Spine::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Movement::class, Spine::class).get()) {
     private lateinit var currentController: Controller
 
     override fun addedToEngine(engine: Engine?) {
@@ -25,10 +26,15 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Movement::clas
         if (isAxisInputInDeadZone(stickInput)) {
             stickInput = Vector2.Zero
         }
-        val playerMovement = player.movement
+        val transform = player.transform
+        val movement = player.movement
         val spine = player.spine
         val direction = stickInput
-        playerMovement.direction = direction
+
+        movement.direction = direction
+        if (direction.isNotZero) {
+            transform.forward.set(direction)
+        }
         playAnimation(spine, direction)
     }
 

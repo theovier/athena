@@ -12,9 +12,7 @@ import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
-import mu.KotlinLogging
 
-private val log = KotlinLogging.logger {}
 class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false

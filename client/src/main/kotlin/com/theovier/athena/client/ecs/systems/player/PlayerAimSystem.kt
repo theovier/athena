@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.inputs.XboxInputAdapter.Companion.isAxisInputInDeadZone
+import com.theovier.athena.client.math.isNotZero
 import com.theovier.athena.client.math.xy
 import ktx.ashley.allOf
 import ktx.math.plus
@@ -27,16 +28,18 @@ class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transfo
         if (isAxisInputInDeadZone(stickInput)) {
             stickInput = Vector2.Zero
         }
-        val playerPosition = player.transform.position.xy
+        val transform = player.transform
+        val playerPosition = transform.position.xy
         val targetPositionRelativeToPlayer = stickInput * player.aim.maxDistanceToPlayer
         player.aim.targetPosition = playerPosition + targetPositionRelativeToPlayer
 
         val direction = stickInput.nor()
-        val isAiming = !direction.isZero
+        val isAiming = direction.isNotZero
         player.aim.isCurrentlyAiming = isAiming
 
         if (isAiming) {
             player.aim.direction = direction
+            transform.forward.set(direction)
         }
     }
 

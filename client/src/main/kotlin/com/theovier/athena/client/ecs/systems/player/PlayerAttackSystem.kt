@@ -12,12 +12,12 @@ import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
+import mu.KotlinLogging
 
+private val log = KotlinLogging.logger {}
 class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
-
-    //todo use weapons and dedicated components instead
     private var timeBetweenShots = 0.2f
     private var canNextFireInSeconds = 0f
 
@@ -57,9 +57,9 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         val slot = skeleton.findSlot("muzzle_flash")
         val muzzleFlash = slot.attachment as PointAttachment
         val origin = muzzleFlash.computeWorldPosition(weaponBone, Vector2(muzzleFlash.x, muzzleFlash.y))
-
-        //todo shoot in the direction that the muzzleFlash points to
-        spawnBullet(origin, shooter.aim.direction, shooter)
+        val weaponRotation = muzzleFlash.computeWorldRotation(weaponBone)
+        val shootingDirection = Vector2(1f,0f).rotateDeg(weaponRotation)
+        spawnBullet(origin, shootingDirection, shooter)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
     }

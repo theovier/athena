@@ -58,6 +58,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         val weaponRotation = muzzleFlash.computeWorldRotation(weaponBone)
         val shootingDirection = Vector2(1f,0f).rotateDeg(weaponRotation)
         spawnBullet(origin, shootingDirection, shooter)
+        shooter.trauma.trauma += 0.5f
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
     }

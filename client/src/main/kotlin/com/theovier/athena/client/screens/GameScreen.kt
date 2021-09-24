@@ -84,7 +84,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
-            addSystem(CameraMovementSystem(steadyReferenceCamera))
+            addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
+            addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
@@ -93,7 +94,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(WeaponRotationSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
             addSystem(PlayerAttackSystem())
-            addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())
             addSystem(HapticDamageFeedbackSystem())
@@ -126,6 +126,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun positionCamera() {
+        camera.position.set(crosshair.transform.position)
         steadyReferenceCamera.position.set(crosshair.transform.position)
     }
 

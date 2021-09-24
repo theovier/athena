@@ -35,6 +35,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "spine" to spineComponentLoader,
         "sprite" to spriteComponentLoader,
         "text" to TextComponentLoader(),
+        "trauma" to TraumaComponentLoader(),
         "transform" to TransformComponentLoader(),
     )
 

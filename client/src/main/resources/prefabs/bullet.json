@@ -12,7 +12,7 @@
     "amount": 1
   },
   "movement": {
-    "maxSpeed": 20,
+    "maxSpeed": 30,
     "acceleration": 250,
     "deceleration": 10
   },

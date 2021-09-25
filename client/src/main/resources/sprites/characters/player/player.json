@@ -1,10 +1,10 @@
 {
   "skeleton": {
-    "hash": "YAaZ2OBV0yI",
+    "hash": "imW5Cow/gic",
     "spine": "4.0.37",
     "x": -122.28,
     "y": -1.62,
-    "width": 351.95,
+    "width": 351.93,
     "height": 306.21,
     "images": "./sprites/default/",
     "audio": ""
@@ -54,6 +54,7 @@
     {
       "name": "weapon",
       "parent": "hips",
+      "rotation": -0.03,
       "x": 37.82,
       "y": 26.13,
       "scaleX": 0.591,
@@ -82,7 +83,7 @@
       "attachment": "head"
     },
     {
-      "name": "muzzle_flash_01",
+      "name": "muzzle_flash",
       "bone": "weapon"
     },
     {
@@ -96,9 +97,14 @@
       "attachment": "bullet_spawn"
     },
     {
-      "name": "muzzle_flash_spawn",
+      "name": "left_hand",
       "bone": "weapon",
-      "attachment": "muzzle_flash_spawn"
+      "attachment": "hand"
+    },
+    {
+      "name": "right_hand",
+      "bone": "weapon",
+      "attachment": "hand"
     }
   ],
   "skins": [
@@ -130,6 +136,15 @@
             "height": 179
           }
         },
+        "left_hand": {
+          "hand": {
+            "x": -30.84,
+            "y": -1.44,
+            "rotation": -20.36,
+            "width": 105,
+            "height": 97
+          }
+        },
         "leg_left": {
           "leg_left": {
             "x": 25.68,
@@ -148,21 +163,24 @@
             "height": 67
           }
         },
-        "muzzle_flash_01": {
+        "muzzle_flash": {
           "muzzle_flash_01": {
-            "x": 401.48,
-            "y": 36.72,
+            "x": 408.64,
+            "y": 38.53,
             "scaleX": 0.5,
             "scaleY": 0.5,
+            "rotation": 0.03,
             "width": 512,
             "height": 512
           }
         },
-        "muzzle_flash_spawn": {
-          "muzzle_flash_spawn": {
-            "type": "point",
-            "x": 306.24,
-            "y": 20
+        "right_hand": {
+          "hand": {
+            "x": 104.05,
+            "y": 7.83,
+            "rotation": -39.7,
+            "width": 105,
+            "height": 97
           }
         },
         "weapon": {
@@ -180,7 +198,7 @@
   "animations": {
     "fire": {
       "slots": {
-        "muzzle_flash_01": {
+        "muzzle_flash": {
           "attachment": [
             {
               "name": "muzzle_flash_01"

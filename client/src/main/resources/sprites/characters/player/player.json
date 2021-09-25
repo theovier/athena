@@ -1,10 +1,10 @@
 {
   "skeleton": {
-    "hash": "tZzZwj1jiDA",
-    "spine": "4.0.36",
+    "hash": "Csxedi4RYmI",
+    "spine": "4.0.37",
     "x": -122.28,
     "y": -1.62,
-    "width": 361.59,
+    "width": 351.95,
     "height": 306.21,
     "images": "./sprites/default/",
     "audio": ""
@@ -54,8 +54,7 @@
     {
       "name": "weapon",
       "parent": "hips",
-      "rotation": 0.69,
-      "x": 53.63,
+      "x": 37.82,
       "y": 26.13,
       "scaleX": 0.591,
       "scaleY": 0.591
@@ -136,13 +135,13 @@
         "muzzle_flash": {
           "muzzle_flash": {
             "type": "point",
-            "x": 331.92,
-            "y": 23.22
+            "x": 390.66,
+            "y": 31.86
           }
         },
         "weapon": {
           "rifle": {
-            "x": 78.67,
+            "x": 90.14,
             "y": -15.75,
             "rotation": 2.84,
             "width": 453,
@@ -321,6 +320,30 @@
               "time": 0.5667,
               "x": 1.037,
               "y": 0.943
+            },
+            {
+              "time": 0.6667
+            }
+          ]
+        },
+        "weapon": {
+          "translate": [
+            {},
+            {
+              "time": 0.1,
+              "y": -9.54
+            },
+            {
+              "time": 0.2333,
+              "y": 2.25
+            },
+            {
+              "time": 0.4333,
+              "y": -9.54
+            },
+            {
+              "time": 0.5667,
+              "y": 2.25
             },
             {
               "time": 0.6667

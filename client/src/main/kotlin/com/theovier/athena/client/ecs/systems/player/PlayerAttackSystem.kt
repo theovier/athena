@@ -11,7 +11,6 @@ import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
-import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.*
 import ktx.math.plus
@@ -72,7 +71,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         val spray = Vector2(sprayX, sprayY)
         val baseDirection = Vector2(1f,0f)
         val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
-        spawnMuzzleFlash(shooter.spine)
+        playFireAnimation(shooter.spine)
         spawnBullet(bulletSpawnOrigin, shootingDirection, shooter)
         applyTrauma(shooter)
         applyKnockBack(shooter)
@@ -80,8 +79,8 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         wantsToFire = false
     }
 
-    private fun spawnMuzzleFlash(spine: Spine) {
-        spine.state.playAnimationIfNotAlreadyPlaying(0, "fire")
+    private fun playFireAnimation(spine: Spine) {
+        spine.state.setAnimation(1, "fire", false)
     }
 
     private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {

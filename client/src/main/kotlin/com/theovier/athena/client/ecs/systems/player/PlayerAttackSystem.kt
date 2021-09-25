@@ -10,11 +10,12 @@ import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
+import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import com.theovier.athena.client.weapons.DamageSource
-import ktx.ashley.allOf
-import ktx.ashley.has
+import ktx.ashley.*
 import ktx.math.times
 import ktx.math.unaryMinus
+import kotlin.with
 
 class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Spine::class).get()) {
     private lateinit var currentController: Controller
@@ -56,16 +57,24 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     private fun fire(shooter: Entity) {
         val skeleton = shooter.spine.skeleton
         val weaponBone = skeleton.findBone("weapon")
-        val slot = skeleton.findSlot("muzzle_flash")
-        val muzzleFlash = slot.attachment as PointAttachment
-        val origin = muzzleFlash.computeWorldPosition(weaponBone, Vector2(muzzleFlash.x, muzzleFlash.y))
-        val weaponRotation = muzzleFlash.computeWorldRotation(weaponBone)
-        val shootingDirection = Vector2(1f,0f).rotateDeg(weaponRotation)
-        spawnBullet(origin, shootingDirection, shooter)
+        val bulletSpawnPointSlot = skeleton.findSlot("bullet_spawn")
+        val bulletSpawnPointAttachment = bulletSpawnPointSlot.attachment as PointAttachment
+        val bulletRotation = bulletSpawnPointAttachment.computeWorldRotation(weaponBone)
+        val bulletSpawnOrigin = bulletSpawnPointAttachment.computeWorldPosition(
+            weaponBone,
+            Vector2(bulletSpawnPointAttachment.x, bulletSpawnPointAttachment.y)
+        )
+        val shootingDirection = Vector2(1f,0f).rotateDeg(bulletRotation)
+        spawnMuzzleFlash(shooter.spine)
+        spawnBullet(bulletSpawnOrigin, shootingDirection, shooter)
         applyTrauma(shooter)
         applyKnockBack(shooter)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
+    }
+
+    private fun spawnMuzzleFlash(spine: Spine) {
+        spine.state.playAnimationIfNotAlreadyPlaying(0, "fire")
     }
 
     private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {

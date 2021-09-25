@@ -1,6 +1,6 @@
 {
   "skeleton": {
-    "hash": "Csxedi4RYmI",
+    "hash": "YAaZ2OBV0yI",
     "spine": "4.0.37",
     "x": -122.28,
     "y": -1.62,
@@ -82,14 +82,23 @@
       "attachment": "head"
     },
     {
+      "name": "muzzle_flash_01",
+      "bone": "weapon"
+    },
+    {
       "name": "weapon",
       "bone": "weapon",
       "attachment": "rifle"
     },
     {
-      "name": "muzzle_flash",
+      "name": "bullet_spawn",
       "bone": "weapon",
-      "attachment": "muzzle_flash"
+      "attachment": "bullet_spawn"
+    },
+    {
+      "name": "muzzle_flash_spawn",
+      "bone": "weapon",
+      "attachment": "muzzle_flash_spawn"
     }
   ],
   "skins": [
@@ -103,6 +112,13 @@
             "rotation": -88.85,
             "width": 129,
             "height": 96
+          }
+        },
+        "bullet_spawn": {
+          "bullet_spawn": {
+            "type": "point",
+            "x": 408.07,
+            "y": 20.66
           }
         },
         "head": {
@@ -132,11 +148,21 @@
             "height": 67
           }
         },
-        "muzzle_flash": {
-          "muzzle_flash": {
+        "muzzle_flash_01": {
+          "muzzle_flash_01": {
+            "x": 401.48,
+            "y": 36.72,
+            "scaleX": 0.5,
+            "scaleY": 0.5,
+            "width": 512,
+            "height": 512
+          }
+        },
+        "muzzle_flash_spawn": {
+          "muzzle_flash_spawn": {
             "type": "point",
-            "x": 390.66,
-            "y": 31.86
+            "x": 306.24,
+            "y": 20
           }
         },
         "weapon": {
@@ -152,6 +178,21 @@
     }
   ],
   "animations": {
+    "fire": {
+      "slots": {
+        "muzzle_flash_01": {
+          "attachment": [
+            {
+              "name": "muzzle_flash_01"
+            },
+            {
+              "time": 0.1,
+              "name": null
+            }
+          ]
+        }
+      }
+    },
     "idle": {
       "bones": {
         "body": {

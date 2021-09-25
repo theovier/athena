@@ -29,10 +29,7 @@ class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter()
                 victim = a.userData as Entity
                 onHit(projectile, victim)
             }
-        } else {
-            return
         }
-        engine.removeEntity(projectile)
     }
 
     private fun hitAnotherEntity(other: Body): Boolean {
@@ -42,10 +39,15 @@ class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter()
     private fun onHit(projectile: Entity, victim: Entity) {
         if (projectile.has(DamageComponent.MAPPER)) {
             val damage = projectile.damageComponent.damage
+            val isSelfHit = damage.source?.owner == victim
+            if (isSelfHit) {
+                return
+            }
             if (victim.hasNoHitMarkerComponent) {
                 victim.add(HitMarker())
             }
             victim.hitmarker.onHit(damage)
         }
+        engine.removeEntity(projectile)
     }
 }

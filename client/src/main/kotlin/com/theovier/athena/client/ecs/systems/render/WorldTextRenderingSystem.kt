@@ -23,7 +23,8 @@ class WorldTextRenderingSystem(private val batch: Batch) : IteratingSystem(allOf
     private val font: BitmapFont
 
     init {
-        val generator = assets.loadSync<FreeTypeFontGenerator>("fonts/open-sans.regular.ttf")
+        //ReallyFree-ALwl7
+        val generator = assets.loadSync<FreeTypeFontGenerator>("fonts/bangers.ttf")
         font = generator.generateFont {
             size = FONT_SIZE
         }.apply {

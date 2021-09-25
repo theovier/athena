@@ -12,11 +12,15 @@ import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
+import ktx.ashley.has
+import ktx.math.times
+import ktx.math.unaryMinus
 
 class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Spine::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
     private var timeBetweenShots = 0.2f
+    private val knockBackForce = 1f
     private var canNextFireInSeconds = 0f
 
     override fun addedToEngine(engine: Engine?) {
@@ -58,7 +62,8 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         val weaponRotation = muzzleFlash.computeWorldRotation(weaponBone)
         val shootingDirection = Vector2(1f,0f).rotateDeg(weaponRotation)
         spawnBullet(origin, shootingDirection, shooter)
-        shooter.trauma.trauma += 0.5f
+        applyTrauma(shooter)
+        applyKnockBack(shooter)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
     }
@@ -77,6 +82,21 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
             }
         }
         engine.addEntity(bullet)
+    }
+
+    private fun applyTrauma(shooter: Entity) {
+        if (shooter.hasTraumaComponent) {
+            shooter.trauma.trauma += 0.5f
+        }
+    }
+
+    private fun applyKnockBack(shooter: Entity) {
+        if (shooter.hasPhysicsComponent) {
+            val position = shooter.transform.position
+            val knockBackDirection = -shooter.transform.forward
+            val knockBack = knockBackDirection * knockBackForce
+            shooter.physics.body.applyLinearImpulse(knockBack.x, knockBack.y, position.x, position.y, true)
+        }
     }
 
     companion object {

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Pool.Poolable
 import ktx.ashley.get
+import ktx.ashley.has
 import ktx.ashley.mapperFor
 
 /**
@@ -37,3 +38,6 @@ class Trauma : Component, Poolable {
 
 val Entity.trauma: Trauma
     get() = this[Trauma.MAPPER] ?: throw GdxRuntimeException("Trauma component for entity '$this' is null")
+
+val Entity.hasTraumaComponent: Boolean
+    get() = this.has(Trauma.MAPPER)

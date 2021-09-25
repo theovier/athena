@@ -63,3 +63,6 @@ Please note that since the Spine Runtime dependency is used, this part of the pr
 
 ### Audio Files (Teeworlds)
 Some audio files (namely `gun_fire-01.ogg`, `gun_fire-02.ogg` and `gun_fire-03.ogg`) are converted versions of the [Teeworlds' Sound Effects](https://github.com/teeworlds/teeworlds/tree/master/datasrc/audio) which are licenced under the [CC-BY-SA 3.0](https://github.com/teeworlds/teeworlds/blob/master/license.txt) 
+
+### [Banger Font](https://www.1001fonts.com/bangers-font.html)
+The used [banger font](https://www.1001fonts.com/bangers-font.html) is licenced under the [SIL Open Font Licence (OFL)](http://scripts.sil.org/OFL).

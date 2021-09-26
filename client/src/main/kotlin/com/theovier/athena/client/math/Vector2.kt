@@ -15,3 +15,6 @@ fun clampMagnitude(vector: Vector2, maxLength: Float): Vector2 {
     return vector
 }
 
+val Vector2.isNotZero: Boolean
+        get() = !this.isZero
+

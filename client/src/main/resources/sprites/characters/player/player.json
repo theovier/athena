@@ -1,10 +1,10 @@
 {
   "skeleton": {
-    "hash": "UsZyLgHJtc8",
-    "spine": "4.0.23",
+    "hash": "imW5Cow/gic",
+    "spine": "4.0.37",
     "x": -122.28,
     "y": -1.62,
-    "width": 270,
+    "width": 351.93,
     "height": 306.21,
     "images": "./sprites/default/",
     "audio": ""
@@ -50,6 +50,15 @@
       "rotation": -81.71,
       "x": 24.96,
       "y": -9.5
+    },
+    {
+      "name": "weapon",
+      "parent": "hips",
+      "rotation": -0.03,
+      "x": 37.82,
+      "y": 26.13,
+      "scaleX": 0.591,
+      "scaleY": 0.591
     }
   ],
   "slots": [
@@ -72,6 +81,30 @@
       "name": "head",
       "bone": "head",
       "attachment": "head"
+    },
+    {
+      "name": "muzzle_flash",
+      "bone": "weapon"
+    },
+    {
+      "name": "weapon",
+      "bone": "weapon",
+      "attachment": "rifle"
+    },
+    {
+      "name": "bullet_spawn",
+      "bone": "weapon",
+      "attachment": "bullet_spawn"
+    },
+    {
+      "name": "left_hand",
+      "bone": "weapon",
+      "attachment": "hand"
+    },
+    {
+      "name": "right_hand",
+      "bone": "weapon",
+      "attachment": "hand"
     }
   ],
   "skins": [
@@ -87,6 +120,13 @@
             "height": 96
           }
         },
+        "bullet_spawn": {
+          "bullet_spawn": {
+            "type": "point",
+            "x": 408.07,
+            "y": 20.66
+          }
+        },
         "head": {
           "head": {
             "x": 79.21,
@@ -94,6 +134,15 @@
             "rotation": -89.26,
             "width": 270,
             "height": 179
+          }
+        },
+        "left_hand": {
+          "hand": {
+            "x": -30.84,
+            "y": -1.44,
+            "rotation": -20.36,
+            "width": 105,
+            "height": 97
           }
         },
         "leg_left": {
@@ -113,11 +162,55 @@
             "width": 34,
             "height": 67
           }
+        },
+        "muzzle_flash": {
+          "muzzle_flash_01": {
+            "x": 408.64,
+            "y": 38.53,
+            "scaleX": 0.5,
+            "scaleY": 0.5,
+            "rotation": 0.03,
+            "width": 512,
+            "height": 512
+          }
+        },
+        "right_hand": {
+          "hand": {
+            "x": 104.05,
+            "y": 7.83,
+            "rotation": -39.7,
+            "width": 105,
+            "height": 97
+          }
+        },
+        "weapon": {
+          "rifle": {
+            "x": 90.14,
+            "y": -15.75,
+            "rotation": 2.84,
+            "width": 453,
+            "height": 164
+          }
         }
       }
     }
   ],
   "animations": {
+    "fire": {
+      "slots": {
+        "muzzle_flash": {
+          "attachment": [
+            {
+              "name": "muzzle_flash_01"
+            },
+            {
+              "time": 0.1,
+              "name": null
+            }
+          ]
+        }
+      }
+    },
     "idle": {
       "bones": {
         "body": {
@@ -156,6 +249,18 @@
             {
               "time": 0.5,
               "x": 1.03
+            },
+            {
+              "time": 0.6667
+            }
+          ]
+        },
+        "weapon": {
+          "translate": [
+            {},
+            {
+              "time": 0.3333,
+              "y": 5.6
             },
             {
               "time": 0.6667
@@ -274,6 +379,30 @@
               "time": 0.5667,
               "x": 1.037,
               "y": 0.943
+            },
+            {
+              "time": 0.6667
+            }
+          ]
+        },
+        "weapon": {
+          "translate": [
+            {},
+            {
+              "time": 0.1,
+              "y": -9.54
+            },
+            {
+              "time": 0.2333,
+              "y": 2.25
+            },
+            {
+              "time": 0.4333,
+              "y": -9.54
+            },
+            {
+              "time": 0.5667,
+              "y": 2.25
             },
             {
               "time": 0.6667

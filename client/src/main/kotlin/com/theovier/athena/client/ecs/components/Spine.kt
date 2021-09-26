@@ -14,6 +14,8 @@ import ktx.ashley.has
 class Spine : Component {
     lateinit var skeleton: Skeleton
     lateinit var state: AnimationState
+    val weaponBone: Bone
+        get() = skeleton.findBone("weapon")
     var damageIndicatorSlotNames = arrayOf<String>()
     val hasDamageIndicator: Boolean
         get() = damageIndicatorSlotNames.isNotEmpty()

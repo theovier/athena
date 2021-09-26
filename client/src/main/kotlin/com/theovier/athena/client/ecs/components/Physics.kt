@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Pool.Poolable
 import ktx.ashley.get
+import ktx.ashley.has
 import ktx.ashley.mapperFor
 
 class Physics : Component, Poolable {
@@ -23,3 +24,6 @@ class Physics : Component, Poolable {
 
 val Entity.physics: Physics
     get() = this[Physics.MAPPER] ?: throw GdxRuntimeException("Body for entity '$this' is null")
+
+val Entity.hasPhysicsComponent: Boolean
+    get() = this.has(Physics.MAPPER)

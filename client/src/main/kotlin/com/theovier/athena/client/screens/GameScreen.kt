@@ -21,6 +21,7 @@ import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
+import com.theovier.athena.client.ecs.systems.player.FacingSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerAimSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
@@ -83,14 +84,16 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
-            addSystem(CameraMovementSystem(steadyReferenceCamera))
+            addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
+            addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
+            addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
+            addSystem(WeaponRotationSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
             addSystem(PlayerAttackSystem())
-            addSystem(CameraShakeSystem(steadyReferenceCamera, camera))
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())
             addSystem(HapticDamageFeedbackSystem())
@@ -123,6 +126,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun positionCamera() {
+        camera.position.set(crosshair.transform.position)
         steadyReferenceCamera.position.set(crosshair.transform.position)
     }
 

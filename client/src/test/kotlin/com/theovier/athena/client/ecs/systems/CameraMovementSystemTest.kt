@@ -37,7 +37,7 @@ class CameraMovementSystemTest {
     fun cameraFollowsTarget() {
         val engine = Engine().apply {
             addSystem(MovementSystem())
-            addSystem(CameraMovementSystem(camera))
+            addSystem(CameraMovementSystem(camera, camera))
             entity{
                 with<CameraTarget>()
                 with<Transform> {
@@ -58,7 +58,7 @@ class CameraMovementSystemTest {
     @DisplayName("Camera does not move when entity with <CameraTarget> component is standing still")
     fun cameraDoesNotMoveWhenTargetIsStandingStill() {
         val engine = Engine().apply {
-            addSystem(CameraMovementSystem(camera))
+            addSystem(CameraMovementSystem(camera, camera))
             entity {
                 with<CameraTarget>()
                 with<Transform> {

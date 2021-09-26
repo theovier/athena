@@ -8,6 +8,11 @@
       "y": 2
     }
   },
+  "trauma": {
+    "maxOffsetTranslation": 0.1,
+    "maxOffsetRotation": 1,
+    "reductionFactor": 0.8
+  },
   "movement": {
     "maxSpeed": 8,
     "acceleration": 250,

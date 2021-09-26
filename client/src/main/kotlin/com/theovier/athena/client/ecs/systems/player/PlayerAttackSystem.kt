@@ -5,19 +5,25 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
+import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import com.theovier.athena.client.weapons.DamageSource
-import ktx.ashley.allOf
+import ktx.ashley.*
+import ktx.math.plus
+import ktx.math.times
+import ktx.math.unaryMinus
+import kotlin.with
 
-class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Aim::class, Spine::class).get()) {
+class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class, Spine::class).get()) {
     private lateinit var currentController: Controller
     private var wantsToFire = false
-
-    //todo use weapons and dedicated components instead
     private var timeBetweenShots = 0.2f
+    private val knockBackForce = 1f
+    private val maxSpray = Vector2(0.125f, 0.125f)
     private var canNextFireInSeconds = 0f
 
     override fun addedToEngine(engine: Engine?) {
@@ -51,11 +57,30 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
     }
 
     private fun fire(shooter: Entity) {
-        val headBone = shooter.spine.skeleton.findBone("head")
-        val origin = Vector2(headBone.worldX, headBone.worldY)
-        spawnBullet(origin, shooter.aim.direction, shooter)
+        val skeleton = shooter.spine.skeleton
+        val weaponBone = skeleton.findBone("weapon")
+        val bulletSpawnPointSlot = skeleton.findSlot("bullet_spawn")
+        val bulletSpawnPointAttachment = bulletSpawnPointSlot.attachment as PointAttachment
+        val bulletRotation = bulletSpawnPointAttachment.computeWorldRotation(weaponBone)
+        val bulletSpawnOrigin = bulletSpawnPointAttachment.computeWorldPosition(
+            weaponBone,
+            Vector2(bulletSpawnPointAttachment.x, bulletSpawnPointAttachment.y)
+        )
+        val sprayX = MathUtils.random(-maxSpray.x, maxSpray.x)
+        val sprayY = MathUtils.random(-maxSpray.y, maxSpray.y)
+        val spray = Vector2(sprayX, sprayY)
+        val baseDirection = Vector2(1f,0f)
+        val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
+        playFireAnimation(shooter.spine)
+        spawnBullet(bulletSpawnOrigin, shootingDirection, shooter)
+        applyTrauma(shooter)
+        applyKnockBack(shooter)
         canNextFireInSeconds = timeBetweenShots
         wantsToFire = false
+    }
+
+    private fun playFireAnimation(spine: Spine) {
+        spine.state.setAnimation(1, "fire", false)
     }
 
     private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {
@@ -65,13 +90,28 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
             }
             with(physics) {
                 body.isBullet = true
-                body.setTransform(Vector2(origin.x, origin.y + 2f), direction.angleRad())
+                body.setTransform(Vector2(origin.x, origin.y), direction.angleRad())
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)
             }
         }
         engine.addEntity(bullet)
+    }
+
+    private fun applyTrauma(shooter: Entity) {
+        if (shooter.hasTraumaComponent) {
+            shooter.trauma.trauma += 0.5f
+        }
+    }
+
+    private fun applyKnockBack(shooter: Entity) {
+        if (shooter.hasPhysicsComponent) {
+            val position = shooter.transform.position
+            val knockBackDirection = -shooter.transform.forward
+            val knockBack = knockBackDirection * knockBackForce
+            shooter.physics.body.applyLinearImpulse(knockBack.x, knockBack.y, position.x, position.y, true)
+        }
     }
 
     companion object {

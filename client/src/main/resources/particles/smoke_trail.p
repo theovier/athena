@@ -1,6 +1,8 @@
 smoke_trail
 - Delay -
-active: false
+active: true
+lowMin: 50.0
+lowMax: 50.0
 - Duration - 
 lowMin: 10000.0
 lowMax: 10000.0

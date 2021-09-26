@@ -72,7 +72,7 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
         val baseDirection = Vector2(1f,0f)
         val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
         playFireAnimation(shooter.spine)
-        spawnBullet(bulletSpawnOrigin, shootingDirection, shooter)
+        spawnBullet(bulletSpawnOrigin, shootingDirection.nor(), shooter)
         applyTrauma(shooter)
         applyKnockBack(shooter)
         canNextFireInSeconds = timeBetweenShots
@@ -85,6 +85,9 @@ class PlayerAttackSystem : XboxInputAdapter, IteratingSystem(allOf(Player::class
 
     private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {
         val bullet = Prefab.instantiate(BULLET_ENTITY) {
+            with(transform) {
+                forward.set(direction)
+            }
             with(movement) {
                 this.direction = direction
             }

@@ -38,9 +38,6 @@ fun main() {
         single { Input() }
         single { GameScreen(get()) }
         single { PhysicsSystem(get()) }
-        single { InputSystem(get()) }
-        single { PlayerAttackSystem(get()) }
-        single { PlayerMovementSystem(get()) }
         single { MapComponentLoader(get()) }
         single { SpineComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }

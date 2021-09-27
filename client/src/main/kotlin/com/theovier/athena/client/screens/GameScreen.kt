@@ -1,5 +1,6 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -10,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
@@ -27,7 +29,10 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
+import ktx.ashley.add
 import ktx.ashley.allOf
+import ktx.ashley.entity
+import ktx.ashley.with
 import ktx.scene2d.*
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
@@ -47,9 +52,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val batch = SpriteBatch()
 
     //injected systems
-    private val inputSystem: InputSystem by inject()
-    private val playerAttackSystem: PlayerAttackSystem by inject()
-    private val playerMovementSystem: PlayerMovementSystem by inject()
     private val physicsSystem: PhysicsSystem by inject()
 
     //Debug UI
@@ -60,11 +62,20 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private lateinit var debugLabelPlayerPosition: Label
 
     init {
+        initSingletonComponents()
         initSystems()
         initListeners()
         initEntities()
         initDebugUI()
         positionCamera()
+    }
+
+    private fun initSingletonComponents() {
+        engine.apply {
+            entity {
+                with<Input>()
+            }
+        }
     }
 
     private fun initEntities() {
@@ -76,7 +87,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initSystems() {
         engine.apply {
-            addSystem(inputSystem)
+            addSystem(InputSystem())
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
             addSystem(
@@ -92,12 +103,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PhysicMovementSystem())
-            addSystem(playerMovementSystem)
+            addSystem(PlayerMovementSystem())
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
-            addSystem(playerAttackSystem)
+            addSystem(PlayerAttackSystem())
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())
             addSystem(HapticDamageFeedbackSystem())

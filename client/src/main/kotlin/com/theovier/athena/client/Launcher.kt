@@ -5,8 +5,12 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
+import com.theovier.athena.client.ecs.components.Input
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
+import com.theovier.athena.client.ecs.systems.InputSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
+import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
+import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.loaders.spine.AnimationStateDataLoader
 import com.theovier.athena.client.loaders.spine.SkeletonDataLoader
 import com.theovier.athena.client.screens.GameScreen
@@ -31,8 +35,12 @@ fun main() {
     val module = module {
         single { assets }
         single { World(Vector2.Zero, true) }
+        single { Input() }
         single { GameScreen(get()) }
         single { PhysicsSystem(get()) }
+        single { InputSystem(get()) }
+        single { PlayerAttackSystem(get()) }
+        single { PlayerMovementSystem(get()) }
         single { MapComponentLoader(get()) }
         single { SpineComponentLoader(get()) }
         single { SpriteComponentLoader(get()) }

@@ -47,6 +47,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val batch = SpriteBatch()
 
     //injected systems
+    private val inputSystem: InputSystem by inject()
+    private val playerAttackSystem: PlayerAttackSystem by inject()
+    private val playerMovementSystem: PlayerMovementSystem by inject()
     private val physicsSystem: PhysicsSystem by inject()
 
     //Debug UI
@@ -73,6 +76,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initSystems() {
         engine.apply {
+            addSystem(inputSystem)
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
             addSystem(
@@ -88,12 +92,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
             addSystem(MovementSystem())
             addSystem(PhysicMovementSystem())
-            addSystem(PlayerMovementSystem())
+            addSystem(playerMovementSystem)
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
-            addSystem(PlayerAttackSystem())
+            addSystem(playerAttackSystem)
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())
             addSystem(HapticDamageFeedbackSystem())

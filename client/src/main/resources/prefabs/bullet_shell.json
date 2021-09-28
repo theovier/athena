@@ -1,0 +1,11 @@
+{
+  "transform": {
+    "size": {
+      "x": 0.4,
+      "y": 0.2
+    }
+  },
+  "sprite": {
+    "texture": "sprites/bullet_shell.png"
+  }
+}

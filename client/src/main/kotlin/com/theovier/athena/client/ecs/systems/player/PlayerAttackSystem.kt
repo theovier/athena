@@ -59,6 +59,13 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
         val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
         playFireAnimation(shooter.spine)
         spawnBullet(bulletSpawnOrigin, shootingDirection.nor(), shooter)
+
+
+        val shellSpawnSlot = skeleton.findSlot("shell_spawn")
+        val shellSpawnPoint = shellSpawnSlot.attachment as PointAttachment
+        val shellSpawn = shellSpawnPoint.computeWorldPosition(weaponBone, Vector2(shellSpawnPoint.x, shellSpawnPoint.y))
+        spawnBulletShell(shellSpawn, shootingDirection.nor())
+
         applyTrauma(shooter)
         applyKnockBack(shooter)
         canNextFireInSeconds = timeBetweenShots
@@ -85,6 +92,24 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
             }
         }
         engine.addEntity(bullet)
+    }
+
+    private fun spawnBulletShell(origin: Vector2, direction: Vector2) {
+        val shell = Prefab.instantiate("bullet_shell") {
+            with(transform) {
+                position.set(origin, 0f)
+            }
+        }
+        val demo = Demo().apply {
+            this.origin.set(origin)
+            if (direction.x <= 0) {
+                velocity.x *= -1
+            }
+        }
+
+        shell.add(demo)
+        shell.add(Spin())
+        engine.addEntity(shell)
     }
 
     private fun applyTrauma(shooter: Entity) {

@@ -14,7 +14,7 @@ class MovementSystem : IteratingSystem(allOf(Movement::class, Transform::class).
         val transform = entity.transform
         val movement = entity.movement
         if (movement.hasMovementInput) {
-            movement.updateVelocity(deltaTime)
+            movement.updateVelocity(deltaTime) //todo should be done by a different system?
             transform.position.set(transform.position + movement.velocity * deltaTime)
         }
     }

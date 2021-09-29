@@ -19,8 +19,32 @@
     "texture": "sprites/bullet_shell.png"
   },
   "sound": {
-    "file": "audio/gun_shell_hitting_ground_01.ogg",
-    "volume": 0.1
+    "choice": [
+      {
+        "file": "audio/gun_shell_hitting_ground_01.ogg",
+        "volume": 0.05
+      },
+      {
+        "file": "audio/gun_shell_hitting_ground_02.ogg",
+        "volume": 0.05
+      },
+      {
+        "file": "audio/gun_shell_hitting_ground_03.ogg",
+        "volume": 0.05
+      },
+      {
+        "file": "audio/gun_shell_hitting_ground_04.ogg",
+        "volume": 0.05
+      },
+      {
+        "file": "audio/gun_shell_hitting_ground_05.ogg",
+        "volume": 0.05
+      },
+      {
+        "file": "audio/gun_shell_hitting_ground_06.ogg",
+        "volume": 0.05
+      }
+    ]
   },
   "ignoreAudio": {}
 }

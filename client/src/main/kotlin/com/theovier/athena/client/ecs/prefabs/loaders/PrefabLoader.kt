@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.components.PostponeAudio
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import ktx.ashley.plusAssign
 import mu.KotlinLogging
@@ -35,7 +34,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "particle" to ParticleComponentLoader(),
         "physics" to physicsComponentLoader,
         "player" to PlayerComponentLoader(),
-        "postponeAudio" to PostponeAudioComponentLoader(),
+        "ignoreAudio" to IgnoreAudioComponentLoader(),
         "sound" to soundComponentLoader,
         "spin" to SpinComponentLoader(),
         "spine" to spineComponentLoader,

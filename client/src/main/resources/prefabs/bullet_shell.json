@@ -22,5 +22,5 @@
     "file": "audio/gun_shell_hitting_ground_01.ogg",
     "volume": 0.1
   },
-  "postponeAudio": {}
+  "ignoreAudio": {}
 }

@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-class PostponeAudioComponentLoaderTest  {
+class IgnoreAudioComponentLoaderTest  {
 
     @Test
-    @DisplayName("Empty <PostponeAudio> component is loaded correctly")
+    @DisplayName("Empty <IgnoreAudio> component is loaded correctly")
     fun isEmptyComponentLoaded() {
-        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/aim/aim_valid")
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/ignoreAudio/ignoreAudio_valid")
         Assertions.assertDoesNotThrow {
-            PostponeAudioComponentLoader().load(json)
+            IgnoreAudioComponentLoader().load(json)
         }
     }
 }

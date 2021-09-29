@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.movement.direction
+import com.theovier.athena.client.ecs.components.movement.velocity
 import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.weapons.DamageSource
@@ -75,17 +77,17 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
         spine.state.setAnimation(1, "fire", false)
     }
 
-    private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {
+    private fun spawnBullet(origin: Vector2, shootingDirection: Vector2, shooter: Entity) {
         val bullet = Prefab.instantiate(BULLET_ENTITY) {
             with(transform) {
-                forward.set(direction)
+                forward.set(shootingDirection)
             }
-            with(movement) {
-                this.direction = direction
+            with(direction) {
+                direction = shootingDirection
             }
             with(physics) {
                 body.isBullet = true
-                body.setTransform(Vector2(origin.x, origin.y), direction.angleRad())
+                body.setTransform(Vector2(origin.x, origin.y), shootingDirection.angleRad())
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)
@@ -99,16 +101,17 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
             with(transform) {
                 position.set(origin, 0f)
             }
-        }
-        val demo = Demo().apply {
-            this.origin.set(origin)
-            if (direction.x <= 0) {
-                velocity.x *= -1
+            with(travel) {
+                this.origin.set(origin)
+            }
+            with(velocity) {
+                velocity.x = MathUtils.random(-5f, -10f)
+                velocity.y = MathUtils.random(5f, 10f)
+                if (direction.x <= 0) {
+                    velocity.x *= -1
+                }
             }
         }
-
-        shell.add(demo)
-        shell.add(Spin())
         engine.addEntity(shell)
     }
 

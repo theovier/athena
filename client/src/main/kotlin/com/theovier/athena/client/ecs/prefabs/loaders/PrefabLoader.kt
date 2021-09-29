@@ -19,24 +19,30 @@ class PrefabLoader : EntityLoader, KoinComponent {
     private val spineComponentLoader by inject<SpineComponentLoader>()
 
     private val componentLoaders = mapOf(
+        "acceleration" to AccelerationComponentLoader(),
         "aim" to AimComponentLoader(),
         "cameraTarget" to CameraTargetComponentLoader(),
         "crosshair" to CrosshairComponentLoader(),
         "damage" to DamageComponentLoader(),
+        "direction" to DirectionComponentLoader(),
+        "friction" to FrictionComponentLoader(),
         "health" to HealthComponentLoader(),
         "invincible" to InvincibleComponentLoader(),
         "lifetime" to LifetimeComponentLoader(),
         "map" to mapComponentLoader,
-        "movement" to MovementComponentLoader(),
         "particle" to ParticleComponentLoader(),
         "physics" to physicsComponentLoader,
         "player" to PlayerComponentLoader(),
         "sound" to soundComponentLoader,
+        "spin" to SpinComponentLoader(),
         "spine" to spineComponentLoader,
         "sprite" to spriteComponentLoader,
         "text" to TextComponentLoader(),
+        "timer" to TimerComponentLoader(),
         "trauma" to TraumaComponentLoader(),
         "transform" to TransformComponentLoader(),
+        "travel" to TravelComponentLoader(),
+        "velocity" to VelocityComponentLoader()
     )
 
     override fun load(fileName: String, configure: Entity.() -> Unit): Entity {

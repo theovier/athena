@@ -10,15 +10,15 @@ class MovementTest {
         const val DELTA_TIME = 0.1f
     }
 
-    @Test
-    @DisplayName("Is Stopping when nearly standing still")
-    fun isStoppingWhenNearlyStandingStill() {
-        val movement = Movement()
-        val velocity = Vector2(5f, 0f)
-        movement.velocity = velocity
-        movement.standingStillThreshold = velocity.len2()
-        movement.updateVelocity(DELTA_TIME)
-        Assertions.assertTrue(movement.isNearlyStandingStill)
-        Assertions.assertTrue(movement.velocity == Vector2.Zero)
-    }
+//    @Test
+//    @DisplayName("Is Stopping when nearly standing still")
+//    fun isStoppingWhenNearlyStandingStill() {
+//        val movement = Movement()
+//        val velocity = Vector2(5f, 0f)
+//        movement.velocity = velocity
+//        movement.standingStillThreshold = velocity.len2()
+//        movement.updateVelocity(DELTA_TIME)
+//        Assertions.assertTrue(movement.isNearlyStandingStill)
+//        Assertions.assertTrue(movement.velocity == Vector2.Zero)
+//    }
 }

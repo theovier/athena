@@ -11,10 +11,12 @@
   "damage": {
     "amount": 1
   },
-  "movement": {
-    "maxSpeed": 30,
-    "acceleration": 250,
-    "deceleration": 10
+  "direction": {},
+  "velocity": {
+    "maxSpeed": 30
+  },
+  "acceleration": {
+    "factor": 250
   },
   "sound": {
     "choice": [

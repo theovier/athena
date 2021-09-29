@@ -1,6 +1,5 @@
 package com.theovier.athena.client.screens
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -11,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
@@ -21,6 +19,9 @@ import com.theovier.athena.client.ecs.systems.cleanup.CleanupSoundSystem
 import com.theovier.athena.client.ecs.systems.damage.DamageIndicatorSystem
 import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
+import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
+import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
+import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.FacingSystem
@@ -29,7 +30,6 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
-import ktx.ashley.add
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -101,7 +101,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 })
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
-//            addSystem(MovementSystem())
+            addSystem(AccelerationSystem())
+            addSystem(FrictionSystem())
+            addSystem(MovementSystem())
+            addSystem(BulletShellEjectionSystem())
             addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
@@ -115,7 +118,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HapticDamageFeedbackSystem())
             addSystem(HealthSystem())
             addSystem(SoundSystem())
-            addSystem(BulletShellEjectionSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
             //addSystem(PhysicsDebugSystem(world, camera))

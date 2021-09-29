@@ -7,9 +7,14 @@
   },
   "crosshair": {},
   "cameraTarget": {},
-  "movement": {
-    "maxSpeed": 22,
-    "acceleration": 250,
-    "deceleration": 10
+  "direction": {},
+  "velocity": {
+    "maxSpeed": 22
+  },
+  "acceleration": {
+    "factor": 250
+  },
+  "friction": {
+    "factor": 10
   }
 }

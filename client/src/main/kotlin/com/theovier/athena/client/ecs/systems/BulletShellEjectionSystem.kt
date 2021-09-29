@@ -2,36 +2,42 @@ package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.movement.Acceleration
+import com.theovier.athena.client.ecs.components.movement.Velocity
+import com.theovier.athena.client.ecs.components.movement.acceleration
+import com.theovier.athena.client.ecs.components.movement.velocity
 import ktx.ashley.allOf
-import ktx.math.plus
-import ktx.math.times
 
-class BulletShellEjectionSystem : IteratingSystem(allOf(Transform::class, Demo::class).get()) {
+class BulletShellEjectionSystem : IteratingSystem(
+    allOf(Transform::class, Velocity::class, Acceleration::class, Timer::class, Travel::class).get()
+) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity.transform
-        val shell = entity.getComponent(Demo::class.java)
+        val velocity = entity.velocity
+        val acceleration = entity.acceleration
+        val timer = entity.timer
+        val travel = entity.travel
 
-        shell.velocityTime += deltaTime
-
-        if (shell.velocity.len2() < shell.standingStillThreshold) {
-            shell.velocity.set(Vector2(0f, 0f))
+        if (velocity.isNearlyStandingStill) {
             entity.remove(Spin::class.java)
-            entity.remove(Demo::class.java)
+            entity.remove(Velocity::class.java)
+            entity.remove(Acceleration::class.java)
+            entity.remove(Timer::class.java)
+            entity.remove(Travel::class.java)
             return
         }
 
-        if (transform.position.y <= shell.origin.y - 1f && shell.velocity.y < 0) {
-            shell.velocity.y *= -0.25f
-            shell.velocity.x *= 0.25f
-            shell.velocityTime = 0f
-        } else {
-            shell.velocity.y += shell.acceleration * shell.velocityTime
-        }
+        timer.millisSinceStart += deltaTime
 
-        //todo how to let this do the movement system?
-        transform.position.set(transform.position + shell.velocity * deltaTime)
+        val hasShellTouchedGround = travel.origin.y - travel.maxTravelDistance.y >= transform.position.y
+        if (hasShellTouchedGround && velocity.velocity.y < 0) {
+            velocity.velocity.y *= -0.25f
+            velocity.velocity.x *= 0.25f
+            timer.millisSinceStart = 0f
+        } else {
+            velocity.velocity.y += acceleration.accelerationFactor * timer.millisSinceStart
+        }
     }
 }

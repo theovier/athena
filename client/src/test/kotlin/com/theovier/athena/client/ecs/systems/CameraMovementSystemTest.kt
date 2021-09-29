@@ -2,11 +2,9 @@ package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.GdxNativesLoader
 import com.theovier.athena.client.ecs.components.CameraTarget
-import com.theovier.athena.client.ecs.components.Movement
 import com.theovier.athena.client.ecs.components.Transform
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -30,28 +28,6 @@ class CameraMovementSystemTest {
     fun reset() {
         camera = OrthographicCamera()
         camera.position.set(STARTING_POSITION)
-    }
-
-    @Test
-    @DisplayName("Camera follows entity with <CameraTarget> component")
-    fun cameraFollowsTarget() {
-        val engine = Engine().apply {
-            addSystem(MovementSystem())
-            addSystem(CameraMovementSystem(camera, camera))
-            entity{
-                with<CameraTarget>()
-                with<Transform> {
-                    position.set(STARTING_POSITION)
-                }
-                with<Movement> {
-                    maxSpeed = 10f
-                    accelerationFactor = 10f
-                    direction = Vector2.X
-                }
-            }
-        }
-        engine.update(DELTA_TIME * 20) //simulate multiple frames at once
-        Assertions.assertTrue(camera.position != STARTING_POSITION)
     }
 
     @Test

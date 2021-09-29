@@ -5,13 +5,15 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.movement.Direction
+import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.inputs.XboxInputAdapter.Companion.isAxisInputInDeadZone
 import com.theovier.athena.client.math.isNotZero
 import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Movement::class, Spine::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Direction::class, Spine::class).get()) {
     private lateinit var input: Input
 
     override fun addedToEngine(engine: Engine) {
@@ -25,11 +27,11 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::cla
             stickInput = Vector2.Zero
         }
         val transform = player.transform
-        val movement = player.movement
+        val directionComponent = player.direction
         val spine = player.spine
-        val direction = stickInput
 
-        movement.direction = direction
+        val direction = stickInput
+        directionComponent.direction = direction
         if (direction.isNotZero) {
             transform.forward.set(direction)
         }

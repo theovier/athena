@@ -8,15 +8,20 @@
       "y": 2
     }
   },
+  "direction": {},
+  "velocity": {
+    "maxSpeed": 8
+  },
+  "acceleration": {
+    "factor": 250
+  },
+  "friction": {
+    "factor": 10
+  },
   "trauma": {
     "maxOffsetTranslation": 0.1,
     "maxOffsetRotation": 1,
     "reductionFactor": 0.8
-  },
-  "movement": {
-    "maxSpeed": 8,
-    "acceleration": 250,
-    "deceleration": 10
   },
   "spine": {
     "atlas": "sprites/characters/player/player.atlas",

@@ -1,11 +1,10 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
-import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.movement.Velocity
 
 class VelocityComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Component {
+    override fun load(componentJSON: JsonValue): Velocity {
         return Velocity().apply {
             velocity.x = componentJSON.getFloat(VELOCITY_X, Velocity.DEFAULT_VELOCITY_X)
             velocity.y = componentJSON.getFloat(VELOCITY_Y, Velocity.DEFAULT_VELOCITY_Y)
@@ -20,5 +19,4 @@ class VelocityComponentLoader : ComponentLoader {
         const val MAX_SPEED = "maxSpeed"
         const val STANDING_STILL_THRESHOLD = "standingStillThreshold"
     }
-
 }

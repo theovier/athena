@@ -16,6 +16,8 @@ class MovementSystem : IteratingSystem(allOf(Transform::class, Velocity::class).
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity.transform
         val velocity = entity.velocity
-        transform.position.set(transform.position + velocity.velocity * deltaTime)
+        if (!velocity.isNearlyStandingStill) {
+            transform.position.set(transform.position + velocity.velocity * deltaTime)
+        }
     }
 }

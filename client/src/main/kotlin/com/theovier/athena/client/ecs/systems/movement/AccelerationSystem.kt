@@ -16,8 +16,5 @@ class AccelerationSystem : IteratingSystem(allOf(Velocity::class, Acceleration::
         val direction = entity.direction
         acceleration.acceleration.set(direction.direction * acceleration.accelerationFactor)
         velocity.velocity += acceleration.acceleration * deltaTime
-        if (velocity.isNearlyStandingStill) {
-            velocity.velocity = Vector2(0f, 0f)
-        }
     }
 }

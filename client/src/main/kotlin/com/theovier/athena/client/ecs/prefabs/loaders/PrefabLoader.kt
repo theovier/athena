@@ -25,6 +25,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "crosshair" to CrosshairComponentLoader(),
         "damage" to DamageComponentLoader(),
         "direction" to DirectionComponentLoader(),
+        "foreground" to ForegroundComponentLoader(),
         "friction" to FrictionComponentLoader(),
         "health" to HealthComponentLoader(),
         "invincible" to InvincibleComponentLoader(),

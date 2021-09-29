@@ -36,6 +36,7 @@ class BulletShellEjectionSystem : IteratingSystem(
             velocity.velocity.y *= -0.25f
             velocity.velocity.x *= 0.25f
             timer.millisSinceStart = 0f
+            entity.remove(Foreground::class.java) //let the shell now be rendered in the background instead
         } else {
             velocity.velocity.y += acceleration.accelerationFactor * timer.millisSinceStart
         }

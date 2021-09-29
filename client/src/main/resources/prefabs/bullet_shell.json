@@ -14,6 +14,7 @@
   },
   "travel": {},
   "timer": {},
+  "foreground": {},
   "sprite": {
     "texture": "sprites/bullet_shell.png"
   }

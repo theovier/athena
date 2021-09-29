@@ -37,6 +37,7 @@ class BulletShellEjectionSystem : IteratingSystem(
             velocity.velocity.x *= 0.25f
             timer.millisSinceStart = 0f
             entity.remove(Foreground::class.java) //let the shell now be rendered in the background instead
+            entity.remove(PostponeAudio::class.java) //allow the sound effect to play now
         } else {
             velocity.velocity.y += acceleration.accelerationFactor * timer.millisSinceStart
         }

@@ -26,6 +26,7 @@ Work in progress.
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_002.gif)
+![screenshot_002](screenshots/screenshot_003.gif)
 
 ## Building from Source
 This project uses **Maven 3** as its build management tool.

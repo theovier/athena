@@ -1,0 +1,15 @@
+{
+  "transform": {
+    "position": {
+      "x": 15,
+      "y": 14.5
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5
+    }
+  },
+  "sprite": {
+    "texture": "sprites/health_bar_filling.png"
+  }
+}

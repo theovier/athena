@@ -50,6 +50,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
     private val dummy = Prefab.instantiate("dummy")
+    private val frame = Prefab.instantiate("health_bar_frame")
+    private val filling = Prefab.instantiate("health_bar_filling")
     private val batch = SpriteBatch()
 
     //injected systems
@@ -85,6 +87,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.addEntity(map)
         engine.addEntity(crosshair)
         engine.addEntity(dummy)
+
+        //health bar demo
+        engine.addEntity(filling)
+        engine.addEntity(frame)
     }
 
     private fun initSystems() {

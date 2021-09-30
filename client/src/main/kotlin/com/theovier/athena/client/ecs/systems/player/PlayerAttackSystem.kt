@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.movement.direction
+import com.theovier.athena.client.ecs.components.movement.velocity
 import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.weapons.DamageSource
@@ -59,6 +61,13 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
         val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
         playFireAnimation(shooter.spine)
         spawnBullet(bulletSpawnOrigin, shootingDirection.nor(), shooter)
+
+
+        val shellSpawnSlot = skeleton.findSlot("shell_spawn")
+        val shellSpawnPoint = shellSpawnSlot.attachment as PointAttachment
+        val shellSpawn = shellSpawnPoint.computeWorldPosition(weaponBone, Vector2(shellSpawnPoint.x, shellSpawnPoint.y))
+        spawnBulletShell(shellSpawn, shootingDirection.nor())
+
         applyTrauma(shooter)
         applyKnockBack(shooter)
         canNextFireInSeconds = timeBetweenShots
@@ -68,23 +77,42 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
         spine.state.setAnimation(1, "fire", false)
     }
 
-    private fun spawnBullet(origin: Vector2, direction: Vector2, shooter: Entity) {
+    private fun spawnBullet(origin: Vector2, shootingDirection: Vector2, shooter: Entity) {
         val bullet = Prefab.instantiate(BULLET_ENTITY) {
             with(transform) {
-                forward.set(direction)
+                forward.set(shootingDirection)
             }
-            with(movement) {
-                this.direction = direction
+            with(direction) {
+                direction = shootingDirection
             }
             with(physics) {
                 body.isBullet = true
-                body.setTransform(Vector2(origin.x, origin.y), direction.angleRad())
+                body.setTransform(Vector2(origin.x, origin.y), shootingDirection.angleRad())
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)
             }
         }
         engine.addEntity(bullet)
+    }
+
+    private fun spawnBulletShell(origin: Vector2, direction: Vector2) {
+        val shell = Prefab.instantiate("bullet_shell") {
+            with(transform) {
+                position.set(origin, 0f)
+            }
+            with(travel) {
+                this.origin.set(origin)
+            }
+            with(velocity) {
+                velocity.x = MathUtils.random(-5f, -10f)
+                velocity.y = MathUtils.random(5f, 10f)
+                if (direction.x <= 0) {
+                    velocity.x *= -1
+                }
+            }
+        }
+        engine.addEntity(shell)
     }
 
     private fun applyTrauma(shooter: Entity) {

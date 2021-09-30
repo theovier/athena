@@ -1,0 +1,8 @@
+{
+  "velocity": {
+    "x": 1,
+    "y": 2,
+    "maxSpeed": 3,
+    "standingStillThreshold": 4
+  }
+}

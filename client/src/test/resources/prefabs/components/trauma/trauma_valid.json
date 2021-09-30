@@ -1,0 +1,7 @@
+{
+  "trauma": {
+    "maxOffsetRotation": 2,
+    "maxOffsetTranslation": 3,
+    "reductionFactor": 4
+  }
+}

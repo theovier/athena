@@ -55,6 +55,8 @@ Feel free to open up pull-requests or discuss issues with us either on GitHub or
 I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game as reference on how to get started with KTX.
 Also, I found [Sioncore](https://github.com/dsaltares/sioncore) to be a good read on how to develop modular LibGdx/KTX games.
 
+For the creation of the bullet shell effects, I found [Rowdy Lemon's Youtube tutorial on shell casings](https://www.youtube.com/watch?v=vTAR14bVJPA&list=LL&index=16) extremely valuable.
+
 ## License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#) except for the Spine Runtime.
 
@@ -63,6 +65,16 @@ Please note that since the Spine Runtime dependency is used, this part of the pr
 
 ### Audio Files (Teeworlds)
 Some audio files (namely `gun_fire-01.ogg`, `gun_fire-02.ogg` and `gun_fire-03.ogg`) are converted versions of the [Teeworlds' Sound Effects](https://github.com/teeworlds/teeworlds/tree/master/datasrc/audio) which are licenced under the [CC-BY-SA 3.0](https://github.com/teeworlds/teeworlds/blob/master/license.txt) 
+
+### Audio Files (Other)
+* The "gun shell hitting the floor" sounds are licenced under the [Creative Commons Attributive Licence](https://creativecommons.org/licenses/by/3.0):
+  * https://freesound.org/s/159002
+  * https://freesound.org/s/159003
+  * https://freesound.org/s/159004
+  * https://freesound.org/s/159005
+  * https://freesound.org/s/159006
+  * https://freesound.org/s/159008
+
 
 ### [Banger Font](https://www.1001fonts.com/bangers-font.html)
 The used [banger font](https://www.1001fonts.com/bangers-font.html) is licenced under the [SIL Open Font Licence (OFL)](http://scripts.sil.org/OFL).

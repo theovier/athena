@@ -1,12 +1,12 @@
 package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Engine
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import com.theovier.athena.client.ecs.components.Movement
 import com.theovier.athena.client.ecs.components.Transform
+import com.theovier.athena.client.ecs.components.movement.Velocity
+import com.theovier.athena.client.ecs.components.transform
+import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import ktx.ashley.entity
-import ktx.ashley.get
 import ktx.ashley.with
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
@@ -19,94 +19,40 @@ class MovementSystemTest {
     }
 
     @Test
-    @DisplayName("Entity does not move when the acceleration factor is zero")
-    fun doesNotMoveWhenAccelerationFactorIsZero() {
+    @DisplayName("Entity does not move when the velocity is zero")
+    fun doesNotMoveWhenVelocityIsZero() {
         val engine = Engine().apply {
             addSystem(MovementSystem())
         }
-
         val startingPosition = Vector3(0f, 0f, 0f)
         val entity = engine.entity {
             with<Transform> {
                 position.set(startingPosition)
             }
-            with<Movement> {
-                maxSpeed = 10f
-                accelerationFactor = 0f
-                direction = Vector2.X
+            with<Velocity> {
+                velocity.set(0f, 0f)
             }
         }
         engine.update(DELTA_TIME)
-        val transform = entity[Transform.MAPPER]!!
-        Assertions.assertTrue(transform.position == startingPosition)
+        Assertions.assertEquals(startingPosition, entity.transform.position)
     }
 
     @Test
-    @DisplayName("Entity does not move when the maximum speed is zero")
-    fun doesNotMoveWhenMaxSpeedIsZero() {
+    @DisplayName("Entity moves when velocity is non zero")
+    fun doesMoveWhenVelocityIsNonZero() {
         val engine = Engine().apply {
             addSystem(MovementSystem())
         }
-
         val startingPosition = Vector3(0f, 0f, 0f)
         val entity = engine.entity {
             with<Transform> {
                 position.set(startingPosition)
             }
-            with<Movement> {
-                maxSpeed = 0f
-                accelerationFactor = 10f
-                direction = Vector2.X
+            with<Velocity> {
+                velocity.set(1f, 0f)
             }
         }
         engine.update(DELTA_TIME)
-        val transform = entity[Transform.MAPPER]!!
-        Assertions.assertTrue(transform.position == startingPosition)
-    }
-
-    @Test
-    @DisplayName("Entity does not move when its movement direction is zero")
-    fun doesNotMoveWhenDirectionIsZero() {
-        val engine = Engine().apply {
-            addSystem(MovementSystem())
-        }
-
-        val startingPosition = Vector3(0f, 0f, 0f)
-        val entity = engine.entity {
-            with<Transform> {
-                position.set(startingPosition)
-            }
-            with<Movement> {
-                maxSpeed = 10f
-                accelerationFactor = 10f
-                direction = Vector2.Zero
-            }
-        }
-        engine.update(DELTA_TIME)
-        val transform = entity[Transform.MAPPER]!!
-        Assertions.assertTrue(transform.position == startingPosition)
-    }
-
-    @Test
-    @DisplayName("Entity moves when movement direction / maxSpeed / accelerationFactor are not zero")
-    fun doesMoveWhenDirectionAndMaxSpeedAndAccelerationFactorAreNonZero() {
-        val engine = Engine().apply {
-            addSystem(MovementSystem())
-        }
-
-        val startingPosition = Vector3(0f, 0f, 0f)
-        val entity = engine.entity {
-            with<Transform> {
-                position.set(startingPosition)
-            }
-            with<Movement> {
-                maxSpeed = 10f
-                accelerationFactor = 10f
-                direction = Vector2.X
-            }
-        }
-        engine.update(DELTA_TIME)
-        val transform = entity[Transform.MAPPER]!!
-        Assertions.assertTrue(transform.position != startingPosition)
+        Assertions.assertNotEquals(entity.transform.position, startingPosition)
     }
 }

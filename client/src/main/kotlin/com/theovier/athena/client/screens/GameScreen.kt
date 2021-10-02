@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
+import com.theovier.athena.client.ecs.addChild
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
@@ -89,6 +90,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.addEntity(dummy)
 
         //health bar demo
+        player.addChild(frame)
+        frame.addChild(filling)
+
         engine.addEntity(filling)
         engine.addEntity(frame)
     }
@@ -98,6 +102,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(InputSystem())
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
+
+            addSystem(ChildrenPositionSystem())
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {
@@ -117,6 +123,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
+
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())

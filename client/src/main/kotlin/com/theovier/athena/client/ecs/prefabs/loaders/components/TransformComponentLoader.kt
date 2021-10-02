@@ -12,6 +12,11 @@ class TransformComponentLoader : ComponentLoader {
             val position = ComponentLoader.readVector3(positionJSON)
             component.position.set(position)
         }
+        if (componentJSON.has(LOCAL_POSITION)) {
+            val positionJSON = componentJSON.get(LOCAL_POSITION)
+            val position = ComponentLoader.readVector3(positionJSON)
+            component.localPosition.set(position)
+        }
         if (componentJSON.has(SIZE)) {
             val sizeJSON = componentJSON.get(SIZE)
             val size = ComponentLoader.readVector2(sizeJSON, Vector2(1f, 1f))
@@ -23,6 +28,7 @@ class TransformComponentLoader : ComponentLoader {
 
     companion object {
         const val POSITION = "position"
+        const val LOCAL_POSITION = "localPosition"
         const val SIZE = "size"
     }
 }

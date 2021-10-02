@@ -32,6 +32,7 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
+import ktx.ashley.addComponent
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -90,8 +91,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.addEntity(dummy)
 
         //health bar demo
-        player.addChild(frame)
+        dummy.addChild(frame)
         frame.addChild(filling)
+
+        filling.add(HealthBar().apply {
+            healthReference = dummy.health
+        })
 
         engine.addEntity(filling)
         engine.addEntity(frame)
@@ -123,7 +128,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
-
+            addSystem(HealthBarSystem())
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())

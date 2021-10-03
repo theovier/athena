@@ -1,5 +1,8 @@
 {
   "transform": {
+    "localPosition": {
+      "z": 1
+    },
     "size": {
       "x": 2,
       "y": 0.5

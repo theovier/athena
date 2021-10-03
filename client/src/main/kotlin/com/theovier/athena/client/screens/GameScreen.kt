@@ -1,6 +1,5 @@
 package com.theovier.athena.client.screens
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera

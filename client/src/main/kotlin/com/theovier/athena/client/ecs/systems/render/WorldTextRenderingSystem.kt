@@ -6,24 +6,24 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
-import com.theovier.athena.client.ecs.components.Text
-import com.theovier.athena.client.ecs.components.Transform
-import com.theovier.athena.client.ecs.components.text
-import com.theovier.athena.client.ecs.components.transform
+import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
+import ktx.ashley.exclude
 import ktx.assets.async.AssetStorage
 import ktx.freetype.generateFont
 import ktx.math.times
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class WorldTextRenderingSystem(private val batch: Batch) : IteratingSystem(allOf(Transform::class, Text::class).get()),
-    KoinComponent {
+class WorldTextRenderingSystem(private val batch: Batch) : IteratingSystem(
+    allOf(Transform::class, Text::class)
+        .exclude(Invisible::class)
+        .get()
+    ), KoinComponent {
     private val assets: AssetStorage by inject()
     private val font: BitmapFont
 
     init {
-        //ReallyFree-ALwl7
         val generator = assets.loadSync<FreeTypeFontGenerator>("fonts/bangers.ttf")
         font = generator.generateFont {
             size = FONT_SIZE

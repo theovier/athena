@@ -14,7 +14,10 @@ private val log = KotlinLogging.logger {}
 
 class SpriteRenderingSystem (private val batch: Batch) :
     SortedIteratingSystem(
-        allOf(Transform::class, SpriteRenderer::class).exclude(Foreground::class).get(),
+        allOf(Transform::class, SpriteRenderer::class)
+            .exclude(Foreground::class)
+            .exclude(Invisible::class)
+            .get(),
         compareBy { it[Transform.MAPPER] }
     ) {
 

@@ -121,7 +121,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(InputSystem())
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
-
             addSystem(ChildrenPositionSystem())
             addSystem(
                 RenderingMetaSystem(camera, batch)
@@ -143,6 +142,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(HealthBarSynchronisationSystem())
+            addSystem(HealthBarToggleSystem())
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())

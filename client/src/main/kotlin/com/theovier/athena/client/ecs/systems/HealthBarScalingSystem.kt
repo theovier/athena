@@ -5,7 +5,7 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
-class HealthBarSynchronisationSystem : IteratingSystem(allOf(HealthBar::class).get()) {
+class HealthBarScalingSystem : IteratingSystem(allOf(HealthBar::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val healthBar = entity.healthBar

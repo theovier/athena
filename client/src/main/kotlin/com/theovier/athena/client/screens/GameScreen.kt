@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.addChild
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
@@ -99,6 +100,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
         engine.addEntity(filling)
         engine.addEntity(frame)
+
+        //frame.add(Invisible())
+        //frame.remove(Invisible::class.java)
     }
 
     private fun initSystems() {
@@ -147,6 +151,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initListeners() {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
+        engine.addEntityListener(allOf(Invisible::class).get(), InvisibleListener())
         world.setContactListener(ProjectileCollisionListener(engine))
     }
 

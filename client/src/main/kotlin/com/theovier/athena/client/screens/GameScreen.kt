@@ -1,5 +1,6 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -32,7 +33,6 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
-import ktx.ashley.addComponent
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with

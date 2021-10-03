@@ -1,7 +1,10 @@
 package com.theovier.athena.client.ecs
 
 import com.badlogic.ashley.core.Engine
+import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.Input
+import com.theovier.athena.client.ecs.components.children
+import com.theovier.athena.client.ecs.components.hasChildrenComponent
 import ktx.ashley.allOf
 import ktx.ashley.get
 
@@ -11,3 +14,14 @@ val Engine.input: Input
         allOf(Input::class).get()
     )
         .first()[Input.MAPPER]!!
+
+fun Engine.removeEntityWithAllChildren(entity: Entity) {
+    if (entity.hasChildrenComponent) {
+        entity.children.children.forEach { child ->
+            if (child != null) {
+                this.removeEntityWithAllChildren(child)
+            }
+        }
+    }
+    this.removeEntity(entity)
+}

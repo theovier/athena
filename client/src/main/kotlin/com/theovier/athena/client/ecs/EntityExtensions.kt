@@ -1,11 +1,24 @@
 package com.theovier.athena.client.ecs
 
 import com.badlogic.ashley.core.Entity
-import com.theovier.athena.client.ecs.components.Parent
-import com.theovier.athena.client.ecs.components.hasParentComponent
-import com.theovier.athena.client.ecs.components.parent
+import com.theovier.athena.client.ecs.components.*
 
-fun Entity.addChild(child: Entity) {
+fun Entity.addChild(child: Entity): Boolean {
+    if (this.hasNoChildrenComponent) {
+        this.add(Children())
+    }
+    val childComponent = this.children
+    if (childComponent.count < Children.MAX_CHILDREN) {
+        childComponent.children[childComponent.count] = child
+        childComponent.count++
+    } else {
+        return false
+    }
+    this.addParentComponentToChild(child)
+    return true
+}
+
+private fun Entity.addParentComponentToChild(child: Entity) {
     val parent = Parent()
     parent.entity = this
     if (this.hasParentComponent) {
@@ -13,4 +26,3 @@ fun Entity.addChild(child: Entity) {
     }
     child.add(parent)
 }
-

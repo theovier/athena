@@ -7,6 +7,7 @@ import ktx.ashley.get
 import ktx.ashley.mapperFor
 
 class HealthBar : Component {
+    var fill: Entity? = null
     lateinit var healthReference: Health
 
     companion object {

@@ -52,8 +52,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
     private val dummy = Prefab.instantiate("dummy")
+
+    //health bar demo
+    private val healthBar = Prefab.instantiate("health_bar")
     private val frame = Prefab.instantiate("health_bar_frame")
     private val filling = Prefab.instantiate("health_bar_filling")
+
     private val batch = SpriteBatch()
 
     //injected systems
@@ -91,18 +95,25 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.addEntity(dummy)
 
         //health bar demo
-        dummy.addChild(frame)
-        frame.addChild(filling)
 
-        filling.add(HealthBar().apply {
+//        Dummy
+//          - HealthBar
+//              - Frame
+//              - Filling
+
+
+        dummy.addChild(healthBar)
+        healthBar.addChild(frame)
+        healthBar.addChild(filling)
+
+        healthBar.add(HealthBar().apply {
+            fill = filling
             healthReference = dummy.health
         })
 
+        engine.addEntity(healthBar)
         engine.addEntity(filling)
         engine.addEntity(frame)
-
-        //frame.add(Invisible())
-        //frame.remove(Invisible::class.java)
     }
 
     private fun initSystems() {
@@ -131,7 +142,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
-            addSystem(HealthBarSystem())
+            addSystem(HealthBarSynchronisationSystem())
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())

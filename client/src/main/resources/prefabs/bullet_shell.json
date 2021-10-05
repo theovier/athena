@@ -1,50 +1,52 @@
 {
-  "transform": {
-    "size": {
-      "x": 0.4,
-      "y": 0.2
-    }
-  },
-  "acceleration": {
-    "factor": -9.8
-  },
-  "velocity": {},
-  "spin": {
-    "speed": 400
-  },
-  "travel": {},
-  "timer": {},
-  "foreground": {},
-  "sprite": {
-    "texture": "sprites/bullet_shell.png"
-  },
-  "sound": {
-    "choice": [
-      {
-        "file": "audio/gun_shell_hitting_ground_01.ogg",
-        "volume": 0.05
-      },
-      {
-        "file": "audio/gun_shell_hitting_ground_02.ogg",
-        "volume": 0.05
-      },
-      {
-        "file": "audio/gun_shell_hitting_ground_03.ogg",
-        "volume": 0.05
-      },
-      {
-        "file": "audio/gun_shell_hitting_ground_04.ogg",
-        "volume": 0.05
-      },
-      {
-        "file": "audio/gun_shell_hitting_ground_05.ogg",
-        "volume": 0.05
-      },
-      {
-        "file": "audio/gun_shell_hitting_ground_06.ogg",
-        "volume": 0.05
+  "components": {
+    "transform": {
+      "size": {
+        "x": 0.4,
+        "y": 0.2
       }
-    ]
-  },
-  "ignoreAudio": {}
+    },
+    "acceleration": {
+      "factor": -9.8
+    },
+    "velocity": {},
+    "spin": {
+      "speed": 400
+    },
+    "travel": {},
+    "timer": {},
+    "foreground": {},
+    "sprite": {
+      "texture": "sprites/bullet_shell.png"
+    },
+    "sound": {
+      "choice": [
+        {
+          "file": "audio/gun_shell_hitting_ground_01.ogg",
+          "volume": 0.05
+        },
+        {
+          "file": "audio/gun_shell_hitting_ground_02.ogg",
+          "volume": 0.05
+        },
+        {
+          "file": "audio/gun_shell_hitting_ground_03.ogg",
+          "volume": 0.05
+        },
+        {
+          "file": "audio/gun_shell_hitting_ground_04.ogg",
+          "volume": 0.05
+        },
+        {
+          "file": "audio/gun_shell_hitting_ground_05.ogg",
+          "volume": 0.05
+        },
+        {
+          "file": "audio/gun_shell_hitting_ground_06.ogg",
+          "volume": 0.05
+        }
+      ]
+    },
+    "ignoreAudio": {}
+  }
 }

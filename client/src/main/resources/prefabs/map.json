@@ -1,3 +1,5 @@
 {
-  "map": "maps/debug.tmx"
+  "components": {
+    "map": "maps/debug.tmx"
+  }
 }

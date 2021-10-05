@@ -1,20 +1,22 @@
 {
-  "transform": {
-    "position": {
-      "x": 14,
-      "y": 12
+  "components": {
+    "transform": {
+      "position": {
+        "x": 14,
+        "y": 12
+      }
+    },
+    "crosshair": {},
+    "cameraTarget": {},
+    "direction": {},
+    "velocity": {
+      "maxSpeed": 22
+    },
+    "acceleration": {
+      "factor": 250
+    },
+    "friction": {
+      "factor": 10
     }
-  },
-  "crosshair": {},
-  "cameraTarget": {},
-  "direction": {},
-  "velocity": {
-    "maxSpeed": 22
-  },
-  "acceleration": {
-    "factor": 250
-  },
-  "friction": {
-    "factor": 10
   }
 }

@@ -1,7 +1,9 @@
 {
-  "transform": {},
-  "lifetime": {
-    "duration": 0.3
-  },
-  "text": {}
+  "components": {
+    "transform": {},
+    "lifetime": {
+      "duration": 0.3
+    },
+    "text": {}
+  }
 }

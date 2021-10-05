@@ -3,7 +3,7 @@ package com.theovier.athena.client.ecs.systems.damage
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.removeEntityWithAllChildren
+import com.theovier.athena.client.ecs.removeEntityAndAllChildren
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.allOf
@@ -27,6 +27,6 @@ class HealthSystem : IteratingSystem(allOf(Health::class, HitMarker::class).excl
 
     private fun die(victim: Entity, source: DamageSource?) {
         //todo add Dead (JustDied) Component
-        engine.removeEntityWithAllChildren(victim)
+        engine.removeEntityAndAllChildren(victim)
     }
 }

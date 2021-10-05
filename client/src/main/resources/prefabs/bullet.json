@@ -1,60 +1,62 @@
 {
-  "lifetime": {
-    "duration": 3.0
-  },
-  "transform": {
-    "size": {
-      "x": 0.6,
-      "y": 0.6
-    }
-  },
-  "damage": {
-    "amount": 1
-  },
-  "direction": {},
-  "velocity": {
-    "maxSpeed": 30
-  },
-  "acceleration": {
-    "factor": 250
-  },
-  "sound": {
-    "choice": [
-      {
-        "file": "audio/gun_fire-01.ogg",
-        "volume": 0.1
-      },
-      {
-        "file": "audio/gun_fire-02.ogg",
-        "volume": 0.1
-      },
-      {
-        "file": "audio/gun_fire-03.ogg",
-        "volume": 0.1
-      }
-    ]
-  },
-  "sprite": {
-    "texture": "sprites/bullet.png",
-    "offset": {
-      "x": -0.5
-    }
-  },
-  "particle": {
-    "effect": {
-      "settings": "particles/smoke_trail.p",
-      "images": "sprites/particles"
+  "components": {
+    "lifetime": {
+      "duration": 3.0
     },
-    "offset": {
-      "x": -1
-    }
-  },
-  "physics": {
-    "body": {
-      "type": "dynamic",
-      "box": {
-        "width": 0.6,
-        "height": 0.6
+    "transform": {
+      "size": {
+        "x": 0.6,
+        "y": 0.6
+      }
+    },
+    "damage": {
+      "amount": 1
+    },
+    "direction": {},
+    "velocity": {
+      "maxSpeed": 30
+    },
+    "acceleration": {
+      "factor": 250
+    },
+    "sound": {
+      "choice": [
+        {
+          "file": "audio/gun_fire-01.ogg",
+          "volume": 0.1
+        },
+        {
+          "file": "audio/gun_fire-02.ogg",
+          "volume": 0.1
+        },
+        {
+          "file": "audio/gun_fire-03.ogg",
+          "volume": 0.1
+        }
+      ]
+    },
+    "sprite": {
+      "texture": "sprites/bullet.png",
+      "offset": {
+        "x": -0.5
+      }
+    },
+    "particle": {
+      "effect": {
+        "settings": "particles/smoke_trail.p",
+        "images": "sprites/particles"
+      },
+      "offset": {
+        "x": -1
+      }
+    },
+    "physics": {
+      "body": {
+        "type": "dynamic",
+        "box": {
+          "width": 0.6,
+          "height": 0.6
+        }
       }
     }
   }

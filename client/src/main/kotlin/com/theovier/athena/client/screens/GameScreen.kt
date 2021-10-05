@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
-import com.theovier.athena.client.ecs.addChild
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -47,17 +46,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val steadyReferenceCamera = OrthographicCamera()
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
-    private val engine = PooledEngine()
+    private val engine: PooledEngine by inject()
     private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
-    private val dummy = Prefab.instantiate("dummy")
-
-    //health bar demo
-    private val healthBar = Prefab.instantiate("health_bar")
-    private val frame = Prefab.instantiate("health_bar_frame")
-    private val filling = Prefab.instantiate("health_bar_filling")
-
     private val batch = SpriteBatch()
 
     //injected systems
@@ -89,31 +81,13 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun initEntities() {
-        engine.addEntity(player)
-        engine.addEntity(map)
-        engine.addEntity(crosshair)
-        engine.addEntity(dummy)
+        val dummy = Prefab.instantiate("dummy")
 
-        //health bar demo
-
-//        Dummy
-//          - HealthBar
-//              - Frame
-//              - Filling
-
-
-        dummy.addChild(healthBar)
-        healthBar.addChild(frame)
-        healthBar.addChild(filling)
-
-        healthBar.add(HealthBar().apply {
-            fill = filling
+        //todo automate this inside PrefabLoader
+        dummy.children.children[0]!!.add(HealthBar().apply {
+            fill = dummy.children.children[0]!!.children.children[0]
             healthReference = dummy.health
         })
-
-        engine.addEntity(healthBar)
-        engine.addEntity(filling)
-        engine.addEntity(frame)
     }
 
     private fun initSystems() {

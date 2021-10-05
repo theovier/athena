@@ -15,13 +15,24 @@ val Engine.input: Input
     )
         .first()[Input.MAPPER]!!
 
-fun Engine.removeEntityWithAllChildren(entity: Entity) {
+fun Engine.removeEntityAndAllChildren(entity: Entity) {
     if (entity.hasChildrenComponent) {
         entity.children.children.forEach { child ->
             if (child != null) {
-                this.removeEntityWithAllChildren(child)
+                this.removeEntityAndAllChildren(child)
             }
         }
     }
     this.removeEntity(entity)
+}
+
+fun Engine.addEntityAndAllChildren(entity: Entity) {
+    if (entity.hasChildrenComponent) {
+        entity.children.children.forEach { child ->
+            if (child != null) {
+                this.addEntityAndAllChildren(child)
+            }
+        }
+    }
+    this.addEntity(entity)
 }

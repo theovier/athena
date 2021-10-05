@@ -1,40 +1,95 @@
 {
-  "transform": {
-    "size": {
-      "y": 2
-    }
-  },
-  "health": {
-    "maximum": 10
-  },
-  "spine": {
-    "atlas": "sprites/characters/dummy/dummy.atlas",
-    "skeleton": "sprites/characters/dummy/dummy.json",
-    "initialAnimation": {
-      "name": "idle",
-      "loop": true
+  "name": "Dummy",
+  "components": {
+    "transform": {
+      "size": {
+        "y": 2
+      }
     },
-    "damageIndicatorSlotNames": [
-      "damage_indicator_1",
-      "damage_indicator_2",
-      "damage_indicator_3",
-      "damage_indicator_4",
-      "damage_indicator_5",
-      "damage_indicator_6",
-      "damage_indicator_7"
-    ]
-  },
-  "physics": {
-    "body": {
-      "type": "static",
-      "box": {
-        "width": 1,
-        "height": 2
+    "health": {
+      "maximum": 10
+    },
+    "spine": {
+      "atlas": "sprites/characters/dummy/dummy.atlas",
+      "skeleton": "sprites/characters/dummy/dummy.json",
+      "initialAnimation": {
+        "name": "idle",
+        "loop": true
       },
-      "position": {
-        "x": 16,
-        "y": 13
+      "damageIndicatorSlotNames": [
+        "damage_indicator_1",
+        "damage_indicator_2",
+        "damage_indicator_3",
+        "damage_indicator_4",
+        "damage_indicator_5",
+        "damage_indicator_6",
+        "damage_indicator_7"
+      ]
+    },
+    "physics": {
+      "body": {
+        "type": "static",
+        "box": {
+          "width": 1,
+          "height": 2
+        },
+        "position": {
+          "x": 16,
+          "y": 13
+        }
       }
     }
-  }
+  },
+  "children": [
+    {
+      "name": "Health Bar",
+      "components": {
+        "transform": {
+          "localPosition": {
+            "x": -1,
+            "y": 2.25
+          }
+        },
+        "healthBar": {
+          "fill": "#3",
+          "health": "#1"
+        }
+      },
+      "children": [
+        {
+          "name": "Filling",
+          "components": {
+            "transform": {
+              "size": {
+                "x": 1,
+                "y": 0.5
+              }
+            },
+            "sprite": {
+              "texture": "sprites/health_bar_filling.png"
+            },
+            "foreground": {}
+          }
+        },
+        {
+          "name": "Frame",
+          "components": {
+            "transform": {
+              "localPosition": {
+                "z": 1
+              },
+              "size": {
+                "x": 2,
+                "y": 0.5
+              }
+            },
+            "sprite": {
+              "texture": "sprites/health_bar_frame.png"
+            },
+            "foreground": {}
+          }
+        }
+      ]
+    }
+  ]
 }

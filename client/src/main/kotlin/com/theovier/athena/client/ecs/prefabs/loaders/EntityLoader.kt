@@ -5,5 +5,5 @@ import com.badlogic.gdx.utils.JsonValue
 
 interface EntityLoader {
     fun loadFromFile(fileName: String, configure: Entity.() -> Unit = {}) : Entity
-    fun load(entityRoot: JsonValue, filePath: String, configure: Entity.() -> Unit = {}) : Entity
+    fun load(entityRoot: JsonValue, configure: Entity.() -> Unit = {}) : Entity
 }

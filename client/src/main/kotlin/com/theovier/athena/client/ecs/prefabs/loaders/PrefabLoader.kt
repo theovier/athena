@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.addChild
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import ktx.ashley.plusAssign
+import ktx.assets.file
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -48,6 +49,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "travel" to TravelComponentLoader(),
         "velocity" to VelocityComponentLoader()
     )
+    private var currentPrefabPath = ""
 
     companion object {
         const val PREFAB_PATH_PREFIX = "/prefabs"
@@ -57,30 +59,30 @@ class PrefabLoader : EntityLoader, KoinComponent {
     }
 
     override fun loadFromFile(fileName: String, configure: Entity.() -> Unit): Entity {
-        val prefabPath = "$PREFAB_PATH_PREFIX/$fileName.$PREFAB_EXTENSION"
-        val prefabStream = PrefabLoader::class.java.getResourceAsStream(prefabPath)
+        currentPrefabPath = "$PREFAB_PATH_PREFIX/$fileName.$PREFAB_EXTENSION"
+        val prefabStream = PrefabLoader::class.java.getResourceAsStream(currentPrefabPath)
         val jsonReader = JsonReader()
         val entityRoot = jsonReader.parse(prefabStream)
-        return load(entityRoot, prefabPath, configure)
+        return load(entityRoot, configure)
     }
 
-    override fun load(entityRoot: JsonValue, filePath: String, configure: Entity.() -> Unit): Entity {
+    override fun load(entityRoot: JsonValue, configure: Entity.() -> Unit): Entity {
         val entity = Entity()
         if (entityRoot.has(COMPONENTS)) {
             val componentRoot = entityRoot.get(COMPONENTS)
-            val components = loadComponents(componentRoot, filePath)
+            val components = loadComponents(componentRoot)
             components.forEach { entity += it }
         }
         if (entityRoot.has(CHILDREN)) {
             val childrenRoot = entityRoot.get(CHILDREN)
-            val children = loadChildren(childrenRoot, filePath)
+            val children = loadChildren(childrenRoot)
             children.forEach { entity.addChild(it) }
         }
         configure(entity)
         return entity
     }
 
-    private fun loadComponents(node: JsonValue, filePath: String): List<Component> {
+    private fun loadComponents(node: JsonValue): List<Component> {
         val components = arrayListOf<Component>()
         val iterator = node.iterator()
         while (iterator.hasNext()) {
@@ -90,24 +92,24 @@ class PrefabLoader : EntityLoader, KoinComponent {
                 val component = componentReader.load(componentRoot)
                 components += component
             } else {
-                log.error { "Could not find a suitable ComponentReader for '${componentRoot.name}' in $filePath. Hence component has not been added to entity." }
+                log.error { "Could not find a suitable ComponentReader for '${componentRoot.name}' in $currentPrefabPath. Hence component has not been added to entity." }
             }
         }
         return components
     }
     
-    private fun loadChildren(node: JsonValue, filePath: String): List<Entity> {
+    private fun loadChildren(node: JsonValue): List<Entity> {
         val children = arrayListOf<Entity>()
         val iterator = node.iterator()
         while (iterator.hasNext()) {
             val childRoot = iterator.next()
-            val child = loadChild(childRoot, filePath)
+            val child = loadChild(childRoot)
             children += child
         }
         return children
     }
 
-    private fun loadChild(entityRoot: JsonValue, filePath: String): Entity {
-        return load(entityRoot, filePath)
+    private fun loadChild(entityRoot: JsonValue): Entity {
+        return load(entityRoot)
     }
 }

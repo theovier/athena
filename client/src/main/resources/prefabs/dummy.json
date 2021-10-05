@@ -49,10 +49,6 @@
             "x": -1,
             "y": 2.25
           }
-        },
-        "healthBar": {
-          "fill": "#3",
-          "health": "#1"
         }
       },
       "children": [

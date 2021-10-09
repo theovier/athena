@@ -1,4 +1,5 @@
 {
+  "id": "bullet",
   "components": {
     "lifetime": {
       "duration": 3.0

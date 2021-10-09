@@ -1,0 +1,8 @@
+{
+  "id": "root",
+  "components": {
+    "transform": {
+      "dependencies": ["root.some.dependency"]
+    }
+  }
+}

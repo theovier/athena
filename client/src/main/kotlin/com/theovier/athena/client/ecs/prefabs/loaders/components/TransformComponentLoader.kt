@@ -3,9 +3,10 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Transform
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class TransformComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Transform {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Transform {
         val component = Transform()
         if (componentJSON.has(POSITION)) {
             val positionJSON = componentJSON.get(POSITION)

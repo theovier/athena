@@ -1,4 +1,5 @@
 {
+  "id": "player",
   "components": {
     "player": {},
     "aim": {

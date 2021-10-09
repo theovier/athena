@@ -1,0 +1,6 @@
+{
+  "healthBar": {
+    "fillReference": "root",
+    "healthReference": "root.health"
+  }
+}

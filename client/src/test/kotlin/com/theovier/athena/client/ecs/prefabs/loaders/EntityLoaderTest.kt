@@ -3,13 +3,16 @@ package com.theovier.athena.client.ecs.prefabs.loaders
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.utils.SerializationException
-import com.theovier.athena.client.ecs.components.lifetime
+import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
+import ktx.ashley.get
+import ktx.ashley.has
 import ktx.assets.async.AssetStorage
 import org.junit.jupiter.api.*
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import org.koin.test.junit5.AutoCloseKoinTest
+import java.lang.IllegalArgumentException
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EntityLoaderTest: AutoCloseKoinTest() {
@@ -66,4 +69,70 @@ class EntityLoaderTest: AutoCloseKoinTest() {
             PrefabLoader().loadFromFile("notExistingFile")
         }
     }
+
+    @Test
+    @DisplayName("Exception is thrown when the entity does not have an id")
+    fun throwsExceptionWhenNoEntityIdSet() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            PrefabLoader().loadFromFile("entityWithMissingId")
+        }
+    }
+
+    @Test
+    @DisplayName("Child entity is loaded correctly")
+    fun isChildLoaded() {
+        val loader = PrefabLoader()
+        val entity = loader.loadFromFile("entityWithChild")
+        Assertions.assertTrue(entity.hasChildrenComponent)
+        Assertions.assertEquals(entity.children.count, 1)
+        Assertions.assertNotNull(entity.children.children[0])
+    }
+
+    @Test
+    @DisplayName("Is component with dependencies on another component loaded correctly")
+    fun isComponentWithComponentDependencyLoaded() {
+        val loader = PrefabLoader()
+        val entity = loader.loadFromFile("componentWithComponentDependency")
+        Assertions.assertEquals(entity.components.count(), 2)
+        Assertions.assertTrue(entity.has(Transform.MAPPER))
+        Assertions.assertTrue(entity.has(Lifetime.MAPPER))
+    }
+
+    @Test
+    @DisplayName("Is component with dependencies on an entity loaded correctly")
+    fun isComponentWithEntityDependencyLoaded() {
+        val loader = PrefabLoader()
+        val entity = loader.loadFromFile("componentWithEntityDependency")
+        Assertions.assertEquals(entity.components.count(), 1)
+        Assertions.assertTrue(entity.has(Transform.MAPPER))
+    }
+
+    @Test
+    @DisplayName("Is component with dependency in children loaded correctly")
+    fun isComponentWithDependencyInChildrenLoaded() {
+        val loader = PrefabLoader()
+        val entity = loader.loadFromFile("componentWithChildDependency")
+        Assertions.assertEquals(entity.components.count(), 2)
+        Assertions.assertTrue(entity.has(Transform.MAPPER))
+        Assertions.assertTrue(entity.has(Children.MAPPER))
+
+        val child = entity.children.children[0]!!
+        Assertions.assertTrue(child.has(Transform.MAPPER))
+    }
+
+    @Test
+    @DisplayName("Is component with unresolvable dependency ignored")
+    fun isComponentWithUnresolvableDependencyIgnored() {
+        val loader = PrefabLoader()
+        val entity = loader.loadFromFile("componentWithMissingDependency")
+        Assertions.assertEquals(entity.components.count(), 0)
+        Assertions.assertFalse(entity.has(Transform.MAPPER))
+    }
+
+    @Test
+    fun isDependencyPoolClearedAfterLoading() {
+        val loader = PrefabLoader()
+
+    }
+
 }

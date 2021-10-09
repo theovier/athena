@@ -10,7 +10,7 @@ class HealthBarScalingSystem : IteratingSystem(allOf(HealthBar::class).get()) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val healthBar = entity.healthBar
         val health = healthBar.healthReference
-        val filler = healthBar.fill
+        val filler = healthBar.fillReference
         filler?.transform?.size?.x = health.currentPercentage * 2f //todo 2f because the initial size was 2
     }
 }

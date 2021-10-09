@@ -1,5 +1,5 @@
 {
-  "name": "Dummy",
+  "id": "dummy",
   "components": {
     "transform": {
       "size": {
@@ -42,18 +42,23 @@
   },
   "children": [
     {
-      "name": "Health Bar",
+      "id": "health_bar",
       "components": {
         "transform": {
           "localPosition": {
             "x": -1,
             "y": 2.25
           }
+        },
+        "healthBar": {
+          "dependencies": ["dummy.health", "filling"],
+          "healthReference": "dummy.health",
+          "fillReference": "filling"
         }
       },
       "children": [
         {
-          "name": "Filling",
+          "id": "filling",
           "components": {
             "transform": {
               "size": {
@@ -68,7 +73,7 @@
           }
         },
         {
-          "name": "Frame",
+          "id": "frame",
           "components": {
             "transform": {
               "localPosition": {

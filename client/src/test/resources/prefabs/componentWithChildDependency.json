@@ -1,0 +1,16 @@
+{
+  "id": "root",
+  "components": {
+    "transform": {}
+  },
+  "children": [
+    {
+      "id": "child_1",
+      "components": {
+        "transform": {
+          "dependencies": ["root"]
+        }
+      }
+    }
+  ]
+}

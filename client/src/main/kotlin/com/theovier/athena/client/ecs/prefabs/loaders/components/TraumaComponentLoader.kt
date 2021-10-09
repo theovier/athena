@@ -2,9 +2,10 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.Trauma
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class TraumaComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Trauma {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Trauma {
         return Trauma().apply {
             maxTranslationalOffset = componentJSON.getFloat(MAX_TRANSLATIONAL_OFFSET, Trauma.DEFAULT_MAX_TRANSLATIONAL_OFFSET)
             maxRotationalOffset = componentJSON.getFloat(MAX_ROTATIONAL_OFFSET, Trauma.DEFAULT_MAX_ROTATIONAL_OFFSET)

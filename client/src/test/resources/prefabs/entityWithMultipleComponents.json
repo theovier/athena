@@ -1,7 +1,10 @@
 {
-  "player": {},
-  "cameraTarget": {},
-  "lifetime": {
-    "duration": 1.0
+  "id": "root",
+  "components": {
+    "player": {},
+    "cameraTarget": {},
+    "lifetime": {
+      "duration": 1.0
+    }
   }
 }

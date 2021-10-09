@@ -47,7 +47,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine: PooledEngine by inject()
-    private val map = Prefab.instantiate("map")
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
     private val batch = SpriteBatch()
@@ -81,13 +80,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun initEntities() {
-        val dummy = Prefab.instantiate("dummy")
-
-        //todo automate this inside PrefabLoader
-        dummy.children.children[0]!!.add(HealthBar().apply {
-            fill = dummy.children.children[0]!!.children.children[0]
-            healthReference = dummy.health
-        })
+        Prefab.instantiate("map")
+        Prefab.instantiate("dummy")
     }
 
     private fun initSystems() {

@@ -1,0 +1,9 @@
+{
+  "id": "root",
+  "components": {
+    "lifetime": {
+      "dependencies": ["root.transform"]
+    },
+    "transform": {}
+  }
+}

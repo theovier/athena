@@ -1,15 +1,15 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
-import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.SpriteRenderer
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import ktx.assets.async.AssetStorage
 
 class SpriteComponentLoader(private val assets: AssetStorage) : ComponentLoader {
 
-    override fun load(componentJSON: JsonValue): Component {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): SpriteRenderer {
         val component = SpriteRenderer()
         val texturePath = componentJSON.getString("texture")
         val texture: Texture = assets.loadSync(texturePath)

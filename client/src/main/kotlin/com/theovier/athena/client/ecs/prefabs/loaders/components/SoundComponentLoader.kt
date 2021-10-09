@@ -1,15 +1,15 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
-import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.utils.JsonValue
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import com.theovier.athena.client.misc.audio.SoundEffect
 import ktx.assets.async.AssetStorage
 import com.theovier.athena.client.ecs.components.Sound as SoundComponent
 
 class SoundComponentLoader(private val assets: AssetStorage) : ComponentLoader {
 
-    override fun load(componentJSON: JsonValue): Component {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): SoundComponent {
         val soundEffect: SoundEffect = if(componentJSON.has(CHOICE)) {
             val choicesJSON = componentJSON.get(CHOICE)
             val choices = readChoices(choicesJSON)

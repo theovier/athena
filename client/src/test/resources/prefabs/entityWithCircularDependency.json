@@ -1,0 +1,17 @@
+{
+  "id": "root",
+  "components": {
+    "transform": {
+      "dependencies": ["root.lifetime"]
+    },
+    "lifetime": {
+      "dependencies": ["root.player"]
+    },
+    "player": {
+      "dependencies": ["root.health"]
+    },
+    "health": {
+      "dependencies": ["root.transform"]
+    }
+  }
+}

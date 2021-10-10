@@ -1,0 +1,8 @@
+{
+  "id": "root",
+  "components": {
+    "player": {
+      "dependencies": ["root.transform"]
+    }
+  }
+}

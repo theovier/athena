@@ -130,9 +130,31 @@ class EntityLoaderTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun isDependencyPoolClearedAfterLoading() {
+    @DisplayName("Is a circular dependency detected")
+    fun isCircularDependencyDetected() {
         val loader = PrefabLoader()
-
+        val entity = loader.loadFromFile("entityWithCircularDependency")
+        Assertions.assertEquals(entity.components.count(), 0)
     }
 
+    @Test
+    @DisplayName("Cascading Dependencies are resolved correctly")
+    fun isEntityWithCascadingDependenciesLoaded() {
+        val loader = PrefabLoader()
+        val entity = loader.loadFromFile("entityWithCascadingDependency")
+        Assertions.assertEquals(entity.components.count(), 4)
+        Assertions.assertTrue(entity.has(Transform.MAPPER))
+        Assertions.assertTrue(entity.has(Lifetime.MAPPER))
+        Assertions.assertTrue(entity.has(Player.MAPPER))
+        Assertions.assertTrue(entity.has(Health.MAPPER))
+    }
+
+    @Test
+    fun isDependencyPoolClearedAfterLoading() {
+        val loader = PrefabLoader()
+        val entity1 = loader.loadFromFile("clearDependencyPoolTestEntity_1")
+        val entity2 = loader.loadFromFile("clearDependencyPoolTestEntity_2")
+        Assertions.assertEquals(entity1.components.count(), 1)
+        Assertions.assertEquals(entity2.components.count(), 0)
+    }
 }

@@ -62,8 +62,8 @@
           "components": {
             "transform": {
               "size": {
-                "x": 1,
-                "y": 0.5
+                "x": 1.8,
+                "y": 0.4
               }
             },
             "sprite": {
@@ -85,7 +85,11 @@
               }
             },
             "sprite": {
-              "texture": "sprites/health_bar_frame.png"
+              "texture": "sprites/health_bar_frame.png",
+              "offset": {
+                "x": -0.05,
+                "y": -0.075
+              }
             },
             "foreground": {}
           }

@@ -9,9 +9,11 @@ import ktx.ashley.mapperFor
 class HealthBar : Component {
     lateinit var fillReference: Entity
     lateinit var healthReference: Health
+    var fillWidthAtFullLife = FILL_WIDTH_AT_FULL_LIFE
 
     companion object {
         val MAPPER = mapperFor<HealthBar>()
+        const val FILL_WIDTH_AT_FULL_LIFE = 1f
     }
 }
 

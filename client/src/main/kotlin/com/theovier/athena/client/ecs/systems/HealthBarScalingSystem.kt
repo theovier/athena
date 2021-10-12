@@ -11,6 +11,7 @@ class HealthBarScalingSystem : IteratingSystem(allOf(HealthBar::class).get()) {
         val healthBar = entity.healthBar
         val health = healthBar.healthReference
         val filler = healthBar.fillReference
-        filler?.transform?.size?.x = health.currentPercentage * 2f //todo 2f because the initial size was 2
+        val originalWidth = healthBar.fillWidthAtFullLife
+        filler?.transform?.size?.x = health.currentPercentage * originalWidth
     }
 }

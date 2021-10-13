@@ -67,7 +67,10 @@
               }
             },
             "sprite": {
-              "texture": "sprites/health_bar_filling.png"
+              "texture": "sprites/1x1-white.png",
+              "color": {
+                "hex": "#E5007C"
+              }
             },
             "foreground": {}
           }
@@ -81,14 +84,14 @@
               },
               "size": {
                 "x": 2,
-                "y": 0.5
+                "y": 0.51
               }
             },
             "sprite": {
               "texture": "sprites/health_bar_frame.png",
               "offset": {
                 "x": -0.05,
-                "y": -0.075
+                "y": -0.08
               }
             },
             "foreground": {}

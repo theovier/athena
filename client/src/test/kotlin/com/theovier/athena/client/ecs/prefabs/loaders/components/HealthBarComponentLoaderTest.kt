@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.Health
+import com.theovier.athena.client.ecs.components.Transform
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import ktx.ashley.plusAssign
 import ktx.assets.async.AssetStorage
@@ -35,7 +36,9 @@ class HealthBarComponentLoaderTest: AutoCloseKoinTest() {
     fun isComponentLoaded() {
         val entity = Entity()
         val health = Health()
+        val transform = Transform()
         entity += health
+        entity += transform
         val dependencyPool = DependencyPool()
         dependencyPool.add("root", entity)
         dependencyPool.add("root.health", health)

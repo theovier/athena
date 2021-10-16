@@ -10,6 +10,8 @@ import ktx.ashley.mapperFor
 class Health : Component {
     var maximum = DEFAULT_MAX_HEALTH
     var current = maximum
+    val currentPercentage : Float
+        get() = current.toFloat() / maximum
 
     companion object {
         val MAPPER = mapperFor<Health>()

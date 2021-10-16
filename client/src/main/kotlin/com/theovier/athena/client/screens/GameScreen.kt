@@ -4,12 +4,15 @@ import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
 import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
@@ -45,11 +48,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val steadyReferenceCamera = OrthographicCamera()
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
-    private val engine = PooledEngine()
-    private val map = Prefab.instantiate("map")
+    private val engine: PooledEngine by inject()
     private val player = Prefab.instantiate("player")
     private val crosshair = Prefab.instantiate("crosshair")
-    private val dummy = Prefab.instantiate("dummy")
     private val batch = SpriteBatch()
 
     //injected systems
@@ -81,10 +82,13 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun initEntities() {
-        engine.addEntity(player)
-        engine.addEntity(map)
-        engine.addEntity(crosshair)
-        engine.addEntity(dummy)
+        Prefab.instantiate("map")
+        Prefab.instantiate("dummy")
+        Prefab.instantiate("dummy") {
+            with(physics) {
+                body.setTransform(Vector2(12f, 17f), 0f)
+            }
+        }
     }
 
     private fun initSystems() {
@@ -92,6 +96,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(InputSystem())
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
+            addSystem(ChildrenPositionSystem())
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {
@@ -111,6 +116,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
+            addSystem(HealthBarScalingSystem())
+            addSystem(HealthBarToggleSystem())
             addSystem(FacingSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())
@@ -130,6 +137,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initListeners() {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
+        engine.addEntityListener(allOf(Invisible::class).get(), InvisibleListener())
         world.setContactListener(ProjectileCollisionListener(engine))
     }
 

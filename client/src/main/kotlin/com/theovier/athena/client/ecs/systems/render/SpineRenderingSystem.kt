@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.esotericsoftware.spine.SkeletonRenderer
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
+import ktx.ashley.exclude
 
 class SpineRenderingSystem(private val batch: Batch) :
     SortedIteratingSystem(
-        allOf(Spine::class, Transform::class).get(),
+        allOf(Spine::class, Transform::class).exclude(Invisible::class).get(),
         compareBy { it.transform }
     ) {
     private val renderer = SkeletonRenderer()

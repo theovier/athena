@@ -1,5 +1,8 @@
 {
-  "lifetime": {
-    "duration": 1.0
+  "id": "root",
+  "components": {
+    "lifetime": {
+      "duration": 1.0
+    }
   }
 }

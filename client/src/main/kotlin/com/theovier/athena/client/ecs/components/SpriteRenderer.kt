@@ -21,6 +21,7 @@ class SpriteRenderer : Component, Poolable {
 
     companion object {
         val MAPPER = mapperFor<SpriteRenderer>()
+        const val COLOR_HEX_DEFAULT = "#FFFFFF"
     }
 }
 

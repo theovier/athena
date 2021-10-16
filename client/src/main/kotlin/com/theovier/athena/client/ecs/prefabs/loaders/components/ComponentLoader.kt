@@ -4,9 +4,10 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.JsonValue
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 interface ComponentLoader {
-    fun load(componentJSON: JsonValue): Component
+    fun load(componentJSON: JsonValue, dependencyPool: DependencyPool = DependencyPool()): Component
 
     companion object {
         fun readVector2(node: JsonValue, default: Vector2 = Vector2.Zero): Vector2 {

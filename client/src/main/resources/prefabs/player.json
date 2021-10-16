@@ -1,46 +1,49 @@
 {
-  "player": {},
-  "aim": {
-    "maxDistanceToPlayer": 4
-  },
-  "transform": {
-    "size": {
-      "y": 2
-    }
-  },
-  "direction": {},
-  "velocity": {
-    "maxSpeed": 8
-  },
-  "acceleration": {
-    "factor": 250
-  },
-  "friction": {
-    "factor": 10
-  },
-  "trauma": {
-    "maxOffsetTranslation": 0.1,
-    "maxOffsetRotation": 1,
-    "reductionFactor": 0.8
-  },
-  "spine": {
-    "atlas": "sprites/characters/player/player.atlas",
-    "skeleton": "sprites/characters/player/player.json",
-    "initialAnimation": {
-      "name": "idle",
-      "loop": true
-    }
-  },
-  "physics": {
-    "body": {
-      "type": "dynamic",
-      "box": {
-        "width": 1,
-        "height": 2
-      },
-      "position": {
-        "x": 10,
-        "y": 12
+  "id": "player",
+  "components": {
+    "player": {},
+    "aim": {
+      "maxDistanceToPlayer": 4
+    },
+    "transform": {
+      "size": {
+        "y": 2
+      }
+    },
+    "direction": {},
+    "velocity": {
+      "maxSpeed": 8
+    },
+    "acceleration": {
+      "factor": 250
+    },
+    "friction": {
+      "factor": 10
+    },
+    "trauma": {
+      "maxOffsetTranslation": 0.1,
+      "maxOffsetRotation": 1,
+      "reductionFactor": 0.8
+    },
+    "spine": {
+      "atlas": "sprites/characters/player/player.atlas",
+      "skeleton": "sprites/characters/player/player.json",
+      "initialAnimation": {
+        "name": "idle",
+        "loop": true
+      }
+    },
+    "physics": {
+      "body": {
+        "type": "dynamic",
+        "box": {
+          "width": 1,
+          "height": 2
+        },
+        "position": {
+          "x": 10,
+          "y": 12
+        }
       }
     }
   }

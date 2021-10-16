@@ -1,7 +1,10 @@
 {
-  "transform": {},
-  "lifetime": {
-    "duration": 0.3
-  },
-  "text": {}
+  "id": "indicator",
+  "components": {
+    "transform": {},
+    "lifetime": {
+      "duration": 0.3
+    },
+    "text": {}
+  }
 }

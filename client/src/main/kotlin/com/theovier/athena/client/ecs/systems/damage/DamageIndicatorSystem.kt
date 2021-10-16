@@ -22,7 +22,7 @@ class DamageIndicatorSystem : IteratingSystem(allOf(HitMarker::class, Spine::cla
     }
 
     private fun spawnDamageIndicator(atPosition: Vector2, hit: Damage) {
-        val indicator = Prefab.instantiate("damageIndicator") {
+       Prefab.instantiate("damageIndicator") {
             with(transform) {
                 position.set(atPosition, 0f)
             }
@@ -30,6 +30,5 @@ class DamageIndicatorSystem : IteratingSystem(allOf(HitMarker::class, Spine::cla
                 text = "${hit.amount}"
             }
         }
-        engine.addEntity(indicator)
     }
 }

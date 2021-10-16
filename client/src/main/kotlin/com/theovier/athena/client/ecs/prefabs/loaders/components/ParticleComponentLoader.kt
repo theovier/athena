@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.Particle
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class ParticleComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Particle {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Particle {
         val component = Particle()
         if (componentJSON.has(EFFECT)) {
             val effectJSON = componentJSON.get(EFFECT)

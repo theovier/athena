@@ -9,7 +9,8 @@ import ktx.ashley.mapperFor
 
 data class Input(
     val movement: Vector2 = Vector2(0f, 0f),
-    var fire: Boolean = false
+    var fire: Boolean = false,
+    var hideHealthBars: Boolean = false
 ) : Component {
     companion object {
         val MAPPER = mapperFor<Input>()

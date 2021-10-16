@@ -1,15 +1,17 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
-import com.badlogic.ashley.core.Component
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.AthenaGame
 import com.theovier.athena.client.ecs.components.SpriteRenderer
+import com.theovier.athena.client.ecs.components.SpriteRenderer.Companion.COLOR_HEX_DEFAULT
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import ktx.assets.async.AssetStorage
 
 class SpriteComponentLoader(private val assets: AssetStorage) : ComponentLoader {
 
-    override fun load(componentJSON: JsonValue): Component {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): SpriteRenderer {
         val component = SpriteRenderer()
         val texturePath = componentJSON.getString("texture")
         val texture: Texture = assets.loadSync(texturePath)
@@ -30,11 +32,17 @@ class SpriteComponentLoader(private val assets: AssetStorage) : ComponentLoader 
         } else {
             component.sprite.setOriginCenter()
         }
+        if (componentJSON.has(COLOR)) {
+            val colorJson = componentJSON.get(COLOR)
+            val hex = colorJson.getString("hex", COLOR_HEX_DEFAULT)
+            component.sprite.color = Color.valueOf(hex)
+        }
         return component
     }
 
     companion object {
         private const val OFFSET = "offset"
         private const val ORIGIN = "origin"
+        private const val COLOR = "color"
     }
 }

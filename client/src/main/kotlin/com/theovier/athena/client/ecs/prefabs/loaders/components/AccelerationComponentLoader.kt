@@ -2,9 +2,10 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.movement.Acceleration
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class AccelerationComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Acceleration {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Acceleration {
         return Acceleration().apply {
             acceleration.x = componentJSON.getFloat(ACCELERATION_X, Acceleration.DEFAULT_ACCELERATION_X)
             acceleration.y = componentJSON.getFloat(ACCELERATION_Y, Acceleration.DEFAULT_ACCELERATION_Y)

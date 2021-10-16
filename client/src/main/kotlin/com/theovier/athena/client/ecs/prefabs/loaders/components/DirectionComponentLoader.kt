@@ -2,9 +2,10 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.components.movement.Direction
+import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class DirectionComponentLoader : ComponentLoader {
-    override fun load(componentJSON: JsonValue): Direction {
+    override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Direction {
         return Direction().apply {
             direction.x = componentJSON.getFloat(DIRECTION_X, Direction.DEFAULT_DIRECTION_X)
             direction.y = componentJSON.getFloat(DIRECTION_Y, Direction.DEFAULT_DIRECTION_Y)

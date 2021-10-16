@@ -1,5 +1,6 @@
 package com.theovier.athena.client
 
+import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
@@ -31,6 +32,7 @@ fun main() {
     }
     val module = module {
         single { assets }
+        single { PooledEngine() }
         single { World(Vector2.Zero, true) }
         single { Input() }
         single { GameScreen(get()) }

@@ -2,6 +2,7 @@ package com.theovier.athena.client.ecs.systems.render
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
@@ -14,7 +15,10 @@ private val log = KotlinLogging.logger {}
 
 class SpriteRenderingSystem (private val batch: Batch) :
     SortedIteratingSystem(
-        allOf(Transform::class, SpriteRenderer::class).exclude(Foreground::class).get(),
+        allOf(Transform::class, SpriteRenderer::class)
+            .exclude(Foreground::class)
+            .exclude(Invisible::class)
+            .get(),
         compareBy { it[Transform.MAPPER] }
     ) {
 

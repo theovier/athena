@@ -1,0 +1,12 @@
+{
+  "id": "root",
+  "components": {
+
+  },
+  "children": [
+    {
+      "id": "child_1",
+      "components": {}
+    }
+  ]
+}

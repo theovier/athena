@@ -78,7 +78,7 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
     }
 
     private fun spawnBullet(origin: Vector2, shootingDirection: Vector2, shooter: Entity) {
-        val bullet = Prefab.instantiate(BULLET_ENTITY) {
+        Prefab.instantiate(BULLET_ENTITY) {
             with(transform) {
                 forward.set(shootingDirection)
             }
@@ -93,11 +93,10 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
                 damage.source = DamageSource(this@instantiate, shooter)
             }
         }
-        engine.addEntity(bullet)
     }
 
     private fun spawnBulletShell(origin: Vector2, direction: Vector2) {
-        val shell = Prefab.instantiate("bullet_shell") {
+        Prefab.instantiate("bullet_shell") {
             with(transform) {
                 position.set(origin, 0f)
             }
@@ -112,7 +111,6 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
                 }
             }
         }
-        engine.addEntity(shell)
     }
 
     private fun applyTrauma(shooter: Entity) {

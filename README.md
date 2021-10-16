@@ -17,6 +17,8 @@ Work in progress.
 - Smooth camera movement by simple [asymptotic average](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 - Smooth translational + rotational [camera shake based on trauma](https://www.youtube.com/watch?v=tu-Qe66AvtY&t)
 - Custom prefab system (using JSON)
+  - Including entity hierarchy
+  - Components can reference other entities/components in same prefab file
 - Controller support with [relatively smooth aiming](https://www.gamasutra.com/blogs/MarkVenturelli/20150817/251387/Everything_I_Learned_About_DualStick_Shooter_Controls.php)
 - Basic support for [tiled maps](https://github.com/libktx/ktx/tree/master/tiled)
 - Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)

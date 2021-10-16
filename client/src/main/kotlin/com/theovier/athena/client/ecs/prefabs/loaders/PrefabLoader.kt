@@ -2,13 +2,17 @@ package com.theovier.athena.client.ecs.prefabs.loaders
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
+import com.theovier.athena.client.ecs.addChild
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.io.IOException
+import java.lang.IllegalArgumentException
 
 class PrefabLoader : EntityLoader, KoinComponent {
     private val log = KotlinLogging.logger {}
@@ -27,6 +31,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "direction" to DirectionComponentLoader(),
         "foreground" to ForegroundComponentLoader(),
         "friction" to FrictionComponentLoader(),
+        "healthBar" to HealthBarComponentLoader(),
         "health" to HealthComponentLoader(),
         "invincible" to InvincibleComponentLoader(),
         "lifetime" to LifetimeComponentLoader(),
@@ -46,36 +51,141 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "travel" to TravelComponentLoader(),
         "velocity" to VelocityComponentLoader()
     )
+    private var currentPrefabPath = ""
+    private val dependencyPool = DependencyPool()
+    private val componentsWithMissingDependencies = HashSet<ComponentData>()
 
-    override fun load(fileName: String, configure: Entity.() -> Unit): Entity {
-        val entity = Entity()
-        val components = loadComponentsFromJSONFile(fileName)
-        components.forEach { entity += it }
-        configure(entity)
+    companion object {
+        const val PREFAB_PATH_PREFIX = "/prefabs"
+        const val PREFAB_EXTENSION = "json"
+        const val COMPONENTS = "components"
+        const val CHILDREN = "children"
+        const val REQUIRES_DEPENDENCIES = "dependencies"
+        const val ID = "id"
+    }
+
+    override fun loadFromFile(fileName: String, configure: Entity.() -> Unit): Entity {
+        currentPrefabPath = "$PREFAB_PATH_PREFIX/$fileName.$PREFAB_EXTENSION"
+        val prefabStream = PrefabLoader::class.java.getResourceAsStream(currentPrefabPath)
+        val jsonReader = JsonReader()
+        val entityRoot = jsonReader.parse(prefabStream)
+        val entity = load(entityRoot, configure)
+        retryLoadingComponentsWithDependencies()
+        cleanup()
         return entity
     }
 
-    private fun loadComponentsFromJSONFile(fileName: String): List<Component> {
-        val prefabPath = "/prefabs/$fileName.json"
-        val prefabStream = PrefabLoader::class.java.getResourceAsStream(prefabPath)
-        val jsonReader = JsonReader()
-        val documentRoot = jsonReader.parse(prefabStream)
-        return loadComponents(documentRoot, prefabPath)
+    fun load(entityRoot: JsonValue, configure: Entity.() -> Unit = {}): Entity {
+        val entity = Entity()
+        if(!entityRoot.has(ID)) {
+            throw IllegalArgumentException("An entity is missing an ID attribute in $currentPrefabPath")
+        }
+        val id = entityRoot.getString(ID)
+        if (entityRoot.has(COMPONENTS)) {
+            val componentRoot = entityRoot.get(COMPONENTS)
+            val components = loadComponents(componentRoot, id)
+            components.forEach { entity += it }
+        }
+        if (entityRoot.has(CHILDREN)) {
+            val childrenRoot = entityRoot.get(CHILDREN)
+            val children = loadChildren(childrenRoot)
+            children.forEach { entity.addChild(it) }
+        }
+        configure(entity)
+        dependencyPool.add(id, entity)
+        return entity
     }
 
-    private fun loadComponents(node: JsonValue, filePath: String): List<Component> {
+    private fun loadComponents(node: JsonValue, belongsTo: String): List<Component> {
         val components = arrayListOf<Component>()
         val iterator = node.iterator()
         while (iterator.hasNext()) {
             val componentRoot = iterator.next()
-            val componentReader = componentLoaders[componentRoot.name]
-            if (componentReader != null) {
-                val component = componentReader.load(componentRoot)
+            val component = loadComponent(componentRoot, belongsTo)
+            if (component != null) {
                 components += component
-            } else {
-                log.error { "Could not find a suitable ComponentReader for '${componentRoot.name}' in $filePath. Hence component has not been added to entity." }
             }
         }
         return components
+    }
+
+    private fun loadComponent(componentRoot: JsonValue, belongsTo: String): Component? {
+        if (componentRoot.has(REQUIRES_DEPENDENCIES)) {
+            val requiredDependencies = componentRoot.get(REQUIRES_DEPENDENCIES).asStringArray()
+            return loadComponent(componentRoot, belongsTo, requiredDependencies)
+        }
+        return load(componentRoot, belongsTo)
+    }
+
+    private fun loadComponent(componentRoot: JsonValue, belongsTo: String, dependencies: Array<String>): Component? {
+        if (dependencyPool.containsAll(dependencies)) {
+            return load(componentRoot, belongsTo)
+        } else {
+            val componentName = componentRoot.name
+            val id = "$belongsTo.$componentName"
+            componentsWithMissingDependencies += ComponentData(componentRoot, id, belongsTo, dependencies)
+            return null
+        }
+    }
+
+    private fun load(componentRoot: JsonValue, entityId: String) : Component? {
+        val componentName = componentRoot.name
+        val componentReader = componentLoaders[componentName]
+        if (componentReader != null) {
+            val component = componentReader.load(componentRoot, dependencyPool)
+            val id = "$entityId.$componentName"
+            dependencyPool.add(id, component)
+            return component
+        } else {
+            log.error { "Could not find a suitable ComponentReader for '$componentName' in $currentPrefabPath. Hence component has not been added to entity." }
+            return null
+        }
+    }
+
+    private fun loadChildren(node: JsonValue): List<Entity> {
+        val children = arrayListOf<Entity>()
+        val iterator = node.iterator()
+        while (iterator.hasNext()) {
+            val childRoot = iterator.next()
+            val child = load(childRoot)
+            children += child
+        }
+        return children
+    }
+
+    private fun retryLoadingComponentsWithDependencies() {
+        val resolvedComponents = ArrayList<ComponentData>()
+        var hasLoadedAnotherComponent: Boolean
+        do {
+            componentsWithMissingDependencies.forEach {
+                val component = loadComponent(it.json, it.belongsTo, it.dependencies)
+                if (component != null) {
+                    resolvedComponents += it
+                    attachComponentToItsEntity(component, it.belongsTo)
+                }
+            }
+            hasLoadedAnotherComponent = componentsWithMissingDependencies.removeAll(resolvedComponents)
+        } while(hasLoadedAnotherComponent)
+        logUnresolvableComponents()
+    }
+
+    private fun logUnresolvableComponents() {
+        componentsWithMissingDependencies.forEach {
+            log.error { "Dependencies for $it were not found, thus this component could not be loaded." }
+        }
+    }
+
+    private fun attachComponentToItsEntity(component: Component, ownerId: String) {
+        val entity = dependencyPool.entities[ownerId]
+        if (entity != null) {
+            entity += component
+        } else {
+            log.error { "Could not find entity $ownerId to attach component to." }
+        }
+    }
+
+    private fun cleanup() {
+        dependencyPool.clear()
+        componentsWithMissingDependencies.clear()
     }
 }

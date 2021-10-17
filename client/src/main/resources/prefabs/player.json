@@ -46,5 +46,24 @@
         }
       }
     }
-  }
+  },
+  "children": [
+    {
+      "id": "dust",
+      "components": {
+        "transform": {
+          "localPosition": {
+            "x": 0.0,
+            "y": -0.5
+          }
+        },
+        "particle": {
+          "effect": {
+            "settings": "particles/dust_trail.p",
+            "images": "sprites/particles"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -53,8 +53,8 @@
       "components": {
         "transform": {
           "localPosition": {
-            "x": 0.0,
-            "y": -0.5
+            "x": -0.75,
+            "y": -0.3
           }
         },
         "particle": {

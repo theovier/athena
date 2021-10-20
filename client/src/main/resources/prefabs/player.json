@@ -25,6 +25,9 @@
       "maxOffsetRotation": 1,
       "reductionFactor": 0.8
     },
+    "dustTrail": {
+      "frequency": 1.0
+    },
     "spine": {
       "atlas": "sprites/characters/player/player.atlas",
       "skeleton": "sprites/characters/player/player.json",
@@ -46,24 +49,5 @@
         }
       }
     }
-  },
-  "children": [
-    {
-      "id": "dust",
-      "components": {
-        "transform": {
-          "localPosition": {
-            "x": -0.75,
-            "y": -0.3
-          }
-        },
-        "particle": {
-          "effect": {
-            "settings": "particles/dust_trail.p",
-            "images": "sprites/particles"
-          }
-        }
-      }
-    }
-  ]
+  }
 }

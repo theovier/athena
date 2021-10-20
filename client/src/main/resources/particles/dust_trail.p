@@ -1,9 +1,11 @@
 dust_trail
 - Delay -
-active: false
+active: true
+lowMin: 150.0
+lowMax: 250.0
 - Duration -
-lowMin: 1500.0
-lowMax: 1500.0
+lowMin: 550.0
+lowMax: 550.0
 - Count -
 min: 0
 max: 1
@@ -122,7 +124,7 @@ timeline1: 0.2
 timeline2: 1.0
 - Options -
 attached: false
-continuous: true
+continuous: false
 aligned: false
 additive: false
 behind: false

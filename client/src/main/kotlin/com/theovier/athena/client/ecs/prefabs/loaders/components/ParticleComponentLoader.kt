@@ -8,6 +8,8 @@ import com.theovier.athena.client.ecs.components.Particle
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class ParticleComponentLoader : ComponentLoader {
+
+    //todo add option to start on creation
     override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Particle {
         val component = Particle()
         if (componentJSON.has(EFFECT)) {

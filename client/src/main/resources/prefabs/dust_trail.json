@@ -1,0 +1,18 @@
+{
+  "id": "dust",
+  "components": {
+    "transform": {},
+    "lifetime": {
+      "duration": 5.0
+    },
+    "particle": {
+      "effect": {
+        "settings": "particles/dust_trail.p",
+        "images": "sprites/particles"
+      },
+      "offset": {
+        "y": -0.3
+      }
+    }
+  }
+}

@@ -32,6 +32,7 @@ class InputSystem : IteratingSystem(allOf(Input::class).get()), XboxInputAdapter
         val fireAxisValue = controller.getAxis(XboxInputAdapter.AXIS_TRIGGER_RIGHT)
         input.fire = fireAxisValue > XboxInputAdapter.FIRE_DEAD_ZONE
         input.movement.set(moveAxisHorizontal, moveAxisVertical)
+        input.isMoving = !(XboxInputAdapter.isAxisInputInDeadZone(input.movement))
     }
 
     override fun buttonDown(controller: Controller, buttonCode: Int): Boolean {

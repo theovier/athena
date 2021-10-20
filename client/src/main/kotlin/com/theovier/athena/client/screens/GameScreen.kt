@@ -62,6 +62,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val stage = Stage(uiViewport, batch)
     private lateinit var debugLabelFPS: Label
     private lateinit var debugLabelPlayerPosition: Label
+    private lateinit var debugEntityCountLabel: Label
 
     init {
         initSingletonComponents()
@@ -150,6 +151,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 verticalGroup {
                     debugLabelFPS = label("FPS Counter")
                     debugLabelPlayerPosition = label("Player Position")
+                    debugEntityCountLabel = label("Entity Counter")
                 }
             }
         }
@@ -171,8 +173,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun updateDebugUI() {
         val fpsText = "${Gdx.graphics.framesPerSecond} FPS"
         val playerPositionText = "Position: (%.2f, %.2f)".format(player.transform.position.x, player.transform.position.y)
+        val entityCount = "${engine.entities.count()} entities"
         debugLabelFPS.setText(fpsText)
         debugLabelPlayerPosition.setText(playerPositionText)
+        debugEntityCountLabel.setText(entityCount)
     }
 
     override fun resize(width: Int, height: Int) {

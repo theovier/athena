@@ -9,7 +9,6 @@ import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class ParticleComponentLoader : ComponentLoader {
 
-    //todo add option to start on creation
     override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Particle {
         val component = Particle()
         if (componentJSON.has(EFFECT)) {
@@ -23,6 +22,9 @@ class ParticleComponentLoader : ComponentLoader {
             component.offset.set(offset)
         }
         component.effect.scaleEffect(AthenaGame.UNIT_SCALE)
+        if (componentJSON.getBoolean(AUTOSTART, true)) {
+            component.effect.start()
+        }
         return component
     }
 
@@ -38,5 +40,6 @@ class ParticleComponentLoader : ComponentLoader {
     companion object {
         const val EFFECT = "effect"
         const val OFFSET = "offset"
+        const val AUTOSTART = "autostart"
     }
 }

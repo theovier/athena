@@ -39,7 +39,6 @@ class DustTrailSpawnSystem : IteratingSystem(allOf(DustTrail::class, Player::cla
             with(transform) {
                 position.set(origin, 0f)
             }
-            particle.effect.start()
         }
     }
 }

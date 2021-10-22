@@ -25,6 +25,9 @@
       "maxOffsetRotation": 1,
       "reductionFactor": 0.8
     },
+    "dustTrail": {
+      "frequency": 1.0
+    },
     "spine": {
       "atlas": "sprites/characters/player/player.atlas",
       "skeleton": "sprites/characters/player/player.json",

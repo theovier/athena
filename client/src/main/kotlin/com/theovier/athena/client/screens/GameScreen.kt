@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -63,6 +62,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val stage = Stage(uiViewport, batch)
     private lateinit var debugLabelFPS: Label
     private lateinit var debugLabelPlayerPosition: Label
+    private lateinit var debugEntityCountLabel: Label
 
     init {
         initSingletonComponents()
@@ -119,6 +119,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HealthBarScalingSystem())
             addSystem(HealthBarToggleSystem())
             addSystem(FacingSystem())
+            addSystem(DustTrailSpawnSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
@@ -150,6 +151,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 verticalGroup {
                     debugLabelFPS = label("FPS Counter")
                     debugLabelPlayerPosition = label("Player Position")
+                    debugEntityCountLabel = label("Entity Counter")
                 }
             }
         }
@@ -171,8 +173,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun updateDebugUI() {
         val fpsText = "${Gdx.graphics.framesPerSecond} FPS"
         val playerPositionText = "Position: (%.2f, %.2f)".format(player.transform.position.x, player.transform.position.y)
+        val entityCount = "${engine.entities.count()} entities"
         debugLabelFPS.setText(fpsText)
         debugLabelPlayerPosition.setText(playerPositionText)
+        debugEntityCountLabel.setText(entityCount)
     }
 
     override fun resize(width: Int, height: Int) {

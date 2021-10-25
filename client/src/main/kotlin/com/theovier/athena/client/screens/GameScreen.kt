@@ -26,6 +26,7 @@ import com.theovier.athena.client.ecs.systems.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
+import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.FacingSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerAimSystem
@@ -33,6 +34,7 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
+import ktx.ashley.addComponent
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -83,6 +85,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         Prefab.instantiate("map")
+        val wall = Prefab.instantiate("wall")
+        wall.add(Impact())
+
+
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -129,6 +135,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HapticDamageFeedbackSystem())
             addSystem(HealthSystem())
             addSystem(SoundSystem())
+            addSystem(ImpactSpawnSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
             //addSystem(PhysicsDebugSystem(world, camera))

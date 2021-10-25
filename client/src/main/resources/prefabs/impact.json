@@ -1,0 +1,17 @@
+{
+  "id": "bullet_impact",
+  "components": {
+    "transform": {
+
+    },
+    "lifetime": {
+      "duration": 1.0
+    },
+    "particle": {
+      "effect": {
+        "settings": "particles/bullet_impact.p",
+        "images": "sprites/particles"
+      }
+    }
+  }
+}

@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
-import com.theovier.athena.client.ecs.components.Particle
-import com.theovier.athena.client.ecs.components.Transform
-import com.theovier.athena.client.ecs.components.particle
-import com.theovier.athena.client.ecs.components.transform
+import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
 
@@ -21,7 +18,7 @@ class ParticleSystem(private val batch: Batch) : IteratingSystem(allOf(Particle:
             val rotation = transform.rotationDegrees
             val offset = particle.offset
             val rotatedOffset = Vector2(offset.x, offset.y).rotateDeg(rotation)
-            val originAdjustmentOffsetFromBox2DToLibgdx = 0.5f * transform.size.y //see the offset in the physics system
+            val originAdjustmentOffsetFromBox2DToLibgdx = if(entity.hasPhysicsComponent) 0.5f * transform.size.y else 0f
             val x = transform.position.x + rotatedOffset.x
             val y = transform.position.y + rotatedOffset.y + originAdjustmentOffsetFromBox2DToLibgdx
             setPosition(x, y)

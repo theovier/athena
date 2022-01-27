@@ -83,6 +83,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         Prefab.instantiate("map")
+        Prefab.instantiate("dufflebag")
+        Prefab.instantiate("dufflebag2")
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {

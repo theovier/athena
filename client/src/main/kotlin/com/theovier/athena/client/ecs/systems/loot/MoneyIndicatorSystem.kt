@@ -17,8 +17,8 @@ class MoneyIndicatorSystem : IteratingSystem(allOf(Looted::class, Money::class).
         val position = looter.transform.position
 
         val gainsMoney = money.amount >= 0
-        val gainMoneyText = "+  ${money.amount.absoluteValue}"
-        val loseMoneyText = "-  ${money.amount.absoluteValue}"
+        val gainMoneyText = "+ $ ${money.amount.absoluteValue}"
+        val loseMoneyText = "- $ ${money.amount.absoluteValue}"
 
         Prefab.instantiate("moneyGainIndicator").apply {
             with(transform) {

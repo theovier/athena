@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.Loot
 import com.theovier.athena.client.ecs.components.Looted
 import com.theovier.athena.client.ecs.components.Player
-import com.theovier.athena.client.ecs.components.loot
 import ktx.ashley.has
 
 class LootCollisionHandler : AbstractCollisionHandler() {
@@ -15,7 +14,7 @@ class LootCollisionHandler : AbstractCollisionHandler() {
         val entityA = contact.entityA
         val entityB = contact.entityB
 
-        if (noLootEntityInvolved(entityA, entityB) || noPlayerEntityInvolved(entityA, entityB)) {
+        if (noLootInvolved(entityA, entityB) || noPlayerInvolved(entityA, entityB)) {
             next?.handleCollision(contact)
             return
         }
@@ -38,11 +37,11 @@ class LootCollisionHandler : AbstractCollisionHandler() {
         return entityA.has(Player.MAPPER) || entityB.has(Player.MAPPER)
     }
 
-    private fun noLootEntityInvolved(entityA: Entity, entityB: Entity): Boolean {
+    private fun noLootInvolved(entityA: Entity, entityB: Entity): Boolean {
         return !lootEntityInvolved(entityA, entityB)
     }
 
-    private fun noPlayerEntityInvolved(entityA: Entity, entityB: Entity): Boolean {
+    private fun noPlayerInvolved(entityA: Entity, entityB: Entity): Boolean {
         return !playerEntityInvolved(entityA, entityB)
     }
 

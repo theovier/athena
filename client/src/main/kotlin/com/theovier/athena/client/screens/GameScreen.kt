@@ -66,6 +66,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private lateinit var debugLabelFPS: Label
     private lateinit var debugLabelPlayerPosition: Label
     private lateinit var debugEntityCountLabel: Label
+    private lateinit var debugLabelPlayerMoney: Label
 
     init {
         initSingletonComponents()
@@ -95,6 +96,16 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 amount = 5
             })
         }
+        Prefab.instantiate("dufflebag").apply {
+            add(Loot()) //todo build loot component loader
+            add(Money().apply {
+                amount = 5
+            })
+            with(physics) {
+                body.setTransform(Vector2(28f, 7f), 0f)
+            }
+        }
+
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -166,6 +177,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     debugLabelFPS = label("FPS Counter")
                     debugLabelPlayerPosition = label("Player Position")
                     debugEntityCountLabel = label("Entity Counter")
+                    debugLabelPlayerMoney = label("Player Money")
                 }
             }
         }
@@ -188,9 +200,11 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         val fpsText = "${Gdx.graphics.framesPerSecond} FPS"
         val playerPositionText = "Position: (%.2f, %.2f)".format(player.transform.position.x, player.transform.position.y)
         val entityCount = "${engine.entities.count()} entities"
+        val playerMoneyText = "$${player.money.amount}"
         debugLabelFPS.setText(fpsText)
         debugLabelPlayerPosition.setText(playerPositionText)
         debugEntityCountLabel.setText(entityCount)
+        debugLabelPlayerMoney.setText(playerMoneyText)
     }
 
     override fun resize(width: Int, height: Int) {

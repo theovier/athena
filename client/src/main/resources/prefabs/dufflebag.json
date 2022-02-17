@@ -22,6 +22,10 @@
       ]
     },
     "ignoreAudio": {},
+    "loot": {},
+    "money": {
+      "amount": 5
+    },
     "physics": {
       "body": {
         "type": "kinematic",

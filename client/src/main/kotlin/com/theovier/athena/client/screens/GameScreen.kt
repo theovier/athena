@@ -87,25 +87,14 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
-        player.add(Money()) //todo build money component loader
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
+        Prefab.instantiate("dufflebag")
         Prefab.instantiate("dufflebag").apply {
-            add(Loot()) //todo build loot component loader
-            add(Money().apply {
-                amount = 5
-            })
-        }
-        Prefab.instantiate("dufflebag").apply {
-            add(Loot()) //todo build loot component loader
-            add(Money().apply {
-                amount = 5
-            })
             with(physics) {
                 body.setTransform(Vector2(28f, 7f), 0f)
             }
         }
-
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {

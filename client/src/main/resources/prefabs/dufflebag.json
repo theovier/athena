@@ -5,14 +5,27 @@
       "size": {
         "x": 2.5,
         "y": 1.5
-      },
-      "position": {
-        "x": 20,
-        "y": 10
       }
     },
     "sprite": {
-      "texture": "sprites/loot/dufflebag.png"
+      "texture": "sprites/loot/dufflebag_02.png",
+      "offset": {
+        "x": -0.5
+      }
+    },
+    "physics": {
+      "body": {
+        "type": "kinematic",
+        "sensor": true,
+        "box": {
+          "width": 2.5,
+          "height": 1.5
+        },
+        "position": {
+          "x": 25,
+          "y": 10
+        }
+      }
     }
   }
 }

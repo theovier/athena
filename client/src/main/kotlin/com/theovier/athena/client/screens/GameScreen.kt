@@ -1,5 +1,6 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -12,8 +13,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
+import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
-import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.ecs.systems.cleanup.CleanupHitMarkerSystem
@@ -33,6 +34,7 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
 import ktx.app.KtxScreen
+import ktx.ashley.addComponent
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -48,8 +50,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine: PooledEngine by inject()
-    private val player = Prefab.instantiate("player")
-    private val crosshair = Prefab.instantiate("crosshair")
+    private lateinit var player: Entity
+    private lateinit var crosshair: Entity
     private val batch = SpriteBatch()
 
     //injected systems
@@ -66,9 +68,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     init {
         initSingletonComponents()
-        initSystems()
         initListeners()
         initEntities()
+        initSystems()
         initDebugUI()
         positionCamera()
     }
@@ -82,9 +84,11 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun initEntities() {
+        player = Prefab.instantiate("player")
+        crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
-        Prefab.instantiate("dufflebag")
-        Prefab.instantiate("dufflebag2")
+        val loot = Prefab.instantiate("dufflebag")
+        loot.add(Loot()) //todo build loot component loader
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -141,7 +145,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initListeners() {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
         engine.addEntityListener(allOf(Invisible::class).get(), InvisibleListener())
-        world.setContactListener(ProjectileCollisionListener(engine))
+        world.setContactListener(WorldContactAdapter(engine))
     }
 
     private fun initDebugUI() {

@@ -1,17 +1,13 @@
-package com.theovier.athena.client.ecs.systems
+package com.theovier.athena.client.ecs.systems.loot
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
-class LootRemovalSystem : IteratingSystem(allOf(Loot::class).get()) {
+class LootRemovalSystem : IteratingSystem(allOf(Loot::class, Looted::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val loot = entity.loot
-
-        if (loot.isLooted) {
-            engine.removeEntity(entity)
-        }
+        engine.removeEntity(entity)
     }
 }

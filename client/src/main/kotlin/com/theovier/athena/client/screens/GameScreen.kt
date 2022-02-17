@@ -24,6 +24,8 @@ import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
 import com.theovier.athena.client.ecs.systems.CameraMovementSystem
+import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
+import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
@@ -84,10 +86,15 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
+        player.add(Money()) //todo build money component loader
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
-        val loot = Prefab.instantiate("dufflebag")
-        loot.add(Loot()) //todo build loot component loader
+        Prefab.instantiate("dufflebag").apply {
+            add(Loot()) //todo build loot component loader
+            add(Money().apply {
+                amount = 5
+            })
+        }
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -134,6 +141,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HapticDamageFeedbackSystem())
             addSystem(HealthSystem())
             addSystem(SoundSystem())
+            addSystem(LootMoneySystem())
             addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())

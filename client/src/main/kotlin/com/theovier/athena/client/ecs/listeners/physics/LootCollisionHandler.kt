@@ -2,6 +2,7 @@ package com.theovier.athena.client.ecs.listeners.physics
 
 import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.Loot
+import com.theovier.athena.client.ecs.components.Looted
 import com.theovier.athena.client.ecs.components.Player
 import com.theovier.athena.client.ecs.components.loot
 import ktx.ashley.has
@@ -46,6 +47,10 @@ class LootCollisionHandler : AbstractCollisionHandler() {
     }
 
     private fun handleLootPickup(player: Entity, loot: Entity) {
-        loot.loot.lootedBy = player
+        loot.add(
+            Looted().apply {
+                lootedBy = player
+            }
+        )
     }
 }

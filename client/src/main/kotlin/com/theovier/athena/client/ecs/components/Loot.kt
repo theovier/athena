@@ -9,8 +9,11 @@ import ktx.ashley.mapperFor
 
 class Loot : Component, Poolable {
     var lootedBy: Entity? = null
+    val isLooted = lootedBy != null
 
-    override fun reset() = Unit
+    override fun reset() {
+        lootedBy = null
+    }
 
     companion object {
         val MAPPER = mapperFor<Loot>()

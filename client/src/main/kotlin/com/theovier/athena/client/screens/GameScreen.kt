@@ -135,6 +135,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HapticDamageFeedbackSystem())
             addSystem(HealthSystem())
             addSystem(SoundSystem())
+            addSystem(LootSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
             //addSystem(PhysicsDebugSystem(world, camera))

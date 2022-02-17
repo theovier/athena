@@ -1,15 +1,12 @@
 package com.theovier.athena.client.ecs.listeners.physics
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.physics.box2d.Contact
-import com.theovier.athena.client.ecs.components.Damage
 import com.theovier.athena.client.ecs.components.Loot
 import com.theovier.athena.client.ecs.components.Player
-import com.theovier.athena.client.ecs.isEntity
+import com.theovier.athena.client.ecs.components.loot
 import ktx.ashley.has
 
-class LootCollisionHandler(private val engine: Engine) : AbstractCollisionHandler() {
+class LootCollisionHandler : AbstractCollisionHandler() {
 
     override fun handleCollision(contact: EntityContact) {
         val player: Entity
@@ -49,7 +46,6 @@ class LootCollisionHandler(private val engine: Engine) : AbstractCollisionHandle
     }
 
     private fun handleLootPickup(player: Entity, loot: Entity) {
-        engine.removeEntity(loot)
-        //todo let that a system do. just add a looted_by field or something
+        loot.loot.lootedBy = player
     }
 }

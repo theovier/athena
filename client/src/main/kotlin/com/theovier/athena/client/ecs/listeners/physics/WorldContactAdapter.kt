@@ -10,7 +10,7 @@ class WorldContactAdapter(engine: Engine) : ContactAdapter() {
     private val handler: CollisionHandler
 
     init {
-        handler = LootCollisionHandler(engine)
+        handler = LootCollisionHandler()
         handler.next = ProjectileCollisionHandler(engine)
     }
 

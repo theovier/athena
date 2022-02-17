@@ -16,16 +16,17 @@ class MoneyIndicatorSystem : IteratingSystem(allOf(Looted::class, Money::class).
         val looter = entity.looted.lootedBy
         val position = looter.transform.position
 
-        val signString = if(money.amount >= 0) "+" else "-"
-        val amountString = "$ ${money.amount.absoluteValue}"
+        val gainsMoney = money.amount >= 0
+        val gainMoneyText = "+  ${money.amount.absoluteValue}"
+        val loseMoneyText = "-  ${money.amount.absoluteValue}"
 
         Prefab.instantiate("moneyGainIndicator").apply {
             with(transform) {
                 this.position.set(position.x, this.position.y + position.y, position.z)
             }
             with(text) {
-                text = "$signString $amountString"
-                color = if(money.amount >= 0) Color.GREEN else Color.RED
+                text = if (gainsMoney) gainMoneyText else loseMoneyText
+                color = if (gainsMoney) Color.GREEN else Color.RED
             }
             //todo add fade system for text
         }

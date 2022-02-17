@@ -26,6 +26,7 @@ import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
 import com.theovier.athena.client.ecs.systems.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
+import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
@@ -142,6 +143,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HealthSystem())
             addSystem(SoundSystem())
             addSystem(LootMoneySystem())
+            addSystem(MoneyIndicatorSystem())
             addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())

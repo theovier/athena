@@ -13,6 +13,15 @@
         "x": -0.5
       }
     },
+    "sound": {
+      "choice": [
+        {
+          "file": "audio/ka-ching.ogg",
+          "volume": 0.1
+        }
+      ]
+    },
+    "ignoreAudio": {},
     "physics": {
       "body": {
         "type": "kinematic",

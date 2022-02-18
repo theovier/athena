@@ -11,8 +11,12 @@
       "y": 2
     },
     "lifetime": {
-      "duration": 0.4
+      "duration": 2
     },
-    "text": {}
+    "text": {},
+    "timer": {},
+    "fade": {
+      "duration": 2
+    }
   }
 }

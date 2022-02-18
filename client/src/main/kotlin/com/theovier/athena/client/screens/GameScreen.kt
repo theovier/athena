@@ -96,6 +96,11 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 body.setTransform(Vector2(28f, 7f), 0f)
             }
         }
+        Prefab.instantiate("dufflebag").apply {
+            with(physics) {
+                body.setTransform(Vector2(30f, 5f), 0f)
+            }
+        }
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -110,6 +115,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
             addSystem(ChildrenPositionSystem())
+            addSystem(FadeSystem())
+            addSystem(FadeTextSystem())
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {

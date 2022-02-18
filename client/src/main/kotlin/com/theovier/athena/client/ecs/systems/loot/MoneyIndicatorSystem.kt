@@ -7,6 +7,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.Velocity
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import ktx.ashley.allOf
+import org.lwjgl.system.MathUtil
 import kotlin.math.absoluteValue
 
 class MoneyIndicatorSystem : IteratingSystem(allOf(Looted::class, Money::class).get()) {
@@ -26,9 +27,9 @@ class MoneyIndicatorSystem : IteratingSystem(allOf(Looted::class, Money::class).
             }
             with(text) {
                 text = if (gainsMoney) gainMoneyText else loseMoneyText
-                color = if (gainsMoney) Color.GREEN else Color.RED
+                //need to create new instances of color as otherwise the alpha value will decrease for all prefabs
+                color = if (gainsMoney) Color.valueOf("#61d327") else Color.valueOf("#d01b3a")
             }
-            //todo add fade system for text
         }
     }
 }

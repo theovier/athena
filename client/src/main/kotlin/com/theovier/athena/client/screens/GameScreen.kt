@@ -1,5 +1,6 @@
 package com.theovier.athena.client.screens
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -12,8 +13,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
+import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
-import com.theovier.athena.client.ecs.listeners.physics.ProjectileCollisionListener
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.ecs.systems.*
 import com.theovier.athena.client.ecs.systems.cleanup.CleanupHitMarkerSystem
@@ -23,6 +24,9 @@ import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
 import com.theovier.athena.client.ecs.systems.CameraMovementSystem
+import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
+import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
+import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
@@ -48,8 +52,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private val camera = OrthographicCamera()
     private val viewport = FitViewport(38f, 23f, camera) //width and height in units, 16:10
     private val engine: PooledEngine by inject()
-    private val player = Prefab.instantiate("player")
-    private val crosshair = Prefab.instantiate("crosshair")
+    private lateinit var player: Entity
+    private lateinit var crosshair: Entity
     private val batch = SpriteBatch()
 
     //injected systems
@@ -63,12 +67,13 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private lateinit var debugLabelFPS: Label
     private lateinit var debugLabelPlayerPosition: Label
     private lateinit var debugEntityCountLabel: Label
+    private lateinit var debugLabelPlayerMoney: Label
 
     init {
         initSingletonComponents()
-        initSystems()
         initListeners()
         initEntities()
+        initSystems()
         initDebugUI()
         positionCamera()
     }
@@ -82,7 +87,20 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     }
 
     private fun initEntities() {
+        player = Prefab.instantiate("player")
+        crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
+        Prefab.instantiate("dufflebag")
+        Prefab.instantiate("dufflebag").apply {
+            with(physics) {
+                body.setTransform(Vector2(28f, 7f), 0f)
+            }
+        }
+        Prefab.instantiate("dufflebag").apply {
+            with(physics) {
+                body.setTransform(Vector2(30f, 5f), 0f)
+            }
+        }
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -97,6 +115,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(physicsSystem)
             addSystem(SpineAnimationSystem())
             addSystem(ChildrenPositionSystem())
+            addSystem(FadeSystem())
+            addSystem(FadeTextSystem())
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {
@@ -129,6 +149,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HapticDamageFeedbackSystem())
             addSystem(HealthSystem())
             addSystem(SoundSystem())
+            addSystem(LootMoneySystem())
+            addSystem(MoneyIndicatorSystem())
+            addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
             //addSystem(PhysicsDebugSystem(world, camera))
@@ -139,7 +162,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initListeners() {
         engine.addEntityListener(allOf(Physics::class).get(), PhysicsListener())
         engine.addEntityListener(allOf(Invisible::class).get(), InvisibleListener())
-        world.setContactListener(ProjectileCollisionListener(engine))
+        world.setContactListener(WorldContactAdapter(engine))
     }
 
     private fun initDebugUI() {
@@ -152,6 +175,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     debugLabelFPS = label("FPS Counter")
                     debugLabelPlayerPosition = label("Player Position")
                     debugEntityCountLabel = label("Entity Counter")
+                    debugLabelPlayerMoney = label("Player Money")
                 }
             }
         }
@@ -174,9 +198,11 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         val fpsText = "${Gdx.graphics.framesPerSecond} FPS"
         val playerPositionText = "Position: (%.2f, %.2f)".format(player.transform.position.x, player.transform.position.y)
         val entityCount = "${engine.entities.count()} entities"
+        val playerMoneyText = "$${player.money.amount}"
         debugLabelFPS.setText(fpsText)
         debugLabelPlayerPosition.setText(playerPositionText)
         debugEntityCountLabel.setText(entityCount)
+        debugLabelPlayerMoney.setText(playerMoneyText)
     }
 
     override fun resize(width: Int, height: Int) {

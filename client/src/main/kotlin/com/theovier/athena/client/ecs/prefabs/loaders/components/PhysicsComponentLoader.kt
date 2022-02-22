@@ -28,10 +28,13 @@ class PhysicsComponentLoader(private val world: World) : ComponentLoader {
         val boxJSON = bodyJSON.get("box")
         val width = boxJSON.getFloat("width", 1.0f)
         val height = boxJSON.getFloat("height", 1.0f)
+        val isSensor = bodyJSON.has("sensor")
 
         return Physics().apply {
             body = world.body(type) {
-                box(width = width, height = height)
+                box(width = width, height = height) {
+                    this.isSensor = isSensor
+                }
                 this.position.set(position)
             }
         }

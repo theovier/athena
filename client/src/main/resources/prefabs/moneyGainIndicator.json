@@ -1,0 +1,22 @@
+{
+  "id": "moneyIndicator",
+  "components": {
+    "transform": {
+      "position": {
+        "y": 2.5
+      }
+    },
+    "velocity": {
+      "x": 0,
+      "y": 2
+    },
+    "lifetime": {
+      "duration": 2
+    },
+    "text": {},
+    "timer": {},
+    "fade": {
+      "duration": 2
+    }
+  }
+}

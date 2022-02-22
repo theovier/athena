@@ -2,7 +2,6 @@ package com.theovier.athena.client.ecs.prefabs.loaders
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.addChild
@@ -11,7 +10,6 @@ import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.io.IOException
 import java.lang.IllegalArgumentException
 
 class PrefabLoader : EntityLoader, KoinComponent {
@@ -30,13 +28,16 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "damage" to DamageComponentLoader(),
         "direction" to DirectionComponentLoader(),
         "dustTrail" to DustTrailComponentLoader(),
+        "fade" to FadeComponentLoader(),
         "foreground" to ForegroundComponentLoader(),
         "friction" to FrictionComponentLoader(),
         "healthBar" to HealthBarComponentLoader(),
         "health" to HealthComponentLoader(),
         "invincible" to InvincibleComponentLoader(),
         "lifetime" to LifetimeComponentLoader(),
+        "loot" to LootComponentLoader(),
         "map" to mapComponentLoader,
+        "money" to MoneyComponentLoader(),
         "particle" to ParticleComponentLoader(),
         "physics" to physicsComponentLoader,
         "player" to PlayerComponentLoader(),

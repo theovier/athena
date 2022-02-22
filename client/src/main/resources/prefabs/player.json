@@ -36,6 +36,9 @@
         "loop": true
       }
     },
+    "money": {
+      "amount": 0
+    },
     "physics": {
       "body": {
         "type": "dynamic",

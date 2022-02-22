@@ -1,0 +1,8 @@
+{
+  "fade": {
+    "start": 100,
+    "end": 0,
+    "current": 20,
+    "duration": 5
+  }
+}

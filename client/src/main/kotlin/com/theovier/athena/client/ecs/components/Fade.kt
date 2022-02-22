@@ -10,7 +10,7 @@ import ktx.ashley.mapperFor
 class Fade : Component {
     var start = DEFAULT_START
     var end = DEFAULT_END
-    var current = DEFAULT_CURRENT
+    var current = start
     var duration = DEFAULT_DURATION
 
     companion object {

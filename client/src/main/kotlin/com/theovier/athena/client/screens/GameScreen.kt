@@ -91,6 +91,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
         Prefab.instantiate("summoner")
+        Prefab.instantiate("skull")
         Prefab.instantiate("dufflebag")
         Prefab.instantiate("dufflebag").apply {
             with(physics) {

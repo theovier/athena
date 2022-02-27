@@ -10,7 +10,7 @@
       "atlas": "sprites/characters/summoner/summoner.atlas",
       "skeleton": "sprites/characters/summoner/summoner.json",
       "initialAnimation": {
-        "name": "singing",
+        "name": "idle",
         "loop": true
       }
     },

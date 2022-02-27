@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -36,6 +37,7 @@ import com.theovier.athena.client.ecs.systems.player.PlayerAimSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
 import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
 import com.theovier.athena.client.ecs.systems.render.*
+import com.theovier.athena.client.misc.spine.forceToFaceLeft
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -90,7 +92,20 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         player = Prefab.instantiate("player")
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
-        Prefab.instantiate("summoner")
+        Prefab.instantiate("summoner").apply {
+            with(physics) {
+                body.setTransform(Vector2(24f, 5f), 0f)
+            }
+            spine.skeleton.forceToFaceLeft()
+        }
+        Prefab.instantiate("summoner").apply {
+            with(physics) {
+                body.setTransform(Vector2(20.5f, 3.5f), 0f)
+            }
+        }
+        Prefab.instantiate("summoner").apply {
+            spine.state.setAnimation(0, "singing", true)
+        }
         Prefab.instantiate("skull")
         Prefab.instantiate("dufflebag")
         Prefab.instantiate("dufflebag").apply {

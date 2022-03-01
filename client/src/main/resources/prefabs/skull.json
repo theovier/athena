@@ -1,0 +1,21 @@
+{
+  "id": "skull",
+  "components": {
+    "transform": {
+      "size": {
+        "x": 1.25,
+        "y": 1.25
+      },
+      "position": {
+        "x": 22,
+        "y": 4
+      }
+    },
+    "sprite": {
+      "texture": "sprites/skull.png",
+      "offset": {
+        "x": -0.5
+      }
+    }
+  }
+}

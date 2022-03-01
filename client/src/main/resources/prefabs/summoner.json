@@ -1,0 +1,31 @@
+{
+  "id": "summoner",
+  "components": {
+    "transform": {
+      "size": {
+        "y": 2
+      }
+    },
+    "spine": {
+      "atlas": "sprites/characters/summoner/summoner.atlas",
+      "skeleton": "sprites/characters/summoner/summoner.json",
+      "initialAnimation": {
+        "name": "idle",
+        "loop": true
+      }
+    },
+    "physics": {
+      "body": {
+        "type": "static",
+        "box": {
+          "width": 1,
+          "height": 2
+        },
+        "position": {
+          "x": 20,
+          "y": 6
+        }
+      }
+    }
+  }
+}

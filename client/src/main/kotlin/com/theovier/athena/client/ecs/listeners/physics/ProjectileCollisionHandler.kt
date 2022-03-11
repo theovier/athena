@@ -4,43 +4,43 @@ import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import com.badlogic.gdx.physics.box2d.Body
-import com.badlogic.gdx.physics.box2d.Contact
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.components.Damage as DamageComponent
+import com.theovier.athena.client.ecs.isEntity
 import ktx.ashley.has
 
-class ProjectileCollisionListener(private val engine: Engine) : ContactAdapter() {
+class ProjectileCollisionHandler(private val engine: Engine) : AbstractCollisionHandler() {
 
-    override fun beginContact(contact: Contact) {
+    override fun handleCollision(contact: EntityContact) {
+        if (contact.hasSensor) {
+            next?.handleCollision(contact)
+            return
+        }
+
         val projectile: Entity
         val victim: Entity
+        val fixtureA = contact.fixtureA
+        val fixtureB = contact.fixtureB
+        val a = fixtureA.body
+        val b = fixtureB.body
+        val contactPosition = contact.position
 
-        val a = contact.fixtureA.body
-        val b = contact.fixtureB.body
-        val contactPosition = contact.worldManifold.points[0]
+        if (!a.isBullet && !b.isBullet) {
+            next?.handleCollision(contact)
+            return
+        }
 
         if (a.isBullet) {
-            projectile = a.userData as Entity
-            if (hitAnotherEntity(b)) {
-                victim = b.userData as Entity
-                onHit(projectile, victim, contactPosition)
-            }
-        } else if (b.isBullet) {
-            projectile = b.userData as Entity
-            if (hitAnotherEntity(a)) {
-                victim = a.userData as Entity
-                onHit(projectile, victim, contactPosition)
-            }
+            projectile = contact.entityA
+            victim = contact.entityB
+        } else {
+            projectile = contact.entityB
+            victim =  contact.entityA
         }
-    }
-
-    private fun hitAnotherEntity(other: Body): Boolean {
-        return other.userData != null && other.userData is Entity
+        onHit(projectile, victim, contactPosition)
     }
 
     private fun onHit(projectile: Entity, victim: Entity, contactPosition: Vector2) {
-        if (projectile.has(DamageComponent.MAPPER)) {
+        if (projectile.has(Damage.MAPPER)) {
             val damage = projectile.damageComponent.damage
             val isSelfHit = damage.source?.owner == victim
             if (isSelfHit) {

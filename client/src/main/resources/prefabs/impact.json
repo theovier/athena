@@ -9,8 +9,8 @@
     },
     "particle": {
       "effect": {
-        "settings": "particles/bullet_impact.p",
-        "images": "sprites/particles"
+        "settings": "particles/impact/impact.p",
+        "atlas": "particles/impact/impact.atlas"
       }
     }
   }

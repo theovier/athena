@@ -4,15 +4,19 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
+import com.talosvfx.talos.runtime.render.SpriteBatchParticleRenderer
 import com.theovier.athena.client.ecs.components.*
 import ktx.ashley.allOf
 
 
 class ParticleSystem(private val batch: Batch) : IteratingSystem(allOf(Particle::class, Transform::class).get()) {
+    val defaultRenderer = SpriteBatchParticleRenderer(batch)
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val transform = entity.transform
         val particle = entity.particle
+
+        val oldAlpha = batch.color.a
 
         particle.effect.run {
             val rotation = transform.rotationDegrees
@@ -23,7 +27,8 @@ class ParticleSystem(private val batch: Batch) : IteratingSystem(allOf(Particle:
             val y = transform.position.y + rotatedOffset.y + originAdjustmentOffsetFromBox2DToLibgdx
             setPosition(x, y)
             update(deltaTime)
-            draw(batch)
+            render(defaultRenderer)
         }
+        batch.color.a = oldAlpha //todo find better way to use spriteBatchparticleRenderer
     }
 }

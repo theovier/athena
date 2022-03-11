@@ -46,6 +46,9 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
 
     private fun loadAssets() {
         assets.loadSync<Texture>("sprites/bullet.png")
+        assets.loadSync<Texture>("sprites/loot/dufflebag.png")
+        assets.loadSync<Texture>("sprites/skull.png")
+        assets.loadSync<Texture>("sprites/particles/smoke.png")
         assets.loadSync<Skin>("ui/skins/default/uiskin.json")
         assets.loadSync<FreeTypeFontGenerator>("fonts/open-sans.regular.ttf")
         assets.loadSync<Sound>("audio/gun_fire-01.ogg")

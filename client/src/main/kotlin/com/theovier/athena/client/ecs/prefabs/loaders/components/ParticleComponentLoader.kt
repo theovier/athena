@@ -1,13 +1,18 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.g2d.ParticleEffect
+import com.badlogic.gdx.assets.AssetDescriptor
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.AthenaGame
+import com.talosvfx.talos.runtime.ParticleEffectDescriptor
+import com.talosvfx.talos.runtime.ParticleEffectInstance
 import com.theovier.athena.client.ecs.components.Particle
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
+import ktx.assets.async.AssetStorage
+import ktx.assets.async.toIdentifier
 
-class ParticleComponentLoader : ComponentLoader {
+
+class ParticleComponentLoader(private val assets: AssetStorage) : ComponentLoader {
 
     override fun load(componentJSON: JsonValue, dependencyPool: DependencyPool): Particle {
         val component = Particle()
@@ -21,25 +26,25 @@ class ParticleComponentLoader : ComponentLoader {
             val offset = ComponentLoader.readVector2(offsetJSON)
             component.offset.set(offset)
         }
-        component.effect.scaleEffect(AthenaGame.UNIT_SCALE)
-        if (componentJSON.getBoolean(AUTOSTART, true)) {
-            component.effect.start()
-        }
         return component
     }
 
-    private fun readParticleEffect(node: JsonValue): ParticleEffect {
+    private fun readParticleEffect(node: JsonValue): ParticleEffectInstance {
         val settingsFilePath = node.getString("settings")
-        val imageFolderPath = node.getString("images")
+        val atlasPath = node.getString("atlas")
+        val atlas = readAtlas(atlasPath)
+        val settings = Gdx.files.local(settingsFilePath)
+        val effectDescriptor = ParticleEffectDescriptor(settings, atlas)
+        return effectDescriptor.createEffectInstance()
+    }
 
-        return ParticleEffect().apply {
-            load(Gdx.files.local(settingsFilePath), Gdx.files.local(imageFolderPath))
-        }
+    private fun readAtlas(path: String): TextureAtlas {
+        val descriptor = AssetDescriptor(path, TextureAtlas::class.java)
+        return assets.loadSync(descriptor.toIdentifier())
     }
 
     companion object {
         const val EFFECT = "effect"
         const val OFFSET = "offset"
-        const val AUTOSTART = "autostart"
     }
 }

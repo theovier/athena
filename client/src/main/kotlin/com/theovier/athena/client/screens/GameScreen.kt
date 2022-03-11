@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -140,7 +139,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(BackgroundRenderingSystem(camera))
                     addSubsystem(spriteRenderingSystem)
                     addSubsystem(ParticleSystem(batch))
-                    addSubsystem(TalosParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))

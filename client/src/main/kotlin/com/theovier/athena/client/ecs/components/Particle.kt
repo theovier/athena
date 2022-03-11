@@ -2,23 +2,19 @@ package com.theovier.athena.client.ecs.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Pool.Poolable
-import com.talosvfx.talos.runtime.ParticleEffectDescriptor
+import com.talosvfx.talos.runtime.ParticleEffectInstance
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
 class Particle : Component, Poolable {
-    var effect = ParticleEffect() //todo pool
+    lateinit var effect: ParticleEffectInstance
     val offset = Vector2()
 
-    //var descriptor = ParticleEffectDescriptor() //todo: dont need that here. only in particle loader
-
-
     override fun reset() {
-        effect.reset()
+        effect.restart()
     }
 
     companion object {

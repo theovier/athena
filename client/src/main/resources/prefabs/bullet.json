@@ -42,7 +42,7 @@
         "x": -0.5
       }
     },
-    "talos": {
+    "particle": {
       "effect": {
         "settings": "particles/bullet_trail/bullet_trail.p",
         "atlas": "particles/bullet_trail/bullet_trail.atlas"

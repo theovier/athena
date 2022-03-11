@@ -19,7 +19,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
     private val physicsComponentLoader by inject<PhysicsComponentLoader>()
     private val soundComponentLoader by inject<SoundComponentLoader>()
     private val spineComponentLoader by inject<SpineComponentLoader>()
-    private val talosComponentLoader by inject<TalosParticleComponentLoader>()
+    private val particleComponentLoader by inject<ParticleComponentLoader>()
 
     private val componentLoaders = mapOf(
         "acceleration" to AccelerationComponentLoader(),
@@ -39,7 +39,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "loot" to LootComponentLoader(),
         "map" to mapComponentLoader,
         "money" to MoneyComponentLoader(),
-        "particle" to ParticleComponentLoader(),
+        "particle" to particleComponentLoader,
         "physics" to physicsComponentLoader,
         "player" to PlayerComponentLoader(),
         "ignoreAudio" to IgnoreAudioComponentLoader(),
@@ -47,7 +47,6 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "spin" to SpinComponentLoader(),
         "spine" to spineComponentLoader,
         "sprite" to spriteComponentLoader,
-        "talos" to talosComponentLoader,
         "text" to TextComponentLoader(),
         "timer" to TimerComponentLoader(),
         "trauma" to TraumaComponentLoader(),

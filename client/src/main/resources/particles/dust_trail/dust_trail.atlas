@@ -1,4 +1,4 @@
-smoke.png
+../../sprites/particles/smoke.png
 size:64,64
 filter:Linear,Linear
 pma:true

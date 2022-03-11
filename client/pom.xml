@@ -206,6 +206,11 @@
             <artifactId>koin-test-junit5</artifactId>
             <version>${koin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.talosvfx</groupId>
+            <artifactId>talos-libgdx</artifactId>
+            <version>1.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>

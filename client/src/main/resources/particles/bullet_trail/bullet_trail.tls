@@ -1,0 +1,367 @@
+{
+"metaData": {
+	"scopeDefaults": [
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ]
+	],
+	"previewCamPos": {},
+	"previewCamZoom": 2,
+	"bgImagePath": "",
+	"isGridVisible": true,
+	"bgImageIsInBack": true,
+	"bgImageSize": 10,
+	"gridSize": 1,
+	"particlePositionX": 0,
+	"particlePositionY": 0
+},
+"emitters": [
+	{
+		"name": "smoke_trail",
+		"modules": [
+			{
+				"class": "ParticleModuleWrapper",
+				"id": 0,
+				"x": -908,
+				"y": -412,
+				"module": {
+					"data": {
+						"class": "ParticleModule",
+						"index": 0
+					}
+				}
+			},
+			{
+				"class": "EmitterModuleWrapper",
+				"id": 1,
+				"x": -923,
+				"y": -160,
+				"module": {
+					"data": {
+						"class": "EmitterModule",
+						"index": 1,
+						"delay": 0,
+						"duration": 2,
+						"rate": 50
+					}
+				}
+			},
+			{
+				"class": "InputModuleWrapper",
+				"id": 2,
+				"x": -1273,
+				"y": -117,
+				"module": {
+					"data": {
+						"class": "InputModule",
+						"index": 2,
+						"scopeKey": 0
+					}
+				}
+			},
+			{
+				"class": "Vector2ModuleWrapper",
+				"id": 3,
+				"x": -1238,
+				"y": -233,
+				"module": {
+					"data": {
+						"class": "Vector2Module",
+						"index": 3,
+						"x": 0,
+						"y": 0
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 4,
+				"x": -1228,
+				"y": -457,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 4,
+						"min": 0.05,
+						"max": 0.05,
+						"distributed": false
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 5,
+				"x": -1228,
+				"y": -57,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 5,
+						"min": 10,
+						"max": 10,
+						"distributed": false
+					}
+				}
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 6,
+				"x": -1728,
+				"y": -283,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 6,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							}
+						],
+						"lowMin": 12,
+						"lowMax": 12,
+						"highMin": 15,
+						"highMax": 15
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 7,
+				"x": -1728,
+				"y": -483,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 7,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							},
+							{
+								"x": 0.65753424,
+								"y": 1
+							},
+							{
+								"x": 1,
+								"y": 0.3
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 0.75,
+						"highMax": 0.75
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 8,
+				"x": -2128,
+				"y": -483,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 8,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							},
+							{
+								"x": 0.5,
+								"y": 0.5
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 0.4,
+						"highMax": 0.4
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "GradientColorModuleWrapper",
+				"id": 9,
+				"x": -2108,
+				"y": -47,
+				"module": {
+					"data": {
+						"class": "GradientColorModule",
+						"index": 9,
+						"points": [
+							{
+								"r": 1,
+								"g": 1,
+								"b": 1,
+								"pos": 0
+							}
+						]
+					}
+				}
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 10,
+				"x": -2528,
+				"y": -283,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 10,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							},
+							{
+								"x": 0.31506848,
+								"y": 1
+							},
+							{
+								"x": 0.80136985,
+								"y": 0.5
+							},
+							{
+								"x": 1,
+								"y": 0
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 1,
+						"highMax": 1
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "StaticValueModuleWrapper",
+				"id": 11,
+				"x": -2408,
+				"y": -437,
+				"module": {
+					"data": {
+						"class": "StaticValueModule",
+						"index": 11,
+						"value": 0
+					}
+				}
+			},
+			{
+				"class": "EmConfigModuleWrapper",
+				"id": 12,
+				"x": -2418,
+				"y": -63,
+				"module": {
+					"data": {
+						"class": "EmConfigModule",
+						"index": 12,
+						"additive": true,
+						"isBlendAdd": false,
+						"attached": false,
+						"continuous": true,
+						"aligned": false,
+						"immortal": false
+					}
+				}
+			},
+			{
+				"class": "TextureModuleWrapper",
+				"id": 13,
+				"x": -2808,
+				"y": -238,
+				"module": {
+					"data": {
+						"class": "TextureModule",
+						"index": 13,
+						"regionName": "smoke"
+					}
+				},
+				"filePath": "C:/Users/Theo/Desktop/smoke.png",
+				"regionName": "smoke"
+			}
+		],
+		"connections": [
+			{
+				"moduleFrom": 3,
+				"slotTo": 3
+			},
+			{
+				"moduleFrom": 4,
+				"moduleTo": 1
+			},
+			{
+				"moduleFrom": 5,
+				"moduleTo": 1,
+				"slotTo": 1
+			},
+			{
+				"moduleFrom": 6,
+				"moduleTo": 1,
+				"slotTo": 2
+			},
+			{
+				"moduleFrom": 7,
+				"slotTo": 4
+			},
+			{
+				"moduleFrom": 8,
+				"slotTo": 13
+			},
+			{
+				"moduleFrom": 9,
+				"slotTo": 9
+			},
+			{
+				"moduleFrom": 10,
+				"slotTo": 10
+			},
+			{
+				"moduleFrom": 11,
+				"slotTo": 11
+			},
+			{
+				"moduleFrom": 12,
+				"moduleTo": 1,
+				"slotTo": 3
+			},
+			{
+				"moduleFrom": 13,
+				"slotTo": 2
+			},
+			{
+				"moduleFrom": 2,
+				"moduleTo": 7
+			},
+			{
+				"moduleFrom": 2,
+				"moduleTo": 6
+			}
+		]
+	}
+]
+}

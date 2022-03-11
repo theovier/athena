@@ -140,6 +140,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(BackgroundRenderingSystem(camera))
                     addSubsystem(spriteRenderingSystem)
                     addSubsystem(ParticleSystem(batch))
+                    addSubsystem(TalosParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))

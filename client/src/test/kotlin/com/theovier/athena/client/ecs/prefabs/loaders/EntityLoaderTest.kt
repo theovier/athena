@@ -24,6 +24,7 @@ class EntityLoaderTest: AutoCloseKoinTest() {
         single { SpriteComponentLoader(get()) }
         single { SoundComponentLoader(get()) }
         single { PhysicsComponentLoader(get()) }
+        single { ParticleComponentLoader(get()) }
     }
 
     @BeforeEach

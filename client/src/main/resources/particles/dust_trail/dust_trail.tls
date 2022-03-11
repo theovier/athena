@@ -1,0 +1,345 @@
+{
+"metaData": {
+	"scopeDefaults": [
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ],
+		[ 1, 1, 1, 0 ]
+	],
+	"previewCamPos": {},
+	"previewCamZoom": 1.4285715,
+	"bgImagePath": "",
+	"isGridVisible": true,
+	"bgImageIsInBack": true,
+	"bgImageSize": 10,
+	"gridSize": 1,
+	"particlePositionX": 0,
+	"particlePositionY": 0
+},
+"emitters": [
+	{
+		"name": "dust_trail",
+		"modules": [
+			{
+				"class": "ParticleModuleWrapper",
+				"id": 0,
+				"x": -908,
+				"y": -412,
+				"module": {
+					"data": {
+						"class": "ParticleModule",
+						"index": 0
+					}
+				}
+			},
+			{
+				"class": "EmitterModuleWrapper",
+				"id": 1,
+				"x": -644,
+				"y": -72,
+				"module": {
+					"data": {
+						"class": "EmitterModule",
+						"index": 1,
+						"delay": 0,
+						"duration": 1,
+						"rate": 1
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 4,
+				"x": -1228,
+				"y": -457,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 4,
+						"min": 0.15,
+						"max": 0.25,
+						"distributed": false
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 5,
+				"x": -1149,
+				"y": 92,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 5,
+						"min": 0.55,
+						"max": 0.55,
+						"distributed": false
+					}
+				}
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 7,
+				"x": -1728,
+				"y": -483,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 7,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 0.3,
+						"highMax": 0.55
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "OffsetModuleWrapper",
+				"id": 8,
+				"x": -1596,
+				"y": -15,
+				"module": {
+					"data": {
+						"class": "OffsetModule",
+						"index": 8,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							}
+						],
+						"low": {
+							"edge": false,
+							"shape": 0,
+							"side": 0,
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"width": 0,
+								"height": 0
+							}
+						},
+						"high": {
+							"edge": false,
+							"shape": 0,
+							"side": 0,
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"width": 0,
+								"height": 0
+							}
+						}
+					}
+				},
+				"lowScale": 0,
+				"highScale": 0,
+				"equals": false
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 9,
+				"x": -2053,
+				"y": 136,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 9,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							},
+							{
+								"x": 0.5,
+								"y": 0.7
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 0.5,
+						"highMax": 1
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": false,
+				"highMirror": false
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 11,
+				"x": -2528,
+				"y": -483,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 11,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": -40,
+						"highMax": 40
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "GradientColorModuleWrapper",
+				"id": 12,
+				"x": -2450,
+				"y": 51,
+				"module": {
+					"data": {
+						"class": "GradientColorModule",
+						"index": 12,
+						"points": [
+							{
+								"r": 1,
+								"g": 1,
+								"b": 1,
+								"pos": 0
+							}
+						]
+					}
+				}
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 13,
+				"x": -2833,
+				"y": 201,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 13,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							},
+							{
+								"x": 0.4900251,
+								"y": 0.27215624
+							},
+							{
+								"x": 1,
+								"y": 0
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 0.8,
+						"highMax": 1
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": true,
+				"highMirror": false
+			},
+			{
+				"class": "EmConfigModuleWrapper",
+				"id": 14,
+				"x": -908,
+				"y": 186,
+				"module": {
+					"data": {
+						"class": "EmConfigModule",
+						"index": 14,
+						"additive": false,
+						"isBlendAdd": false,
+						"attached": false,
+						"continuous": false,
+						"aligned": false,
+						"immortal": false
+					}
+				}
+			},
+			{
+				"class": "TextureModuleWrapper",
+				"id": 15,
+				"x": -2808,
+				"y": -38,
+				"module": {
+					"data": {
+						"class": "TextureModule",
+						"index": 15,
+						"regionName": "smoke"
+					}
+				},
+				"filePath": "C:/Users/Theo/Desktop/smoke.png",
+				"regionName": "smoke"
+			}
+		],
+		"connections": [
+			{
+				"moduleFrom": 4,
+				"moduleTo": 1
+			},
+			{
+				"moduleFrom": 5,
+				"moduleTo": 1,
+				"slotTo": 1
+			},
+			{
+				"moduleFrom": 7,
+				"slotTo": 4
+			},
+			{
+				"moduleFrom": 8,
+				"slotTo": 3
+			},
+			{
+				"moduleFrom": 9,
+				"slotTo": 13
+			},
+			{
+				"moduleFrom": 11,
+				"slotTo": 11
+			},
+			{
+				"moduleFrom": 12,
+				"slotTo": 9
+			},
+			{
+				"moduleFrom": 13,
+				"slotTo": 10
+			},
+			{
+				"moduleFrom": 14,
+				"moduleTo": 1,
+				"slotTo": 3
+			},
+			{
+				"moduleFrom": 15,
+				"slotTo": 2
+			}
+		]
+	}
+]
+}

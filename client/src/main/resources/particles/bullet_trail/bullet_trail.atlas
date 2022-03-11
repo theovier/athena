@@ -1,0 +1,7 @@
+../../sprites/particles/smoke.png
+size:64,64
+filter:Linear,Linear
+pma:true
+smoke
+bounds:0,0,64,64
+

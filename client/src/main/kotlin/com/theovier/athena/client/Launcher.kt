@@ -42,6 +42,7 @@ fun main() {
         single { SpriteComponentLoader(get()) }
         single { SoundComponentLoader(get()) }
         single { PhysicsComponentLoader(get()) }
+        single { ParticleComponentLoader(get()) }
     }
     startKoin {
         modules(module)

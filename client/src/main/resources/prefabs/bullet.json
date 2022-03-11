@@ -44,8 +44,8 @@
     },
     "particle": {
       "effect": {
-        "settings": "particles/smoke_trail.p",
-        "images": "sprites/particles"
+        "settings": "particles/bullet_trail/bullet_trail.p",
+        "atlas": "particles/bullet_trail/bullet_trail.atlas"
       },
       "offset": {
         "x": -1

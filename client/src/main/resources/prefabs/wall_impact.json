@@ -1,15 +1,13 @@
 {
-  "id": "bullet_impact",
+  "id": "wall_impact",
   "components": {
-    "transform": {
-
-    },
+    "transform": {},
     "lifetime": {
       "duration": 1.0
     },
     "particle": {
       "effect": {
-        "settings": "particles/impact/impact_blue.p",
+        "settings": "particles/impact/impact.p",
         "atlas": "particles/impact/impact.atlas"
       }
     }

@@ -9,10 +9,9 @@ import ktx.ashley.has
 import ktx.ashley.mapperFor
 
 class Impact : Component {
-    //todo reference particle effect or prefab
-
     var angle = 0.0f
     var position = Vector3()
+    var prefabToSpawn = ""
 
     companion object {
         val MAPPER = mapperFor<Impact>()

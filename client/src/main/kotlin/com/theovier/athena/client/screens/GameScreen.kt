@@ -93,8 +93,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         player = Prefab.instantiate("player")
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
-        val wall = Prefab.instantiate("wall")
-        wall.add(Impact())
+        Prefab.instantiate("wall")
 
         Prefab.instantiate("summoner").apply {
             with(physics) {

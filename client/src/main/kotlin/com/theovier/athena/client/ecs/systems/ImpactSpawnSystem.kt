@@ -11,8 +11,9 @@ class ImpactSpawnSystem : IteratingSystem(allOf(Impact::class, HitMarker::class)
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val impact = entity.impact
-
-        Prefab.instantiate("impact") {
+        val prefabName = impact.prefabToSpawn
+        Prefab.instantiate(prefabName) {
+            add(Transform())
             with(this.transform) {
                 this.position.set(Vector3(impact.position))
                 this.rotation = impact.angle

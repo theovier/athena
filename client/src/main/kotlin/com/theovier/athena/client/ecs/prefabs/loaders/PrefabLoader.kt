@@ -34,6 +34,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "friction" to FrictionComponentLoader(),
         "healthBar" to HealthBarComponentLoader(),
         "health" to HealthComponentLoader(),
+        "impact" to ImpactComponentLoader(),
         "invincible" to InvincibleComponentLoader(),
         "lifetime" to LifetimeComponentLoader(),
         "loot" to LootComponentLoader(),

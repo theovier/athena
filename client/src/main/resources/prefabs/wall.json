@@ -15,6 +15,9 @@
         "x": -0.5
       }
     },
+    "impact": {
+      "prefabToSpawn": "wall_impact_blue"
+    },
     "physics": {
       "body": {
         "type": "static",

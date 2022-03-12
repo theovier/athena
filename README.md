@@ -26,6 +26,7 @@ Work in progress.
 - Uses [LibGdx's Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) as physic engine
 - Simple damage system with floating damage text
 - Simple loot system
+- Bullet impact effects using dynamic spawning of particles 
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_002.gif)
@@ -59,6 +60,8 @@ I used the [Quilly-Crawler](https://github.com/Quillraven/Quilly-Crawler) game a
 Also, I found [Sioncore](https://github.com/dsaltares/sioncore) to be a good read on how to develop modular LibGdx/KTX games.
 
 For the creation of the bullet shell effects, I found [Rowdy Lemon's Youtube tutorial on shell casings](https://www.youtube.com/watch?v=vTAR14bVJPA&list=LL&index=16) extremely valuable.
+
+For creating my particle effects I use the brilliant open-source [Talos Particle Engine](https://github.com/rockbite/talos).
 
 ## License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#) except for the Spine Runtime.

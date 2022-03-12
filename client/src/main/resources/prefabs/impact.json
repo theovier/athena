@@ -9,7 +9,7 @@
     },
     "particle": {
       "effect": {
-        "settings": "particles/impact/impact.p",
+        "settings": "particles/impact/impact_blue.p",
         "atlas": "particles/impact/impact.atlas"
       }
     }

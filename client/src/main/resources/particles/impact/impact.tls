@@ -23,12 +23,7 @@
 	"bgImageSize": 10,
 	"gridSize": 1,
 	"particlePositionX": 0,
-	"particlePositionY": 0,
-	"resourcePaths": [
-		"C:/Users/Theo/Desktop/smoke.png",
-		"C:/Users/Theo/Desktop/skull.png",
-		"C:/Users/Theo/Desktop/explosion_01.png"
-	]
+	"particlePositionY": 0
 },
 "emitters": [
 	{
@@ -37,8 +32,8 @@
 			{
 				"class": "ParticleModuleWrapper",
 				"id": 0,
-				"x": 153,
-				"y": -174,
+				"x": 341,
+				"y": -162,
 				"module": {
 					"data": {
 						"class": "ParticleModule",
@@ -271,8 +266,8 @@
 			{
 				"class": "RandomRangeModuleWrapper",
 				"id": 12,
-				"x": -135,
-				"y": -624,
+				"x": 25,
+				"y": -635,
 				"module": {
 					"data": {
 						"class": "RandomRangeModule",
@@ -286,8 +281,8 @@
 			{
 				"class": "StaticValueModuleWrapper",
 				"id": 13,
-				"x": -365,
-				"y": -571,
+				"x": -750,
+				"y": -736,
 				"module": {
 					"data": {
 						"class": "StaticValueModule",
@@ -297,15 +292,45 @@
 				}
 			},
 			{
-				"class": "StaticValueModuleWrapper",
-				"id": 14,
-				"x": -359,
-				"y": -726,
+				"class": "GlobalScopeModuleWrapper",
+				"id": 15,
+				"x": -759,
+				"y": -590,
 				"module": {
 					"data": {
-						"class": "StaticValueModule",
-						"index": 14,
-						"value": -30
+						"class": "GlobalScopeModule",
+						"index": 15,
+						"key": 0
+					}
+				}
+			},
+			{
+				"class": "MathModuleWrapper",
+				"id": 16,
+				"x": -453,
+				"y": -603,
+				"module": {
+					"data": {
+						"class": "MathModule",
+						"index": 16,
+						"a": 0,
+						"b": 30,
+						"mathExpression": "sum"
+					}
+				}
+			},
+			{
+				"class": "MathModuleWrapper",
+				"id": 17,
+				"x": -467,
+				"y": -785,
+				"module": {
+					"data": {
+						"class": "MathModule",
+						"index": 17,
+						"a": 0,
+						"b": 30,
+						"mathExpression": "substract"
 					}
 				}
 			}
@@ -341,27 +366,45 @@
 				"slotTo": 7
 			},
 			{
+				"moduleFrom": 3,
+				"slotTo": 2
+			},
+			{
 				"moduleFrom": 12,
 				"slotTo": 11
 			},
 			{
-				"moduleFrom": 13,
-				"moduleTo": 12
+				"moduleFrom": 15,
+				"moduleTo": 16
 			},
 			{
-				"moduleFrom": 14,
-				"moduleTo": 12,
+				"moduleFrom": 13,
+				"moduleTo": 16,
 				"slotTo": 1
 			},
 			{
-				"moduleFrom": 3,
-				"slotTo": 2
+				"moduleFrom": 16,
+				"moduleTo": 12
+			},
+			{
+				"moduleFrom": 15,
+				"moduleTo": 17
+			},
+			{
+				"moduleFrom": 13,
+				"moduleTo": 17,
+				"slotTo": 1
+			},
+			{
+				"moduleFrom": 17,
+				"moduleTo": 12,
+				"slotTo": 1
 			}
 		],
 		"groups": [
 			{
 				"text": "GROUP NAME",
-				"modules": [ 5, 6, 8 ],
+				"modules": [ 6, 8, 5 ],
 				"color": -1.3926823E38
 			}
 		]

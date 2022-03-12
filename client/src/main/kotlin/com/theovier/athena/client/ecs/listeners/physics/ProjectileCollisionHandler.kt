@@ -2,6 +2,7 @@ package com.theovier.athena.client.ecs.listeners.physics
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.theovier.athena.client.ecs.components.*
@@ -53,7 +54,7 @@ class ProjectileCollisionHandler(private val engine: Engine) : AbstractCollision
 
             if (victim.hasImpactComponent) {
                 victim.impact.position = Vector3(contactPosition, 0f)
-                victim.impact.angle = -projectile.transform.rotation
+                victim.impact.angle = projectile.transform.rotation - MathUtils.PI //to turn radians 180 degree, subtract PI
             }
         }
         engine.removeEntity(projectile)

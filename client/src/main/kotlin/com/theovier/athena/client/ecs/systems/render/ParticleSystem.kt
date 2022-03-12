@@ -16,8 +16,8 @@ class ParticleSystem(private val batch: Batch) : IteratingSystem(allOf(Particle:
         val transform = entity.transform
         val particle = entity.particle
 
-        val oldAlpha = batch.color.a
 
+        val oldAlpha = batch.color.a
         particle.effect.run {
             val rotation = transform.rotationDegrees
             val offset = particle.offset
@@ -26,9 +26,15 @@ class ParticleSystem(private val batch: Batch) : IteratingSystem(allOf(Particle:
             val x = transform.position.x + rotatedOffset.x
             val y = transform.position.y + rotatedOffset.y + originAdjustmentOffsetFromBox2DToLibgdx
             setPosition(x, y)
+
+            //rotate particle effect
+            val scope = particle.effect.scope
+            scope.setDynamicValue(0, transform.rotationDegrees)
+
             update(deltaTime)
             render(defaultRenderer)
         }
-        batch.color.a = oldAlpha //todo find better way to use spriteBatchparticleRenderer
+
+        batch.color.a = oldAlpha
     }
 }

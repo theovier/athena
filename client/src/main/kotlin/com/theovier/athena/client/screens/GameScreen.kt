@@ -95,32 +95,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
 
-        Prefab.instantiate("summoner").apply {
-            with(physics) {
-                body.setTransform(Vector2(24f, 5f), 0f)
-            }
-            spine.skeleton.forceToFaceLeft()
-        }
-        Prefab.instantiate("summoner").apply {
-            with(physics) {
-                body.setTransform(Vector2(20.5f, 3.5f), 0f)
-            }
-        }
-        Prefab.instantiate("summoner").apply {
-            spine.state.setAnimation(0, "singing", true)
-        }
-        Prefab.instantiate("skull")
         Prefab.instantiate("dufflebag")
-        Prefab.instantiate("dufflebag").apply {
-            with(physics) {
-                body.setTransform(Vector2(28f, 7f), 0f)
-            }
-        }
-        Prefab.instantiate("dufflebag").apply {
-            with(physics) {
-                body.setTransform(Vector2(30f, 5f), 0f)
-            }
-        }
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {

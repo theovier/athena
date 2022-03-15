@@ -1,0 +1,15 @@
+{
+  "id": "glass_shatter",
+  "components": {
+    "transform": {},
+    "lifetime": {
+      "duration": 1.0
+    },
+    "particle": {
+      "effect": {
+        "settings": "particles/glass_shatter/glass_shatter.p",
+        "atlas": "particles/glass_shatter/glass_shatter.atlas"
+      }
+    }
+  }
+}

@@ -1,32 +1,33 @@
 {
-  "id": "wall",
+  "id": "wall_glass",
   "components": {
     "transform": {
       "size": {
-        "x": 4
+        "x": 10,
+        "y": 4
       }
     },
+    "health": {
+      "maximum": 1
+    },
     "sprite": {
-      "texture": "sprites/1x1-white.png",
-      "color": {
-        "hex": "#38bce6"
-      },
+      "texture": "sprites/glass_wall.png",
       "offset": {
         "x": -0.5
       }
     },
     "impact": {
-      "prefabToSpawn": "wall_impact_blue"
+      "prefabToSpawn": "glass_shatter"
     },
     "physics": {
       "body": {
         "type": "static",
         "box": {
-          "width": 4,
-          "height": 1
+          "width": 5,
+          "height": 3
         },
         "position": {
-          "x": 20,
+          "x": 27,
           "y": 20
         }
       }

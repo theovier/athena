@@ -1,0 +1,36 @@
+{
+  "id": "wall_glass",
+  "components": {
+    "transform": {
+      "size": {
+        "x": 10,
+        "y": 4
+      }
+    },
+    "health": {
+      "maximum": 1
+    },
+    "sprite": {
+      "texture": "sprites/glass_wall.png",
+      "offset": {
+        "x": -0.5
+      }
+    },
+    "impact": {
+      "prefabToSpawn": "glass_shatter"
+    },
+    "physics": {
+      "body": {
+        "type": "static",
+        "box": {
+          "width": 5,
+          "height": 3
+        },
+        "position": {
+          "x": 27,
+          "y": 20
+        }
+      }
+    }
+  }
+}

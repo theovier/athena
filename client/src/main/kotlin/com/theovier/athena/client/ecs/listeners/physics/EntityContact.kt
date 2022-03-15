@@ -8,4 +8,5 @@ data class EntityContact(val contact: Contact, val entityA: Entity, val entityB:
     val fixtureA: Fixture = contact.fixtureA
     val fixtureB: Fixture = contact.fixtureB
     val hasSensor = fixtureA.isSensor || fixtureB.isSensor
+    val position = contact.worldManifold.points.first()
 }

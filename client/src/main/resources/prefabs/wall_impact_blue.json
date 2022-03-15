@@ -1,0 +1,15 @@
+{
+  "id": "wall_impact",
+  "components": {
+    "transform": {},
+    "lifetime": {
+      "duration": 1.0
+    },
+    "particle": {
+      "effect": {
+        "settings": "particles/impact/impact_blue.p",
+        "atlas": "particles/impact/impact.atlas"
+      }
+    }
+  }
+}

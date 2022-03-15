@@ -1,0 +1,35 @@
+{
+  "id": "wall",
+  "components": {
+    "transform": {
+      "size": {
+        "x": 4
+      }
+    },
+    "sprite": {
+      "texture": "sprites/1x1-white.png",
+      "color": {
+        "hex": "#38bce6"
+      },
+      "offset": {
+        "x": -0.5
+      }
+    },
+    "impact": {
+      "prefabToSpawn": "wall_impact_blue"
+    },
+    "physics": {
+      "body": {
+        "type": "static",
+        "box": {
+          "width": 4,
+          "height": 1
+        },
+        "position": {
+          "x": 20,
+          "y": 20
+        }
+      }
+    }
+  }
+}

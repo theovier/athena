@@ -30,6 +30,7 @@ class EntityStateMachineTest {
             .add(ComponentA::class.java)
         fsm.changeState("test")
         assertEquals(1, entity.components.count())
+        assertTrue(entity.components.get(0) is ComponentA)
     }
 
     @Test

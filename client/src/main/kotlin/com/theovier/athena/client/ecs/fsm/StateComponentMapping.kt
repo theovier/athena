@@ -6,13 +6,13 @@ import com.badlogic.ashley.core.Component
  * Used by the EntityState class to create the mappings of components to providers via a fluent interface.
  */
 class StateComponentMapping(private val creatingState: EntityState, private val type: Class<out Component>) {
-    private lateinit var provider: ComponentProvider<*>
+    private lateinit var provider: ComponentProvider<Component>
 
     init {
         withType()
     }
 
-    private fun setProvider(provider: ComponentProvider<*>) {
+    private fun setProvider(provider: ComponentProvider<Component>) {
         this.provider = provider
         creatingState.addProvider(type, provider)
     }

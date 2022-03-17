@@ -15,4 +15,13 @@ class ComponentInstanceProvider<T: Component>(private val instance: T): Componen
     override fun identifier(): T {
         return instance
     }
+
+    override fun hashCode(): Int {
+        return instance.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is ComponentInstanceProvider<*>
+                && other.identifier() == identifier()
+    }
 }

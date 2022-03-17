@@ -8,9 +8,9 @@ import com.badlogic.gdx.utils.ObjectMap
  * are used to add components to the entity when this state is entered.
  */
 class EntityState {
-    val providers = ObjectMap<Class<out Component>, ComponentProvider<*>>()
+    val providers = ObjectMap<Class<out Component>, ComponentProvider<Component>>()
 
-    fun addProvider(type: Class<out Component>, provider: ComponentProvider<*>) {
+    fun addProvider(type: Class<out Component>, provider: ComponentProvider<Component>) {
         providers.put(type, provider)
     }
 
@@ -18,11 +18,11 @@ class EntityState {
         return StateComponentMapping(this, type)
     }
 
-    fun <T: Component> get(type: Class<T>): ComponentProvider<*> {
+    fun <T: Component> get(type: Class<T>): ComponentProvider<Component> {
         return providers.get(type)
     }
 
-    fun has(type: Class<out Component>): Boolean {
+    fun <T: Component> has(type: Class<T>): Boolean {
         return providers.containsKey(type)
     }
 }

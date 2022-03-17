@@ -20,4 +20,13 @@ class ComponentSingletonProvider<T: Component>(private val type: Class<T>): Comp
     override fun identifier(): T {
         return getComponent()
     }
+
+    override fun hashCode(): Int {
+        return instance.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is ComponentSingletonProvider<*>
+                && other.identifier() == identifier()
+    }
 }

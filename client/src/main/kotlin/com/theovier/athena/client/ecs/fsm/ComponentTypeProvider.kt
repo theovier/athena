@@ -17,4 +17,13 @@ class ComponentTypeProvider<T: Component>(private val type: Class<T>): Component
     override fun identifier(): Any {
         return type
     }
+
+    override fun hashCode(): Int {
+        return type.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is ComponentTypeProvider<*>
+                && other.identifier() == identifier()
+    }
 }

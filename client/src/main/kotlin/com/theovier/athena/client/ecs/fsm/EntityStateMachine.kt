@@ -2,7 +2,7 @@ package com.theovier.athena.client.ecs.fsm
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.theovier.athena.client.ecs.components.Player
+import com.badlogic.gdx.utils.ObjectMap
 import com.theovier.athena.client.ecs.components.Transform
 import mu.KotlinLogging
 
@@ -33,39 +33,33 @@ class EntityStateMachine(val entity: Entity) {
             log.error { "Entity state '$name' does not exist. Ignoring state change." }
             return
         }
-
         if (newState == currentState) {
             return
         }
+        changeComponents(newState)
+        currentState = newState
+    }
 
-        val componentsToAdd = mutableMapOf<Class<out Component>, ComponentProvider<*>>() //todo warum reicht nicht set<Component>? wegen removal?
-
-        //todo dont like that chaining
-        // get all component classes for new state
-        newState.providers.keys().forEach { type ->
-            componentsToAdd[type] = newState.providers[type]
-        }
-
-
-
-
-        //todo refactor me
-        currentState.providers.keys().forEach { type ->
-            val other = componentsToAdd[type]
-            if (other != null && other.identifier() == currentState.providers[type].identifier()) {
-                //remove components from toAdd if current state has same component as newState
-                componentsToAdd.remove(type)
+    private fun changeComponents(newState: EntityState) {
+        val newProviders = ObjectMap(newState.providers)
+        currentState.providers.forEach {
+            val clazz = it.key
+            val provider = it.value
+            val newProvider = newProviders[clazz]
+            if (provider.equals(newProvider)) {
+                newProviders.remove(clazz) //components of next state are already present in the current state
             } else {
-                //remove components of current state if they are not in newState
-                entity.remove(type)
+                entity.remove(clazz) //components needed in current state but not required in the next state
             }
         }
+        addComponentsForNextState(newProviders)
+    }
 
-        //todo extract method
-        componentsToAdd.keys.forEach { type ->
-            val component = componentsToAdd[type]?.getComponent()
+    private fun addComponentsForNextState(providers: ObjectMap<Class<out Component>, ComponentProvider<Component>>) {
+        providers.forEach {
+            val provider = it.value
+            val component = provider.getComponent()
             entity.add(component)
         }
-        currentState = newState
     }
 }

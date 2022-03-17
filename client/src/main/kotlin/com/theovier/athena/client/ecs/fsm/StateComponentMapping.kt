@@ -1,11 +1,12 @@
 package com.theovier.athena.client.ecs.fsm
 
 import com.badlogic.ashley.core.Component
+import kotlin.reflect.KClass
 
 /**
  * Used by the EntityState class to create the mappings of components to providers via a fluent interface.
  */
-class StateComponentMapping(private val creatingState: EntityState, private val type: Class<out Component>) {
+class StateComponentMapping(private val creatingState: EntityState, private val type: KClass<out Component>) {
     private lateinit var provider: ComponentProvider<Component>
 
     init {
@@ -27,7 +28,7 @@ class StateComponentMapping(private val creatingState: EntityState, private val 
         return this
     }
 
-    fun <T: Component> withSingleton(type: Class<T>): StateComponentMapping {
+    fun <T: Component> withSingleton(type: KClass<T>): StateComponentMapping {
         setProvider(ComponentSingletonProvider(type))
         return this
     }
@@ -42,7 +43,7 @@ class StateComponentMapping(private val creatingState: EntityState, private val 
         return this
     }
 
-    fun <T: Component> add(type: Class<T>): StateComponentMapping {
+    fun <T: Component> add(type: KClass<T>): StateComponentMapping {
         return creatingState.add(type)
     }
 }

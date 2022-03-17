@@ -12,22 +12,22 @@ class ComponentSingletonProviderTest {
     @Test
     @DisplayName("Provider Returns an Instance of Type")
     fun providerReturnsAnInstanceOfType() {
-        val provider = ComponentSingletonProvider(ComponentA::class.java)
+        val provider = ComponentSingletonProvider(ComponentA::class)
         assertTrue(provider.getComponent() is ComponentA)
     }
 
     @Test
     @DisplayName("Provider Returns Same Instance Each Time")
     fun providerReturnsSameInstanceEachTime() {
-        val provider = ComponentSingletonProvider(ComponentA::class.java)
+        val provider = ComponentSingletonProvider(ComponentA::class)
         assertEquals(provider.getComponent(), provider.getComponent())
     }
 
     @Test
     @DisplayName("Providers With Same Type Have Different Identifier")
     fun providersWithSameTypeHaveDifferentIdentifier() {
-        val provider1 = ComponentSingletonProvider(ComponentA::class.java)
-        val provider2 = ComponentSingletonProvider(ComponentA::class.java)
+        val provider1 = ComponentSingletonProvider(ComponentA::class)
+        val provider2 = ComponentSingletonProvider(ComponentA::class)
         assertNotEquals(provider1.identifier(), provider2.getComponent())
     }
 }

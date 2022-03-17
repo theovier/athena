@@ -34,8 +34,8 @@ class EntityStateTest {
     @Test
     @DisplayName("Add With No Qualifier Creates Type Provider")
     fun addWithNoQualifierCreatesTypeProvider() {
-        state.add(ComponentA::class.java)
-        val provider = state.providers.get(ComponentA::class.java)
+        state.add(ComponentA::class)
+        val provider = state.providers.get(ComponentA::class)
         assertTrue(provider is ComponentTypeProvider)
         assertTrue(provider.getComponent() is ComponentA)
     }
@@ -43,8 +43,8 @@ class EntityStateTest {
     @Test
     @DisplayName("Add With Type Qualifier Creates Type Provider")
     fun addWithTypeQualifierCreatesTypeProvider() {
-        state.add(ComponentA::class.java).withType()
-        val provider = state.providers.get(ComponentA::class.java)
+        state.add(ComponentA::class).withType()
+        val provider = state.providers.get(ComponentA::class)
         assertTrue(provider is ComponentTypeProvider)
         assertTrue(provider.getComponent() is ComponentA)
     }
@@ -53,8 +53,8 @@ class EntityStateTest {
     @DisplayName("Add With Instance Qualifier Creates Instances Provider")
     fun addWithInstanceQualifierCreatesInstanceProvider() {
         val component = ComponentA()
-        state.add(ComponentA::class.java).withInstance(component)
-        val provider = state.providers.get(ComponentA::class.java)
+        state.add(ComponentA::class).withInstance(component)
+        val provider = state.providers.get(ComponentA::class)
         assertTrue(provider is ComponentInstanceProvider)
         assertEquals(provider.getComponent(), component)
     }
@@ -62,8 +62,8 @@ class EntityStateTest {
     @Test
     @DisplayName("Add With Singleton Qualifier Creates Singleton Provider")
     fun addWithSingletonQualifierCreatesSingletonProvider() {
-        state.add(ComponentA::class.java).withSingleton(ComponentA::class.java)
-        val provider = state.providers.get(ComponentA::class.java)
+        state.add(ComponentA::class).withSingleton(ComponentA::class)
+        val provider = state.providers.get(ComponentA::class)
         assertTrue(provider is ComponentSingletonProvider)
         assertTrue(provider.getComponent() is ComponentA)
     }
@@ -72,7 +72,7 @@ class EntityStateTest {
     @DisplayName("Add With Custom Provider Creates Custom Provider")
     fun addWithCustomProviderCreatesCustomProvider() {
         val bProvider = CustomBProvider()
-        state.add(ComponentB::class.java).withProvider<Component>(bProvider)
+        state.add(ComponentB::class).withProvider<Component>(bProvider)
         assertTrue(bProvider is CustomBProvider)
         assertTrue(bProvider.getComponent() is ComponentB)
         assertEquals(5f, bProvider.getComponent().value)

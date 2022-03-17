@@ -1,14 +1,15 @@
 package com.theovier.athena.client.ecs.fsm
 
 import com.badlogic.ashley.core.Component
+import kotlin.reflect.KClass
 
 /**
  * This component provider always returns the same instance of the component. The instance
  * is created when first required and is of the type passed in to the constructor.
  */
-class ComponentSingletonProvider<T: Component>(private val type: Class<T>): ComponentProvider<T> {
+class ComponentSingletonProvider<T: Component>(private val type: KClass<T>): ComponentProvider<T> {
     private val instance by lazy {
-        type
+        type.java
             .getDeclaredConstructor()
             .newInstance()
     }

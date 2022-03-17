@@ -3,7 +3,9 @@ package com.theovier.athena.client.ecs.fsm
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.ObjectMap
+import com.theovier.athena.client.ecs.components.DustTrail
 import com.theovier.athena.client.ecs.remove
+import ktx.ashley.mapperFor
 import mu.KotlinLogging
 import kotlin.reflect.KClass
 
@@ -16,10 +18,11 @@ import kotlin.reflect.KClass
 class EntityStateMachine(val entity: Entity) {
     private val log = KotlinLogging.logger {}
     private val states = mutableMapOf<String, EntityState>()
-    private var currentState = EntityState()
+    var currentState = EntityState()
 
     fun addState(name: String, state: EntityState): EntityStateMachine {
         states[name] = state
+        state.name = name
         return this
     }
 

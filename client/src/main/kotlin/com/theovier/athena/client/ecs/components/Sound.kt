@@ -2,7 +2,6 @@ package com.theovier.athena.client.ecs.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.theovier.athena.client.misc.audio.SoundEffect
 import ktx.ashley.get

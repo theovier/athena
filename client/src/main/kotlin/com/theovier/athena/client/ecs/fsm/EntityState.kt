@@ -9,6 +9,7 @@ import kotlin.reflect.KClass
  * are used to add components to the entity when this state is entered.
  */
 class EntityState {
+    var name = DEFAULT_STATE_NAME
     val providers = ObjectMap<KClass<out Component>, ComponentProvider<Component>>()
 
     fun addProvider(type: KClass<out Component>, provider: ComponentProvider<Component>) {
@@ -25,5 +26,9 @@ class EntityState {
 
     fun <T: Component> has(type: KClass<T>): Boolean {
         return providers.containsKey(type)
+    }
+
+    companion object {
+        const val DEFAULT_STATE_NAME = "idle"
     }
 }

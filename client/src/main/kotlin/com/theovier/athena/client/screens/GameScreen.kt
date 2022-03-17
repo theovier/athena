@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.fsm.EntityStateMachine
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -30,16 +31,10 @@ import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
-import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
-import com.theovier.athena.client.ecs.systems.player.FacingSystem
-import com.theovier.athena.client.ecs.systems.player.PlayerAimSystem
-import com.theovier.athena.client.ecs.systems.player.PlayerAttackSystem
-import com.theovier.athena.client.ecs.systems.player.PlayerMovementSystem
+import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
-import com.theovier.athena.client.misc.spine.forceToFaceLeft
 import ktx.app.KtxScreen
-import ktx.ashley.addComponent
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
@@ -91,6 +86,15 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
+
+        val stateMachine = EntityStateMachine(player)
+        stateMachine.createState("idle")
+        stateMachine.createState("running")
+
+        player.add(StateMachine().apply {
+            fsm = stateMachine
+        })
+
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
@@ -108,6 +112,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.apply {
             addSystem(InputSystem())
             addSystem(physicsSystem)
+            addSystem(PlayerAnimationSystem())
             addSystem(SpineAnimationSystem())
             addSystem(ChildrenPositionSystem())
             addSystem(FadeSystem())

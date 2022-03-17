@@ -3,6 +3,7 @@ package com.theovier.athena.client.ecs.fsm
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.ObjectMap
+import com.theovier.athena.client.ecs.remove
 import mu.KotlinLogging
 import kotlin.reflect.KClass
 
@@ -49,7 +50,7 @@ class EntityStateMachine(val entity: Entity) {
             if (provider.equals(newProvider)) {
                 newProviders.remove(clazz) //components of next state are already present in the current state
             } else {
-                entity.remove(clazz.java) //components needed in current state but not required in the next state
+                entity.remove(clazz) //components needed in current state but not required in the next state
             }
         }
         addComponentsForNextState(newProviders)

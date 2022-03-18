@@ -25,6 +25,7 @@ import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
 import com.theovier.athena.client.ecs.systems.CameraMovementSystem
+import com.theovier.athena.client.ecs.systems.animation.AnimationSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
 import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
@@ -88,8 +89,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         player = Prefab.instantiate("player")
 
         val stateMachine = EntityStateMachine(player)
-        stateMachine.createState("idle")
-        stateMachine.createState("running")
+        stateMachine
+            .createState("idle")
+            .add(Animation::class).withInstance(Animation("idle"))
+        stateMachine
+            .createState("running")
+            .add(Animation::class).withInstance(Animation("run"))
 
         player.add(StateMachine().apply {
             fsm = stateMachine
@@ -112,7 +117,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.apply {
             addSystem(InputSystem())
             addSystem(physicsSystem)
-            addSystem(PlayerAnimationSystem())
+            addSystem(AnimationSystem())
             addSystem(SpineAnimationSystem())
             addSystem(ChildrenPositionSystem())
             addSystem(FadeSystem())

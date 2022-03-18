@@ -8,6 +8,10 @@ import com.badlogic.gdx.utils.Array
 abstract class MetaSystem : EntitySystem() {
     protected val subsystems = Array<EntitySystem>()
 
+    override fun update(deltaTime: Float) {
+        subsystems.forEach { it.update(deltaTime)}
+    }
+
     fun addSubsystem(system: EntitySystem) {
         subsystems.add(system)
         if (engine != null) {

@@ -12,7 +12,7 @@ import com.theovier.athena.client.inputs.XboxInputAdapter.Companion.isAxisInputI
 import com.theovier.athena.client.math.isNotZero
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Direction::class, StateMachine::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Direction::class).get()) {
     private lateinit var input: Input
 
     override fun addedToEngine(engine: Engine) {
@@ -27,15 +27,11 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::cla
         }
         val transform = player.transform
         val directionComponent = player.direction
-        val fsm = player.stateMachine.fsm
 
         val direction = stickInput
         directionComponent.direction = direction
         if (direction.isNotZero) {
             transform.forward.set(direction)
-            fsm.changeState("running")
-        } else {
-            fsm.changeState("idle")
         }
     }
 }

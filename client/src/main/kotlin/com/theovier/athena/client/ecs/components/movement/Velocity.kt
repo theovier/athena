@@ -19,6 +19,8 @@ class Velocity : Component, Poolable {
     var standingStillThreshold = DEFAULT_STANDING_STILL_THRESHOLD //when should the movement be considered standing still
     val isNearlyStandingStill: Boolean
         get() = velocity.len2() <= standingStillThreshold
+    val isNearlyStandingStillForAnimation: Boolean
+        get() = velocity.len2() <= standingStillThreshold * 2f
 
     override fun reset() {
         velocity = Vector2(DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y)

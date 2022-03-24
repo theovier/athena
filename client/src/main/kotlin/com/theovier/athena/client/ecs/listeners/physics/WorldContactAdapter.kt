@@ -8,10 +8,14 @@ import com.theovier.athena.client.ecs.isEntity
 //todo add collision filtering: https://www.aurelienribon.com/post/2011-07-box2d-tutorial-collision-filtering
 class WorldContactAdapter(engine: Engine) : ContactAdapter() {
     private val handler: CollisionHandler
+    private val lootHandler = LootCollisionHandler()
+    private val projectileHandler = ProjectileCollisionHandler(engine)
+    private val wiggleHandler = WiggleCollisionHandler()
 
     init {
-        handler = LootCollisionHandler()
-        handler.next = ProjectileCollisionHandler(engine)
+        lootHandler.next = projectileHandler
+        projectileHandler.next = wiggleHandler
+        handler = lootHandler
     }
 
     override fun beginContact(contact: Contact) {

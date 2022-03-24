@@ -10,10 +10,9 @@ import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.inputs.XboxInputAdapter.Companion.isAxisInputInDeadZone
 import com.theovier.athena.client.math.isNotZero
-import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import ktx.ashley.allOf
 
-class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Direction::class, Spine::class).get()) {
+class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::class, Direction::class).get()) {
     private lateinit var input: Input
 
     override fun addedToEngine(engine: Engine) {
@@ -28,21 +27,11 @@ class PlayerMovementSystem : IteratingSystem(allOf(Player::class, Transform::cla
         }
         val transform = player.transform
         val directionComponent = player.direction
-        val spine = player.spine
 
         val direction = stickInput
         directionComponent.direction = direction
         if (direction.isNotZero) {
             transform.forward.set(direction)
-        }
-        playAnimation(spine, direction)
-    }
-
-    private fun playAnimation(spine: Spine, direction: Vector2) {
-        if (direction.isZero) {
-            spine.state.playAnimationIfNotAlreadyPlaying(name = "idle")
-        } else {
-            spine.state.playAnimationIfNotAlreadyPlaying(name = "run")
         }
     }
 }

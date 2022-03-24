@@ -1,7 +1,9 @@
 package com.theovier.athena.client.ecs
 
+import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.*
+import kotlin.reflect.KClass
 
 fun Entity.addChild(child: Entity): Boolean {
     if (this.hasNoChildrenComponent) {
@@ -25,4 +27,8 @@ private fun Entity.addParentComponentToChild(child: Entity) {
         parent.hierarchyLevel = this.parent.hierarchyLevel + 1
     }
     child.add(parent)
+}
+
+fun <T: Component> Entity.remove(componentClass: KClass<T>): T {
+    return remove(componentClass.java)
 }

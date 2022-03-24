@@ -1,0 +1,74 @@
+{
+"skeleton": {
+	"hash": "DyWuRoEYO4Q",
+	"spine": "4.0.62",
+	"x": -102.2,
+	"y": -5.07,
+	"width": 231.13,
+	"height": 244.71,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "trunk", "parent": "root", "length": 66.55, "rotation": 90, "x": 0.69, "y": 2.16 },
+	{ "name": "leafes", "parent": "trunk", "length": 144, "rotation": -0.76, "x": 70.39, "y": 0.64 }
+],
+"slots": [
+	{ "name": "leafes", "bone": "leafes", "attachment": "leafes" },
+	{ "name": "trunk", "bone": "trunk", "attachment": "trunk" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"leafes": {
+				"leafes": { "x": 52.77, "y": -13.17, "rotation": -89.24, "width": 230, "height": 229 }
+			},
+			"trunk": {
+				"trunk": { "x": 107.26, "y": -12.1, "rotation": -90, "width": 230, "height": 229 }
+			}
+		}
+	}
+],
+"animations": {
+	"idle": {
+		"bones": {
+			"trunk": {
+				"rotate": [
+					{},
+					{ "time": 0.5, "value": -3.18 },
+					{ "time": 1 },
+					{ "time": 1.5, "value": 2.3 },
+					{ "time": 2 }
+				]
+			}
+		}
+	},
+	"move": {
+		"bones": {
+			"trunk": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -11.29 },
+					{ "time": 0.5333, "value": 13.7 },
+					{ "time": 0.7 }
+				]
+			},
+			"leafes": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -3.78 },
+					{ "time": 0.4667 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.933, "y": 1.057 },
+					{ "time": 0.4667, "x": 1.051, "y": 0.845 },
+					{ "time": 0.7 }
+				]
+			}
+		}
+	}
+}
+}

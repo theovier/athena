@@ -26,7 +26,8 @@ Work in progress.
 - Uses [LibGdx's Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) as physic engine
 - Simple damage system with floating damage text
 - Simple loot system
-- Bullet impact effects using dynamic spawning of particles 
+- Bullet impact effects using dynamic spawning of particles
+- Finite State Machines
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_002.gif)
@@ -57,6 +58,8 @@ Also, I found [Sioncore](https://github.com/dsaltares/sioncore) to be a good rea
 For the creation of the bullet shell effects, I found [Rowdy Lemon's Youtube tutorial on shell casings](https://www.youtube.com/watch?v=vTAR14bVJPA&list=LL&index=16) extremely valuable.
 
 For creating particle effects, I use the brilliant open-source [Talos Particle Engine](https://github.com/rockbite/talos).
+
+For the ideas of FSM in ECS, I found [Richard Lord's view](https://www.richardlord.net/blog/ecs/finite-state-machines-with-ash.html) worth the read.
 
 ## License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/#) except for the Spine Runtime.

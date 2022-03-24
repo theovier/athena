@@ -1,0 +1,38 @@
+{
+  "id": "bush",
+  "components": {
+    "transform": {
+      "size": {
+        "y": 0.7
+      },
+      "position": {
+        "z": -1
+      }
+    },
+    "wiggleAnimationController": {},
+    "animation": {},
+    "spine": {
+      "atlas": "sprites/environment/bush/bush.atlas",
+      "skeleton": "sprites/environment/bush/bush.json",
+      "initialAnimation": {
+        "name": "idle",
+        "loop": true
+      }
+    },
+    "wiggle": {},
+    "physics": {
+      "body": {
+        "type": "kinematic",
+        "sensor": true,
+        "box": {
+          "width": 1,
+          "height": 0.7
+        },
+        "position": {
+          "x": 22,
+          "y": 8
+        }
+      }
+    }
+  }
+}

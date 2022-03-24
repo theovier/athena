@@ -9,6 +9,8 @@
         "z": -1
       }
     },
+    "wiggleAnimationController": {},
+    "animation": {},
     "spine": {
       "atlas": "sprites/environment/bush/bush.atlas",
       "skeleton": "sprites/environment/bush/bush.json",
@@ -17,6 +19,7 @@
         "loop": true
       }
     },
+    "wiggle": {},
     "physics": {
       "body": {
         "type": "kinematic",

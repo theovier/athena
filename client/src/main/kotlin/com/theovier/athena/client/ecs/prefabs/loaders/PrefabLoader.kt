@@ -6,6 +6,9 @@ import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.addChild
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
+import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.AnimationComponentLoader
+import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.controllers.PlayerAnimationControllerComponentLoader
+import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.controllers.WiggleAnimationControllerComponentLoader
 import ktx.ashley.plusAssign
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
@@ -24,6 +27,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
     private val componentLoaders = mapOf(
         "acceleration" to AccelerationComponentLoader(),
         "aim" to AimComponentLoader(),
+        "animation" to AnimationComponentLoader(),
         "cameraTarget" to CameraTargetComponentLoader(),
         "crosshair" to CrosshairComponentLoader(),
         "damage" to DamageComponentLoader(),
@@ -43,6 +47,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "particle" to particleComponentLoader,
         "physics" to physicsComponentLoader,
         "player" to PlayerComponentLoader(),
+        "playerAnimationController" to PlayerAnimationControllerComponentLoader(),
         "ignoreAudio" to IgnoreAudioComponentLoader(),
         "sound" to soundComponentLoader,
         "spin" to SpinComponentLoader(),
@@ -53,7 +58,9 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "trauma" to TraumaComponentLoader(),
         "transform" to TransformComponentLoader(),
         "travel" to TravelComponentLoader(),
-        "velocity" to VelocityComponentLoader()
+        "velocity" to VelocityComponentLoader(),
+        "wiggle" to WiggleComponentLoader(),
+        "wiggleAnimationController" to WiggleAnimationControllerComponentLoader()
     )
     private var currentPrefabPath = ""
     private val dependencyPool = DependencyPool()

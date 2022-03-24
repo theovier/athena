@@ -2,6 +2,7 @@
   "id": "player",
   "components": {
     "player": {},
+    "playerAnimationController": {},
     "aim": {
       "maxDistanceToPlayer": 4
     },
@@ -28,6 +29,7 @@
     "dustTrail": {
       "frequency": 1.0
     },
+    "animation": {},
     "spine": {
       "atlas": "sprites/characters/player/player.atlas",
       "skeleton": "sprites/characters/player/player.json",

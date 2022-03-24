@@ -91,27 +91,16 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
-        player.add(PlayerAnimationController())
-        player.add(Animation())
-
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
 
-
         Prefab.instantiate("bush")
-            .add(Wiggle())
-            .add(WiggleAnimationController())
-            .add(Animation())
-
         Prefab.instantiate("bush").apply {
             with(physics) {
                 body.setTransform(Vector2(23f, 9f), 0f)
             }
         }
-            .add(Wiggle())
-            .add(WiggleAnimationController())
-            .add(Animation())
 
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {

@@ -8,10 +8,11 @@ import ktx.ashley.mapperFor
 
 class Animation : Component {
     var looping = true
-    var name = "idle"
+    var name = DEFAULT_NAME
 
     companion object {
         val MAPPER = mapperFor<Animation>()
+        const val DEFAULT_NAME = "idle"
     }
 }
 

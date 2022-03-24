@@ -218,6 +218,11 @@
             <artifactId>talos-libgdx</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.tinder.statemachine</groupId>
+            <artifactId>statemachine</artifactId>
+            <version>0.2.0</version>
+        </dependency>
     </dependencies>
 
     <build>

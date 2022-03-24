@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.PlayerAnimationController
+import com.theovier.athena.client.ecs.components.animation.WiggleAnimationController
 import com.theovier.athena.client.ecs.fsm.EntityStateMachine
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
@@ -27,6 +29,7 @@ import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
 import com.theovier.athena.client.ecs.systems.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.animation.AnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.PlayerAnimationSystem
+import com.theovier.athena.client.ecs.systems.animation.WiggleAnimationSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
 import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
@@ -88,24 +91,28 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
-
-        val stateMachine = EntityStateMachine(player)
-        stateMachine
-            .createState("idle")
-            .add(Animation::class).withInstance(Animation("idle"))
-        stateMachine
-            .createState("running")
-            .add(Animation::class).withInstance(Animation("run"))
-
-        player.add(StateMachine().apply {
-            fsm = stateMachine
-        })
+        player.add(PlayerAnimationController())
+        player.add(Animation())
 
         crosshair = Prefab.instantiate("crosshair")
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
 
-        Prefab.instantiate("dufflebag")
+
+        Prefab.instantiate("bush")
+            .add(Wiggle())
+            .add(WiggleAnimationController())
+            .add(Animation())
+
+        Prefab.instantiate("bush").apply {
+            with(physics) {
+                body.setTransform(Vector2(23f, 9f), 0f)
+            }
+        }
+            .add(Wiggle())
+            .add(WiggleAnimationController())
+            .add(Animation())
+
         Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -118,8 +125,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         engine.apply {
             addSystem(InputSystem())
             addSystem(physicsSystem)
-            addSystem(PlayerAnimationSystem())
             addSystem(AnimationSystem())
+            addSystem(PlayerAnimationSystem())
+            addSystem(WiggleAnimationSystem())
             addSystem(SpineAnimationSystem())
             addSystem(ChildrenPositionSystem())
             addSystem(FadeSystem())

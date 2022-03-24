@@ -1,0 +1,11 @@
+bush.png
+size:253,214
+filter:Linear,Linear
+pma:true
+leafes
+bounds:2,2,210,223
+offsets:5,0,230,229
+rotate:90
+trunk
+bounds:227,140,24,72
+offsets:91,2,230,229

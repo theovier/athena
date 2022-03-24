@@ -6,8 +6,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
-class Animation(var name: String) : Component {
+class Animation : Component {
     var looping = true
+    var name = "idle"
 
     companion object {
         val MAPPER = mapperFor<Animation>()

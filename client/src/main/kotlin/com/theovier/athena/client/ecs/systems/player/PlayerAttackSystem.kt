@@ -58,7 +58,8 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
         val sprayY = MathUtils.random(-maxSpray.y, maxSpray.y)
         val spray = Vector2(sprayX, sprayY)
         val baseDirection = Vector2(1f,0f)
-        val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
+        //val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
+        val shootingDirection = baseDirection.rotateDeg(bulletRotation) //todo: add spray back in when finished with aim debugging
         playFireAnimation(shooter.spine)
         spawnBullet(bulletSpawnOrigin, shootingDirection.nor(), shooter)
 

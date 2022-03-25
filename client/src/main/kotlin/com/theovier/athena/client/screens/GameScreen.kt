@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.Target
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -104,16 +105,17 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         }
 
         Prefab.instantiate("dummy")
-            .add(DamageOverTime(Damage(1, DamageType.ELECTRIC, DamageSource(player, player))).apply {
-                duration = 10f
-                tickRate = 1f
-            })
+//            .add(DamageOverTime(Damage(1, DamageType.ELECTRIC, DamageSource(player, player))).apply {
+//                duration = 10f
+//                tickRate = 1f
+//            })
+            .add(Target())
 
         Prefab.instantiate("dummy") {
             with(physics) {
                 body.setTransform(Vector2(12f, 17f), 0f)
             }
-        }
+        }.add(Target())
     }
 
     private fun initSystems() {
@@ -137,6 +139,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
+            addSystem(AimDebugRenderingSystem(camera))
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
             addSystem(AccelerationSystem())

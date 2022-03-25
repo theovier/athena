@@ -7,7 +7,7 @@ import com.theovier.athena.client.weapons.Damage
 import ktx.ashley.allOf
 import ktx.ashley.exclude
 
-class DamageOverTimeSystem : IteratingSystem(allOf(DamageOverTime::class, Health::class).exclude(Invincible::class).get()) {
+class DamageOverTimeSystem : IteratingSystem(allOf(DamageOverTime::class, Health::class).get()) {
     override fun processEntity(victim: Entity, deltaTime: Float) {
         val dot = victim.dot
 

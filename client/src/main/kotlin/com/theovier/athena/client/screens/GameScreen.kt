@@ -104,7 +104,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         }
 
         Prefab.instantiate("dummy")
-            .add(DamageOverTime(Damage(1, DamageType.FIRE, DamageSource(player, player))).apply {
+            .add(DamageOverTime(Damage(1, DamageType.ELECTRIC, DamageSource(player, player))).apply {
                 duration = 10f
                 tickRate = 1f
             })

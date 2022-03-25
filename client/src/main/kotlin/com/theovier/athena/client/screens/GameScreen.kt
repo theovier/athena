@@ -12,9 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.components.animation.PlayerAnimationController
-import com.theovier.athena.client.ecs.components.animation.WiggleAnimationController
-import com.theovier.athena.client.ecs.fsm.EntityStateMachine
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -30,6 +27,7 @@ import com.theovier.athena.client.ecs.systems.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.animation.AnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.PlayerAnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.WiggleAnimationSystem
+import com.theovier.athena.client.ecs.systems.damage.DamageOverTimeSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
 import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
@@ -39,6 +37,9 @@ import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
+import com.theovier.athena.client.weapons.Damage
+import com.theovier.athena.client.weapons.DamageSource
+import com.theovier.athena.client.weapons.DamageType
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -103,6 +104,11 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         }
 
         Prefab.instantiate("dummy")
+            .add(DamageOverTime(Damage(1, DamageType.ELECTRIC, DamageSource(player, player))).apply {
+                duration = 10f
+                tickRate = 1f
+            })
+
         Prefab.instantiate("dummy") {
             with(physics) {
                 body.setTransform(Vector2(12f, 17f), 0f)
@@ -148,6 +154,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(WeaponRotationSystem())
             addSystem(CrosshairPlacementSystem(player.aim))
             addSystem(PlayerAttackSystem())
+            addSystem(DamageOverTimeSystem())
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())
             addSystem(HapticDamageFeedbackSystem())

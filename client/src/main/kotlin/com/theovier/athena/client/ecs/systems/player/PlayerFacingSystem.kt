@@ -8,7 +8,7 @@ import com.theovier.athena.client.ecs.input
 import com.theovier.athena.client.misc.spine.faceDirection
 import ktx.ashley.allOf
 
-class PlayerFacingSystem : IteratingSystem(allOf(Transform::class, Spine::class).get())  {
+class PlayerFacingSystem : IteratingSystem(allOf(Player::class, Transform::class, Spine::class).get())  {
     private lateinit var input: Input
 
     override fun addedToEngine(engine: Engine) {

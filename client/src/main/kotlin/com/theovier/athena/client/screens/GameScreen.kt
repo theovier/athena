@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.components.Targetable
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -39,7 +38,6 @@ import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
-import com.theovier.athena.client.misc.physics.CollisionCategory
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -147,7 +145,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PlayerMovementSystem())
             addSystem(HealthBarScalingSystem())
             addSystem(HealthBarToggleSystem())
-            addSystem(FacingSystem())
+            addSystem(PlayerFacingSystem())
             addSystem(DustTrailSpawnSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())

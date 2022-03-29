@@ -24,15 +24,8 @@ class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transfo
     }
 
     override fun processEntity(player: Entity, deltaTime: Float) {
-        var stickInput = pollInput()
-        if (isAxisInputInDeadZone(stickInput)) {
-            stickInput = Vector2.Zero
-        }
         val transform = player.transform
-        val playerPosition = transform.position.xy
-        val targetPositionRelativeToPlayer = stickInput * player.aim.maxDistanceToPlayer
-        player.aim.targetPosition = playerPosition + targetPositionRelativeToPlayer
-
+        val stickInput = pollProcessedInput()
         val direction = stickInput.nor()
         val isAiming = direction.isNotZero
         player.aim.isCurrentlyAiming = isAiming
@@ -47,5 +40,13 @@ class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transfo
         val xAxisValueRaw = currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_X)
         val yAxisValueRaw = -currentController.getAxis(XboxInputAdapter.AXIS_RIGHT_Y)
         return Vector2(xAxisValueRaw, yAxisValueRaw)
+    }
+
+    private fun pollProcessedInput(): Vector2 {
+        var stickInput = pollInput()
+        if (isAxisInputInDeadZone(stickInput)) {
+            stickInput = Vector2.Zero
+        }
+        return stickInput
     }
 }

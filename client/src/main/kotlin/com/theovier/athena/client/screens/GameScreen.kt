@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.components.Target
+import com.theovier.athena.client.ecs.components.Targetable
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -35,12 +35,11 @@ import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
+import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
-import com.theovier.athena.client.weapons.Damage
-import com.theovier.athena.client.weapons.DamageSource
-import com.theovier.athena.client.weapons.DamageType
+import com.theovier.athena.client.misc.physics.CollisionCategory
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -94,6 +93,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initEntities() {
         player = Prefab.instantiate("player")
         crosshair = Prefab.instantiate("crosshair")
+        crosshair.crosshair.owner = player
+
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
 
@@ -105,17 +106,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         }
 
         Prefab.instantiate("dummy")
-//            .add(DamageOverTime(Damage(1, DamageType.ELECTRIC, DamageSource(player, player))).apply {
-//                duration = 10f
-//                tickRate = 1f
-//            })
-            .add(Target())
 
         Prefab.instantiate("dummy") {
             with(physics) {
                 body.setTransform(Vector2(12f, 17f), 0f)
             }
-        }.add(Target())
+        }
     }
 
     private fun initSystems() {
@@ -155,7 +151,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(DustTrailSpawnSystem())
             addSystem(PlayerAimSystem())
             addSystem(WeaponRotationSystem())
-            addSystem(CrosshairPlacementSystem(player.aim))
+            addSystem(CrosshairPlacementSystem())
             addSystem(PlayerAttackSystem())
             addSystem(DamageOverTimeSystem())
             addSystem(LifetimeSystem())
@@ -169,7 +165,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
-            //addSystem(PhysicsDebugSystem(world, camera))
+            addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
     }

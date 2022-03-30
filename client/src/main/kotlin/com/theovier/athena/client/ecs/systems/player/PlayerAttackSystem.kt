@@ -12,6 +12,7 @@ import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.misc.physics.CollisionCategory
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.*
+import ktx.math.plus
 import ktx.math.times
 import ktx.math.unaryMinus
 import kotlin.with
@@ -49,8 +50,7 @@ class PlayerAttackSystem : InputDrivenIteratingSystem(allOf(Player::class, Spine
         val sprayY = MathUtils.random(-maxSpray.y, maxSpray.y)
         val spray = Vector2(sprayX, sprayY)
         val baseDirection = Vector2(1f,0f)
-        //val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
-        val shootingDirection = baseDirection.rotateDeg(bulletRotation) //todo: add spray back in when finished with aim debugging
+        val shootingDirection = baseDirection.rotateDeg(bulletRotation) + spray
         playFireAnimation(shooter.spine)
         spawnBullet(bulletSpawnOrigin, shootingDirection.nor(), shooter)
 

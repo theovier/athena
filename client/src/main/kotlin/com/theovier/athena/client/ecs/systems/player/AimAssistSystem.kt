@@ -68,7 +68,7 @@ class AimAssistSystem(private val world: World) : InputDrivenIteratingSystem(
         }!!
     }
 
-    //todo problem with other physic elements, e.g., (bushes) / bullets?
+    //todo problem (gun wiggling) with other physic elements, e.g., (bushes) / bullets?
     private fun raycast(start: Vector2, end: Vector2): Entity? {
         var target: Entity? = null
         world.rayCast(start.cpy(), end.cpy()) { fixture, _, _, _ ->
@@ -82,8 +82,6 @@ class AimAssistSystem(private val world: World) : InputDrivenIteratingSystem(
                         RayCast.TERMINATE
                     }
                 }
-            } else {
-                log.debug { fixture.filterData.categoryBits }
             }
             RayCast.CONTINUE
         }

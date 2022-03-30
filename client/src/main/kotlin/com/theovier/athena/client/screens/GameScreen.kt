@@ -103,20 +103,24 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         crosshair.crosshair.owner = player
 
         Prefab.instantiate("map")
-        Prefab.instantiate("wall")
+        Prefab.instantiate("wall").apply {
+            with(physics) {
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.WALL
+            }
+        }
 
-//        Prefab.instantiate("bush").apply {
-//            with(physics) {
-//                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
-//            }
-//        }
-//
-//        Prefab.instantiate("bush").apply {
-//            with(physics) {
-//                body.setTransform(Vector2(23f, 9f), 0f)
-//                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
-//            }
-//        }
+        Prefab.instantiate("bush").apply {
+            with(physics) {
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
+            }
+        }
+
+        Prefab.instantiate("bush").apply {
+            with(physics) {
+                body.setTransform(Vector2(23f, 9f), 0f)
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
+            }
+        }
 
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -124,7 +128,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             }
         }
             .add(Targetable())
-            .add(Invincible())
 
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -132,7 +135,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
             }
         }
-            .add(Invincible())
             .add(Targetable())
 
     }
@@ -180,7 +182,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PlayerAimSystem())
             addSystem(AimAssistSystem(world))
             //addSystem(AimDebugRenderingSystem(camera))
-            addSystem(AimAssistRaycastDebugSystem(camera))
+            //addSystem(AimAssistRaycastDebugSystem(camera))
             addSystem(WeaponRotationSystem())
             addSystem(PlayerAttackSystem())
             addSystem(CrosshairPlacementSystem())
@@ -197,7 +199,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
-            addSystem(PhysicsDebugSystem(world, camera))
+            //addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
     }

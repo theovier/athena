@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.addChild
+import com.theovier.athena.client.ecs.extensions.addChild
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.AnimationComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.controllers.PlayerAnimationControllerComponentLoader

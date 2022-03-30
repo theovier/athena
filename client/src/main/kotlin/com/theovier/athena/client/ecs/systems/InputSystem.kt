@@ -7,7 +7,7 @@ import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.Input
-import com.theovier.athena.client.ecs.input
+import com.theovier.athena.client.ecs.extensions.input
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.ashley.allOf
 

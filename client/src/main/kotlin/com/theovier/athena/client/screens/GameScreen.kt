@@ -23,10 +23,12 @@ import com.theovier.athena.client.ecs.systems.damage.DamageIndicatorSystem
 import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
-import com.theovier.athena.client.ecs.systems.CameraMovementSystem
+import com.theovier.athena.client.ecs.systems.camera.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.animation.AnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.PlayerAnimationSystem
+import com.theovier.athena.client.ecs.systems.animation.SpineAnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.WiggleAnimationSystem
+import com.theovier.athena.client.ecs.systems.camera.CameraShakeSystem
 import com.theovier.athena.client.ecs.systems.damage.DamageOverTimeSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
@@ -38,6 +40,10 @@ import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
+import com.theovier.athena.client.ecs.systems.sound.SoundSystem
+import com.theovier.athena.client.ecs.systems.spawn.BulletShellEjectionSystem
+import com.theovier.athena.client.ecs.systems.spawn.DustTrailSpawnSystem
+import com.theovier.athena.client.ecs.systems.spawn.ImpactSpawnSystem
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity

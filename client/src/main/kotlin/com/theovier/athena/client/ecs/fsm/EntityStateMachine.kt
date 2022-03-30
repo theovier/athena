@@ -3,9 +3,7 @@ package com.theovier.athena.client.ecs.fsm
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.ObjectMap
-import com.theovier.athena.client.ecs.components.DustTrail
-import com.theovier.athena.client.ecs.remove
-import ktx.ashley.mapperFor
+import com.theovier.athena.client.ecs.extensions.remove
 import mu.KotlinLogging
 import kotlin.reflect.KClass
 

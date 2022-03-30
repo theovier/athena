@@ -9,11 +9,10 @@ import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.components.movement.velocity
-import com.theovier.athena.client.ecs.input
+import com.theovier.athena.client.ecs.extensions.input
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.*
-import ktx.math.plus
 import ktx.math.times
 import ktx.math.unaryMinus
 import kotlin.with

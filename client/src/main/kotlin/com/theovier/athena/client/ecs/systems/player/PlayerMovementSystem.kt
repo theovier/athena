@@ -6,7 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.Direction
 import com.theovier.athena.client.ecs.components.movement.direction
-import com.theovier.athena.client.ecs.input
+import com.theovier.athena.client.ecs.extensions.input
 import com.theovier.athena.client.math.isNotZero
 import ktx.ashley.allOf
 

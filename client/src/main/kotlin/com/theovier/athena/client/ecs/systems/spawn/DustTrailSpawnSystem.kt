@@ -1,11 +1,11 @@
-package com.theovier.athena.client.ecs.systems
+package com.theovier.athena.client.ecs.systems.spawn
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.input
+import com.theovier.athena.client.ecs.extensions.input
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import ktx.ashley.allOf
 

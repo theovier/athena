@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.GdxNativesLoader
 import com.theovier.athena.client.ecs.components.CameraTarget
 import com.theovier.athena.client.ecs.components.Transform
 import com.theovier.athena.client.ecs.components.movement.Velocity
+import com.theovier.athena.client.ecs.systems.camera.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import ktx.ashley.entity
 import ktx.ashley.with

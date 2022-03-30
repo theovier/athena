@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.input
+import com.theovier.athena.client.ecs.extensions.input
 import ktx.ashley.allOf
 
 class HealthBarToggleSystem : IteratingSystem(allOf(HealthBar::class).get()) {

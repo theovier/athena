@@ -3,7 +3,7 @@ package com.theovier.athena.client.ecs.listeners.physics
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.physics.box2d.Contact
-import com.theovier.athena.client.ecs.isEntity
+import com.theovier.athena.client.ecs.extensions.isEntity
 
 //todo add collision filtering: https://www.aurelienribon.com/post/2011-07-box2d-tutorial-collision-filtering
 class WorldContactAdapter(engine: Engine) : ContactAdapter() {

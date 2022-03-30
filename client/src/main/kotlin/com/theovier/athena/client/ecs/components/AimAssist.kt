@@ -13,6 +13,7 @@ class AimAssist : Component, Poolable {
     var distance = DEFAULT_DISTANCE
     var maxAngle = DEFAULT_MAX_ANGLE
     var degreesBetweenAngleChecks = DEFAULT_DEGREES_BETWEEN_ANGLE_CHECKS
+    var deadzone = DEFAULT_DEAD_ZONE
 
     override fun reset() {
         maxAngle = DEFAULT_MAX_ANGLE
@@ -22,8 +23,9 @@ class AimAssist : Component, Poolable {
     companion object {
         val MAPPER = mapperFor<AimAssist>()
         const val DEFAULT_DISTANCE = 15f
-        const val DEFAULT_MAX_ANGLE = 5
+        const val DEFAULT_MAX_ANGLE = 6
         const val DEFAULT_DEGREES_BETWEEN_ANGLE_CHECKS = 3
+        const val DEFAULT_DEAD_ZONE = 15f
     }
 }
 

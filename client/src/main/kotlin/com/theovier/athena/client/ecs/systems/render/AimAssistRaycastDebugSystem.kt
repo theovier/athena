@@ -12,23 +12,27 @@ import ktx.math.times
 
 class AimAssistRaycastDebugSystem(private val camera: Camera) : InputDrivenIteratingSystem(allOf(Aim::class, Spine::class).get()) {
     private val renderer = ShapeRenderer()
-    private val purple = Color.valueOf("#BF40BF")
+    private val red = Color.valueOf("#d01b3a")
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val assist = entity.aimAssist
         val spine = entity.spine
         val originalAimDirection = input.aim
 
-        renderer.color = purple
+        renderer.color = red
         renderer.projectionMatrix = camera.combined
         renderer.begin(ShapeRenderer.ShapeType.Line)
 
         val start = spine.getMuzzlePosition()
-        for (angle in -assist.maxAngle ..assist.maxAngle step assist.degreesBetweenAngleChecks) {
-            val direction = originalAimDirection.cpy()
-            direction.rotateDeg(angle.toFloat())
-            val end = start + direction * assist.distance
-            renderer.line(start, end)
+
+        for (angle in 0..assist.maxAngle step assist.degreesBetweenAngleChecks) {
+            for (sign in intArrayOf(-1, 1)) {
+                val newAngle = angle * sign
+                val direction = originalAimDirection.cpy()
+                direction.rotateDeg(newAngle.toFloat())
+                val end = start + direction * assist.distance
+                renderer.line(start, end)
+            }
         }
 
         renderer.end()

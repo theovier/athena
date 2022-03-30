@@ -1,10 +1,8 @@
 package com.theovier.athena.client.ecs.systems.player
 
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
-import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.misc.physics.CollisionCategory
@@ -16,60 +14,64 @@ import ktx.math.plus
 import ktx.math.times
 import mu.KotlinLogging
 
+private val log = KotlinLogging.logger {}
+
 class AimAssistSystem(private val world: World) : InputDrivenIteratingSystem(
     allOf(Player::class, AimAssist::class, Aim::class, Transform::class, Spine::class).get()) {
-    private val log = KotlinLogging.logger {}
 
     override fun processEntity(player: Entity, deltaTime: Float) {
-        val aim = player.aim
-
-        if (!input.isAiming) {
+        if (input.isNotAiming) {
             return
         }
-
+        val targets = ArrayList<Entity>()
+        val transform = player.transform
+        val aim = player.aim
         val assist = player.aimAssist
         val spine = player.spine
         val aimingDirection = aim.direction
-        val start = spine.getMuzzlePosition()
+        val aimOrigin = spine.getMuzzlePosition()
 
-        //todo refactor
-
-        val targets = ArrayList<Entity>()
-
-        //todo rewrite the for loop, so the first found entity is the closest to the actual angle
-        for (angle in -assist.maxAngle ..assist.maxAngle step assist.degreesBetweenAngleChecks) {
-            val direction = aimingDirection.cpy()
-            direction.rotateDeg(angle.toFloat())
-            val end = start + direction * assist.distance
-            val target = raycast(start, end)
-            if (target != null && !targets.contains(target)) {
-                targets.add(target)
+        // first check the closest angles, then increase in both directions simultaneously
+        for (angle in 0..assist.maxAngle step assist.degreesBetweenAngleChecks) {
+            for (sign in intArrayOf(-1, 1)) {
+                val newAngle = angle * sign
+                val direction = aimingDirection.cpy()
+                direction.rotateDeg(newAngle.toFloat())
+                val aimDestination = aimOrigin + direction * assist.distance
+                val target = raycast(aimOrigin, aimDestination)
+                if (target != null && !targets.contains(target)) {
+                    targets.add(target)
+                }
             }
         }
-
         if (targets.isEmpty()) {
             //do not modify aim, no enemies in sight
             return
         }
 
-        val bestTarget = targets.first()
-        val bestTargetPosition = bestTarget.transform.center
+        //todo: maybe add decision between closer targets and better angle
+        val closestAngleTarget = targets.first()
+        val target = closestAngleTarget
+        val targetPosition = target.transform.center
 
+        if (targetPosition.dst2(transform.center) <= assist.deadzone) {
+            //target too close for aim assist
+            return
+        }
 
-        val correctedDirection = (bestTargetPosition - start).nor() //todo problem of snapping here?
-
-
-        aim.direction = correctedDirection
-
-
-        //todo select closest
-
+        aim.direction = (targetPosition - aimOrigin).nor()
     }
 
-    //todo clean up
+    private fun getClosestDistanceTarget(origin: Vector2, targets: List<Entity>): Entity {
+        return targets.minByOrNull {
+            it.transform.center.dst2(origin)
+        }!!
+    }
+
+    //todo problem with other physic elements, e.g., (bushes) / bullets?
     private fun raycast(start: Vector2, end: Vector2): Entity? {
         var target: Entity? = null
-        world.rayCast(start, end) { fixture, _, _, _ ->
+        world.rayCast(start.cpy(), end.cpy()) { fixture, _, _, _ ->
 
             if (fixture.filterData.categoryBits == CollisionCategory.ENEMY) {
                 val userData = fixture.body.userData
@@ -77,9 +79,11 @@ class AimAssistSystem(private val world: World) : InputDrivenIteratingSystem(
                     val entity = userData
                     if (entity.isTargetable) {
                         target = userData
+                        RayCast.TERMINATE
                     }
-                    RayCast.TERMINATE
                 }
+            } else {
+                log.debug { fixture.filterData.categoryBits }
             }
             RayCast.CONTINUE
         }

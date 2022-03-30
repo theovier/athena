@@ -105,18 +105,30 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
 
-        Prefab.instantiate("bush")
-        Prefab.instantiate("bush").apply {
-            with(physics) {
-                body.setTransform(Vector2(23f, 9f), 0f)
-            }
-        }
-
-        Prefab.instantiate("dummy")
+//        Prefab.instantiate("bush").apply {
+//            with(physics) {
+//                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
+//            }
+//        }
+//
+//        Prefab.instantiate("bush").apply {
+//            with(physics) {
+//                body.setTransform(Vector2(23f, 9f), 0f)
+//                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
+//            }
+//        }
 
         Prefab.instantiate("dummy") {
             with(physics) {
-                body.setTransform(Vector2(12f, 17f), 0f)
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
+            }
+        }
+            .add(Targetable())
+            .add(Invincible())
+
+        Prefab.instantiate("dummy") {
+            with(physics) {
+                body.setTransform(Vector2(14f, 16f), 0f)
                 body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
             }
         }
@@ -146,29 +158,32 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
+            //camera
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
+
+            //moving stuff
             addSystem(AccelerationSystem())
             addSystem(FrictionSystem())
             addSystem(MovementSystem())
-            addSystem(BulletShellEjectionSystem())
-            addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
+
+            addSystem(BulletShellEjectionSystem())
+            addSystem(SpinningSystem())
             addSystem(HealthBarScalingSystem())
             addSystem(HealthBarToggleSystem())
             addSystem(PlayerFacingSystem())
             addSystem(DustTrailSpawnSystem())
 
-
+            //aiming and shooting
             addSystem(PlayerAimSystem())
             addSystem(AimAssistSystem(world))
-            addSystem(AimDebugRenderingSystem(camera))
+            //addSystem(AimDebugRenderingSystem(camera))
+            addSystem(AimAssistRaycastDebugSystem(camera))
             addSystem(WeaponRotationSystem())
             addSystem(PlayerAttackSystem())
             addSystem(CrosshairPlacementSystem())
-
-
 
             addSystem(DamageOverTimeSystem())
             addSystem(LifetimeSystem())
@@ -182,7 +197,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
-            //addSystem(PhysicsDebugSystem(world, camera))
+            addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
     }

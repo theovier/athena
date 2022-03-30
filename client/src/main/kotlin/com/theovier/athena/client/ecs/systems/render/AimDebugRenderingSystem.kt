@@ -17,7 +17,12 @@ class AimDebugRenderingSystem(private val camera: Camera) : InputDrivenIterating
     private val green = Color.valueOf("#AAFF00")
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val aim = entity.aim //todo add origin to aim?
+        if (input.isNotAiming) {
+            //just render the aim if we are actually aiming
+            return
+        }
+
+        val aim = entity.aim
         val spine = entity.spine
         val aimOrigin = spine.getMuzzlePosition()
         val aimDestination = aimOrigin + input.aim * DEFAULT_DISTANCE

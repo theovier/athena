@@ -22,6 +22,8 @@ data class Input(
     }
     val isStandingStill: Boolean
         get() = !isMoving
+    val isNotAiming: Boolean
+        get() = !isAiming
 }
 
 val Entity.input: Input

@@ -9,8 +9,9 @@ import ktx.ashley.mapperFor
 
 data class Input(
     val movement: Vector2 = Vector2(0f, 0f),
+    val rawMovement: Vector2 = Vector2(0f, 0f),
     var isMoving: Boolean = false,
-    val aimRaw: Vector2 = Vector2(1f, 0f),
+    val rawAim: Vector2 = Vector2(1f, 0f),
     val aim: Vector2 = Vector2(1f, 0f),
     var isAiming: Boolean = false,
     var fire: Boolean = false,

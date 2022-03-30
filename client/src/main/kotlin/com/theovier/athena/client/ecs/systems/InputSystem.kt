@@ -34,9 +34,10 @@ class InputSystem : IteratingSystem(allOf(Input::class).get()), XboxInputAdapter
         val aimAxisVertical = -controller.getAxis(XboxInputAdapter.AXIS_RIGHT_Y)
         val fireAxisValue = controller.getAxis(XboxInputAdapter.AXIS_TRIGGER_RIGHT)
         input.fire = fireAxisValue > XboxInputAdapter.FIRE_DEAD_ZONE
-        input.movement.set(moveAxisHorizontal, moveAxisVertical)
-        input.aimRaw.set(aimAxisHorizontal, aimAxisVertical)
-        input.aim.set(zeroOutWhenInDeadZone(input.aimRaw))
+        input.rawMovement.set(moveAxisHorizontal, moveAxisVertical)
+        input.rawAim.set(aimAxisHorizontal, aimAxisVertical)
+        input.aim.set(zeroOutWhenInDeadZone(input.rawAim))
+        input.movement.set(zeroOutWhenInDeadZone(input.rawMovement))
         input.isMoving = !(XboxInputAdapter.isAxisInputInDeadZone(input.movement))
         input.isAiming = !(XboxInputAdapter.isAxisInputInDeadZone(input.aim))
     }

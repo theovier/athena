@@ -12,9 +12,6 @@ import ktx.box2d.rayCast
 import ktx.math.minus
 import ktx.math.plus
 import ktx.math.times
-import mu.KotlinLogging
-
-private val log = KotlinLogging.logger {}
 
 class AimAssistSystem(private val world: World) : InputDrivenIteratingSystem(
     allOf(Player::class, AimAssist::class, Aim::class, Transform::class, Spine::class).get()) {
@@ -68,7 +65,6 @@ class AimAssistSystem(private val world: World) : InputDrivenIteratingSystem(
         }!!
     }
 
-    //todo problem (gun wiggling) with other physic elements, e.g., (bushes) / bullets?
     private fun raycast(start: Vector2, end: Vector2): Entity? {
         var target: Entity? = null
         world.rayCast(start.cpy(), end.cpy()) { fixture, _, _, _ ->

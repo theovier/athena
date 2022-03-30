@@ -44,6 +44,7 @@ import com.theovier.athena.client.ecs.systems.sound.SoundSystem
 import com.theovier.athena.client.ecs.systems.spawn.BulletShellEjectionSystem
 import com.theovier.athena.client.ecs.systems.spawn.DustTrailSpawnSystem
 import com.theovier.athena.client.ecs.systems.spawn.ImpactSpawnSystem
+import com.theovier.athena.client.misc.physics.CollisionCategory
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -96,6 +97,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
+        player.add(AimAssist())
+
         crosshair = Prefab.instantiate("crosshair")
         crosshair.crosshair.owner = player
 
@@ -114,8 +117,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         Prefab.instantiate("dummy") {
             with(physics) {
                 body.setTransform(Vector2(12f, 17f), 0f)
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
             }
         }
+            .add(Invincible())
+            .add(Targetable())
+
     }
 
     private fun initSystems() {
@@ -139,7 +146,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
-            addSystem(AimDebugRenderingSystem(camera))
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
             addSystem(AccelerationSystem())
@@ -153,10 +159,17 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(HealthBarToggleSystem())
             addSystem(PlayerFacingSystem())
             addSystem(DustTrailSpawnSystem())
+
+
             addSystem(PlayerAimSystem())
+            addSystem(AimAssistSystem(world))
+            addSystem(AimDebugRenderingSystem(camera))
             addSystem(WeaponRotationSystem())
-            addSystem(CrosshairPlacementSystem())
             addSystem(PlayerAttackSystem())
+            addSystem(CrosshairPlacementSystem())
+
+
+
             addSystem(DamageOverTimeSystem())
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())
@@ -169,7 +182,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(LootRemovalSystem())
             addSystem(CleanupHitMarkerSystem())
             addSystem(CleanupSoundSystem())
-            addSystem(PhysicsDebugSystem(world, camera))
+            //addSystem(PhysicsDebugSystem(world, camera))
             //addSystem(SpineDebugSystem(camera))
         }
     }

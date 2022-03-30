@@ -16,7 +16,7 @@ class PlayerAimSystem : InputDrivenIteratingSystem(allOf(Aim::class, Player::cla
 
         if (isAiming) {
             val direction = aimInput.nor()
-            player.aim.direction = direction
+            aimComponent.direction = direction
             transform.forward.set(direction)
         }
     }

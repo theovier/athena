@@ -29,6 +29,14 @@ class Spine : Component {
         return point.computeWorldPosition(skeleton.rootBone, Vector2(point.x, point.y))
     }
 
+    //should not be accessible for all spine components
+    fun getMuzzlePosition(): Vector2 {
+        val weaponBone = skeleton.findBone("weapon")
+        val muzzlePointSlot = skeleton.findSlot("bullet_spawn")
+        val muzzlePointAttachment = muzzlePointSlot.attachment as PointAttachment
+        return muzzlePointAttachment.computeWorldPosition(weaponBone, Vector2(muzzlePointAttachment.x, muzzlePointAttachment.y))
+    }
+
     companion object {
         val MAPPER = mapperFor<Spine>()
     }

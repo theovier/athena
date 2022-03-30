@@ -9,8 +9,8 @@ import ktx.ashley.get
 import ktx.ashley.mapperFor
 
 class Aim : Component, Poolable {
-    //the direction the player aims at (default is facing right)
-    var direction = Vector2(1f, 0f)
+    //the direction the player aims at
+    var direction = Vector2(0f, 0f)
 
     var isCurrentlyAiming = false
     val isNotCurrentlyAiming: Boolean

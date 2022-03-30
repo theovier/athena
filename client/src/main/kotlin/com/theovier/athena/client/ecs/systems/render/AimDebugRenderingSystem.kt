@@ -1,40 +1,39 @@
 package com.theovier.athena.client.ecs.systems.render
 
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.Vector2
-import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.AimAssist.Companion.DEFAULT_DISTANCE
+import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import ktx.ashley.allOf
 import ktx.math.plus
 import ktx.math.times
 
-class AimDebugRenderingSystem(private val camera: Camera) : IteratingSystem(allOf(Player::class, Transform::class, Aim::class, Spine::class).get()) {
+class AimDebugRenderingSystem(private val camera: Camera) : InputDrivenIteratingSystem(allOf(Aim::class, Spine::class).get()) {
     private val renderer = ShapeRenderer()
-    private val distance = 10f
-    private val color = Color.valueOf("#d01b3a")
+    private val red = Color.valueOf("#d01b3a")
+    private val green = Color.valueOf("#AAFF00")
 
-    override fun processEntity(player: Entity, deltaTime: Float) {
-        val transform = player.transform
-        val aim = player.aim
-        val spine = player.spine
-        val skeleton = spine.skeleton
+    override fun processEntity(entity: Entity, deltaTime: Float) {
+        val aim = entity.aim //todo add origin to aim?
+        val spine = entity.spine
+        val aimOrigin = spine.getMuzzlePosition()
+        val aimDestination = aimOrigin + input.aim * DEFAULT_DISTANCE
+        val correctedAimDestination = aimOrigin + aim.direction * DEFAULT_DISTANCE
 
-        val weaponBone = skeleton.findBone("weapon")
-        val muzzlePointSlot = skeleton.findSlot("bullet_spawn")
-        val muzzlePointAttachment = muzzlePointSlot.attachment as PointAttachment
-        val muzzlePosition = muzzlePointAttachment.computeWorldPosition(weaponBone, Vector2(muzzlePointAttachment.x, muzzlePointAttachment.y))
-        val rotation = muzzlePointAttachment.computeWorldRotation(weaponBone)
-        val baseDirection = Vector2(1f,0f)
-        val shootingDirection = baseDirection.rotateDeg(rotation)
-
-        renderer.color = color
+        renderer.color = green
         renderer.projectionMatrix = camera.combined
         renderer.begin(ShapeRenderer.ShapeType.Line)
-        renderer.line(muzzlePosition, muzzlePosition + shootingDirection * distance)
+
+        //aim assist
+        renderer.line(aimOrigin, correctedAimDestination)
+
+        //original aim
+        renderer.color = red
+        renderer.line(aimOrigin, aimDestination)
+
         renderer.end()
     }
 }

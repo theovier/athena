@@ -9,6 +9,7 @@ import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.components.movement.velocity
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.ecs.prefabs.Prefab
+import com.theovier.athena.client.misc.physics.CollisionCategory
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.*
 import ktx.math.times
@@ -79,6 +80,7 @@ class PlayerAttackSystem : InputDrivenIteratingSystem(allOf(Player::class, Spine
             with(physics) {
                 body.isBullet = true
                 body.setTransform(Vector2(origin.x, origin.y), shootingDirection.angleRad())
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.BULLET
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)

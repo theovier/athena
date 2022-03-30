@@ -1,19 +1,11 @@
 package com.theovier.athena.client.ecs.systems.player
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.extensions.input
+import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import ktx.ashley.allOf
 
-class PlayerAimSystem : IteratingSystem(allOf(Aim::class, Player::class, Transform::class).get())  {
-    private lateinit var input: Input
-
-    override fun addedToEngine(engine: Engine) {
-        super.addedToEngine(engine)
-        input = engine.input
-    }
+class PlayerAimSystem : InputDrivenIteratingSystem(allOf(Aim::class, Player::class, Transform::class).get())  {
 
     override fun processEntity(player: Entity, deltaTime: Float) {
         val transform = player.transform

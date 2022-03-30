@@ -2,24 +2,21 @@ package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.controllers.Controller
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.Input
-import com.theovier.athena.client.ecs.extensions.input
+import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.inputs.XboxInputAdapter
 import ktx.ashley.allOf
 
-class InputSystem : IteratingSystem(allOf(Input::class).get()), XboxInputAdapter  {
-    private lateinit var input: Input
+class InputSystem : InputDrivenIteratingSystem(allOf(Input::class).get()), XboxInputAdapter  {
     private lateinit var controller: Controller
 
     override fun addedToEngine(engine: Engine) {
         super.addedToEngine(engine)
         controller = Controllers.getCurrent()
         controller.addListener(this)
-        input = engine.input
     }
 
     override fun removedFromEngine(engine: Engine) {

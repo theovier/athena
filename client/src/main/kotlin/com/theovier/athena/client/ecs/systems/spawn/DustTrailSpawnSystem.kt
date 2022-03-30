@@ -1,21 +1,13 @@
 package com.theovier.athena.client.ecs.systems.spawn
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.extensions.input
+import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import ktx.ashley.allOf
 
-class DustTrailSpawnSystem : IteratingSystem(allOf(DustTrail::class, Player::class, Transform::class).get()) {
-    lateinit var input: Input
-
-    override fun addedToEngine(engine: Engine) {
-        super.addedToEngine(engine)
-        input = engine.input
-    }
+class DustTrailSpawnSystem : InputDrivenIteratingSystem(allOf(DustTrail::class, Player::class, Transform::class).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         if (input.isStandingStill) {

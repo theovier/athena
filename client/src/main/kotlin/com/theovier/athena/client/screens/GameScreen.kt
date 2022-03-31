@@ -97,8 +97,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
-        player.add(AimAssist())
-
         crosshair = Prefab.instantiate("crosshair")
         crosshair.crosshair.owner = player
 
@@ -127,7 +125,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
             }
         }
-            .add(Targetable())
 
         Prefab.instantiate("dummy") {
             with(physics) {
@@ -135,7 +132,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
             }
         }
-            .add(Targetable())
 
     }
 

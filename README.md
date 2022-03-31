@@ -28,6 +28,7 @@ Work in progress.
 - Simple loot system
 - Bullet impact effects using dynamic spawning of particles
 - Finite State Machines
+- Aim Assist
 
 ## Screenshots
 ![screenshot_001](screenshots/screenshot_002.gif)

@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.JsonReader
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.addChild
+import com.theovier.athena.client.ecs.extensions.addChild
 import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.AnimationComponentLoader
 import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.controllers.PlayerAnimationControllerComponentLoader
@@ -27,6 +27,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
     private val componentLoaders = mapOf(
         "acceleration" to AccelerationComponentLoader(),
         "aim" to AimComponentLoader(),
+        "aimAssist" to AimAssistComponentLoader(),
         "animation" to AnimationComponentLoader(),
         "cameraTarget" to CameraTargetComponentLoader(),
         "crosshair" to CrosshairComponentLoader(),
@@ -53,6 +54,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "spin" to SpinComponentLoader(),
         "spine" to spineComponentLoader,
         "sprite" to spriteComponentLoader,
+        "targetable" to TargetableComponentLoader(),
         "text" to TextComponentLoader(),
         "timer" to TimerComponentLoader(),
         "trauma" to TraumaComponentLoader(),

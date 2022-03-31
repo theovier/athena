@@ -6,6 +6,7 @@
     "aim": {
       "maxDistanceToPlayer": 4
     },
+    "aimAssist": {},
     "transform": {
       "size": {
         "y": 2
@@ -51,7 +52,8 @@
         "position": {
           "x": 10,
           "y": 12
-        }
+        },
+        "categoryBits": "player"
       }
     }
   }

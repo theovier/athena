@@ -57,7 +57,8 @@
         "box": {
           "width": 0.4,
           "height": 0.4
-        }
+        },
+        "categoryBits": "bullet"
       }
     }
   }

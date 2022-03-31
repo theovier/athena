@@ -9,25 +9,19 @@ import ktx.ashley.get
 import ktx.ashley.mapperFor
 
 class Aim : Component, Poolable {
-    var maxDistanceToPlayer: Float = DEFAULT_MAX_DISTANCE_TO_PLAYER
+    //the direction the player aims at
+    var direction = Vector2(0f, 0f)
+
     var isCurrentlyAiming = false
     val isNotCurrentlyAiming: Boolean
         get() = !isCurrentlyAiming
 
-    //the direction the player aims at (default is facing right)
-    var direction = Vector2(1f, 0f)
-
-    //where the (invisible) crosshair will move to
-    var targetPosition = Vector2()
-
     override fun reset() {
-        targetPosition = Vector2()
         direction = Vector2(1f, 0f)
     }
 
     companion object {
         val MAPPER = mapperFor<Aim>()
-        const val DEFAULT_MAX_DISTANCE_TO_PLAYER = 4f
     }
 }
 

@@ -37,7 +37,8 @@
         "position": {
           "x": 25,
           "y": 10
-        }
+        },
+        "categoryBits": "pickup"
       }
     }
   }

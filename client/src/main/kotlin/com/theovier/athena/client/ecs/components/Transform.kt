@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Pool.Poolable
+import com.theovier.athena.client.math.xy
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 import ktx.math.compareTo
@@ -22,6 +23,9 @@ class Transform : Component, Poolable, Comparable<Transform> {
 
     val rotationDegrees: Float
         get() = rotation * MathUtils.radiansToDegrees
+
+    val center: Vector2
+        get() = Vector2(position.x, position.y + 0.5f * size.y)
 
     override fun reset() {
         position.set(0f, 0f, 0f)

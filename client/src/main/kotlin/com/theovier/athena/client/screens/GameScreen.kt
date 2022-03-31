@@ -23,10 +23,12 @@ import com.theovier.athena.client.ecs.systems.damage.DamageIndicatorSystem
 import com.theovier.athena.client.ecs.systems.damage.HapticDamageFeedbackSystem
 import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.ecs.systems.movement.AccelerationSystem
-import com.theovier.athena.client.ecs.systems.CameraMovementSystem
+import com.theovier.athena.client.ecs.systems.camera.CameraMovementSystem
 import com.theovier.athena.client.ecs.systems.animation.AnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.PlayerAnimationSystem
+import com.theovier.athena.client.ecs.systems.animation.SpineAnimationSystem
 import com.theovier.athena.client.ecs.systems.animation.WiggleAnimationSystem
+import com.theovier.athena.client.ecs.systems.camera.CameraShakeSystem
 import com.theovier.athena.client.ecs.systems.damage.DamageOverTimeSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
@@ -34,12 +36,15 @@ import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
+import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
-import com.theovier.athena.client.weapons.Damage
-import com.theovier.athena.client.weapons.DamageSource
-import com.theovier.athena.client.weapons.DamageType
+import com.theovier.athena.client.ecs.systems.sound.SoundSystem
+import com.theovier.athena.client.ecs.systems.spawn.BulletShellEjectionSystem
+import com.theovier.athena.client.ecs.systems.spawn.DustTrailSpawnSystem
+import com.theovier.athena.client.ecs.systems.spawn.ImpactSpawnSystem
+import com.theovier.athena.client.misc.physics.CollisionCategory
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
@@ -93,25 +98,20 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initEntities() {
         player = Prefab.instantiate("player")
         crosshair = Prefab.instantiate("crosshair")
+        crosshair.crosshair.owner = player
+
         Prefab.instantiate("map")
         Prefab.instantiate("wall")
-
         Prefab.instantiate("bush")
         Prefab.instantiate("bush").apply {
             with(physics) {
                 body.setTransform(Vector2(23f, 9f), 0f)
             }
         }
-
         Prefab.instantiate("dummy")
-            .add(DamageOverTime(Damage(1, DamageType.ELECTRIC, DamageSource(player, player))).apply {
-                duration = 10f
-                tickRate = 1f
-            })
-
         Prefab.instantiate("dummy") {
             with(physics) {
-                body.setTransform(Vector2(12f, 17f), 0f)
+                body.setTransform(Vector2(14f, 16f), 0f)
             }
         }
     }
@@ -137,23 +137,33 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
+            //camera
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))
+
+            //moving stuff
             addSystem(AccelerationSystem())
             addSystem(FrictionSystem())
             addSystem(MovementSystem())
-            addSystem(BulletShellEjectionSystem())
-            addSystem(SpinningSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
+
+            addSystem(BulletShellEjectionSystem())
+            addSystem(SpinningSystem())
             addSystem(HealthBarScalingSystem())
             addSystem(HealthBarToggleSystem())
-            addSystem(FacingSystem())
+            addSystem(PlayerFacingSystem())
             addSystem(DustTrailSpawnSystem())
+
+            //aiming and shooting
             addSystem(PlayerAimSystem())
+            addSystem(AimAssistSystem(world))
+            //addSystem(AimDebugRenderingSystem(camera))
+            //addSystem(AimAssistRaycastDebugSystem(camera))
             addSystem(WeaponRotationSystem())
-            addSystem(CrosshairPlacementSystem(player.aim))
             addSystem(PlayerAttackSystem())
+            addSystem(CrosshairPlacementSystem())
+
             addSystem(DamageOverTimeSystem())
             addSystem(LifetimeSystem())
             addSystem(DamageIndicatorSystem())

@@ -1,16 +1,15 @@
 package com.theovier.athena.client.ecs.systems.player
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.components.movement.velocity
-import com.theovier.athena.client.ecs.input
+import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.ecs.prefabs.Prefab
+import com.theovier.athena.client.misc.physics.CollisionCategory
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.*
 import ktx.math.plus
@@ -18,18 +17,11 @@ import ktx.math.times
 import ktx.math.unaryMinus
 import kotlin.with
 
-class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).get()) {
-    private lateinit var input: Input
-
+class PlayerAttackSystem : InputDrivenIteratingSystem(allOf(Player::class, Spine::class).get()) {
     private var timeBetweenShots = 0.2f
     private val knockBackForce = 1f
     private val maxSpray = Vector2(0.125f, 0.125f)
     private var canNextFireInSeconds = 0f
-
-    override fun addedToEngine(engine: Engine) {
-        super.addedToEngine(engine)
-        input = engine.input
-    }
 
     override fun processEntity(player: Entity, deltaTime: Float) {
         if (input.fire && canFire()) {
@@ -88,6 +80,7 @@ class PlayerAttackSystem : IteratingSystem(allOf(Player::class, Spine::class).ge
             with(physics) {
                 body.isBullet = true
                 body.setTransform(Vector2(origin.x, origin.y), shootingDirection.angleRad())
+                body.fixtureList.first().filterData.categoryBits = CollisionCategory.BULLET
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)

@@ -31,7 +31,8 @@
         "position": {
           "x": 22,
           "y": 8
-        }
+        },
+        "categoryBits": "doodad"
       }
     }
   }

@@ -52,7 +52,8 @@
         "position": {
           "x": 10,
           "y": 12
-        }
+        },
+        "categoryBits": "player"
       }
     }
   }

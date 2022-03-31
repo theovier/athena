@@ -101,38 +101,19 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         crosshair.crosshair.owner = player
 
         Prefab.instantiate("map")
-        Prefab.instantiate("wall").apply {
-            with(physics) {
-                body.fixtureList.first().filterData.categoryBits = CollisionCategory.WALL
-            }
-        }
-
-        Prefab.instantiate("bush").apply {
-            with(physics) {
-                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
-            }
-        }
-
+        Prefab.instantiate("wall")
+        Prefab.instantiate("bush")
         Prefab.instantiate("bush").apply {
             with(physics) {
                 body.setTransform(Vector2(23f, 9f), 0f)
-                body.fixtureList.first().filterData.categoryBits = CollisionCategory.DOODAD
             }
         }
-
-        Prefab.instantiate("dummy") {
-            with(physics) {
-                body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
-            }
-        }
-
+        Prefab.instantiate("dummy")
         Prefab.instantiate("dummy") {
             with(physics) {
                 body.setTransform(Vector2(14f, 16f), 0f)
-                body.fixtureList.first().filterData.categoryBits = CollisionCategory.ENEMY
             }
         }
-
     }
 
     private fun initSystems() {

@@ -1,0 +1,8 @@
+{
+  "physics": {
+    "body": {
+      "box": {},
+      "categoryBits": "pickup"
+    }
+  }
+}

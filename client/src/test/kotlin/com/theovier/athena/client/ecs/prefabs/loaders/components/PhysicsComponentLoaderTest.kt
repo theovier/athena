@@ -3,6 +3,7 @@ package com.theovier.athena.client.ecs.prefabs.loaders.components
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.World
+import com.theovier.athena.client.misc.physics.CollisionCategory
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -74,5 +75,75 @@ class PhysicsComponentLoaderTest : AutoCloseKoinTest() {
         val component = loader.load(json)
         val body = component.body
         Assertions.assertEquals(expectedType, body.type)
+    }
+
+    @Test
+    fun arePlayerCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.PLAYER
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_player_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
+    }
+
+    @Test
+    fun areEnemyCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.ENEMY
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_enemy_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
+    }
+
+    @Test
+    fun areBulletCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.BULLET
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_bullet_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
+    }
+
+    @Test
+    fun arePickupCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.PICKUP
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_pickup_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
+    }
+
+    @Test
+    fun areWallCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.WALL
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_wall_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
+    }
+
+    @Test
+    fun areDoodadCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.DOODAD
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_doodad_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
+    }
+
+    @Test
+    fun areDefaultCategoryBitsCorrectlyLoaded() {
+        val expectedCategoryBits = CollisionCategory.DOODAD
+        val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/physics/physics_categorybits_without_valid")
+        val loader = get<PhysicsComponentLoader>()
+        val component = loader.load(json)
+        val body = component.body
+        Assertions.assertEquals(expectedCategoryBits, body.fixtureList.first().filterData.categoryBits)
     }
 }

@@ -24,7 +24,8 @@
         "position": {
           "x": 20,
           "y": 6
-        }
+        },
+        "categoryBits": "wall"
       }
     }
   }

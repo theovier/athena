@@ -29,7 +29,8 @@
         "position": {
           "x": 27,
           "y": 20
-        }
+        },
+        "categoryBits": "wall"
       }
     }
   }

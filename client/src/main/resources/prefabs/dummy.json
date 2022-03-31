@@ -34,6 +34,7 @@
           "width": 1,
           "height": 2
         },
+        "categoryBits": "enemy",
         "position": {
           "x": 16,
           "y": 13

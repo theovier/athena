@@ -28,7 +28,8 @@
         "position": {
           "x": 20,
           "y": 20
-        }
+        },
+        "collisionBits": "wall"
       }
     }
   }

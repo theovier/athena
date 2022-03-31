@@ -7,5 +7,6 @@ class CollisionCategory {
         const val BULLET: Short = 4
         const val DOODAD: Short = 8
         const val WALL: Short = 16
+        const val PICKUP: Short = 32
     }
 }

@@ -16,6 +16,9 @@
           "volume": 0.15
         }
       ]
+    },
+    "lifetime": {
+      "duration": 2
     }
   }
 }

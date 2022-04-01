@@ -41,7 +41,8 @@ class InputSystem : InputDrivenIteratingSystem(allOf(Input::class).get()), XboxI
 
     override fun buttonDown(controller: Controller, buttonCode: Int): Boolean {
         when (buttonCode) {
-            XboxInputAdapter.BUTTON_A -> input.hideHealthBars = !input.hideHealthBars
+            XboxInputAdapter.BUTTON_Y -> input.hideHealthBars = !input.hideHealthBars
+            XboxInputAdapter.BUTTON_A -> input.dash = true
             else -> {
                 return false
             }

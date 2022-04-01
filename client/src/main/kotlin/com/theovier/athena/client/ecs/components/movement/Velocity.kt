@@ -12,9 +12,6 @@ import mu.KotlinLogging
 
 class Velocity : Component, Poolable {
     var velocity: Vector2 = Vector2(DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y)
-        set(vector) {
-            field = clampMagnitude(vector, maxSpeed)
-        }
     var maxSpeed = DEFAULT_MAX_SPEED //units per second
     var standingStillThreshold = DEFAULT_STANDING_STILL_THRESHOLD //when should the movement be considered standing still
     val isNearlyStandingStill: Boolean

@@ -17,6 +17,9 @@ interface XboxInputAdapter : ControllerListener {
         }
 
         const val BUTTON_A = 0
+        const val BUTTON_B = 1
+        const val BUTTON_X = 2
+        const val BUTTON_Y = 3
         const val AXIS_LEFT_X = 0
         const val AXIS_LEFT_Y = 1
         const val AXIS_RIGHT_X = 2

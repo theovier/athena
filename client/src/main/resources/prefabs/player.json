@@ -14,7 +14,7 @@
     },
     "direction": {},
     "velocity": {
-      "maxSpeed": 8
+      "maxSpeed": 10
     },
     "acceleration": {
       "factor": 250

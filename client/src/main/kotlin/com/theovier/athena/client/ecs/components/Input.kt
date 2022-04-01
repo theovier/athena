@@ -15,6 +15,7 @@ data class Input(
     val aim: Vector2 = Vector2(0f, 0f),
     var isAiming: Boolean = false,
     var fire: Boolean = false,
+    var dash: Boolean = false,
     var hideHealthBars: Boolean = false
 ) : Component {
     companion object {

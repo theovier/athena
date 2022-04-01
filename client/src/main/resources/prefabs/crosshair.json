@@ -11,7 +11,7 @@
     "cameraTarget": {},
     "direction": {},
     "velocity": {
-      "maxSpeed": 22
+      "maxSpeed": 24
     },
     "acceleration": {
       "factor": 250

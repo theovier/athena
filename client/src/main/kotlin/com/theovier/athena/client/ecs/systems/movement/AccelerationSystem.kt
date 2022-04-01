@@ -2,7 +2,6 @@ package com.theovier.athena.client.ecs.systems.movement
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.movement.*
 import ktx.ashley.allOf
 import ktx.math.plus
@@ -15,6 +14,11 @@ class AccelerationSystem : IteratingSystem(allOf(Velocity::class, Acceleration::
         val acceleration = entity.acceleration
         val direction = entity.direction
         acceleration.acceleration.set(direction.direction * acceleration.accelerationFactor)
-        velocity.velocity += acceleration.acceleration * deltaTime
+
+        //hack so we do not cap velocity anymore. Velocity can be set to a higher value elsewhere, e.g., in the dash system
+        val desiredVelocity = velocity.velocity + acceleration.acceleration * deltaTime
+        if (desiredVelocity.len() < velocity.maxSpeed) {
+            velocity.velocity = desiredVelocity
+        }
     }
 }

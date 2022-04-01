@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -97,6 +98,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
+        player.add(Dash())
+
         crosshair = Prefab.instantiate("crosshair")
         crosshair.crosshair.owner = player
 
@@ -147,6 +150,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(MovementSystem())
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
+            addSystem(PlayerDashSystem())
 
             addSystem(BulletShellEjectionSystem())
             addSystem(SpinningSystem())

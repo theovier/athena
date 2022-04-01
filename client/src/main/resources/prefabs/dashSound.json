@@ -1,0 +1,21 @@
+{
+  "id": "dash_sound",
+  "components": {
+    "sound": {
+      "choice": [
+        {
+          "file": "audio/dash_01.ogg",
+          "volume": 0.15
+        },
+        {
+          "file": "audio/dash_02.ogg",
+          "volume": 0.15
+        },
+        {
+          "file": "audio/dash_03.ogg",
+          "volume": 0.15
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package com.theovier.athena.client.ecs.systems.player
 
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.movement.Velocity
@@ -19,18 +20,34 @@ class PlayerDashSystem : InputDrivenIteratingSystem(allOf(Player::class, Dash::c
         val velocity = player.velocity
         val direction = transform.forward
 
-        if (input.dash && dash.timeLeft == dash.duration) {
-            Prefab.instantiate("dashSound")
+        if (input.dash && dash.canDash) {
+            startDashing(dash)
         }
+        else if (dash.isCurrentlyDashing) {
+            keepDashing(dash, velocity, direction, deltaTime)
+        } else if (dash.canNextDashInSeconds > 0) {
+            dash.canNextDashInSeconds -= deltaTime
+        }
+    }
 
-        if (input.dash) {
+    private fun startDashing(dash: Dash) {
+        dash.isCurrentlyDashing = true
+        dash.canNextDashInSeconds = dash.timeBetweenDashes
+        Prefab.instantiate("dashSound")
+        input.dash = false //prevents that keeping the button pressed results in consecutive dashes
+    }
+
+    private fun keepDashing(dash: Dash, velocity: Velocity, direction: Vector2, deltaTime: Float) {
+        if (dash.finishedDashing) {
+            stopDashing(dash)
+        } else {
             dash.timeLeft -= deltaTime
             velocity.velocity = direction * dash.speed
         }
+    }
 
-        if (dash.timeLeft <= 0) {
-            input.dash = false
-            dash.timeLeft = dash.duration
-        }
+    private fun stopDashing(dash: Dash) {
+        dash.isCurrentlyDashing = false
+        dash.timeLeft = dash.duration
     }
 }

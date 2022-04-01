@@ -50,6 +50,16 @@ class InputSystem : InputDrivenIteratingSystem(allOf(Input::class).get()), XboxI
         return true
     }
 
+    override fun buttonUp(controller: Controller, buttonCode: Int): Boolean {
+        when (buttonCode) {
+            XboxInputAdapter.BUTTON_A -> input.dash = false
+            else -> {
+                return false
+            }
+        }
+        return true
+    }
+
     private fun zeroOutWhenInDeadZone(input: Vector2): Vector2 {
         if (XboxInputAdapter.isAxisInputInDeadZone(input)) {
             return Vector2.Zero

@@ -13,6 +13,7 @@ class DashComponentLoader : ComponentLoader {
             timeLeft = componentJSON.getFloat("timeLeft", Dash.DEFAULT_TIME_LEFT)
             timeBetweenDashes = componentJSON.getFloat("timeBetweenDashes", Dash.DEFAULT_TIME_BETWEEN_DASHES)
             canNextDashInSeconds = componentJSON.getFloat("canDashInSeconds", Dash.DEFAULT_CAN_DASH_IN_SECONDS)
+            prefabToSpawn = componentJSON.getString("prefabToSpawn", null)
         }
     }
 }

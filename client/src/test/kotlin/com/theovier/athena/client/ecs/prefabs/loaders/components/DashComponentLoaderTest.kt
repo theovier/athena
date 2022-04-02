@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
+import kotlin.test.assertNull
 
 class DashComponentLoaderTest {
 
@@ -20,6 +21,7 @@ class DashComponentLoaderTest {
         assertEquals(Dash.DEFAULT_TIME_LEFT, component.timeLeft)
         assertEquals(Dash.DEFAULT_TIME_BETWEEN_DASHES, component.timeBetweenDashes)
         assertEquals(Dash.DEFAULT_CAN_DASH_IN_SECONDS, component.canNextDashInSeconds)
+        assertNull(component.prefabToSpawn)
     }
 
     @Test
@@ -30,6 +32,7 @@ class DashComponentLoaderTest {
         val expectedTimeLeft = 3.3f
         val expectedTimeBetweenDashes = 4.4f
         val expectedCanDashInSeconds = 5.5f
+        val expectedPrefabToSpawn = "something"
 
         val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/dash/dash_valid")
         val dash = DashComponentLoader().load(json)
@@ -39,5 +42,7 @@ class DashComponentLoaderTest {
         assertEquals(expectedTimeLeft, dash.timeLeft)
         assertEquals(expectedTimeBetweenDashes, dash.timeBetweenDashes)
         assertEquals(expectedCanDashInSeconds, dash.canNextDashInSeconds)
+        assertEquals(expectedCanDashInSeconds, dash.canNextDashInSeconds)
+        assertEquals(expectedPrefabToSpawn, dash.prefabToSpawn)
     }
 }

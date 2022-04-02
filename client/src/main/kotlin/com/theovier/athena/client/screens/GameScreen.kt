@@ -98,9 +98,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
-        player.add(Dash().apply {
-            prefabToSpawn = "dashSound"
-        })
 
         crosshair = Prefab.instantiate("crosshair")
         crosshair.crosshair.owner = player

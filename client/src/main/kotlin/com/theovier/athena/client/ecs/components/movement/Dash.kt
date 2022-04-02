@@ -3,10 +3,11 @@ package com.theovier.athena.client.ecs.components.movement
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.GdxRuntimeException
+import com.badlogic.gdx.utils.Pool
 import ktx.ashley.get
 import ktx.ashley.mapperFor
 
-class Dash : Component {
+class Dash : Component, Pool.Poolable {
     var isCurrentlyDashing = false
     var remainingDashes = DEFAULT_REMAINING_DASHES
     var maximumDashes = DEFAULT_MAXIMUM_DASHES
@@ -19,6 +20,19 @@ class Dash : Component {
         get() = !isCurrentlyDashing && canNextDashInSeconds <= 0
     val finishedDashing: Boolean
         get() = timeLeft <= 0
+    var prefabToSpawn: String? = null
+
+    override fun reset() {
+        isCurrentlyDashing = false
+        remainingDashes = DEFAULT_REMAINING_DASHES
+        maximumDashes = DEFAULT_MAXIMUM_DASHES
+        speed = DEFAULT_SPEED
+        timeLeft = DEFAULT_DURATION
+        duration = DEFAULT_DURATION
+        timeBetweenDashes = DEFAULT_TIME_BETWEEN_DASHES
+        canNextDashInSeconds = 0f
+        prefabToSpawn = null
+    }
 
     companion object {
         val MAPPER = mapperFor<Dash>()

@@ -9,13 +9,11 @@ import ktx.ashley.mapperFor
 
 class Dash : Component, Pool.Poolable {
     var isCurrentlyDashing = false
-    var remainingDashes = DEFAULT_REMAINING_DASHES
-    var maximumDashes = DEFAULT_MAXIMUM_DASHES
     var speed = DEFAULT_SPEED
     var timeLeft = DEFAULT_DURATION
     var duration = DEFAULT_DURATION
     var timeBetweenDashes = DEFAULT_TIME_BETWEEN_DASHES
-    var canNextDashInSeconds = 0f
+    var canNextDashInSeconds = DEFAULT_CAN_DASH_IN_SECONDS
     val canDash: Boolean
         get() = !isCurrentlyDashing && canNextDashInSeconds <= 0
     val finishedDashing: Boolean
@@ -24,23 +22,21 @@ class Dash : Component, Pool.Poolable {
 
     override fun reset() {
         isCurrentlyDashing = false
-        remainingDashes = DEFAULT_REMAINING_DASHES
-        maximumDashes = DEFAULT_MAXIMUM_DASHES
         speed = DEFAULT_SPEED
         timeLeft = DEFAULT_DURATION
         duration = DEFAULT_DURATION
         timeBetweenDashes = DEFAULT_TIME_BETWEEN_DASHES
-        canNextDashInSeconds = 0f
+        canNextDashInSeconds = DEFAULT_CAN_DASH_IN_SECONDS
         prefabToSpawn = null
     }
 
     companion object {
         val MAPPER = mapperFor<Dash>()
-        const val DEFAULT_MAXIMUM_DASHES = 1
-        const val DEFAULT_REMAINING_DASHES = DEFAULT_MAXIMUM_DASHES
         const val DEFAULT_SPEED = 30f
         const val DEFAULT_DURATION = 0.1f
+        const val DEFAULT_TIME_LEFT = DEFAULT_DURATION
         const val DEFAULT_TIME_BETWEEN_DASHES = 0.75f
+        const val DEFAULT_CAN_DASH_IN_SECONDS = 0f
     }
 }
 

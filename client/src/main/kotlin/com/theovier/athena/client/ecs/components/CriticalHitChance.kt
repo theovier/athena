@@ -12,7 +12,7 @@ class CriticalHitChance : Component {
 
     companion object {
         val MAPPER = mapperFor<CriticalHitChance>()
-        const val DEFAULT_CRIT_CHANCE = 0.2f
+        const val DEFAULT_CRIT_CHANCE = 0.1f
     }
 }
 

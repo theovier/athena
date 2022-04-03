@@ -30,6 +30,7 @@ class PrefabLoader : EntityLoader, KoinComponent {
         "aimAssist" to AimAssistComponentLoader(),
         "animation" to AnimationComponentLoader(),
         "cameraTarget" to CameraTargetComponentLoader(),
+        "critChance" to CriticalHitChanceComponentLoader(),
         "crosshair" to CrosshairComponentLoader(),
         "damage" to DamageComponentLoader(),
         "direction" to DirectionComponentLoader(),

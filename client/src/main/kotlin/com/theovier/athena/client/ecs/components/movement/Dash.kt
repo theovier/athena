@@ -19,6 +19,7 @@ class Dash : Component, Pool.Poolable {
     val finishedDashing: Boolean
         get() = timeLeft <= 0
     var prefabToSpawn: String? = null
+    var trauma = DEFAULT_DASH_TRAUMA
 
     override fun reset() {
         isCurrentlyDashing = false
@@ -37,6 +38,7 @@ class Dash : Component, Pool.Poolable {
         const val DEFAULT_TIME_LEFT = DEFAULT_DURATION
         const val DEFAULT_TIME_BETWEEN_DASHES = 0.75f
         const val DEFAULT_CAN_DASH_IN_SECONDS = 0f
+        const val DEFAULT_DASH_TRAUMA = 0.1f
     }
 }
 

@@ -21,6 +21,7 @@ class DashComponentLoaderTest {
         assertEquals(Dash.DEFAULT_TIME_LEFT, component.timeLeft)
         assertEquals(Dash.DEFAULT_TIME_BETWEEN_DASHES, component.timeBetweenDashes)
         assertEquals(Dash.DEFAULT_CAN_DASH_IN_SECONDS, component.canNextDashInSeconds)
+        assertEquals(Dash.DEFAULT_DASH_TRAUMA, component.trauma)
         assertNull(component.prefabToSpawn)
     }
 
@@ -33,6 +34,7 @@ class DashComponentLoaderTest {
         val expectedTimeBetweenDashes = 4.4f
         val expectedCanDashInSeconds = 5.5f
         val expectedPrefabToSpawn = "something"
+        val expectedTrauma = 6.6f
 
         val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/dash/dash_valid")
         val dash = DashComponentLoader().load(json)
@@ -44,5 +46,6 @@ class DashComponentLoaderTest {
         assertEquals(expectedCanDashInSeconds, dash.canNextDashInSeconds)
         assertEquals(expectedCanDashInSeconds, dash.canNextDashInSeconds)
         assertEquals(expectedPrefabToSpawn, dash.prefabToSpawn)
+        assertEquals(expectedTrauma, dash.trauma)
     }
 }

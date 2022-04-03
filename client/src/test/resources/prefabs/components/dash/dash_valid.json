@@ -5,6 +5,7 @@
     "timeLeft": 3.3,
     "timeBetweenDashes": 4.4,
     "canDashInSeconds": 5.5,
-    "prefabToSpawn": "something"
+    "prefabToSpawn": "something",
+    "trauma": 6.6
   }
 }

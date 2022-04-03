@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.Text
+import com.theovier.athena.client.ecs.components.render.text
 import ktx.ashley.allOf
 import ktx.ashley.exclude
 import ktx.assets.async.AssetStorage

@@ -12,7 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.aim.crosshair
 import com.theovier.athena.client.ecs.components.movement.Dash
+import com.theovier.athena.client.ecs.components.render.Invisible
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -37,7 +39,6 @@ import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
-import com.theovier.athena.client.ecs.systems.physics.PhysicsDebugSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicsSystem
 import com.theovier.athena.client.ecs.systems.player.*
 import com.theovier.athena.client.ecs.systems.render.*
@@ -45,7 +46,6 @@ import com.theovier.athena.client.ecs.systems.sound.SoundSystem
 import com.theovier.athena.client.ecs.systems.spawn.BulletShellEjectionSystem
 import com.theovier.athena.client.ecs.systems.spawn.DustTrailSpawnSystem
 import com.theovier.athena.client.ecs.systems.spawn.ImpactSpawnSystem
-import com.theovier.athena.client.misc.physics.CollisionCategory
 import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity

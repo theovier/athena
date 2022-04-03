@@ -5,6 +5,7 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.Color
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.Velocity
+import com.theovier.athena.client.ecs.components.render.text
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import ktx.ashley.allOf
 import org.lwjgl.system.MathUtil

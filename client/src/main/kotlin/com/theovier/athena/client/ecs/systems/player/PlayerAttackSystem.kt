@@ -5,6 +5,11 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.esotericsoftware.spine.attachments.PointAttachment
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
+import com.theovier.athena.client.ecs.components.damage.criticalHitChance
+import com.theovier.athena.client.ecs.components.damage.damageComponent
+import com.theovier.athena.client.ecs.components.damage.hasCriticalHitChance
 import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.components.movement.velocity
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem

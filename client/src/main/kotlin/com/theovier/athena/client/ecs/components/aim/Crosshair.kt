@@ -1,8 +1,7 @@
-package com.theovier.athena.client.ecs.components
+package com.theovier.athena.client.ecs.components.aim
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Pool.Poolable
 import ktx.ashley.get

@@ -24,7 +24,7 @@ Work in progress.
 - Particle system relying on [LibGdx's particle system](https://github.com/libgdx/libgdx/wiki/2D-ParticleEffects)
 - Supports [Spine](http://de.esotericsoftware.com/) animations and skeletons
 - Uses [LibGdx's Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) as physic engine
-- Simple damage system with floating damage text
+- Simple damage system with critical hits and floating damage text 
 - Simple loot system
 - Bullet impact effects using dynamic spawning of particles
 - Finite State Machines

@@ -99,6 +99,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private fun initEntities() {
         player = Prefab.instantiate("player")
         player.add(Dash())
+        player.add(CriticalHitChance())
 
         crosshair = Prefab.instantiate("crosshair")
         crosshair.crosshair.owner = player

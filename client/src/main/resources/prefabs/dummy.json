@@ -10,6 +10,7 @@
     "health": {
       "maximum": 10
     },
+    "invincible": {},
     "spine": {
       "atlas": "sprites/characters/dummy/dummy.atlas",
       "skeleton": "sprites/characters/dummy/dummy.json",

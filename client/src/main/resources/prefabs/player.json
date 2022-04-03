@@ -7,6 +7,9 @@
       "maxDistanceToPlayer": 4
     },
     "aimAssist": {},
+    "critChance": {
+      "chance": 0.05
+    },
     "transform": {
       "size": {
         "y": 2

@@ -12,6 +12,6 @@ class DamageComponentLoaderTest {
         val expectedDamageAmount = 5
         val json = ComponentLoaderUtils.loadComponentJSONFromFile("components/damage/damage_valid")
         val damage = DamageComponentLoader().load(json)
-        Assertions.assertEquals(expectedDamageAmount, damage.damage.amount)
+        Assertions.assertEquals(expectedDamageAmount, damage.damage.rawAmount)
     }
 }

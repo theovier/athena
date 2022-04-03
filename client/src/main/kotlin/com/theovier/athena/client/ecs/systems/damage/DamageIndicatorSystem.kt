@@ -27,6 +27,9 @@ class DamageIndicatorSystem : IteratingSystem(allOf(HitMarker::class, Spine::cla
        Prefab.instantiate("damageIndicator") {
             with(transform) {
                 position.set(atPosition, 0f)
+                if (hit.isCritical) {
+                    size.set(critSize)
+                }
             }
             with(text) {
                 text = "${hit.amount}"
@@ -42,5 +45,6 @@ class DamageIndicatorSystem : IteratingSystem(allOf(HitMarker::class, Spine::cla
             DamageType.FIRE to "#ff8815",
             DamageType.POISON to "#ffffff",
         )
+        val critSize = Vector2(1.4f, 1.4f)
     }
 }

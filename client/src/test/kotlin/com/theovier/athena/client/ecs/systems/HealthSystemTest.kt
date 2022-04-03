@@ -9,6 +9,7 @@ import com.theovier.athena.client.ecs.systems.damage.HealthSystem
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageType
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class HealthSystemTest {
@@ -29,11 +30,32 @@ class HealthSystemTest {
             addSystem(HealthSystem())
             addEntity(entity)
         }
-        Assertions.assertEquals(health.current, health.maximum)
+        assertEquals(health.current, health.maximum)
         entity.add(HitMarker())
         entity.hitmarker.onHit(Damage(1, DamageType.PHYSICAL, null))
         engine.update(DELTA_TIME)
-        Assertions.assertEquals(health.current, 4)
+        assertEquals(health.current, 4)
+    }
+
+    @Test
+    fun isHealthReducedByCriticalHit() {
+        val entity = Entity()
+        val health = Health().apply {
+            maximum = 5
+            current = 5
+        }
+        val rawDamage = 1
+        entity.add(health)
+        entity.add(HitMarker().apply {
+            onHit(Damage(rawDamage, DamageType.PHYSICAL, null, true))
+        })
+        val engine = Engine().apply {
+            addSystem(HealthSystem())
+            addEntity(entity)
+        }
+
+        engine.update(DELTA_TIME)
+        assertEquals(3, health.current)
     }
 
     @Test
@@ -48,10 +70,10 @@ class HealthSystemTest {
             addSystem(HealthSystem())
             addEntity(entity)
         }
-        Assertions.assertEquals(1, engine.entities.count())
+        assertEquals(1, engine.entities.count())
         entity.add(HitMarker())
         entity.hitmarker.onHit(Damage(health.maximum, DamageType.PHYSICAL, null))
         engine.update(DELTA_TIME)
-        Assertions.assertEquals(0, engine.entities.count())
+        assertEquals(0, engine.entities.count())
     }
 }

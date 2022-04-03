@@ -4,10 +4,10 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
-import com.theovier.athena.client.ecs.components.Aim
-import com.theovier.athena.client.ecs.components.Spine
-import com.theovier.athena.client.ecs.components.aim
-import com.theovier.athena.client.ecs.components.spine
+import com.theovier.athena.client.ecs.components.aim.Aim
+import com.theovier.athena.client.ecs.components.aim.aim
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
 import com.theovier.athena.client.misc.spine.isMirrored
 import ktx.ashley.allOf
 

@@ -1,10 +1,12 @@
 package com.theovier.athena.client.ecs.listeners.physics
 
 import com.badlogic.ashley.core.Entity
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Wiggle
+import com.theovier.athena.client.ecs.components.animation.spine
 import com.theovier.athena.client.ecs.components.animation.WiggleAnimationController
 import com.theovier.athena.client.ecs.components.animation.hasWiggleAnimationController
 import com.theovier.athena.client.ecs.components.animation.wiggleAnimationController
+import com.theovier.athena.client.ecs.components.animation.hasSpineComponent
 import ktx.ashley.has
 
 class WiggleCollisionHandler : AbstractCollisionHandler() {

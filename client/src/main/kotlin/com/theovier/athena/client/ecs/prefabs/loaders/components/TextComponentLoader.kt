@@ -1,7 +1,7 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.components.Text
+import com.theovier.athena.client.ecs.components.render.Text
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 
 class TextComponentLoader : ComponentLoader {

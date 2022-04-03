@@ -2,10 +2,9 @@ package com.theovier.athena.client.ecs.systems.damage
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.damage.*
 import com.theovier.athena.client.weapons.Damage
 import ktx.ashley.allOf
-import ktx.ashley.exclude
 
 class DamageOverTimeSystem : IteratingSystem(allOf(DamageOverTime::class, Health::class).get()) {
     override fun processEntity(victim: Entity, deltaTime: Float) {

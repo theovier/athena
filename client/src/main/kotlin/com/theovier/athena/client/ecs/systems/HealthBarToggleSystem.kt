@@ -1,7 +1,10 @@
 package com.theovier.athena.client.ecs.systems
 
 import com.badlogic.ashley.core.Entity
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.damage.HealthBar
+import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.isInvisible
+import com.theovier.athena.client.ecs.components.render.isVisible
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import ktx.ashley.allOf
 

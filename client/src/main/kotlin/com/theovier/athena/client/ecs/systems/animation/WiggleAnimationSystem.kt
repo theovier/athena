@@ -2,10 +2,8 @@ package com.theovier.athena.client.ecs.systems.animation
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.components.animation.WiggleAnimationController
+import com.theovier.athena.client.ecs.components.animation.*
 import com.theovier.athena.client.ecs.components.animation.WiggleAnimationController.Companion.State
-import com.theovier.athena.client.ecs.components.animation.wiggleAnimationController
 import ktx.ashley.allOf
 
 class WiggleAnimationSystem : IteratingSystem(allOf(WiggleAnimationController::class, Animation::class, Spine::class).get()) {

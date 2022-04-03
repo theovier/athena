@@ -2,6 +2,8 @@ package com.theovier.athena.client.ecs.systems.player
 
 import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.aim.Aim
+import com.theovier.athena.client.ecs.components.aim.aim
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import ktx.ashley.allOf
 

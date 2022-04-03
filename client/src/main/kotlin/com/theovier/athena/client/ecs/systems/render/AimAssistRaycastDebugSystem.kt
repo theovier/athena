@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.aim.Aim
+import com.theovier.athena.client.ecs.components.aim.aimAssist
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import ktx.ashley.allOf
 import ktx.math.plus

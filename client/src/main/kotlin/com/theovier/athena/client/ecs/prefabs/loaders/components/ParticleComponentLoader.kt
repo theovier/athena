@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.utils.JsonValue
 import com.talosvfx.talos.runtime.ParticleEffectDescriptor
 import com.talosvfx.talos.runtime.ParticleEffectInstance
-import com.theovier.athena.client.ecs.components.Particle
+import com.theovier.athena.client.ecs.components.render.Particle
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import ktx.assets.async.AssetStorage
 import ktx.assets.async.toIdentifier

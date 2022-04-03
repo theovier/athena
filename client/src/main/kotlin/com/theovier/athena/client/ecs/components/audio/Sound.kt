@@ -1,11 +1,11 @@
-package com.theovier.athena.client.ecs.components
+package com.theovier.athena.client.ecs.components.audio
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.theovier.athena.client.misc.audio.SoundEffect
 import ktx.ashley.get
-import com.theovier.athena.client.ecs.components.Sound as SoundComponent
+import com.theovier.athena.client.ecs.components.audio.Sound as SoundComponent
 import ktx.ashley.mapperFor
 
 class Sound : Component {

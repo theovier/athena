@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import com.theovier.athena.client.misc.audio.SoundEffect
 import ktx.assets.async.AssetStorage
-import com.theovier.athena.client.ecs.components.Sound as SoundComponent
+import com.theovier.athena.client.ecs.components.audio.Sound as SoundComponent
 
 class SoundComponentLoader(private val assets: AssetStorage) : ComponentLoader {
 

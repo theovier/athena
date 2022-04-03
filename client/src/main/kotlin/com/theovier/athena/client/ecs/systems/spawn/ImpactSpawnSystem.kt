@@ -4,6 +4,9 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.math.Vector3
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.damage.HitMarker
+import com.theovier.athena.client.ecs.components.damage.Impact
+import com.theovier.athena.client.ecs.components.damage.impact
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import ktx.ashley.allOf
 

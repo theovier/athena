@@ -4,6 +4,9 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.aim.*
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.misc.physics.CollisionCategory
 import ktx.ashley.allOf

@@ -3,6 +3,10 @@ package com.theovier.athena.client.ecs.systems
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.damage.DamageOverTime
+import com.theovier.athena.client.ecs.components.damage.Health
+import com.theovier.athena.client.ecs.components.damage.hasHitMarkerComponent
+import com.theovier.athena.client.ecs.components.damage.hitmarker
 import com.theovier.athena.client.ecs.systems.damage.DamageOverTimeSystem
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageSource

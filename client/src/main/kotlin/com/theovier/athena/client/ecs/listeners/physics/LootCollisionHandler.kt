@@ -1,7 +1,7 @@
 package com.theovier.athena.client.ecs.listeners.physics
 
 import com.badlogic.ashley.core.Entity
-import com.theovier.athena.client.ecs.components.IgnoreAudio
+import com.theovier.athena.client.ecs.components.audio.IgnoreAudio
 import com.theovier.athena.client.ecs.components.Loot
 import com.theovier.athena.client.ecs.components.Looted
 import com.theovier.athena.client.ecs.components.Player

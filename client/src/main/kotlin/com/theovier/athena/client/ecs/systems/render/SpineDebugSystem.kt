@@ -4,7 +4,8 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.Camera
 import com.esotericsoftware.spine.SkeletonRendererDebug
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
 import ktx.ashley.allOf
 
 class SpineDebugSystem(private val camera: Camera) : IteratingSystem(allOf(Spine::class).get()) {

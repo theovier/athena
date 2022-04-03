@@ -10,6 +10,7 @@ import com.theovier.athena.client.ecs.components.movement.velocity
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.misc.physics.CollisionCategory
+import com.theovier.athena.client.weapons.Damage.Companion.CRIT_DAMAGE_MODIFIER
 import com.theovier.athena.client.weapons.DamageSource
 import ktx.ashley.*
 import ktx.math.plus
@@ -84,6 +85,12 @@ class PlayerAttackSystem : InputDrivenIteratingSystem(allOf(Player::class, Spine
             }
             with(damageComponent) {
                 damage.source = DamageSource(this@instantiate, shooter)
+
+                //todo write own rng generator: https://www.youtube.com/watch?v=LWFzPP8ZbdU
+                //todo get CritChance from Component?
+                if (MathUtils.randomBoolean()) {
+                    damage.isCritical = true
+                }
             }
         }
     }

@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
 import com.talosvfx.talos.runtime.render.SpriteBatchParticleRenderer
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.render.Particle
+import com.theovier.athena.client.ecs.components.render.particle
 import ktx.ashley.allOf
 
 

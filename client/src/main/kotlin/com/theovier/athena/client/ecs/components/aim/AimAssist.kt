@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.components
+package com.theovier.athena.client.ecs.components.aim
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity

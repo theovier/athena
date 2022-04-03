@@ -1,6 +1,5 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
-
-import com.theovier.athena.client.ecs.components.Animation
+import com.theovier.athena.client.ecs.components.animation.Animation
 import com.theovier.athena.client.ecs.prefabs.loaders.components.animation.AnimationComponentLoader
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions

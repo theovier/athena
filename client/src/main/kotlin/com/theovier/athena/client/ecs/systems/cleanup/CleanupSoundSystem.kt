@@ -2,8 +2,8 @@ package com.theovier.athena.client.ecs.systems.cleanup
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.theovier.athena.client.ecs.components.IgnoreAudio
-import com.theovier.athena.client.ecs.components.Sound
+import com.theovier.athena.client.ecs.components.audio.IgnoreAudio
+import com.theovier.athena.client.ecs.components.audio.Sound
 import ktx.ashley.allOf
 import ktx.ashley.exclude
 

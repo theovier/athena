@@ -1,7 +1,7 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components.animation
 
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.components.Animation
+import com.theovier.athena.client.ecs.components.animation.Animation
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import com.theovier.athena.client.ecs.prefabs.loaders.components.ComponentLoader
 

@@ -4,8 +4,11 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.theovier.athena.client.ecs.components.*
-import com.theovier.athena.client.ecs.components.AimAssist.Companion.DEFAULT_DISTANCE
+import com.theovier.athena.client.ecs.components.aim.Aim
+import com.theovier.athena.client.ecs.components.aim.AimAssist.Companion.DEFAULT_DISTANCE
+import com.theovier.athena.client.ecs.components.aim.aim
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import ktx.ashley.allOf
 import ktx.math.plus

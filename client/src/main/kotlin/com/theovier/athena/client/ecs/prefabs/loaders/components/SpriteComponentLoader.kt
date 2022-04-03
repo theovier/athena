@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.utils.JsonValue
 import com.theovier.athena.client.AthenaGame
-import com.theovier.athena.client.ecs.components.SpriteRenderer
-import com.theovier.athena.client.ecs.components.SpriteRenderer.Companion.COLOR_HEX_DEFAULT
+import com.theovier.athena.client.ecs.components.render.SpriteRenderer
+import com.theovier.athena.client.ecs.components.render.SpriteRenderer.Companion.COLOR_HEX_DEFAULT
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import ktx.assets.async.AssetStorage
 

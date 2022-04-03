@@ -3,6 +3,8 @@ package com.theovier.athena.client.ecs.systems.player
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.aim.Crosshair
+import com.theovier.athena.client.ecs.components.aim.crosshair
 import com.theovier.athena.client.ecs.components.movement.Direction
 import com.theovier.athena.client.ecs.components.movement.direction
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem

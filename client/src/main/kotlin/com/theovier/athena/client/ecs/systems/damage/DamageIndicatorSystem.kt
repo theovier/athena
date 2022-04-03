@@ -5,6 +5,11 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
+import com.theovier.athena.client.ecs.components.damage.HitMarker
+import com.theovier.athena.client.ecs.components.damage.hitmarker
+import com.theovier.athena.client.ecs.components.render.text
 import com.theovier.athena.client.ecs.prefabs.Prefab
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageType

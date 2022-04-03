@@ -3,10 +3,12 @@ package com.theovier.athena.client.ecs.systems.spawn
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.audio.IgnoreAudio
 import com.theovier.athena.client.ecs.components.movement.Acceleration
 import com.theovier.athena.client.ecs.components.movement.Velocity
 import com.theovier.athena.client.ecs.components.movement.acceleration
 import com.theovier.athena.client.ecs.components.movement.velocity
+import com.theovier.athena.client.ecs.components.render.Foreground
 import ktx.ashley.allOf
 
 class BulletShellEjectionSystem : IteratingSystem(

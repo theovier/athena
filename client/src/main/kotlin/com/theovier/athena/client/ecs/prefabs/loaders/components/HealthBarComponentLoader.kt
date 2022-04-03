@@ -1,8 +1,8 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.components.Health
-import com.theovier.athena.client.ecs.components.HealthBar
+import com.theovier.athena.client.ecs.components.damage.Health
+import com.theovier.athena.client.ecs.components.damage.HealthBar
 import com.theovier.athena.client.ecs.components.transform
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 

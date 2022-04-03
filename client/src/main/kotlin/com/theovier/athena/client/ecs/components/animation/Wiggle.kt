@@ -1,4 +1,4 @@
-package com.theovier.athena.client.ecs.components
+package com.theovier.athena.client.ecs.components.animation
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.Pool.Poolable

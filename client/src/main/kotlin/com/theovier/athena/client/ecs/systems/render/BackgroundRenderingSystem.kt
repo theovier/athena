@@ -6,7 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.theovier.athena.client.AthenaGame
-import com.theovier.athena.client.ecs.components.TiledMap
+import com.theovier.athena.client.ecs.components.render.TiledMap
 import ktx.ashley.allOf
 import ktx.ashley.get
 import mu.KotlinLogging

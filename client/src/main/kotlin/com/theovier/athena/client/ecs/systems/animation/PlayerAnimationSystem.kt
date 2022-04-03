@@ -3,9 +3,11 @@ package com.theovier.athena.client.ecs.systems.animation
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Animation
 import com.theovier.athena.client.ecs.components.animation.PlayerAnimationController
 import com.theovier.athena.client.ecs.components.animation.PlayerAnimationController.Companion.Event
 import com.theovier.athena.client.ecs.components.animation.PlayerAnimationController.Companion.State
+import com.theovier.athena.client.ecs.components.animation.animation
 import com.theovier.athena.client.ecs.components.animation.playerAnimationController
 import com.theovier.athena.client.ecs.components.movement.Velocity
 import com.theovier.athena.client.ecs.components.movement.velocity

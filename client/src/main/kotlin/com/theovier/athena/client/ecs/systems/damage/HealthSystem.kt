@@ -2,7 +2,7 @@ package com.theovier.athena.client.ecs.systems.damage
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.damage.*
 import com.theovier.athena.client.ecs.extensions.removeEntityAndAllChildren
 import com.theovier.athena.client.weapons.Damage
 import com.theovier.athena.client.weapons.DamageSource

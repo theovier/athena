@@ -5,6 +5,9 @@ import com.badlogic.ashley.systems.SortedIteratingSystem
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.esotericsoftware.spine.SkeletonRenderer
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
+import com.theovier.athena.client.ecs.components.render.Invisible
 import ktx.ashley.allOf
 import ktx.ashley.exclude
 

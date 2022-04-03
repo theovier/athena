@@ -1,7 +1,7 @@
 package com.theovier.athena.client.ecs.prefabs.loaders.components
 
 import com.badlogic.gdx.utils.JsonValue
-import com.theovier.athena.client.ecs.components.TiledMap
+import com.theovier.athena.client.ecs.components.render.TiledMap
 import com.theovier.athena.client.ecs.prefabs.loaders.DependencyPool
 import ktx.assets.async.AssetStorage
 

@@ -2,6 +2,8 @@ package com.theovier.athena.client.ecs.systems.player
 
 import com.badlogic.ashley.core.Entity
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.Spine
+import com.theovier.athena.client.ecs.components.animation.spine
 import com.theovier.athena.client.ecs.extensions.InputDrivenIteratingSystem
 import com.theovier.athena.client.misc.spine.faceDirection
 import ktx.ashley.allOf

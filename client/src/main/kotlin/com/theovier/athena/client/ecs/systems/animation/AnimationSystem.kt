@@ -2,7 +2,7 @@ package com.theovier.athena.client.ecs.systems.animation
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.animation.*
 import com.theovier.athena.client.misc.spine.playAnimationIfNotAlreadyPlaying
 import ktx.ashley.allOf
 

@@ -2,9 +2,12 @@ package com.theovier.athena.client.ecs.systems.render
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.SortedIteratingSystem
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.theovier.athena.client.ecs.components.*
+import com.theovier.athena.client.ecs.components.render.Foreground
+import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.SpriteRenderer
+import com.theovier.athena.client.ecs.components.render.renderer
 import ktx.ashley.allOf
 import ktx.ashley.exclude
 import ktx.ashley.get

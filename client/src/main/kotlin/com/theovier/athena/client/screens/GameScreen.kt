@@ -3,11 +3,11 @@ package com.theovier.athena.client.screens
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
@@ -19,6 +19,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.aim.crosshair
 import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.WorldSpaceUI
 import com.theovier.athena.client.ecs.components.render.renderer
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
@@ -131,8 +132,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             }
         }
         water = Prefab.instantiate("water")
-        water.add(Demo())
-        water.add(Invisible())
+        water.add(SpeechBubble())
+        water.add(WorldSpaceUI())
     }
 
     private fun initSystems() {
@@ -147,22 +148,18 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(FadeSystem())
             addSystem(FadeTextSystem())
 
-
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {
                     addSubsystem(BackgroundRenderingSystem(camera))
-                    //addSubsystem(SpeechBubbleRenderingSystem(batch, shader, noiseTexture))
                     addSubsystem(spriteRenderingSystem)
                     addSubsystem(ParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
-                    addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
+                    addSubsystem(ForegroundSpriteRenderingSystem(batch))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
 
-
             addSystem(SpeechBubbleRenderingSystem(camera, shader, noiseTexture))
-
 
             //camera
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))

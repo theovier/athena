@@ -19,6 +19,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.aim.crosshair
 import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.Shader
 import com.theovier.athena.client.ecs.components.render.WorldSpaceUI
 import com.theovier.athena.client.ecs.components.render.renderer
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
@@ -131,8 +132,11 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 body.setTransform(Vector2(14f, 16f), 0f)
             }
         }
+
+        //DEMO
         water = Prefab.instantiate("water")
         water.add(SpeechBubble())
+        water.add(Shader())
         water.add(WorldSpaceUI())
     }
 
@@ -148,6 +152,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(FadeSystem())
             addSystem(FadeTextSystem())
 
+            //rendering
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {
@@ -156,9 +161,10 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                     addSubsystem(ParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(ForegroundSpriteRenderingSystem(batch))
-                    addSubsystem(WorldTextRenderingSystem(batch))
                 })
 
+            //world space UI
+            addSystem(WorldTextRenderingSystem(camera))
             addSystem(SpeechBubbleRenderingSystem(camera, shader, noiseTexture))
 
             //camera

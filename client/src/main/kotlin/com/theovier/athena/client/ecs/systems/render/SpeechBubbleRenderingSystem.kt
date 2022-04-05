@@ -22,7 +22,6 @@ class SpeechBubbleRenderingSystem(private val camera: Camera, private val wobble
 
     override fun update(deltaTime: Float) {
         elapsedTime += deltaTime
-
         batch.use(camera) {
             batch.shader.apply {
                 setUniformf("u_noise_scale", 0.1f)

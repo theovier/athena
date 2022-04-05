@@ -3,8 +3,12 @@ package com.theovier.athena.client.screens
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -15,6 +19,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.aim.crosshair
 import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.renderer
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
 import com.theovier.athena.client.ecs.listeners.physics.PhysicsListener
@@ -50,6 +55,8 @@ import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
+import ktx.assets.async.AssetStorage
+import ktx.graphics.use
 import ktx.scene2d.*
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
@@ -78,6 +85,12 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private lateinit var debugLabelPlayerPosition: Label
     private lateinit var debugEntityCountLabel: Label
     private lateinit var debugLabelPlayerMoney: Label
+
+    //REMOVE ME AFTER TESTING
+    private val assets: AssetStorage by inject()
+    private val shader: ShaderProgram = assets["shaders/water.frag"]
+    private val noiseTexture: Texture = assets["sprites/displacement.png"]
+    private lateinit var water: Entity
 
     init {
         initSingletonComponents()
@@ -117,6 +130,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 body.setTransform(Vector2(14f, 16f), 0f)
             }
         }
+        water = Prefab.instantiate("water")
+        water.add(Demo())
+        water.add(Invisible())
     }
 
     private fun initSystems() {
@@ -130,16 +146,24 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(ChildrenPositionSystem())
             addSystem(FadeSystem())
             addSystem(FadeTextSystem())
+
+
             addSystem(
                 RenderingMetaSystem(camera, batch)
                 .apply {
                     addSubsystem(BackgroundRenderingSystem(camera))
+                    //addSubsystem(SpeechBubbleRenderingSystem(batch, shader, noiseTexture))
                     addSubsystem(spriteRenderingSystem)
                     addSubsystem(ParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(ForegroundSpriteRenderingSystem(spriteRenderingSystem))
                     addSubsystem(WorldTextRenderingSystem(batch))
                 })
+
+
+            addSystem(SpeechBubbleRenderingSystem(camera, shader, noiseTexture))
+
+
             //camera
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))
             addSystem(CameraShakeSystem(camera, steadyReferenceCamera))

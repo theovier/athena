@@ -3,20 +3,16 @@ package com.theovier.athena.client
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
-import com.badlogic.gdx.maps.tiled.TiledMap
-import com.badlogic.gdx.maps.tiled.TmxMapLoader
+import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.theovier.athena.client.screens.GameScreen
-import kotlinx.coroutines.launch
 import ktx.app.KtxGame
 import ktx.assets.async.AssetStorage
 import ktx.async.KtxAsync
-import ktx.freetype.async.loadFreeTypeFont
 import ktx.scene2d.Scene2DSkin
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -54,6 +50,8 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
         assets.loadSync<Sound>("audio/gun_fire-01.ogg")
         assets.loadSync<Sound>("audio/gun_fire-02.ogg")
         assets.loadSync<Sound>("audio/gun_fire-03.ogg")
+        assets.loadSync<ShaderProgram>("shaders/water.frag") //loads both, the frag and the vertex shader
+        assets.loadSync<Texture>("sprites/displacement.png")
     }
 
     private fun setDefaultScene2DSkin() {

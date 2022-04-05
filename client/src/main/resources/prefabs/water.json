@@ -1,0 +1,18 @@
+{
+  "id": "bubble",
+  "components": {
+    "transform": {
+      "size": {
+        "x": 7,
+        "y": 7
+      },
+      "position": {
+        "x": 2,
+        "y": 2
+      }
+    },
+    "sprite": {
+      "texture": "sprites/water.png"
+    }
+  }
+}

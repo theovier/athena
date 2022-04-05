@@ -42,7 +42,6 @@ class WorldTextRenderingSystem(private val batch: Batch) : IteratingSystem(
         val size = entity.transform.size * FONT_SCALE_MODIFIER
         val text = entity.text.text
         val color = entity.text.color
-        //println("$entity + ${entity.text.text} + ${entity.text.color.a}")
         font.run {
             this.color = color
             data.setScale(size.x, size.y)

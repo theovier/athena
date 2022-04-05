@@ -70,7 +70,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     //injected systems
     private val physicsSystem: PhysicsSystem by inject()
-    private val spriteRenderingSystem = SpriteRenderingSystem(batch)
 
     //Debug UI
     private val uiCamera = OrthographicCamera()
@@ -146,7 +145,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 RenderingMetaSystem(camera, batch)
                 .apply {
                     addSubsystem(BackgroundRenderingSystem(camera))
-                    addSubsystem(spriteRenderingSystem)
+                    addSubsystem(SpriteRenderingSystem(batch))
                     addSubsystem(ParticleSystem(batch))
                     addSubsystem(SpineRenderingSystem(batch))
                     addSubsystem(ForegroundSpriteRenderingSystem(batch))

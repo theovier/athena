@@ -36,6 +36,7 @@ import com.theovier.athena.client.ecs.systems.damage.DamageOverTimeSystem
 import com.theovier.athena.client.ecs.systems.loot.LootMoneySystem
 import com.theovier.athena.client.ecs.systems.loot.LootRemovalSystem
 import com.theovier.athena.client.ecs.systems.loot.MoneyIndicatorSystem
+import com.theovier.athena.client.ecs.systems.movement.DashScreenShakeSystem
 import com.theovier.athena.client.ecs.systems.movement.FrictionSystem
 import com.theovier.athena.client.ecs.systems.movement.MovementSystem
 import com.theovier.athena.client.ecs.systems.physics.PhysicMovementSystem
@@ -98,7 +99,6 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
 
     private fun initEntities() {
         player = Prefab.instantiate("player")
-        player.add(Dash())
 
         crosshair = Prefab.instantiate("crosshair")
         crosshair.crosshair.owner = player
@@ -151,6 +151,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
             addSystem(PhysicMovementSystem())
             addSystem(PlayerMovementSystem())
             addSystem(PlayerDashSystem())
+            addSystem(DashScreenShakeSystem())
 
             addSystem(BulletShellEjectionSystem())
             addSystem(SpinningSystem())

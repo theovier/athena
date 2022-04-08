@@ -30,6 +30,9 @@
       "maxOffsetRotation": 1,
       "reductionFactor": 0.8
     },
+    "dash": {
+      "prefabToSpawn": "dashSound"
+    },
     "dustTrail": {
       "frequency": 1.0
     },

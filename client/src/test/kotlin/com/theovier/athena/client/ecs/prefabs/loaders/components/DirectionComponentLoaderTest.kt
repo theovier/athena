@@ -17,7 +17,7 @@ class DirectionComponentLoaderTest {
     }
 
     @Test
-    @DisplayName("<Acceleration> component is loaded correctly")
+    @DisplayName("<Direction> component is loaded correctly")
     fun isComponentLoadedCorrectly() {
         val expectedADirectionX = 1f
         val expectedDirectionY = 2f

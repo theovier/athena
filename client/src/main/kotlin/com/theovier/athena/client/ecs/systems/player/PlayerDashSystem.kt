@@ -23,7 +23,7 @@ class PlayerDashSystem : InputDrivenIteratingSystem(allOf(Player::class, Dash::c
         if (input.dash && dash.canDash) {
             startDashing(dash)
         }
-        else if (dash.isCurrentlyDashing) {
+        if (dash.isCurrentlyDashing) {
             keepDashing(dash, velocity, direction, deltaTime)
         } else if (dash.canNextDashInSeconds > 0) {
             dash.canNextDashInSeconds -= deltaTime
@@ -33,16 +33,16 @@ class PlayerDashSystem : InputDrivenIteratingSystem(allOf(Player::class, Dash::c
     private fun startDashing(dash: Dash) {
         dash.isCurrentlyDashing = true
         dash.canNextDashInSeconds = dash.timeBetweenDashes
-        Prefab.instantiate("dashSound")
+        dash.prefabToSpawn?.let { Prefab.instantiate(it) }
         input.dash = false //prevents that keeping the button pressed results in consecutive dashes
     }
 
     private fun keepDashing(dash: Dash, velocity: Velocity, direction: Vector2, deltaTime: Float) {
+        dash.timeLeft -= deltaTime
+        velocity.velocity = direction * dash.speed
+
         if (dash.finishedDashing) {
             stopDashing(dash)
-        } else {
-            dash.timeLeft -= deltaTime
-            velocity.velocity = direction * dash.speed
         }
     }
 

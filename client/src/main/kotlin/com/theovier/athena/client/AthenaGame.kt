@@ -51,6 +51,8 @@ class AthenaGame : KtxGame<Screen>(), KoinComponent {
         assets.loadSync<Sound>("audio/gun_fire-02.ogg")
         assets.loadSync<Sound>("audio/gun_fire-03.ogg")
         assets.loadSync<ShaderProgram>("shaders/water.frag") //loads both, the frag and the vertex shader
+        assets.loadSync<ShaderProgram>("shaders/water2.frag")
+        assets.loadSync<ShaderProgram>("shaders/doodle.frag")
         assets.loadSync<Texture>("sprites/displacement.png")
     }
 

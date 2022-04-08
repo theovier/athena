@@ -15,6 +15,7 @@ import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.aim.crosshair
 import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.render.Invisible
+import com.theovier.athena.client.ecs.components.render.Text
 import com.theovier.athena.client.ecs.components.render.WorldSpaceUI
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
@@ -126,6 +127,17 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         water = Prefab.instantiate("water")
         water.add(SpeechBubble())
         water.add(WorldSpaceUI())
+
+
+        val demoText = Entity()
+            .add(Text().apply {
+                text = "Hello World!"
+            })
+            .add(Transform().apply {
+                position.set(Vector2(3f, 3.75f), 0f)
+            })
+
+        engine.addEntity(demoText)
     }
 
     private fun initSystems() {
@@ -152,8 +164,8 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
                 })
 
             //world space UI
-            addSystem(WorldTextRenderingSystem(camera))
             addSystem(SpeechBubbleRenderingSystem(camera))
+            addSystem(WorldTextRenderingSystem(camera))
 
             //camera
             addSystem(CameraMovementSystem(camera, steadyReferenceCamera))

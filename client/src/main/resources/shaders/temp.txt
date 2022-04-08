@@ -1,5 +1,4 @@
-Shader "Custom/UI/Bubble"
-{
+
  Properties
  {
   _MainTex ("Texture", 2D) = "white" {}
@@ -10,24 +9,6 @@ Shader "Custom/UI/Bubble"
 
  SubShader
  {
-  Tags
-  {
-         "RenderType" = "Transparent"
-         "Queue" = "Transparent"
-  }
-
-  Pass
-  {
-   ZWrite Off
-   Blend SrcAlpha OneMinusSrcAlpha
-
-   CGPROGRAM
-
-   #pragma vertex vert
-   #pragma fragment frag
-
-   #include "UnityCG.cginc"
-
    struct appdata
    {
     float4 vertex : POSITION;
@@ -35,10 +16,10 @@ Shader "Custom/UI/Bubble"
     fixed4 vertexColor : COLOR;
    };
 
-   struct v2f
+   struct v2f //vertex 2 fragment
    {
-    float2 uv1 : TEXCOORD0;
-    float2 uv2 : TEXCOORD1;
+    float2 uv1 : TEXCOORD0; //vector2 of floats
+    float2 uv2 : TEXCOORD1; //vector2 of floats
     float4 vertex : SV_POSITION;
     fixed4 col : COLOR;
    };
@@ -67,8 +48,4 @@ Shader "Custom/UI/Bubble"
     fixed4 col = tex2D(_MainTex, i.uv2 + disp * _Intensity);
     return col * i.col;
    }
-
-   ENDCG
   }
- }
-}

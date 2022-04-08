@@ -1,0 +1,34 @@
+{
+  "id": "bubble",
+  "components": {
+    "transform": {
+      "size": {
+        "x": 5,
+        "y": 3
+      },
+      "position": {
+        "x": 3,
+        "y": 3
+      }
+    },
+    "sprite": {
+      "texture": "sprites/bubble.png"
+    }
+  },
+  "children": [
+    {
+      "id": "text",
+      "components": {
+        "transform": {
+          "localPosition": {
+            "x": 1,
+            "y": 1.75
+          }
+        },
+        "text": {
+          "text": "Hello World!"
+        }
+      }
+    }
+  ]
+}

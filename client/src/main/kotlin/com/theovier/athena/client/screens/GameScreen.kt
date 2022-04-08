@@ -13,9 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.aim.crosshair
-import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.render.Invisible
-import com.theovier.athena.client.ecs.components.render.Text
 import com.theovier.athena.client.ecs.components.render.WorldSpaceUI
 import com.theovier.athena.client.ecs.listeners.InvisibleListener
 import com.theovier.athena.client.ecs.listeners.physics.WorldContactAdapter
@@ -53,7 +51,6 @@ import ktx.app.KtxScreen
 import ktx.ashley.allOf
 import ktx.ashley.entity
 import ktx.ashley.with
-import ktx.assets.async.AssetStorage
 import ktx.scene2d.*
 import mu.KotlinLogging
 import org.koin.core.component.KoinComponent
@@ -83,7 +80,7 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
     private lateinit var debugLabelPlayerMoney: Label
 
     //REMOVE ME AFTER TESTING
-    private lateinit var water: Entity
+    private lateinit var speechBubble: Entity
 
     init {
         initSingletonComponents()
@@ -124,20 +121,9 @@ class GameScreen(private val world: World) : KtxScreen, KoinComponent {
         }
 
         //TODO: load all of these by component loader
-        water = Prefab.instantiate("water")
-        water.add(SpeechBubble())
-        water.add(WorldSpaceUI())
-
-
-        val demoText = Entity()
-            .add(Text().apply {
-                text = "Hello World!"
-            })
-            .add(Transform().apply {
-                position.set(Vector2(3f, 3.75f), 0f)
-            })
-
-        engine.addEntity(demoText)
+        speechBubble = Prefab.instantiate("speechBubble")
+        speechBubble.add(SpeechBubble())
+        speechBubble.add(WorldSpaceUI())
     }
 
     private fun initSystems() {

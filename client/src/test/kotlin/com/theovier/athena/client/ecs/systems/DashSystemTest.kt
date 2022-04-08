@@ -3,37 +3,18 @@ package com.theovier.athena.client.ecs.systems
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.physics.box2d.World
 import com.theovier.athena.client.ecs.components.*
 import com.theovier.athena.client.ecs.components.movement.Dash
 import com.theovier.athena.client.ecs.components.movement.Velocity
 import com.theovier.athena.client.ecs.components.movement.dash
 import com.theovier.athena.client.ecs.components.movement.velocity
-import com.theovier.athena.client.ecs.prefabs.loaders.components.*
 import com.theovier.athena.client.ecs.systems.player.PlayerDashSystem
-import ktx.assets.async.AssetStorage
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
-import org.koin.java.KoinJavaComponent.inject
 import org.koin.test.junit5.AutoCloseKoinTest
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DashSystemTest : AutoCloseKoinTest() {
-
-    //needed for the Prefab class to work
-    private val componentLoaders = module {
-        single { AssetStorage() }
-        single { World(Vector2.Zero, true) }
-        single { MapComponentLoader(get()) }
-        single { SpineComponentLoader(get()) }
-        single { SpriteComponentLoader(get()) }
-        single { SoundComponentLoader(get()) }
-        single { PhysicsComponentLoader(get()) }
-        single { ParticleComponentLoader(get()) }
-        single { PooledEngine() }
-    }
 
     private val input = Input().apply {
         dash = true
@@ -43,13 +24,10 @@ class DashSystemTest : AutoCloseKoinTest() {
         .add(Transform())
         .add(Velocity())
         .add(Dash())
-    val engine: PooledEngine by inject(PooledEngine::class.java)
+    val engine = PooledEngine()
 
     @BeforeAll
     fun setup() {
-        startKoin {
-            modules(componentLoaders)
-        }
         engine.apply {
             addEntity(
                 Entity().add(input)
@@ -100,9 +78,15 @@ class DashSystemTest : AutoCloseKoinTest() {
     @Test
     fun dashSpawnsCorrectPrefab() {
         entity.dash.prefabToSpawn = "emptyEntity"
-        assertEquals(engine.entities.size(), 2) //entity + input
-        engine.update(0.1f)
-        assertEquals(engine.entities.size(), 3)
+        assertEquals(2, engine.entities.size()) //entity + input
+
+        assertThrows(ExceptionInInitializerError::class.java) {
+            /*
+                the system will try to call Prefab.instantiate which will fail because the required Koin
+                instance is not started. If we get this error, we know that Prefab.instantiate() was called.
+            */
+            engine.update(0.1f)
+        }
     }
 
     @Test

@@ -34,7 +34,7 @@
       "prefabToSpawn": "dashSound"
     },
     "dustTrail": {
-      "frequency": 1.0
+      "frequency": 0.85
     },
     "animation": {},
     "spine": {

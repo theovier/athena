@@ -9,9 +9,6 @@
       "effect": {
         "settings": "particles/dust_trail/dust_trail.p",
         "atlas": "particles/dust_trail/dust_trail.atlas"
-      },
-      "offset": {
-        "y": -0.3
       }
     }
   }

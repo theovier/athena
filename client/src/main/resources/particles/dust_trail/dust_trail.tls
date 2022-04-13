@@ -74,8 +74,8 @@
 						],
 						"lowMin": 0,
 						"lowMax": 0,
-						"highMin": 1,
-						"highMax": 2.5
+						"highMin": 1.5,
+						"highMax": 3.5
 					}
 				},
 				"lowEquals": true,
@@ -347,14 +347,14 @@
 			{
 				"class": "RandomRangeModuleWrapper",
 				"id": 30,
-				"x": -1996,
-				"y": -126,
+				"x": -2121,
+				"y": -119,
 				"module": {
 					"data": {
 						"class": "RandomRangeModule",
 						"index": 30,
-						"min": -0.3,
-						"max": 0.3,
+						"min": -0.5,
+						"max": 0.5,
 						"distributed": true
 					}
 				}
@@ -362,8 +362,8 @@
 			{
 				"class": "RandomRangeModuleWrapper",
 				"id": 31,
-				"x": -1991,
-				"y": -292,
+				"x": -2126,
+				"y": -298,
 				"module": {
 					"data": {
 						"class": "RandomRangeModule",
@@ -371,6 +371,19 @@
 						"min": -0.125,
 						"max": 0.125,
 						"distributed": true
+					}
+				}
+			},
+			{
+				"class": "GlobalScopeModuleWrapper",
+				"id": 32,
+				"x": -3372,
+				"y": -455,
+				"module": {
+					"data": {
+						"class": "GlobalScopeModule",
+						"index": 32,
+						"key": 0
 					}
 				}
 			}

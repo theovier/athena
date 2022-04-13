@@ -1,26 +1,30 @@
 {
 "metaData": {
 	"scopeDefaults": [
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ],
-		[ 1, 1, 1, 0 ]
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ],
+		[ 1, 1, 1, 1 ]
 	],
-	"previewCamPos": {},
-	"previewCamZoom": 1.4285715,
+	"previewCamPos": {
+		"x": 1.9899786,
+		"y": 0.68829536
+	},
+	"previewCamZoom": 0.6466612,
 	"bgImagePath": "",
 	"isGridVisible": true,
 	"bgImageIsInBack": true,
 	"bgImageSize": 10,
 	"gridSize": 1,
-	"particlePositionX": 0,
-	"particlePositionY": 0
+	"particlePositionX": 1.3117291,
+	"particlePositionY": -0.11057812,
+	"resourcePaths": []
 },
 "emitters": [
 	{
@@ -29,8 +33,8 @@
 			{
 				"class": "ParticleModuleWrapper",
 				"id": 0,
-				"x": -908,
-				"y": -412,
+				"x": -812,
+				"y": -414,
 				"module": {
 					"data": {
 						"class": "ParticleModule",
@@ -41,140 +45,37 @@
 			{
 				"class": "EmitterModuleWrapper",
 				"id": 1,
-				"x": -644,
-				"y": -72,
+				"x": -212,
+				"y": -113,
 				"module": {
 					"data": {
 						"class": "EmitterModule",
 						"index": 1,
 						"delay": 0,
-						"duration": 1,
-						"rate": 1
-					}
-				}
-			},
-			{
-				"class": "RandomRangeModuleWrapper",
-				"id": 4,
-				"x": -1228,
-				"y": -457,
-				"module": {
-					"data": {
-						"class": "RandomRangeModule",
-						"index": 4,
-						"min": 0.15,
-						"max": 0.25,
-						"distributed": false
-					}
-				}
-			},
-			{
-				"class": "RandomRangeModuleWrapper",
-				"id": 5,
-				"x": -1149,
-				"y": 92,
-				"module": {
-					"data": {
-						"class": "RandomRangeModule",
-						"index": 5,
-						"min": 0.55,
-						"max": 0.55,
-						"distributed": false
+						"duration": 0.05,
+						"rate": 80
 					}
 				}
 			},
 			{
 				"class": "DynamicRangeModuleWrapper",
 				"id": 7,
-				"x": -1728,
-				"y": -483,
+				"x": -2118,
+				"y": 267,
 				"module": {
 					"data": {
 						"class": "DynamicRangeModule",
 						"index": 7,
 						"points": [
 							{
-								"x": 0,
+								"x": 0.44822413,
 								"y": 1
 							}
 						],
 						"lowMin": 0,
 						"lowMax": 0,
-						"highMin": 0.3,
-						"highMax": 0.55
-					}
-				},
-				"lowEquals": true,
-				"lowMirror": false,
-				"highEquals": true,
-				"highMirror": false
-			},
-			{
-				"class": "OffsetModuleWrapper",
-				"id": 8,
-				"x": -1596,
-				"y": -15,
-				"module": {
-					"data": {
-						"class": "OffsetModule",
-						"index": 8,
-						"points": [
-							{
-								"x": 0,
-								"y": 1
-							}
-						],
-						"low": {
-							"edge": false,
-							"shape": 0,
-							"side": 0,
-							"rect": {
-								"x": 0,
-								"y": 0,
-								"width": 0,
-								"height": 0
-							}
-						},
-						"high": {
-							"edge": false,
-							"shape": 0,
-							"side": 0,
-							"rect": {
-								"x": 0,
-								"y": 0,
-								"width": 0,
-								"height": 0
-							}
-						}
-					}
-				},
-				"lowScale": 0,
-				"highScale": 0,
-				"equals": false
-			},
-			{
-				"class": "DynamicRangeModuleWrapper",
-				"id": 9,
-				"x": -2053,
-				"y": 136,
-				"module": {
-					"data": {
-						"class": "DynamicRangeModule",
-						"index": 9,
-						"points": [
-							{
-								"x": 0,
-								"y": 1
-							},
-							{
-								"x": 0.5,
-								"y": 0.7
-							}
-						],
-						"lowMin": 0,
-						"lowMax": 0,
-						"highMin": 0.5,
-						"highMax": 1
+						"highMin": 1.5,
+						"highMax": 3.5
 					}
 				},
 				"lowEquals": true,
@@ -184,35 +85,51 @@
 			},
 			{
 				"class": "DynamicRangeModuleWrapper",
-				"id": 11,
-				"x": -2528,
-				"y": -483,
+				"id": 9,
+				"x": -2075,
+				"y": -954,
 				"module": {
 					"data": {
 						"class": "DynamicRangeModule",
-						"index": 11,
+						"index": 9,
 						"points": [
 							{
-								"x": 0,
+								"x": 0.107973054,
 								"y": 1
+							},
+							{
+								"x": 0.22848137,
+								"y": 0.5328426
+							},
+							{
+								"x": 0.42430705,
+								"y": 0.17580207
+							},
+							{
+								"x": 0.716539,
+								"y": 0.043056753
+							},
+							{
+								"x": 1,
+								"y": 0
 							}
 						],
 						"lowMin": 0,
 						"lowMax": 0,
-						"highMin": -40,
-						"highMax": 40
+						"highMin": 0.3,
+						"highMax": 0.5
 					}
 				},
 				"lowEquals": true,
 				"lowMirror": false,
-				"highEquals": true,
+				"highEquals": false,
 				"highMirror": false
 			},
 			{
 				"class": "GradientColorModuleWrapper",
 				"id": 12,
-				"x": -2450,
-				"y": 51,
+				"x": -1469,
+				"y": -332,
 				"module": {
 					"data": {
 						"class": "GradientColorModule",
@@ -231,8 +148,8 @@
 			{
 				"class": "DynamicRangeModuleWrapper",
 				"id": 13,
-				"x": -2833,
-				"y": 201,
+				"x": -2233,
+				"y": -686,
 				"module": {
 					"data": {
 						"class": "DynamicRangeModule",
@@ -240,15 +157,23 @@
 						"points": [
 							{
 								"x": 0,
-								"y": 1
+								"y": 0.6472991
 							},
 							{
-								"x": 0.4900251,
-								"y": 0.27215624
+								"x": 0.16926667,
+								"y": 0.32179153
+							},
+							{
+								"x": 0.39354596,
+								"y": 0.12343627
+							},
+							{
+								"x": 0.6843598,
+								"y": 0.08110957
 							},
 							{
 								"x": 1,
-								"y": 0
+								"y": 0.02508545
 							}
 						],
 						"lowMin": 0,
@@ -265,8 +190,8 @@
 			{
 				"class": "EmConfigModuleWrapper",
 				"id": 14,
-				"x": -908,
-				"y": 186,
+				"x": -562,
+				"y": -189,
 				"module": {
 					"data": {
 						"class": "EmConfigModule",
@@ -283,8 +208,9 @@
 			{
 				"class": "TextureModuleWrapper",
 				"id": 15,
-				"x": -2808,
-				"y": -38,
+				"titleOverride": "drawable",
+				"x": -1815,
+				"y": 491,
 				"module": {
 					"data": {
 						"class": "TextureModule",
@@ -294,33 +220,182 @@
 				},
 				"filePath": "C:/Users/Theo/Desktop/smoke.png",
 				"regionName": "smoke"
+			},
+			{
+				"class": "DynamicRangeModuleWrapper",
+				"id": 16,
+				"x": -2106,
+				"y": 61,
+				"module": {
+					"data": {
+						"class": "DynamicRangeModule",
+						"index": 16,
+						"points": [
+							{
+								"x": 0,
+								"y": 1
+							},
+							{
+								"x": 0.43243656,
+								"y": 0.22940607
+							},
+							{
+								"x": 0.8527016,
+								"y": 0.05011081
+							},
+							{
+								"x": 1,
+								"y": 0
+							}
+						],
+						"lowMin": 0,
+						"lowMax": 0,
+						"highMin": 0.5,
+						"highMax": 1.25
+					}
+				},
+				"lowEquals": true,
+				"lowMirror": false,
+				"highEquals": false,
+				"highMirror": false
+			},
+			{
+				"class": "MathModuleWrapper",
+				"id": 22,
+				"x": -3070,
+				"y": -465,
+				"module": {
+					"data": {
+						"class": "MathModule",
+						"index": 22,
+						"a": 0,
+						"b": 15,
+						"mathExpression": "sum"
+					}
+				}
+			},
+			{
+				"class": "GlobalScopeModuleWrapper",
+				"id": 23,
+				"x": -3372,
+				"y": -455,
+				"module": {
+					"data": {
+						"class": "GlobalScopeModule",
+						"index": 23,
+						"key": 0
+					}
+				}
+			},
+			{
+				"class": "MathModuleWrapper",
+				"id": 24,
+				"x": -3086,
+				"y": -646,
+				"module": {
+					"data": {
+						"class": "MathModule",
+						"index": 24,
+						"a": 0,
+						"b": 15,
+						"mathExpression": "substract"
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 25,
+				"x": -2794,
+				"y": -597,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 25,
+						"min": 45,
+						"max": 135,
+						"distributed": false
+					}
+				}
+			},
+			{
+				"class": "StaticValueModuleWrapper",
+				"id": 26,
+				"x": -3360,
+				"y": -614,
+				"module": {
+					"data": {
+						"class": "StaticValueModule",
+						"index": 26,
+						"value": 20
+					}
+				}
+			},
+			{
+				"class": "Vector2ModuleWrapper",
+				"id": 29,
+				"x": -1644,
+				"y": -151,
+				"module": {
+					"data": {
+						"class": "Vector2Module",
+						"index": 29,
+						"x": 0,
+						"y": 0
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 30,
+				"x": -2121,
+				"y": -119,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 30,
+						"min": -0.5,
+						"max": 0.5,
+						"distributed": true
+					}
+				}
+			},
+			{
+				"class": "RandomRangeModuleWrapper",
+				"id": 31,
+				"x": -2126,
+				"y": -298,
+				"module": {
+					"data": {
+						"class": "RandomRangeModule",
+						"index": 31,
+						"min": -0.125,
+						"max": 0.125,
+						"distributed": true
+					}
+				}
+			},
+			{
+				"class": "GlobalScopeModuleWrapper",
+				"id": 32,
+				"x": -3372,
+				"y": -455,
+				"module": {
+					"data": {
+						"class": "GlobalScopeModule",
+						"index": 32,
+						"key": 0
+					}
+				}
 			}
 		],
 		"connections": [
-			{
-				"moduleFrom": 4,
-				"moduleTo": 1
-			},
-			{
-				"moduleFrom": 5,
-				"moduleTo": 1,
-				"slotTo": 1
-			},
 			{
 				"moduleFrom": 7,
 				"slotTo": 4
 			},
 			{
-				"moduleFrom": 8,
-				"slotTo": 3
-			},
-			{
 				"moduleFrom": 9,
 				"slotTo": 13
-			},
-			{
-				"moduleFrom": 11,
-				"slotTo": 11
 			},
 			{
 				"moduleFrom": 12,
@@ -338,6 +413,54 @@
 			{
 				"moduleFrom": 15,
 				"slotTo": 2
+			},
+			{
+				"moduleFrom": 16,
+				"slotTo": 5
+			},
+			{
+				"moduleFrom": 23,
+				"moduleTo": 22
+			},
+			{
+				"moduleFrom": 26,
+				"moduleTo": 22,
+				"slotTo": 1
+			},
+			{
+				"moduleFrom": 22,
+				"moduleTo": 25
+			},
+			{
+				"moduleFrom": 23,
+				"moduleTo": 24
+			},
+			{
+				"moduleFrom": 26,
+				"moduleTo": 24,
+				"slotTo": 1
+			},
+			{
+				"moduleFrom": 24,
+				"moduleTo": 25,
+				"slotTo": 1
+			},
+			{
+				"moduleFrom": 25,
+				"slotTo": 11
+			},
+			{
+				"moduleFrom": 29,
+				"slotTo": 3
+			},
+			{
+				"moduleFrom": 30,
+				"moduleTo": 29
+			},
+			{
+				"moduleFrom": 31,
+				"moduleTo": 29,
+				"slotTo": 1
 			}
 		]
 	}

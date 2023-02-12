@@ -36,3 +36,5 @@ build/
 logs/
 
 notes.txt
+
+client/.temp

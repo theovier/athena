@@ -24,11 +24,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.6.10</kotlin.version>
+        <kotlin.version>1.8.0</kotlin.version>
         <kotlin.code.style>official</kotlin.code.style>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <koin.version>3.1.5</koin.version>
+        <ktx.version>1.11.0-rc4</ktx.version>
+        <gdx.version>1.11.0</gdx.version>
     </properties>
 
     <dependencies>
@@ -88,105 +90,105 @@
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-app</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-graphics</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-assets-async</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-math</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-ashley</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-inject</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-tiled</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-box2d</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-scene2d</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-freetype</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.libktx</groupId>
             <artifactId>ktx-freetype-async</artifactId>
-            <version>1.10.0-b1</version>
+            <version>${ktx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
-            <version>1.10.0</version>
+            <version>${gdx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-lwjgl3</artifactId>
-            <version>1.10.0</version>
+            <version>${gdx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
-            <version>1.10.0</version>
+            <version>${gdx.version}</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype</artifactId>
-            <version>1.10.0</version>
+            <version>${gdx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
-            <version>1.10.0</version>
+            <version>${gdx.version}</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d</artifactId>
+            <version>${gdx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d-platform</artifactId>
+            <version>${gdx.version}</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-desktop</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-core</artifactId>
-            <version>2.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-box2d</artifactId>
-            <version>1.10.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-box2d-platform</artifactId>
-            <version>1.10.0</version>
-            <classifier>natives-desktop</classifier>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.ashley</groupId>

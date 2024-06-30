@@ -3,6 +3,7 @@ package com.theovier.athena.client.ecs.systems.damage
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.theovier.athena.client.ecs.components.damage.*
+import com.theovier.athena.client.ecs.extensions.remove
 import com.theovier.athena.client.weapons.Damage
 import ktx.ashley.allOf
 
@@ -12,7 +13,7 @@ class DamageOverTimeSystem : IteratingSystem(allOf(DamageOverTime::class, Health
 
         dot.duration -= deltaTime
         if (dot.isExpired) {
-            victim.remove(DamageOverTime::class.java)
+            victim.remove(DamageOverTime::class)
             return
         }
 

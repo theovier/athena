@@ -35,15 +35,14 @@ Work in progress.
 ![screenshot_002](screenshots/screenshot_003.gif)
 
 ## Building from Source
-This project uses **Maven 3** as its build management tool.
-If you installed Maven just clone the repository or download the .zip and navigate to the root-level pom.xml.
-Then simply run
+This project uses **Gradle** as its build management tool.
+Simply run
 
 ```
-mvn package
+./gradlew build
 ```
 
-and check your /target folder for the newly generated jar files.
+and check your /build folder for the newly generated jar files at `/build/libs/client-VERSION.jar`.
 
 ### macOS
 Please note that (even when run from within your IDE) you need to add the VM option flag `-XstartOnFirstThread`

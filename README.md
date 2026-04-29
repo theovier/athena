@@ -9,7 +9,7 @@ The main purpose of this project is simply to play around with some ideas and ho
 Don't expect anything too fancy or polished here.
 
 ## Status
-Work in progress.
+Discontinued.
 
 ## Features
 - Uses [Ashley](https://github.com/libktx/ktx/tree/master/ashley) as its [ECS](https://en.wikipedia.org/wiki/Entity_component_system)
